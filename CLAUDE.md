@@ -94,7 +94,31 @@ npm run build:holidays  # regenera data/holidays/*.json (1 vez por año)
 
 ## Convenciones
 
-- Mensajes de commit en español, imperativo: "agrega endpoint de disponibilidad".
+- **Commits semánticos, en español y en imperativo.** Formato `tipo(alcance): descripción`,
+  con la descripción en minúscula y sin punto final:
+
+  ```
+  feat(backend): agrega endpoint de disponibilidad
+  fix(android): corrige el orden de la lista de miembros
+  docs: define la convención de mensajes de commit
+  ```
+
+  | Tipo       | Cuándo                                                  |
+  |------------|---------------------------------------------------------|
+  | `feat`     | funcionalidad nueva                                     |
+  | `fix`      | corrección de un error                                  |
+  | `docs`     | documentación, incluidos los `.md` de la raíz           |
+  | `test`     | tests, sin tocar código de producción                   |
+  | `refactor` | cambio interno que no altera el comportamiento          |
+  | `style`    | formato, sin cambios de comportamiento                  |
+  | `chore`    | dependencias, configuración, scripts de mantenimiento   |
+
+  El alcance es opcional y sirve para separar las piezas del monorepo: `backend`,
+  `android`, `ios`, `design`. La regeneración anual de feriados o de ciudades va como
+  `chore(datos): regenera los feriados de 2027`.
+
+  El cuerpo del mensaje, cuando hace falta, también en español y explicando el porqué,
+  no el qué: el qué ya está en el diff.
 - Los textos visibles al usuario los devuelve el backend ya redactados
   (`statusLabel`, `statusDetail`). El cliente no los arma.
 - Comentarios en el código en español.
