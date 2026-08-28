@@ -1,0 +1,81 @@
+{
+  "countryCode": "IQ",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.243Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "New Year's Day"
+    },
+    {
+      "date": "2026-01-06",
+      "name": "Army Day",
+      "localName": "Army Day"
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Nowruz",
+      "localName": "Nowruz"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Labour Day"
+    },
+    {
+      "date": "2026-10-03",
+      "name": "National Day",
+      "localName": "National Day"
+    },
+    {
+      "date": "2026-12-10",
+      "name": "Victory Day",
+      "localName": "Victory Day"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Christmas Day"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "New Year's Day"
+    },
+    {
+      "date": "2027-01-06",
+      "name": "Army Day",
+      "localName": "Army Day"
+    },
+    {
+      "date": "2027-03-21",
+      "name": "Nowruz",
+      "localName": "Nowruz"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Labour Day"
+    },
+    {
+      "date": "2027-10-03",
+      "name": "National Day",
+      "localName": "National Day"
+    },
+    {
+      "date": "2027-12-10",
+      "name": "Victory Day",
+      "localName": "Victory Day"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Christmas Day"
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "countryCode": "RO",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:50.153Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Anul Nou"
+    },
+    {
+      "date": "2026-01-02",
+      "name": "Day after New Year's Day",
+      "localName": "Anul Nou"
+    },
+    {
+      "date": "2026-01-06",
+      "name": "Epiphany",
+      "localName": "Bobotează"
+    },
+    {
+      "date": "2026-01-07",
+      "name": "Saint John the Baptist",
+      "localName": "Sfântul Ion"
+    },
+    {
+      "date": "2026-01-24",
+      "name": "Union Day/Small Union",
+      "localName": "Unirea Principatelor Române/Mica Unire"
+    },
+    {
+      "date": "2026-04-10",
+      "name": "Good Friday",
+      "localName": "Vinerea mare"
+    },
+    {
+      "date": "2026-04-12",
+      "name": "Easter Sunday",
+      "localName": "Paștele"
+    },
+    {
+      "date": "2026-04-13",
+      "name": "Easter Monday",
+      "localName": "Paștele"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Ziua Muncii"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Pentecost",
+      "localName": "Rusaliile"
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Children's Day",
+      "localName": "Ziua Copilului"
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Whit Monday",
+      "localName": "Rusaliile"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "Dormition of the Theotokos",
+      "localName": "Adormirea Maicii Domnului/Sfânta Maria Mare"
+    },
+    {
+      "date": "2026-11-30",
+      "name": "St. Andrew's Day",
+      "localName": "Sfântul Andrei"
+    },
+    {
+      "date": "2026-12-01",
+      "name": "National Day/Great Union",
+      "localName": "Ziua Națională/Marea Unire"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Crăciunul"
+    },
+    {
+      "date": "2026-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "Crăciunul"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Anul Nou"
+    },
+    {
+      "date": "2027-01-02",
+      "name": "Day after New Year's Day",
+      "localName": "Anul Nou"
+    },
+    {
+      "date": "2027-01-06",
+      "name": "Epiphany",
+      "localName": "Bobotează"
+    },
+    {
+      "date": "2027-01-07",
+      "name": "Saint John the Baptist",
+      "localName": "Sfântul Ion"
+    },
+    {
+      "date": "2027-01-24",
+      "name": "Union Day/Small Union",
+      "localName": "Unirea Principatelor Române/Mica Unire"
+    },
+    {
+      "date": "2027-04-30",
+      "name": "Good Friday",
+      "localName": "Vinerea mare"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Ziua Muncii"
+    },
+    {
+      "date": "2027-05-02",
+      "name": "Easter Sunday",
+      "localName": "Paștele"
+    },
+    {
+      "date": "2027-05-03",
+      "name": "Easter Monday",
+      "localName": "Paștele"
+    },
+    {
+      "date": "2027-06-01",
+      "name": "Children's Day",
+      "localName": "Ziua Copilului"
+    },
+    {
+      "date": "2027-06-20",
+      "name": "Pentecost",
+      "localName": "Rusaliile"
+    },
+    {
+      "date": "2027-06-21",
+      "name": "Whit Monday",
+      "localName": "Rusaliile"
+    },
+    {
+      "date": "2027-08-15",
+      "name": "Dormition of the Theotokos",
+      "localName": "Adormirea Maicii Domnului/Sfânta Maria Mare"
+    },
+    {
+      "date": "2027-11-30",
+      "name": "St. Andrew's Day",
+      "localName": "Sfântul Andrei"
+    },
+    {
+      "date": "2027-12-01",
+      "name": "National Day/Great Union",
+      "localName": "Ziua Națională/Marea Unire"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Crăciunul"
+    },
+    {
+      "date": "2027-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "Crăciunul"
+    }
+  ]
+}

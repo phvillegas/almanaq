@@ -1,0 +1,136 @@
+{
+  "countryCode": "EG",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.125Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-07",
+      "name": "Christmas Day (Orthodox)",
+      "localName": "عيد الميلاد المجيد"
+    },
+    {
+      "date": "2026-01-29",
+      "name": "Revolution Day 2011 / National Police Day",
+      "localName": "عيد الثورة 25 يناير"
+    },
+    {
+      "date": "2026-04-13",
+      "name": "Easter Monday",
+      "localName": "Sham El-Nessim"
+    },
+    {
+      "date": "2026-04-25",
+      "name": "Sinai Liberation Day",
+      "localName": "عيد تحرير سيناء"
+    },
+    {
+      "date": "2026-05-07",
+      "name": "Labour Day",
+      "localName": "عيد العمال"
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Eid Al-Adha",
+      "localName": "Eid Al-Adha"
+    },
+    {
+      "date": "2026-05-28",
+      "name": "Eid Al-Adha",
+      "localName": "Eid Al-Adha"
+    },
+    {
+      "date": "2026-05-29",
+      "name": "Eid Al-Adha",
+      "localName": "Eid Al-Adha"
+    },
+    {
+      "date": "2026-05-30",
+      "name": "Eid Al-Adha",
+      "localName": "Eid Al-Adha"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Eid Al-Adha",
+      "localName": "Eid Al-Adha"
+    },
+    {
+      "date": "2026-06-18",
+      "name": "Islamic New Year",
+      "localName": "Islamic New Year"
+    },
+    {
+      "date": "2026-07-02",
+      "name": "June 30 Revolution",
+      "localName": "ثورة 30 يونيو"
+    },
+    {
+      "date": "2026-07-23",
+      "name": "Revolution Day",
+      "localName": "عيد ثورة 23 يوليو"
+    },
+    {
+      "date": "2026-08-26",
+      "name": "Prophet Muhammad's Birthday",
+      "localName": "Prophet Muhammad's Birthday"
+    },
+    {
+      "date": "2026-10-06",
+      "name": "Armed Forces Day",
+      "localName": "عيد القوات المسلحة"
+    },
+    {
+      "date": "2027-01-07",
+      "name": "Christmas Day (Orthodox)",
+      "localName": "عيد الميلاد المجيد"
+    },
+    {
+      "date": "2027-01-25",
+      "name": "Revolution Day 2011 / National Police Day",
+      "localName": "عيد الثورة 25 يناير"
+    },
+    {
+      "date": "2027-04-25",
+      "name": "Sinai Liberation Day",
+      "localName": "عيد تحرير سيناء"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "عيد العمال"
+    },
+    {
+      "date": "2027-05-03",
+      "name": "Easter Monday",
+      "localName": "Sham El-Nessim"
+    },
+    {
+      "date": "2027-06-10",
+      "name": "Islamic New Year",
+      "localName": "Islamic New Year"
+    },
+    {
+      "date": "2027-07-01",
+      "name": "June 30 Revolution",
+      "localName": "ثورة 30 يونيو"
+    },
+    {
+      "date": "2027-07-23",
+      "name": "Revolution Day",
+      "localName": "عيد ثورة 23 يوليو"
+    },
+    {
+      "date": "2027-08-14",
+      "name": "Prophet Muhammad's Birthday (Tentative Date)",
+      "localName": "Prophet Muhammad's Birthday (Tentative Date)"
+    },
+    {
+      "date": "2027-10-06",
+      "name": "Armed Forces Day",
+      "localName": "عيد القوات المسلحة"
+    }
+  ]
+}

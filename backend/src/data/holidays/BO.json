@@ -1,0 +1,131 @@
+{
+  "countryCode": "BO",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:49.130Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2026-02-02",
+      "name": "Feast of the Virgin of Candelaria",
+      "localName": "Fiesta de la Virgen de Candelaria"
+    },
+    {
+      "date": "2026-02-16",
+      "name": "Carnival",
+      "localName": "Feriado por Carnaval"
+    },
+    {
+      "date": "2026-02-17",
+      "name": "Carnival",
+      "localName": "Feriado por Carnaval"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Dia del trabajo"
+    },
+    {
+      "date": "2026-06-04",
+      "name": "Corpus Christi",
+      "localName": "Corpus Christi"
+    },
+    {
+      "date": "2026-06-21",
+      "name": "Andean New Year",
+      "localName": "Año Nuevo Andino"
+    },
+    {
+      "date": "2026-08-02",
+      "name": "Agrarian Reform Day",
+      "localName": "Día de la Revolución Agraria"
+    },
+    {
+      "date": "2026-08-06",
+      "name": "Independence Day",
+      "localName": "Dia de la Patria"
+    },
+    {
+      "date": "2026-11-02",
+      "name": "All Saints' Day",
+      "localName": "Todos Santos"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2027-02-02",
+      "name": "Feast of the Virgin of Candelaria",
+      "localName": "Fiesta de la Virgen de Candelaria"
+    },
+    {
+      "date": "2027-02-08",
+      "name": "Carnival",
+      "localName": "Feriado por Carnaval"
+    },
+    {
+      "date": "2027-02-09",
+      "name": "Carnival",
+      "localName": "Feriado por Carnaval"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Dia del trabajo"
+    },
+    {
+      "date": "2027-05-27",
+      "name": "Corpus Christi",
+      "localName": "Corpus Christi"
+    },
+    {
+      "date": "2027-06-21",
+      "name": "Andean New Year",
+      "localName": "Año Nuevo Andino"
+    },
+    {
+      "date": "2027-08-02",
+      "name": "Agrarian Reform Day",
+      "localName": "Día de la Revolución Agraria"
+    },
+    {
+      "date": "2027-08-06",
+      "name": "Independence Day",
+      "localName": "Dia de la Patria"
+    },
+    {
+      "date": "2027-11-02",
+      "name": "All Saints' Day",
+      "localName": "Todos Santos"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    }
+  ]
+}

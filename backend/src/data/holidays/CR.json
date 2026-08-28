@@ -1,0 +1,121 @@
+{
+  "countryCode": "CR",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:49.040Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2026-04-02",
+      "name": "Maundy Thursday",
+      "localName": "Jueves Santo"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2026-04-11",
+      "name": "Juan Santamaría Day",
+      "localName": "Día de Juan Santamaría"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Día Internacional del Trabajo"
+    },
+    {
+      "date": "2026-07-25",
+      "name": "Annexation of the Party of Nicoya to Costa Rica",
+      "localName": "Anexión del Partido de Nicoya a Costa Rica"
+    },
+    {
+      "date": "2026-08-02",
+      "name": "Feast of Our Lady of the Angels",
+      "localName": "Fiesta de Nuestra Señora de los Ángeles"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "Mother's Day",
+      "localName": "Día de la Madre"
+    },
+    {
+      "date": "2026-09-15",
+      "name": "Independence Day",
+      "localName": "Día de la Independencia"
+    },
+    {
+      "date": "2026-12-01",
+      "name": "Army Abolition Day",
+      "localName": "Día de la Abolición del Ejército"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2027-03-25",
+      "name": "Maundy Thursday",
+      "localName": "Jueves Santo"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2027-04-11",
+      "name": "Juan Santamaría Day",
+      "localName": "Día de Juan Santamaría"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Día Internacional del Trabajo"
+    },
+    {
+      "date": "2027-07-25",
+      "name": "Annexation of the Party of Nicoya to Costa Rica",
+      "localName": "Anexión del Partido de Nicoya a Costa Rica"
+    },
+    {
+      "date": "2027-08-02",
+      "name": "Feast of Our Lady of the Angels",
+      "localName": "Fiesta de Nuestra Señora de los Ángeles"
+    },
+    {
+      "date": "2027-08-15",
+      "name": "Mother's Day",
+      "localName": "Día de la Madre"
+    },
+    {
+      "date": "2027-09-15",
+      "name": "Independence Day",
+      "localName": "Día de la Independencia"
+    },
+    {
+      "date": "2027-12-01",
+      "name": "Army Abolition Day",
+      "localName": "Día de la Abolición del Ejército"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    }
+  ]
+}

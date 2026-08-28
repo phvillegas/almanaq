@@ -1,0 +1,51 @@
+{
+  "countryCode": "VN",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:51.045Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Tết dương lịch"
+    },
+    {
+      "date": "2026-04-30",
+      "name": "Reunification Day",
+      "localName": "Ngày Giải phóng miền Nam, thống nhất đất nước"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Ngày Quốc tế lao động"
+    },
+    {
+      "date": "2026-09-02",
+      "name": "National Day",
+      "localName": "Quốc khánh"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Tết dương lịch"
+    },
+    {
+      "date": "2027-04-30",
+      "name": "Reunification Day",
+      "localName": "Ngày Giải phóng miền Nam, thống nhất đất nước"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Ngày Quốc tế lao động"
+    },
+    {
+      "date": "2027-09-02",
+      "name": "National Day",
+      "localName": "Quốc khánh"
+    }
+  ]
+}

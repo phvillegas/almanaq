@@ -1,0 +1,81 @@
+{
+  "countryCode": "BD",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.449Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-02-21",
+      "name": "International Mother Language Day",
+      "localName": "শহিদ দিবস ও আন্তর্জাতিক মাতৃভাষা দিবস"
+    },
+    {
+      "date": "2026-03-26",
+      "name": "Independence and National Day",
+      "localName": "স্বাধীনতা ও জাতীয় দিবস"
+    },
+    {
+      "date": "2026-04-14",
+      "name": "Bengali New Year",
+      "localName": "নববর্ষ"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "মে দিবস"
+    },
+    {
+      "date": "2026-08-05",
+      "name": "July Mass Uprising Day",
+      "localName": "জুলাই গণঅভ্যুত্থান দিবস"
+    },
+    {
+      "date": "2026-12-16",
+      "name": "Victory Day",
+      "localName": "বিজয় দিবস"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "বড়দিন"
+    },
+    {
+      "date": "2027-02-21",
+      "name": "International Mother Language Day",
+      "localName": "শহিদ দিবস ও আন্তর্জাতিক মাতৃভাষা দিবস"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Independence and National Day",
+      "localName": "স্বাধীনতা ও জাতীয় দিবস"
+    },
+    {
+      "date": "2027-04-14",
+      "name": "Bengali New Year",
+      "localName": "নববর্ষ"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "মে দিবস"
+    },
+    {
+      "date": "2027-08-05",
+      "name": "July Mass Uprising Day",
+      "localName": "জুলাই গণঅভ্যুত্থান দিবস"
+    },
+    {
+      "date": "2027-12-16",
+      "name": "Victory Day",
+      "localName": "বিজয় দিবস"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "বড়দিন"
+    }
+  ]
+}

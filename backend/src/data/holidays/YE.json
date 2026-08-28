@@ -1,0 +1,61 @@
+{
+  "countryCode": "YE",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.331Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-02-05",
+      "name": "Unity Day",
+      "localName": "اليوم الوطني للجمهورية اليمنية"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "عيد العمال"
+    },
+    {
+      "date": "2026-09-26",
+      "name": "Revolution Day",
+      "localName": "ثورة 26 سبتمبر المجيدة"
+    },
+    {
+      "date": "2026-10-14",
+      "name": "Liberation Day",
+      "localName": "ثورة 14 أكتوبر المجيدة"
+    },
+    {
+      "date": "2026-11-30",
+      "name": "Independence Day",
+      "localName": "عيد الجلاء"
+    },
+    {
+      "date": "2027-02-05",
+      "name": "Unity Day",
+      "localName": "اليوم الوطني للجمهورية اليمنية"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "عيد العمال"
+    },
+    {
+      "date": "2027-09-26",
+      "name": "Revolution Day",
+      "localName": "ثورة 26 سبتمبر المجيدة"
+    },
+    {
+      "date": "2027-10-14",
+      "name": "Liberation Day",
+      "localName": "ثورة 14 أكتوبر المجيدة"
+    },
+    {
+      "date": "2027-11-30",
+      "name": "Independence Day",
+      "localName": "عيد الجلاء"
+    }
+  ]
+}

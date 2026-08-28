@@ -1,0 +1,91 @@
+{
+  "countryCode": "ID",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:50.924Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Tahun Baru Masehi"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Wafat Isa Almasih"
+    },
+    {
+      "date": "2026-04-05",
+      "name": "Easter Sunday",
+      "localName": "Paskah"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Hari Buruh Internasional"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Ascension Day",
+      "localName": "Kenaikan Isa Almasih"
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Pancasila Day",
+      "localName": "Hari Lahir Pancasila"
+    },
+    {
+      "date": "2026-08-17",
+      "name": "Independence Day",
+      "localName": "Hari Ulang Tahun Kemerdekaan Republik Indonesia"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Hari Raya Natal"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Tahun Baru Masehi"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Wafat Isa Almasih"
+    },
+    {
+      "date": "2027-03-28",
+      "name": "Easter Sunday",
+      "localName": "Paskah"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Hari Buruh Internasional"
+    },
+    {
+      "date": "2027-05-06",
+      "name": "Ascension Day",
+      "localName": "Kenaikan Isa Almasih"
+    },
+    {
+      "date": "2027-06-01",
+      "name": "Pancasila Day",
+      "localName": "Hari Lahir Pancasila"
+    },
+    {
+      "date": "2027-08-17",
+      "name": "Independence Day",
+      "localName": "Hari Ulang Tahun Kemerdekaan Republik Indonesia"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Hari Raya Natal"
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "countryCode": "CO",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.755Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2026-01-12",
+      "name": "Epiphany",
+      "localName": "Día de los Reyes Magos"
+    },
+    {
+      "date": "2026-03-23",
+      "name": "Saint Joseph's Day",
+      "localName": "Día de San José"
+    },
+    {
+      "date": "2026-04-02",
+      "name": "Maundy Thursday",
+      "localName": "Jueves Santo"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Primero de Mayo"
+    },
+    {
+      "date": "2026-05-18",
+      "name": "Ascension Day",
+      "localName": "Ascensión del señor"
+    },
+    {
+      "date": "2026-06-08",
+      "name": "Corpus Christi",
+      "localName": "Corpus Christi"
+    },
+    {
+      "date": "2026-06-15",
+      "name": "Sacred Heart",
+      "localName": "Sagrado Corazón"
+    },
+    {
+      "date": "2026-06-29",
+      "name": "Saint Peter and Saint Paul",
+      "localName": "San Pedro y San Pablo"
+    },
+    {
+      "date": "2026-07-13",
+      "name": "Our Lady of Chiquinquirá Day",
+      "localName": "Día de la Virgen de Chiquinquirá"
+    },
+    {
+      "date": "2026-07-20",
+      "name": "Declaration of Independence",
+      "localName": "Declaracion de la Independencia de Colombia"
+    },
+    {
+      "date": "2026-08-07",
+      "name": "Battle of Boyacá",
+      "localName": "Batalla de Boyacá"
+    },
+    {
+      "date": "2026-08-17",
+      "name": "Assumption of Mary",
+      "localName": "La Asunción"
+    },
+    {
+      "date": "2026-10-12",
+      "name": "Columbus Day",
+      "localName": "Día de la Raza"
+    },
+    {
+      "date": "2026-11-02",
+      "name": "All Saints’ Day",
+      "localName": "Dia de los Santos"
+    },
+    {
+      "date": "2026-11-16",
+      "name": "Independence of Cartagena",
+      "localName": "Independencia de Cartagena"
+    },
+    {
+      "date": "2026-12-08",
+      "name": "Immaculate Conception",
+      "localName": "La Inmaculada Concepción"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2027-01-11",
+      "name": "Epiphany",
+      "localName": "Día de los Reyes Magos"
+    },
+    {
+      "date": "2027-03-22",
+      "name": "Saint Joseph's Day",
+      "localName": "Día de San José"
+    },
+    {
+      "date": "2027-03-25",
+      "name": "Maundy Thursday",
+      "localName": "Jueves Santo"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Primero de Mayo"
+    },
+    {
+      "date": "2027-05-10",
+      "name": "Ascension Day",
+      "localName": "Ascensión del señor"
+    },
+    {
+      "date": "2027-05-31",
+      "name": "Corpus Christi",
+      "localName": "Corpus Christi"
+    },
+    {
+      "date": "2027-06-07",
+      "name": "Sacred Heart",
+      "localName": "Sagrado Corazón"
+    },
+    {
+      "date": "2027-07-05",
+      "name": "Saint Peter and Saint Paul",
+      "localName": "San Pedro y San Pablo"
+    },
+    {
+      "date": "2027-07-12",
+      "name": "Our Lady of Chiquinquirá Day",
+      "localName": "Día de la Virgen de Chiquinquirá"
+    },
+    {
+      "date": "2027-07-20",
+      "name": "Declaration of Independence",
+      "localName": "Declaracion de la Independencia de Colombia"
+    },
+    {
+      "date": "2027-08-07",
+      "name": "Battle of Boyacá",
+      "localName": "Batalla de Boyacá"
+    },
+    {
+      "date": "2027-08-16",
+      "name": "Assumption of Mary",
+      "localName": "La Asunción"
+    },
+    {
+      "date": "2027-10-18",
+      "name": "Columbus Day",
+      "localName": "Día de la Raza"
+    },
+    {
+      "date": "2027-11-01",
+      "name": "All Saints’ Day",
+      "localName": "Dia de los Santos"
+    },
+    {
+      "date": "2027-11-15",
+      "name": "Independence of Cartagena",
+      "localName": "Independencia de Cartagena"
+    },
+    {
+      "date": "2027-12-08",
+      "name": "Immaculate Conception",
+      "localName": "La Inmaculada Concepción"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    }
+  ]
+}

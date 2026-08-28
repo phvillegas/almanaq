@@ -1,0 +1,111 @@
+{
+  "countryCode": "NG",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:50.529Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "New Year's Day"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Good Friday"
+    },
+    {
+      "date": "2026-04-06",
+      "name": "Easter Monday",
+      "localName": "Easter Monday"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Workers' Day",
+      "localName": "Workers' Day"
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Children's Day",
+      "localName": "Children's Day"
+    },
+    {
+      "date": "2026-06-12",
+      "name": "Democracy Day",
+      "localName": "Democracy Day"
+    },
+    {
+      "date": "2026-10-01",
+      "name": "National Day",
+      "localName": "National Day"
+    },
+    {
+      "date": "2026-11-01",
+      "name": "National Youth Day",
+      "localName": "National Youth Day"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Christmas Day"
+    },
+    {
+      "date": "2026-12-28",
+      "name": "Boxing Day",
+      "localName": "Boxing Day"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "New Year's Day"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Good Friday"
+    },
+    {
+      "date": "2027-03-29",
+      "name": "Easter Monday",
+      "localName": "Easter Monday"
+    },
+    {
+      "date": "2027-05-03",
+      "name": "Workers' Day",
+      "localName": "Workers' Day"
+    },
+    {
+      "date": "2027-05-27",
+      "name": "Children's Day",
+      "localName": "Children's Day"
+    },
+    {
+      "date": "2027-06-12",
+      "name": "Democracy Day",
+      "localName": "Democracy Day"
+    },
+    {
+      "date": "2027-10-01",
+      "name": "National Day",
+      "localName": "National Day"
+    },
+    {
+      "date": "2027-11-01",
+      "name": "National Youth Day",
+      "localName": "National Youth Day"
+    },
+    {
+      "date": "2027-12-27",
+      "name": "Christmas Day",
+      "localName": "Christmas Day"
+    },
+    {
+      "date": "2027-12-27",
+      "name": "Boxing Day",
+      "localName": "Boxing Day"
+    }
+  ]
+}

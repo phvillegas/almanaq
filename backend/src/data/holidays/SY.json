@@ -1,0 +1,111 @@
+{
+  "countryCode": "SY",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.304Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "عيد رأس السنة الميلادية"
+    },
+    {
+      "date": "2026-03-18",
+      "name": "Syrian Revolution Day",
+      "localName": "عيد الثورة السورية"
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Newroz",
+      "localName": "عيد النوروز"
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Mother's Day",
+      "localName": "عيد الأم"
+    },
+    {
+      "date": "2026-04-05",
+      "name": "Easter Sunday",
+      "localName": "عيد الفصح غريغوري"
+    },
+    {
+      "date": "2026-04-12",
+      "name": "Easter Sunday",
+      "localName": "عيد الفصح اليوليوسي"
+    },
+    {
+      "date": "2026-04-17",
+      "name": "Independence Day",
+      "localName": "عيد الجلاء"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "عيد العمال"
+    },
+    {
+      "date": "2026-12-08",
+      "name": "Liberation Day",
+      "localName": "يوم التحرير"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "عيد الميلاد المجيد"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "عيد رأس السنة الميلادية"
+    },
+    {
+      "date": "2027-03-18",
+      "name": "Syrian Revolution Day",
+      "localName": "عيد الثورة السورية"
+    },
+    {
+      "date": "2027-03-21",
+      "name": "Newroz",
+      "localName": "عيد النوروز"
+    },
+    {
+      "date": "2027-03-21",
+      "name": "Mother's Day",
+      "localName": "عيد الأم"
+    },
+    {
+      "date": "2027-03-28",
+      "name": "Easter Sunday",
+      "localName": "عيد الفصح غريغوري"
+    },
+    {
+      "date": "2027-04-17",
+      "name": "Independence Day",
+      "localName": "عيد الجلاء"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "عيد العمال"
+    },
+    {
+      "date": "2027-05-02",
+      "name": "Easter Sunday",
+      "localName": "عيد الفصح اليوليوسي"
+    },
+    {
+      "date": "2027-12-08",
+      "name": "Liberation Day",
+      "localName": "يوم التحرير"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "عيد الميلاد المجيد"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "countryCode": "DE",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:49.474Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Neujahr"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Karfreitag"
+    },
+    {
+      "date": "2026-04-06",
+      "name": "Easter Monday",
+      "localName": "Ostermontag"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Tag der Arbeit"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Ascension Day",
+      "localName": "Christi Himmelfahrt"
+    },
+    {
+      "date": "2026-05-25",
+      "name": "Whit Monday",
+      "localName": "Pfingstmontag"
+    },
+    {
+      "date": "2026-10-03",
+      "name": "German Unity Day",
+      "localName": "Tag der Deutschen Einheit"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Erster Weihnachtstag"
+    },
+    {
+      "date": "2026-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "Zweiter Weihnachtstag"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Neujahr"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Karfreitag"
+    },
+    {
+      "date": "2027-03-29",
+      "name": "Easter Monday",
+      "localName": "Ostermontag"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Tag der Arbeit"
+    },
+    {
+      "date": "2027-05-06",
+      "name": "Ascension Day",
+      "localName": "Christi Himmelfahrt"
+    },
+    {
+      "date": "2027-05-17",
+      "name": "Whit Monday",
+      "localName": "Pfingstmontag"
+    },
+    {
+      "date": "2027-10-03",
+      "name": "German Unity Day",
+      "localName": "Tag der Deutschen Einheit"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Erster Weihnachtstag"
+    },
+    {
+      "date": "2027-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "Zweiter Weihnachtstag"
+    }
+  ]
+}

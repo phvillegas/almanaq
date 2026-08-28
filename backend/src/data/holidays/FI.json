@@ -1,0 +1,161 @@
+{
+  "countryCode": "FI",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:49.901Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Uudenvuodenpäivä"
+    },
+    {
+      "date": "2026-01-06",
+      "name": "Epiphany",
+      "localName": "Loppiainen"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Pitkäperjantai"
+    },
+    {
+      "date": "2026-04-05",
+      "name": "Easter Sunday",
+      "localName": "Pääsiäispäivä"
+    },
+    {
+      "date": "2026-04-06",
+      "name": "Easter Monday",
+      "localName": "Toinen pääsiäispäivä"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "May Day",
+      "localName": "Vappu"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Ascension Day",
+      "localName": "Helatorstai"
+    },
+    {
+      "date": "2026-05-24",
+      "name": "Pentecost",
+      "localName": "Helluntaipäivä"
+    },
+    {
+      "date": "2026-06-19",
+      "name": "Midsummer Eve",
+      "localName": "Juhannusaatto"
+    },
+    {
+      "date": "2026-06-20",
+      "name": "Midsummer Day",
+      "localName": "Juhannuspäivä"
+    },
+    {
+      "date": "2026-10-31",
+      "name": "All Saints' Day",
+      "localName": "Pyhäinpäivä"
+    },
+    {
+      "date": "2026-12-06",
+      "name": "Independence Day",
+      "localName": "Itsenäisyyspäivä"
+    },
+    {
+      "date": "2026-12-24",
+      "name": "Christmas Eve",
+      "localName": "Jouluaatto"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Joulupäivä"
+    },
+    {
+      "date": "2026-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "Tapaninpäivä"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Uudenvuodenpäivä"
+    },
+    {
+      "date": "2027-01-06",
+      "name": "Epiphany",
+      "localName": "Loppiainen"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Pitkäperjantai"
+    },
+    {
+      "date": "2027-03-28",
+      "name": "Easter Sunday",
+      "localName": "Pääsiäispäivä"
+    },
+    {
+      "date": "2027-03-29",
+      "name": "Easter Monday",
+      "localName": "Toinen pääsiäispäivä"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "May Day",
+      "localName": "Vappu"
+    },
+    {
+      "date": "2027-05-06",
+      "name": "Ascension Day",
+      "localName": "Helatorstai"
+    },
+    {
+      "date": "2027-05-16",
+      "name": "Pentecost",
+      "localName": "Helluntaipäivä"
+    },
+    {
+      "date": "2027-06-25",
+      "name": "Midsummer Eve",
+      "localName": "Juhannusaatto"
+    },
+    {
+      "date": "2027-06-26",
+      "name": "Midsummer Day",
+      "localName": "Juhannuspäivä"
+    },
+    {
+      "date": "2027-11-06",
+      "name": "All Saints' Day",
+      "localName": "Pyhäinpäivä"
+    },
+    {
+      "date": "2027-12-06",
+      "name": "Independence Day",
+      "localName": "Itsenäisyyspäivä"
+    },
+    {
+      "date": "2027-12-24",
+      "name": "Christmas Eve",
+      "localName": "Jouluaatto"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Joulupäivä"
+    },
+    {
+      "date": "2027-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "Tapaninpäivä"
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "countryCode": "AR",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.550Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2026-02-16",
+      "name": "Carnival",
+      "localName": "Carnaval"
+    },
+    {
+      "date": "2026-02-17",
+      "name": "Carnival",
+      "localName": "Carnaval"
+    },
+    {
+      "date": "2026-03-24",
+      "name": "Day of Remembrance for Truth and Justice",
+      "localName": "Día Nacional de la Memoria por la Verdad y la Justicia"
+    },
+    {
+      "date": "2026-04-02",
+      "name": "Day of the Veterans and Fallen of the Malvinas War",
+      "localName": "Día del Veterano y de los Caídos en la Guerra de Malvinas"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Día del Trabajador"
+    },
+    {
+      "date": "2026-05-25",
+      "name": "May Revolution",
+      "localName": "Día de la Revolución de Mayo"
+    },
+    {
+      "date": "2026-06-15",
+      "name": "Anniversary of the Passing of General Martín Miguel de Güemes",
+      "localName": "Paso a la Inmortalidad del General Martín Miguel de Güemes"
+    },
+    {
+      "date": "2026-06-20",
+      "name": "General Manuel Belgrano Memorial Day",
+      "localName": "Paso a la Inmortalidad del General Manuel Belgrano"
+    },
+    {
+      "date": "2026-07-09",
+      "name": "Independence Day",
+      "localName": "Día de la Independencia"
+    },
+    {
+      "date": "2026-08-17",
+      "name": "General José de San Martín Memorial Day",
+      "localName": "Paso a la Inmortalidad del General José de San Martín"
+    },
+    {
+      "date": "2026-10-12",
+      "name": "Day of Respect for Cultural Diversity",
+      "localName": "Día del Respeto a la Diversidad Cultural"
+    },
+    {
+      "date": "2026-11-23",
+      "name": "National Sovereignty Day",
+      "localName": "Día de la Soberanía Nacional"
+    },
+    {
+      "date": "2026-12-08",
+      "name": "Immaculate Conception Day",
+      "localName": "Día de la Inmaculada Concepción de María"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2027-02-08",
+      "name": "Carnival",
+      "localName": "Carnaval"
+    },
+    {
+      "date": "2027-02-09",
+      "name": "Carnival",
+      "localName": "Carnaval"
+    },
+    {
+      "date": "2027-03-24",
+      "name": "Day of Remembrance for Truth and Justice",
+      "localName": "Día Nacional de la Memoria por la Verdad y la Justicia"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2027-04-02",
+      "name": "Day of the Veterans and Fallen of the Malvinas War",
+      "localName": "Día del Veterano y de los Caídos en la Guerra de Malvinas"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Día del Trabajador"
+    },
+    {
+      "date": "2027-05-25",
+      "name": "May Revolution",
+      "localName": "Día de la Revolución de Mayo"
+    },
+    {
+      "date": "2027-06-20",
+      "name": "General Manuel Belgrano Memorial Day",
+      "localName": "Paso a la Inmortalidad del General Manuel Belgrano"
+    },
+    {
+      "date": "2027-06-21",
+      "name": "Anniversary of the Passing of General Martín Miguel de Güemes",
+      "localName": "Paso a la Inmortalidad del General Martín Miguel de Güemes"
+    },
+    {
+      "date": "2027-07-09",
+      "name": "Independence Day",
+      "localName": "Día de la Independencia"
+    },
+    {
+      "date": "2027-08-16",
+      "name": "General José de San Martín Memorial Day",
+      "localName": "Paso a la Inmortalidad del General José de San Martín"
+    },
+    {
+      "date": "2027-10-11",
+      "name": "Day of Respect for Cultural Diversity",
+      "localName": "Día del Respeto a la Diversidad Cultural"
+    },
+    {
+      "date": "2027-11-20",
+      "name": "National Sovereignty Day",
+      "localName": "Día de la Soberanía Nacional"
+    },
+    {
+      "date": "2027-12-08",
+      "name": "Immaculate Conception Day",
+      "localName": "Día de la Inmaculada Concepción de María"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "countryCode": "CA",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:49.010Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "New Year's Day"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Good Friday"
+    },
+    {
+      "date": "2026-05-18",
+      "name": "Victoria Day",
+      "localName": "Victoria Day"
+    },
+    {
+      "date": "2026-07-01",
+      "name": "Canada Day",
+      "localName": "Canada Day"
+    },
+    {
+      "date": "2026-09-07",
+      "name": "Labour Day",
+      "localName": "Labour Day"
+    },
+    {
+      "date": "2026-09-30",
+      "name": "National Day for Truth and Reconciliation",
+      "localName": "National Day for Truth and Reconciliation"
+    },
+    {
+      "date": "2026-10-12",
+      "name": "Thanksgiving",
+      "localName": "Thanksgiving"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Christmas Day"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "New Year's Day"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Good Friday"
+    },
+    {
+      "date": "2027-05-24",
+      "name": "Victoria Day",
+      "localName": "Victoria Day"
+    },
+    {
+      "date": "2027-07-01",
+      "name": "Canada Day",
+      "localName": "Canada Day"
+    },
+    {
+      "date": "2027-09-06",
+      "name": "Labour Day",
+      "localName": "Labour Day"
+    },
+    {
+      "date": "2027-09-30",
+      "name": "National Day for Truth and Reconciliation",
+      "localName": "National Day for Truth and Reconciliation"
+    },
+    {
+      "date": "2027-10-11",
+      "name": "Thanksgiving",
+      "localName": "Thanksgiving"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Christmas Day"
+    }
+  ]
+}

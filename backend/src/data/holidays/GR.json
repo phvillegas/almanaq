@@ -1,0 +1,161 @@
+{
+  "countryCode": "GR",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:50.184Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Πρωτοχρονιά"
+    },
+    {
+      "date": "2026-01-06",
+      "name": "Epiphany",
+      "localName": "Θεοφάνεια"
+    },
+    {
+      "date": "2026-02-23",
+      "name": "Clean Monday",
+      "localName": "Καθαρά Δευτέρα"
+    },
+    {
+      "date": "2026-03-25",
+      "name": "Annunciation",
+      "localName": "Ευαγγελισμός της Θεοτόκου"
+    },
+    {
+      "date": "2026-03-25",
+      "name": "Independence Day",
+      "localName": "Εικοστή Πέμπτη Μαρτίου"
+    },
+    {
+      "date": "2026-04-10",
+      "name": "Good Friday",
+      "localName": "Μεγάλη Παρασκευή"
+    },
+    {
+      "date": "2026-04-12",
+      "name": "Easter Sunday",
+      "localName": "Κυριακή του Πάσχα"
+    },
+    {
+      "date": "2026-04-13",
+      "name": "Easter Monday",
+      "localName": "Δευτέρα του Πάσχα"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Εργατική Πρωτομαγιά"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Pentecost",
+      "localName": "Πεντηκοστή"
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Whit Monday",
+      "localName": "Δευτέρα Πεντηκοστής"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "Assumption Day",
+      "localName": "Κοίμηση της Θεοτόκου"
+    },
+    {
+      "date": "2026-10-28",
+      "name": "Ochi Day",
+      "localName": "Το Όχι"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Χριστούγεννα"
+    },
+    {
+      "date": "2026-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "Σύναξις Υπεραγίας Θεοτόκου Μαρίας"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Πρωτοχρονιά"
+    },
+    {
+      "date": "2027-01-06",
+      "name": "Epiphany",
+      "localName": "Θεοφάνεια"
+    },
+    {
+      "date": "2027-03-15",
+      "name": "Clean Monday",
+      "localName": "Καθαρά Δευτέρα"
+    },
+    {
+      "date": "2027-03-25",
+      "name": "Annunciation",
+      "localName": "Ευαγγελισμός της Θεοτόκου"
+    },
+    {
+      "date": "2027-03-25",
+      "name": "Independence Day",
+      "localName": "Εικοστή Πέμπτη Μαρτίου"
+    },
+    {
+      "date": "2027-04-30",
+      "name": "Good Friday",
+      "localName": "Μεγάλη Παρασκευή"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Εργατική Πρωτομαγιά"
+    },
+    {
+      "date": "2027-05-02",
+      "name": "Easter Sunday",
+      "localName": "Κυριακή του Πάσχα"
+    },
+    {
+      "date": "2027-05-03",
+      "name": "Easter Monday",
+      "localName": "Δευτέρα του Πάσχα"
+    },
+    {
+      "date": "2027-06-20",
+      "name": "Pentecost",
+      "localName": "Πεντηκοστή"
+    },
+    {
+      "date": "2027-06-21",
+      "name": "Whit Monday",
+      "localName": "Δευτέρα Πεντηκοστής"
+    },
+    {
+      "date": "2027-08-15",
+      "name": "Assumption Day",
+      "localName": "Κοίμηση της Θεοτόκου"
+    },
+    {
+      "date": "2027-10-28",
+      "name": "Ochi Day",
+      "localName": "Το Όχι"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Χριστούγεννα"
+    },
+    {
+      "date": "2027-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "Σύναξις Υπεραγίας Θεοτόκου Μαρίας"
+    }
+  ]
+}

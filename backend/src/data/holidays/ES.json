@@ -1,0 +1,111 @@
+{
+  "countryCode": "ES",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:49.278Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2026-01-06",
+      "name": "Epiphany",
+      "localName": "Día de Reyes / Epifanía del Señor"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Fiesta del trabajo"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "Assumption",
+      "localName": "Asunción"
+    },
+    {
+      "date": "2026-10-12",
+      "name": "National Day of Spain",
+      "localName": "Fiesta Nacional de España"
+    },
+    {
+      "date": "2026-11-01",
+      "name": "All Saints Day",
+      "localName": "Día de todos los Santos"
+    },
+    {
+      "date": "2026-12-06",
+      "name": "Constitution Day",
+      "localName": "Día de la Constitución"
+    },
+    {
+      "date": "2026-12-08",
+      "name": "Immaculate Conception",
+      "localName": "Inmaculada Concepción"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2027-01-06",
+      "name": "Epiphany",
+      "localName": "Día de Reyes / Epifanía del Señor"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Fiesta del trabajo"
+    },
+    {
+      "date": "2027-08-15",
+      "name": "Assumption",
+      "localName": "Asunción"
+    },
+    {
+      "date": "2027-10-12",
+      "name": "National Day of Spain",
+      "localName": "Fiesta Nacional de España"
+    },
+    {
+      "date": "2027-11-01",
+      "name": "All Saints Day",
+      "localName": "Día de todos los Santos"
+    },
+    {
+      "date": "2027-12-06",
+      "name": "Constitution Day",
+      "localName": "Día de la Constitución"
+    },
+    {
+      "date": "2027-12-08",
+      "name": "Immaculate Conception",
+      "localName": "Inmaculada Concepción"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    }
+  ]
+}

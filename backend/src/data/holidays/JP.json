@@ -1,0 +1,171 @@
+{
+  "countryCode": "JP",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.517Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "元日"
+    },
+    {
+      "date": "2026-01-12",
+      "name": "Coming of Age Day",
+      "localName": "成人の日"
+    },
+    {
+      "date": "2026-02-11",
+      "name": "Foundation Day",
+      "localName": "建国記念の日"
+    },
+    {
+      "date": "2026-02-23",
+      "name": "The Emperor's Birthday",
+      "localName": "天皇誕生日"
+    },
+    {
+      "date": "2026-03-20",
+      "name": "Vernal Equinox Day",
+      "localName": "春分の日"
+    },
+    {
+      "date": "2026-04-29",
+      "name": "Shōwa Day",
+      "localName": "昭和の日"
+    },
+    {
+      "date": "2026-05-04",
+      "name": "Greenery Day",
+      "localName": "みどりの日"
+    },
+    {
+      "date": "2026-05-05",
+      "name": "Children's Day",
+      "localName": "こどもの日"
+    },
+    {
+      "date": "2026-05-06",
+      "name": "Constitution Memorial Day",
+      "localName": "憲法記念日"
+    },
+    {
+      "date": "2026-07-20",
+      "name": "Marine Day",
+      "localName": "海の日"
+    },
+    {
+      "date": "2026-08-11",
+      "name": "Mountain Day",
+      "localName": "山の日"
+    },
+    {
+      "date": "2026-09-21",
+      "name": "Respect for the Aged Day",
+      "localName": "敬老の日"
+    },
+    {
+      "date": "2026-09-23",
+      "name": "Autumnal Equinox Day",
+      "localName": "秋分の日"
+    },
+    {
+      "date": "2026-10-12",
+      "name": "Sports Day",
+      "localName": "スポーツの日"
+    },
+    {
+      "date": "2026-11-03",
+      "name": "Culture Day",
+      "localName": "文化の日"
+    },
+    {
+      "date": "2026-11-23",
+      "name": "Labour Thanksgiving Day",
+      "localName": "勤労感謝の日"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "元日"
+    },
+    {
+      "date": "2027-01-11",
+      "name": "Coming of Age Day",
+      "localName": "成人の日"
+    },
+    {
+      "date": "2027-02-11",
+      "name": "Foundation Day",
+      "localName": "建国記念の日"
+    },
+    {
+      "date": "2027-02-23",
+      "name": "The Emperor's Birthday",
+      "localName": "天皇誕生日"
+    },
+    {
+      "date": "2027-03-21",
+      "name": "Vernal Equinox Day",
+      "localName": "春分の日"
+    },
+    {
+      "date": "2027-04-29",
+      "name": "Shōwa Day",
+      "localName": "昭和の日"
+    },
+    {
+      "date": "2027-05-03",
+      "name": "Constitution Memorial Day",
+      "localName": "憲法記念日"
+    },
+    {
+      "date": "2027-05-04",
+      "name": "Greenery Day",
+      "localName": "みどりの日"
+    },
+    {
+      "date": "2027-05-05",
+      "name": "Children's Day",
+      "localName": "こどもの日"
+    },
+    {
+      "date": "2027-07-19",
+      "name": "Marine Day",
+      "localName": "海の日"
+    },
+    {
+      "date": "2027-08-11",
+      "name": "Mountain Day",
+      "localName": "山の日"
+    },
+    {
+      "date": "2027-09-20",
+      "name": "Respect for the Aged Day",
+      "localName": "敬老の日"
+    },
+    {
+      "date": "2027-09-23",
+      "name": "Autumnal Equinox Day",
+      "localName": "秋分の日"
+    },
+    {
+      "date": "2027-10-11",
+      "name": "Sports Day",
+      "localName": "スポーツの日"
+    },
+    {
+      "date": "2027-11-03",
+      "name": "Culture Day",
+      "localName": "文化の日"
+    },
+    {
+      "date": "2027-11-23",
+      "name": "Labour Thanksgiving Day",
+      "localName": "勤労感謝の日"
+    }
+  ]
+}

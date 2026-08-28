@@ -1,0 +1,51 @@
+{
+  "countryCode": "CH",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:50.029Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Neujahr"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Ascension Day",
+      "localName": "Auffahrt"
+    },
+    {
+      "date": "2026-08-01",
+      "name": "Swiss National Day",
+      "localName": "Bundesfeier"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Weihnachten"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Neujahr"
+    },
+    {
+      "date": "2027-05-06",
+      "name": "Ascension Day",
+      "localName": "Auffahrt"
+    },
+    {
+      "date": "2027-08-01",
+      "name": "Swiss National Day",
+      "localName": "Bundesfeier"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Weihnachten"
+    }
+  ]
+}

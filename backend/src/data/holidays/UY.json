@@ -1,0 +1,161 @@
+{
+  "countryCode": "UY",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.843Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2026-01-06",
+      "name": "Children's Day",
+      "localName": "Día de los Niños"
+    },
+    {
+      "date": "2026-02-16",
+      "name": "Carnival",
+      "localName": "Carnaval"
+    },
+    {
+      "date": "2026-02-17",
+      "name": "Carnival",
+      "localName": "Carnaval"
+    },
+    {
+      "date": "2026-04-02",
+      "name": "Maundy Thursday",
+      "localName": "Semana de Turismo"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Semana de Turismo"
+    },
+    {
+      "date": "2026-04-19",
+      "name": "Landing of the 33 Patriots Day",
+      "localName": "Desembarco de los 33 Orientales"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "International Workers' Day",
+      "localName": "Día de los Trabajadores"
+    },
+    {
+      "date": "2026-05-18",
+      "name": "Battle of Las Piedras",
+      "localName": "Batalla de las Piedras"
+    },
+    {
+      "date": "2026-06-19",
+      "name": "Birthday of José Gervasio Artigas and Never Again Day",
+      "localName": "Natalicio de Artigas y Día del Nunca Más"
+    },
+    {
+      "date": "2026-07-18",
+      "name": "Constitution Day",
+      "localName": "Jura de la Constitución"
+    },
+    {
+      "date": "2026-08-25",
+      "name": "Independence Day",
+      "localName": "Día de la Independencia"
+    },
+    {
+      "date": "2026-10-12",
+      "name": "Day of the race",
+      "localName": "Día de la Raza"
+    },
+    {
+      "date": "2026-11-02",
+      "name": "Deceased ones day",
+      "localName": "Día de los Difuntos"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Día de la Familia"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2027-01-06",
+      "name": "Children's Day",
+      "localName": "Día de los Niños"
+    },
+    {
+      "date": "2027-02-08",
+      "name": "Carnival",
+      "localName": "Carnaval"
+    },
+    {
+      "date": "2027-02-09",
+      "name": "Carnival",
+      "localName": "Carnaval"
+    },
+    {
+      "date": "2027-03-25",
+      "name": "Maundy Thursday",
+      "localName": "Semana de Turismo"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Semana de Turismo"
+    },
+    {
+      "date": "2027-04-19",
+      "name": "Landing of the 33 Patriots Day",
+      "localName": "Desembarco de los 33 Orientales"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "International Workers' Day",
+      "localName": "Día de los Trabajadores"
+    },
+    {
+      "date": "2027-05-18",
+      "name": "Battle of Las Piedras",
+      "localName": "Batalla de las Piedras"
+    },
+    {
+      "date": "2027-06-19",
+      "name": "Birthday of José Gervasio Artigas and Never Again Day",
+      "localName": "Natalicio de Artigas y Día del Nunca Más"
+    },
+    {
+      "date": "2027-07-18",
+      "name": "Constitution Day",
+      "localName": "Jura de la Constitución"
+    },
+    {
+      "date": "2027-08-25",
+      "name": "Independence Day",
+      "localName": "Día de la Independencia"
+    },
+    {
+      "date": "2027-10-12",
+      "name": "Day of the race",
+      "localName": "Día de la Raza"
+    },
+    {
+      "date": "2027-11-02",
+      "name": "Deceased ones day",
+      "localName": "Día de los Difuntos"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Día de la Familia"
+    }
+  ]
+}

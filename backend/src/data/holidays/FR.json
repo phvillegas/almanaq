@@ -1,0 +1,121 @@
+{
+  "countryCode": "FR",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:49.355Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Jour de l'an"
+    },
+    {
+      "date": "2026-04-06",
+      "name": "Easter Monday",
+      "localName": "Lundi de Pâques"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Fête du Travail"
+    },
+    {
+      "date": "2026-05-08",
+      "name": "Victory in Europe Day",
+      "localName": "Victoire 1945"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Ascension Day",
+      "localName": "Ascension"
+    },
+    {
+      "date": "2026-05-25",
+      "name": "Whit Monday",
+      "localName": "Lundi de Pentecôte"
+    },
+    {
+      "date": "2026-07-14",
+      "name": "Bastille Day",
+      "localName": "Fête nationale"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "Assumption Day",
+      "localName": "Assomption"
+    },
+    {
+      "date": "2026-11-01",
+      "name": "All Saints' Day",
+      "localName": "Toussaint"
+    },
+    {
+      "date": "2026-11-11",
+      "name": "Armistice Day",
+      "localName": "Armistice 1918"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Noël"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Jour de l'an"
+    },
+    {
+      "date": "2027-03-29",
+      "name": "Easter Monday",
+      "localName": "Lundi de Pâques"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Fête du Travail"
+    },
+    {
+      "date": "2027-05-06",
+      "name": "Ascension Day",
+      "localName": "Ascension"
+    },
+    {
+      "date": "2027-05-08",
+      "name": "Victory in Europe Day",
+      "localName": "Victoire 1945"
+    },
+    {
+      "date": "2027-05-17",
+      "name": "Whit Monday",
+      "localName": "Lundi de Pentecôte"
+    },
+    {
+      "date": "2027-07-14",
+      "name": "Bastille Day",
+      "localName": "Fête nationale"
+    },
+    {
+      "date": "2027-08-15",
+      "name": "Assumption Day",
+      "localName": "Assomption"
+    },
+    {
+      "date": "2027-11-01",
+      "name": "All Saints' Day",
+      "localName": "Toussaint"
+    },
+    {
+      "date": "2027-11-11",
+      "name": "Armistice Day",
+      "localName": "Armistice 1918"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Noël"
+    }
+  ]
+}

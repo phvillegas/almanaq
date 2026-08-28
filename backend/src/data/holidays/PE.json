@@ -1,0 +1,151 @@
+{
+  "countryCode": "PE",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.813Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2026-04-02",
+      "name": "Holy Thursday",
+      "localName": "Jueves Santo"
+    },
+    {
+      "date": "2026-04-02",
+      "name": "Maundy Thursday",
+      "localName": "Jueves Santo"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2026-04-05",
+      "name": "Easter Sunday",
+      "localName": "Domingo Santo"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "International Workers' Day",
+      "localName": "Día del Trabajo"
+    },
+    {
+      "date": "2026-06-29",
+      "name": "Saint Peter and Saint Paul",
+      "localName": "Día de San Pedro y San Pablo"
+    },
+    {
+      "date": "2026-07-28",
+      "name": "Independence Day",
+      "localName": "Día de la Independencia"
+    },
+    {
+      "date": "2026-07-29",
+      "name": "Independence Day",
+      "localName": "Día de la Independencia"
+    },
+    {
+      "date": "2026-08-30",
+      "name": "Santa Rosa de Lima",
+      "localName": "Día de Santa Rosa de Lima"
+    },
+    {
+      "date": "2026-10-08",
+      "name": "Battle of Angamos",
+      "localName": "Combate de Angamos"
+    },
+    {
+      "date": "2026-11-01",
+      "name": "All Saints Day",
+      "localName": "Día de Todos los Santos"
+    },
+    {
+      "date": "2026-12-08",
+      "name": "Immaculate Conception",
+      "localName": "Inmaculada Concepción"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2027-03-25",
+      "name": "Holy Thursday",
+      "localName": "Jueves Santo"
+    },
+    {
+      "date": "2027-03-25",
+      "name": "Maundy Thursday",
+      "localName": "Jueves Santo"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2027-03-28",
+      "name": "Easter Sunday",
+      "localName": "Domingo Santo"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "International Workers' Day",
+      "localName": "Día del Trabajo"
+    },
+    {
+      "date": "2027-06-29",
+      "name": "Saint Peter and Saint Paul",
+      "localName": "Día de San Pedro y San Pablo"
+    },
+    {
+      "date": "2027-07-28",
+      "name": "Independence Day",
+      "localName": "Día de la Independencia"
+    },
+    {
+      "date": "2027-07-29",
+      "name": "Independence Day",
+      "localName": "Día de la Independencia"
+    },
+    {
+      "date": "2027-08-30",
+      "name": "Santa Rosa de Lima",
+      "localName": "Día de Santa Rosa de Lima"
+    },
+    {
+      "date": "2027-10-08",
+      "name": "Battle of Angamos",
+      "localName": "Combate de Angamos"
+    },
+    {
+      "date": "2027-11-01",
+      "name": "All Saints Day",
+      "localName": "Día de Todos los Santos"
+    },
+    {
+      "date": "2027-12-08",
+      "name": "Immaculate Conception",
+      "localName": "Inmaculada Concepción"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    }
+  ]
+}

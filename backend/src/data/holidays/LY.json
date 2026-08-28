@@ -1,0 +1,61 @@
+{
+  "countryCode": "LY",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.277Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-02-17",
+      "name": "Revolution Day",
+      "localName": "يوم ثورة 17 فبراير"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "عيد العمال"
+    },
+    {
+      "date": "2026-09-16",
+      "name": "Martyrs' Day",
+      "localName": "يوم الشهيد"
+    },
+    {
+      "date": "2026-10-23",
+      "name": "Liberation Day",
+      "localName": "يوم التحرير"
+    },
+    {
+      "date": "2026-12-24",
+      "name": "Independence Day",
+      "localName": "عيد الاستقلال"
+    },
+    {
+      "date": "2027-02-17",
+      "name": "Revolution Day",
+      "localName": "يوم ثورة 17 فبراير"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "عيد العمال"
+    },
+    {
+      "date": "2027-09-16",
+      "name": "Martyrs' Day",
+      "localName": "يوم الشهيد"
+    },
+    {
+      "date": "2027-10-23",
+      "name": "Liberation Day",
+      "localName": "يوم التحرير"
+    },
+    {
+      "date": "2027-12-24",
+      "name": "Independence Day",
+      "localName": "عيد الاستقلال"
+    }
+  ]
+}

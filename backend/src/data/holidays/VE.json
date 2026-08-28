@@ -1,0 +1,351 @@
+{
+  "countryCode": "VE",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:49.162Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Día de Año Nuevo"
+    },
+    {
+      "date": "2026-01-06",
+      "name": "Epiphany",
+      "localName": "Día de Reyes"
+    },
+    {
+      "date": "2026-01-14",
+      "name": "Feast of the Divina Pastora",
+      "localName": "Día de la Divina Pastora"
+    },
+    {
+      "date": "2026-01-15",
+      "name": "Teacher's Day",
+      "localName": "Día del Maestro"
+    },
+    {
+      "date": "2026-02-12",
+      "name": "Youth Day",
+      "localName": "Día de la Juventud"
+    },
+    {
+      "date": "2026-02-16",
+      "name": "Carnival",
+      "localName": "Carnaval"
+    },
+    {
+      "date": "2026-02-17",
+      "name": "Carnival",
+      "localName": "Carnaval"
+    },
+    {
+      "date": "2026-03-08",
+      "name": "International Women's Day",
+      "localName": "Dia Internacional de la Mujer"
+    },
+    {
+      "date": "2026-03-19",
+      "name": "Saint Joseph's Day",
+      "localName": "Día de San José"
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Slavery Abolition Anniversary",
+      "localName": "Día del abolición de la esclavitud"
+    },
+    {
+      "date": "2026-03-31",
+      "name": "Foundation anniversary Day of San Cristóbal, Táchira",
+      "localName": "Aniversario del fundacion del San Cristóbal"
+    },
+    {
+      "date": "2026-04-19",
+      "name": "Beginning of the Independence Movement",
+      "localName": "Proclamación de la Independencia"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Día del Trabajador"
+    },
+    {
+      "date": "2026-05-03",
+      "name": "Festival of the Crosses",
+      "localName": "Día del Cruz del Mayo"
+    },
+    {
+      "date": "2026-05-10",
+      "name": "Mother's Day",
+      "localName": "Día de las Madres"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Ascension Day",
+      "localName": "Día de la Ascención"
+    },
+    {
+      "date": "2026-06-04",
+      "name": "Corpus Christi",
+      "localName": "Corpus Christi"
+    },
+    {
+      "date": "2026-06-21",
+      "name": "Father's Day",
+      "localName": "Día de los Padres"
+    },
+    {
+      "date": "2026-06-24",
+      "name": "Anniversary of the Battle of Carabobo",
+      "localName": "Aniversario de la Batalla de Carabobo"
+    },
+    {
+      "date": "2026-06-27",
+      "name": "Journalists' Day",
+      "localName": "Día del Periodista y aniversario de la instauración del Decreto de Instrucción pública gratuita y obligatoria"
+    },
+    {
+      "date": "2026-07-05",
+      "name": "Independence Day",
+      "localName": "Cinco de julio"
+    },
+    {
+      "date": "2026-07-19",
+      "name": "Children's Day",
+      "localName": "Dia del niño"
+    },
+    {
+      "date": "2026-07-24",
+      "name": "Simón Bolívar's Birthday",
+      "localName": "Natalicio del Libertador Simón Bolívar"
+    },
+    {
+      "date": "2026-07-25",
+      "name": "Caracas City Foundation Day",
+      "localName": "Aniversario del fundacion del Caracas"
+    },
+    {
+      "date": "2026-08-03",
+      "name": "Flag Day",
+      "localName": "Día de la Bandera"
+    },
+    {
+      "date": "2026-09-08",
+      "name": "Birth of the Blessed Virgin Mary",
+      "localName": "Día del Virgen del Valle"
+    },
+    {
+      "date": "2026-09-24",
+      "name": "Feast of the Our Lady of Mercy",
+      "localName": "Día del Virgen de las Mercedes"
+    },
+    {
+      "date": "2026-10-12",
+      "name": "Day of Indigenous Resistance",
+      "localName": "Día de la Resistencia Indígena"
+    },
+    {
+      "date": "2026-11-01",
+      "name": "All Saints' Day",
+      "localName": "Día de Todos los Santos"
+    },
+    {
+      "date": "2026-11-02",
+      "name": "All Souls' Day",
+      "localName": "Día de los fieles difuntos"
+    },
+    {
+      "date": "2026-12-08",
+      "name": "Immaculate Conception Day",
+      "localName": "La Inmaculada Concepción"
+    },
+    {
+      "date": "2026-12-24",
+      "name": "Christmas Eve",
+      "localName": "Nochebuena"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    },
+    {
+      "date": "2026-12-31",
+      "name": "New Year's Eve",
+      "localName": "Nochevieja"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Día de Año Nuevo"
+    },
+    {
+      "date": "2027-01-06",
+      "name": "Epiphany",
+      "localName": "Día de Reyes"
+    },
+    {
+      "date": "2027-01-14",
+      "name": "Feast of the Divina Pastora",
+      "localName": "Día de la Divina Pastora"
+    },
+    {
+      "date": "2027-01-15",
+      "name": "Teacher's Day",
+      "localName": "Día del Maestro"
+    },
+    {
+      "date": "2027-02-08",
+      "name": "Carnival",
+      "localName": "Carnaval"
+    },
+    {
+      "date": "2027-02-09",
+      "name": "Carnival",
+      "localName": "Carnaval"
+    },
+    {
+      "date": "2027-02-12",
+      "name": "Youth Day",
+      "localName": "Día de la Juventud"
+    },
+    {
+      "date": "2027-03-08",
+      "name": "International Women's Day",
+      "localName": "Dia Internacional de la Mujer"
+    },
+    {
+      "date": "2027-03-19",
+      "name": "Saint Joseph's Day",
+      "localName": "Día de San José"
+    },
+    {
+      "date": "2027-03-21",
+      "name": "Slavery Abolition Anniversary",
+      "localName": "Día del abolición de la esclavitud"
+    },
+    {
+      "date": "2027-03-31",
+      "name": "Foundation anniversary Day of San Cristóbal, Táchira",
+      "localName": "Aniversario del fundacion del San Cristóbal"
+    },
+    {
+      "date": "2027-04-19",
+      "name": "Beginning of the Independence Movement",
+      "localName": "Proclamación de la Independencia"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Día del Trabajador"
+    },
+    {
+      "date": "2027-05-03",
+      "name": "Festival of the Crosses",
+      "localName": "Día del Cruz del Mayo"
+    },
+    {
+      "date": "2027-05-06",
+      "name": "Ascension Day",
+      "localName": "Día de la Ascención"
+    },
+    {
+      "date": "2027-05-09",
+      "name": "Mother's Day",
+      "localName": "Día de las Madres"
+    },
+    {
+      "date": "2027-05-27",
+      "name": "Corpus Christi",
+      "localName": "Corpus Christi"
+    },
+    {
+      "date": "2027-06-20",
+      "name": "Father's Day",
+      "localName": "Día de los Padres"
+    },
+    {
+      "date": "2027-06-24",
+      "name": "Anniversary of the Battle of Carabobo",
+      "localName": "Aniversario de la Batalla de Carabobo"
+    },
+    {
+      "date": "2027-06-27",
+      "name": "Journalists' Day",
+      "localName": "Día del Periodista y aniversario de la instauración del Decreto de Instrucción pública gratuita y obligatoria"
+    },
+    {
+      "date": "2027-07-05",
+      "name": "Independence Day",
+      "localName": "Cinco de julio"
+    },
+    {
+      "date": "2027-07-18",
+      "name": "Children's Day",
+      "localName": "Dia del niño"
+    },
+    {
+      "date": "2027-07-24",
+      "name": "Simón Bolívar's Birthday",
+      "localName": "Natalicio del Libertador Simón Bolívar"
+    },
+    {
+      "date": "2027-07-25",
+      "name": "Caracas City Foundation Day",
+      "localName": "Aniversario del fundacion del Caracas"
+    },
+    {
+      "date": "2027-08-03",
+      "name": "Flag Day",
+      "localName": "Día de la Bandera"
+    },
+    {
+      "date": "2027-09-08",
+      "name": "Birth of the Blessed Virgin Mary",
+      "localName": "Día del Virgen del Valle"
+    },
+    {
+      "date": "2027-09-24",
+      "name": "Feast of the Our Lady of Mercy",
+      "localName": "Día del Virgen de las Mercedes"
+    },
+    {
+      "date": "2027-10-12",
+      "name": "Day of Indigenous Resistance",
+      "localName": "Día de la Resistencia Indígena"
+    },
+    {
+      "date": "2027-11-01",
+      "name": "All Saints' Day",
+      "localName": "Día de Todos los Santos"
+    },
+    {
+      "date": "2027-11-02",
+      "name": "All Souls' Day",
+      "localName": "Día de los fieles difuntos"
+    },
+    {
+      "date": "2027-12-08",
+      "name": "Immaculate Conception Day",
+      "localName": "La Inmaculada Concepción"
+    },
+    {
+      "date": "2027-12-24",
+      "name": "Christmas Eve",
+      "localName": "Nochebuena"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    },
+    {
+      "date": "2027-12-31",
+      "name": "New Year's Eve",
+      "localName": "Nochevieja"
+    }
+  ]
+}

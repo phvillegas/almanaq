@@ -1,0 +1,20 @@
+# Node
+node_modules/
+dist/
+.env
+
+# Android
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.idea/
+
+# iOS
+ios/build/
+ios/DerivedData/
+*.xcuserstate
+ios/**/xcuserdata/
+
+# Sistema
+.DS_Store

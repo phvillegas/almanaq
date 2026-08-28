@@ -1,0 +1,151 @@
+{
+  "countryCode": "DK",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:49.868Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Nytårsdag"
+    },
+    {
+      "date": "2026-04-02",
+      "name": "Maundy Thursday",
+      "localName": "Skærtorsdag"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Langfredag"
+    },
+    {
+      "date": "2026-04-05",
+      "name": "Easter Sunday",
+      "localName": "Påskedag"
+    },
+    {
+      "date": "2026-04-06",
+      "name": "Easter Monday",
+      "localName": "2. Påskedag"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Ascension Day",
+      "localName": "Kristi Himmelfartsdag"
+    },
+    {
+      "date": "2026-05-15",
+      "name": "Bank closing day",
+      "localName": "Banklukkedag"
+    },
+    {
+      "date": "2026-05-24",
+      "name": "Pentecost",
+      "localName": "Pinsedag"
+    },
+    {
+      "date": "2026-05-25",
+      "name": "Whit Monday",
+      "localName": "2. Pinsedag"
+    },
+    {
+      "date": "2026-06-05",
+      "name": "Constitution Day",
+      "localName": "Grundlovsdag"
+    },
+    {
+      "date": "2026-12-24",
+      "name": "Christmas Eve",
+      "localName": "Juleaftensdag"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Juledag / 1. juledag"
+    },
+    {
+      "date": "2026-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "2. juledag"
+    },
+    {
+      "date": "2026-12-31",
+      "name": "New Year's Eve",
+      "localName": "Nytårsaftensdag"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Nytårsdag"
+    },
+    {
+      "date": "2027-03-25",
+      "name": "Maundy Thursday",
+      "localName": "Skærtorsdag"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Langfredag"
+    },
+    {
+      "date": "2027-03-28",
+      "name": "Easter Sunday",
+      "localName": "Påskedag"
+    },
+    {
+      "date": "2027-03-29",
+      "name": "Easter Monday",
+      "localName": "2. Påskedag"
+    },
+    {
+      "date": "2027-05-06",
+      "name": "Ascension Day",
+      "localName": "Kristi Himmelfartsdag"
+    },
+    {
+      "date": "2027-05-07",
+      "name": "Bank closing day",
+      "localName": "Banklukkedag"
+    },
+    {
+      "date": "2027-05-16",
+      "name": "Pentecost",
+      "localName": "Pinsedag"
+    },
+    {
+      "date": "2027-05-17",
+      "name": "Whit Monday",
+      "localName": "2. Pinsedag"
+    },
+    {
+      "date": "2027-06-05",
+      "name": "Constitution Day",
+      "localName": "Grundlovsdag"
+    },
+    {
+      "date": "2027-12-24",
+      "name": "Christmas Eve",
+      "localName": "Juleaftensdag"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Juledag / 1. juledag"
+    },
+    {
+      "date": "2027-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "2. juledag"
+    },
+    {
+      "date": "2027-12-31",
+      "name": "New Year's Eve",
+      "localName": "Nytårsaftensdag"
+    }
+  ]
+}

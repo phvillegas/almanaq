@@ -1,0 +1,171 @@
+{
+  "countryCode": "CL",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.629Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2026-04-04",
+      "name": "Holy Saturday",
+      "localName": "Sábado Santo"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Día del Trabajo"
+    },
+    {
+      "date": "2026-05-21",
+      "name": "Navy Day",
+      "localName": "Día de las Glorias Navales"
+    },
+    {
+      "date": "2026-06-21",
+      "name": "National Day of Indigenous Peoples",
+      "localName": "Día Nacional de los Pueblos Indígenas"
+    },
+    {
+      "date": "2026-06-29",
+      "name": "Saint Peter and Saint Paul",
+      "localName": "San Pedro y San Pablo"
+    },
+    {
+      "date": "2026-07-16",
+      "name": "Our Lady of Mount Carmel",
+      "localName": "Virgen del Carmen"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "Assumption of Mary",
+      "localName": "Asunción de la Virgen"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "National holiday",
+      "localName": "Fiestas Patrias"
+    },
+    {
+      "date": "2026-09-19",
+      "name": "Army Day",
+      "localName": "Día de las Glorias del Ejército"
+    },
+    {
+      "date": "2026-10-12",
+      "name": "Columbus Day",
+      "localName": "Día del Descubrimiento de Dos Mundos"
+    },
+    {
+      "date": "2026-10-31",
+      "name": "Reformation Day",
+      "localName": "Día Nacional de las Iglesias Evangélicas y Protestantes"
+    },
+    {
+      "date": "2026-11-01",
+      "name": "All Saints Day",
+      "localName": "Día de Todos los Santos"
+    },
+    {
+      "date": "2026-12-08",
+      "name": "Immaculate Conception",
+      "localName": "Inmaculada Concepción"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad / Natividad del Señor"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2027-03-27",
+      "name": "Holy Saturday",
+      "localName": "Sábado Santo"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Día del Trabajo"
+    },
+    {
+      "date": "2027-05-21",
+      "name": "Navy Day",
+      "localName": "Día de las Glorias Navales"
+    },
+    {
+      "date": "2027-06-21",
+      "name": "National Day of Indigenous Peoples",
+      "localName": "Día Nacional de los Pueblos Indígenas"
+    },
+    {
+      "date": "2027-06-28",
+      "name": "Saint Peter and Saint Paul",
+      "localName": "San Pedro y San Pablo"
+    },
+    {
+      "date": "2027-07-16",
+      "name": "Our Lady of Mount Carmel",
+      "localName": "Virgen del Carmen"
+    },
+    {
+      "date": "2027-08-15",
+      "name": "Assumption of Mary",
+      "localName": "Asunción de la Virgen"
+    },
+    {
+      "date": "2027-09-18",
+      "name": "National holiday",
+      "localName": "Fiestas Patrias"
+    },
+    {
+      "date": "2027-09-19",
+      "name": "Army Day",
+      "localName": "Día de las Glorias del Ejército"
+    },
+    {
+      "date": "2027-10-11",
+      "name": "Columbus Day",
+      "localName": "Día del Descubrimiento de Dos Mundos"
+    },
+    {
+      "date": "2027-10-31",
+      "name": "Reformation Day",
+      "localName": "Día Nacional de las Iglesias Evangélicas y Protestantes"
+    },
+    {
+      "date": "2027-11-01",
+      "name": "All Saints Day",
+      "localName": "Día de Todos los Santos"
+    },
+    {
+      "date": "2027-12-08",
+      "name": "Immaculate Conception",
+      "localName": "Inmaculada Concepción"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad / Natividad del Señor"
+    }
+  ]
+}

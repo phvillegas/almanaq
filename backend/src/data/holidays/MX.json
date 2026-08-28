@@ -1,0 +1,101 @@
+{
+  "countryCode": "MX",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.786Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2026-02-02",
+      "name": "Constitution Day",
+      "localName": "Día de la Constitución"
+    },
+    {
+      "date": "2026-03-16",
+      "name": "Benito Juárez's birthday",
+      "localName": "Natalicio de Benito Juárez"
+    },
+    {
+      "date": "2026-04-02",
+      "name": "Maundy Thursday",
+      "localName": "Jueves Santo"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Día del Trabajo"
+    },
+    {
+      "date": "2026-09-16",
+      "name": "Independence Day",
+      "localName": "Día de la Independencia"
+    },
+    {
+      "date": "2026-11-16",
+      "name": "Revolution Day",
+      "localName": "Día de la Revolución"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Año Nuevo"
+    },
+    {
+      "date": "2027-02-01",
+      "name": "Constitution Day",
+      "localName": "Día de la Constitución"
+    },
+    {
+      "date": "2027-03-15",
+      "name": "Benito Juárez's birthday",
+      "localName": "Natalicio de Benito Juárez"
+    },
+    {
+      "date": "2027-03-25",
+      "name": "Maundy Thursday",
+      "localName": "Jueves Santo"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Viernes Santo"
+    },
+    {
+      "date": "2027-04-30",
+      "name": "Labour Day",
+      "localName": "Día del Trabajo"
+    },
+    {
+      "date": "2027-09-16",
+      "name": "Independence Day",
+      "localName": "Día de la Independencia"
+    },
+    {
+      "date": "2027-11-15",
+      "name": "Revolution Day",
+      "localName": "Día de la Revolución"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Navidad"
+    }
+  ]
+}

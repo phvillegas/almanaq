@@ -1,0 +1,131 @@
+{
+  "countryCode": "NO",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:49.834Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Første nyttårsdag"
+    },
+    {
+      "date": "2026-04-02",
+      "name": "Maundy Thursday",
+      "localName": "Skjærtorsdag"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Langfredag"
+    },
+    {
+      "date": "2026-04-05",
+      "name": "Easter Sunday",
+      "localName": "Første påskedag"
+    },
+    {
+      "date": "2026-04-06",
+      "name": "Easter Monday",
+      "localName": "Andre påskedag"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Første mai"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Ascension Day",
+      "localName": "Kristi himmelfartsdag"
+    },
+    {
+      "date": "2026-05-17",
+      "name": "Constitution Day",
+      "localName": "Syttende mai"
+    },
+    {
+      "date": "2026-05-24",
+      "name": "Pentecost",
+      "localName": "Første pinsedag"
+    },
+    {
+      "date": "2026-05-25",
+      "name": "Whit Monday",
+      "localName": "Andre pinsedag"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Første juledag"
+    },
+    {
+      "date": "2026-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "Andre juledag"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Første nyttårsdag"
+    },
+    {
+      "date": "2027-03-25",
+      "name": "Maundy Thursday",
+      "localName": "Skjærtorsdag"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Langfredag"
+    },
+    {
+      "date": "2027-03-28",
+      "name": "Easter Sunday",
+      "localName": "Første påskedag"
+    },
+    {
+      "date": "2027-03-29",
+      "name": "Easter Monday",
+      "localName": "Andre påskedag"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Første mai"
+    },
+    {
+      "date": "2027-05-06",
+      "name": "Ascension Day",
+      "localName": "Kristi himmelfartsdag"
+    },
+    {
+      "date": "2027-05-16",
+      "name": "Pentecost",
+      "localName": "Første pinsedag"
+    },
+    {
+      "date": "2027-05-17",
+      "name": "Constitution Day",
+      "localName": "Syttende mai"
+    },
+    {
+      "date": "2027-05-17",
+      "name": "Whit Monday",
+      "localName": "Andre pinsedag"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Første juledag"
+    },
+    {
+      "date": "2027-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "Andre juledag"
+    }
+  ]
+}

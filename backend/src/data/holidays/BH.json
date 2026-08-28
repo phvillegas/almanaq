@@ -1,0 +1,61 @@
+{
+  "countryCode": "BH",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.084Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "رأس السنة الميلادية"
+    },
+    {
+      "date": "2026-02-22",
+      "name": "Sports Day",
+      "localName": "اليوم الرياضي"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "يوم العمال"
+    },
+    {
+      "date": "2026-12-16",
+      "name": "National Day",
+      "localName": "اليوم الوطني"
+    },
+    {
+      "date": "2026-12-17",
+      "name": "National Day",
+      "localName": "اليوم الوطني"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "رأس السنة الميلادية"
+    },
+    {
+      "date": "2027-02-22",
+      "name": "Sports Day",
+      "localName": "اليوم الرياضي"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "يوم العمال"
+    },
+    {
+      "date": "2027-12-16",
+      "name": "National Day",
+      "localName": "اليوم الوطني"
+    },
+    {
+      "date": "2027-12-17",
+      "name": "National Day",
+      "localName": "اليوم الوطني"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "countryCode": "BE",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:49.652Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Nieuwjaar"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Goede Vrijdag"
+    },
+    {
+      "date": "2026-04-05",
+      "name": "Easter Sunday",
+      "localName": "Pasen"
+    },
+    {
+      "date": "2026-04-06",
+      "name": "Easter Monday",
+      "localName": "Paasmaandag"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Dag van de arbeid"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Ascension Day",
+      "localName": "Onze Lieve Heer hemel"
+    },
+    {
+      "date": "2026-05-15",
+      "name": "Day after Ascension Day",
+      "localName": "Day after Ascension Day"
+    },
+    {
+      "date": "2026-05-25",
+      "name": "Whit Monday",
+      "localName": "Pinkstermaandag"
+    },
+    {
+      "date": "2026-07-21",
+      "name": "Belgian National Day",
+      "localName": "Nationale feestdag"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "Assumption Day",
+      "localName": "Onze Lieve Vrouw hemelvaart"
+    },
+    {
+      "date": "2026-11-01",
+      "name": "All Saints' Day",
+      "localName": "Allerheiligen"
+    },
+    {
+      "date": "2026-11-11",
+      "name": "Armistice Day",
+      "localName": "Wapenstilstand"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Kerstdag"
+    },
+    {
+      "date": "2026-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "Boxing Day"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Nieuwjaar"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Goede Vrijdag"
+    },
+    {
+      "date": "2027-03-28",
+      "name": "Easter Sunday",
+      "localName": "Pasen"
+    },
+    {
+      "date": "2027-03-29",
+      "name": "Easter Monday",
+      "localName": "Paasmaandag"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Dag van de arbeid"
+    },
+    {
+      "date": "2027-05-06",
+      "name": "Ascension Day",
+      "localName": "Onze Lieve Heer hemel"
+    },
+    {
+      "date": "2027-05-07",
+      "name": "Day after Ascension Day",
+      "localName": "Day after Ascension Day"
+    },
+    {
+      "date": "2027-05-17",
+      "name": "Whit Monday",
+      "localName": "Pinkstermaandag"
+    },
+    {
+      "date": "2027-07-21",
+      "name": "Belgian National Day",
+      "localName": "Nationale feestdag"
+    },
+    {
+      "date": "2027-08-15",
+      "name": "Assumption Day",
+      "localName": "Onze Lieve Vrouw hemelvaart"
+    },
+    {
+      "date": "2027-11-01",
+      "name": "All Saints' Day",
+      "localName": "Allerheiligen"
+    },
+    {
+      "date": "2027-11-11",
+      "name": "Armistice Day",
+      "localName": "Wapenstilstand"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Kerstdag"
+    },
+    {
+      "date": "2027-12-26",
+      "name": "St. Stephen's Day",
+      "localName": "Boxing Day"
+    }
+  ]
+}

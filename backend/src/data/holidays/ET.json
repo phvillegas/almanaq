@@ -1,0 +1,111 @@
+{
+  "countryCode": "ET",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:48.479Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-07",
+      "name": "Christmas Day (Orthodox)",
+      "localName": "ልደተ-ለእግዚእነ/ ገና"
+    },
+    {
+      "date": "2026-01-19",
+      "name": "Epiphany (Orthodox)",
+      "localName": "ნათლისღება"
+    },
+    {
+      "date": "2026-03-02",
+      "name": "Adwa Victory Day",
+      "localName": "የዓድዋ ድል በዓል"
+    },
+    {
+      "date": "2026-04-10",
+      "name": "Good Friday",
+      "localName": "ስቅለት"
+    },
+    {
+      "date": "2026-04-12",
+      "name": "Easter Sunday",
+      "localName": "ብርሃነ-ትንሣኤ/ፋሲካ"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "International Workers' Day",
+      "localName": "ዓለም አቀፍ የሠራተኞች ቀን"
+    },
+    {
+      "date": "2026-05-05",
+      "name": "Ethiopian Patriots' Victory Day",
+      "localName": "የአርበኞች ቀን"
+    },
+    {
+      "date": "2026-05-28",
+      "name": "Downfall of the Derg",
+      "localName": "ደርግ የወደቀበት ቀን"
+    },
+    {
+      "date": "2026-09-11",
+      "name": "Enkutatash",
+      "localName": "እንቁጣጣሽ/የዘመን መለወጫ/አዲስ አመት"
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Meskel (Orthodox)",
+      "localName": "መስቀል"
+    },
+    {
+      "date": "2027-01-07",
+      "name": "Christmas Day (Orthodox)",
+      "localName": "ልደተ-ለእግዚእነ/ ገና"
+    },
+    {
+      "date": "2027-01-19",
+      "name": "Epiphany (Orthodox)",
+      "localName": "ნათლისღება"
+    },
+    {
+      "date": "2027-03-02",
+      "name": "Adwa Victory Day",
+      "localName": "የዓድዋ ድል በዓል"
+    },
+    {
+      "date": "2027-04-30",
+      "name": "Good Friday",
+      "localName": "ስቅለት"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "International Workers' Day",
+      "localName": "ዓለም አቀፍ የሠራተኞች ቀን"
+    },
+    {
+      "date": "2027-05-02",
+      "name": "Easter Sunday",
+      "localName": "ብርሃነ-ትንሣኤ/ፋሲካ"
+    },
+    {
+      "date": "2027-05-05",
+      "name": "Ethiopian Patriots' Victory Day",
+      "localName": "የአርበኞች ቀን"
+    },
+    {
+      "date": "2027-05-28",
+      "name": "Downfall of the Derg",
+      "localName": "ደርግ የወደቀበት ቀን"
+    },
+    {
+      "date": "2027-09-11",
+      "name": "Enkutatash",
+      "localName": "እንቁጣጣሽ/የዘመን መለወጫ/አዲስ አመት"
+    },
+    {
+      "date": "2027-09-27",
+      "name": "Meskel (Orthodox)",
+      "localName": "መስቀል"
+    }
+  ]
+}

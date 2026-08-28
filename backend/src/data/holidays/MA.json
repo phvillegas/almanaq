@@ -1,0 +1,111 @@
+{
+  "countryCode": "MA",
+  "provider": "nager.date",
+  "generatedAt": "2026-08-28T19:58:50.596Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "Ras l' âm"
+    },
+    {
+      "date": "2026-01-11",
+      "name": "Proclamation of Independence",
+      "localName": "Takdim watikat al-istiqlal"
+    },
+    {
+      "date": "2026-01-14",
+      "name": "Amazigh New Year",
+      "localName": "Id Yennayer"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Eid Ash-Shughl"
+    },
+    {
+      "date": "2026-07-30",
+      "name": "Enthronement",
+      "localName": "Eid Al-Ârch"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "Zikra Oued Ed-Dahab",
+      "localName": "Oued Ed-Dahab Day"
+    },
+    {
+      "date": "2026-08-20",
+      "name": "Revolution of the King and the People",
+      "localName": "Thawrat al malik wa shâab"
+    },
+    {
+      "date": "2026-08-21",
+      "name": "Youth Day",
+      "localName": "Eid Al Chabab"
+    },
+    {
+      "date": "2026-11-06",
+      "name": "Green March",
+      "localName": "Eid Al Massira Al Khadra"
+    },
+    {
+      "date": "2026-11-18",
+      "name": "Independence Day",
+      "localName": "Eid Al Istiqulal"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "Ras l' âm"
+    },
+    {
+      "date": "2027-01-11",
+      "name": "Proclamation of Independence",
+      "localName": "Takdim watikat al-istiqlal"
+    },
+    {
+      "date": "2027-01-14",
+      "name": "Amazigh New Year",
+      "localName": "Id Yennayer"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Eid Ash-Shughl"
+    },
+    {
+      "date": "2027-07-30",
+      "name": "Enthronement",
+      "localName": "Eid Al-Ârch"
+    },
+    {
+      "date": "2027-08-14",
+      "name": "Zikra Oued Ed-Dahab",
+      "localName": "Oued Ed-Dahab Day"
+    },
+    {
+      "date": "2027-08-20",
+      "name": "Revolution of the King and the People",
+      "localName": "Thawrat al malik wa shâab"
+    },
+    {
+      "date": "2027-08-21",
+      "name": "Youth Day",
+      "localName": "Eid Al Chabab"
+    },
+    {
+      "date": "2027-11-06",
+      "name": "Green March",
+      "localName": "Eid Al Massira Al Khadra"
+    },
+    {
+      "date": "2027-11-18",
+      "name": "Independence Day",
+      "localName": "Eid Al Istiqulal"
+    }
+  ]
+}

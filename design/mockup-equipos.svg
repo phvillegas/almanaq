@@ -1,0 +1,270 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1270" height="920" viewBox="0 0 1270 920" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+
+  <defs>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#171634" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect width="1270" height="920" fill="#DEDEE6"/>
+
+  <text x="40" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">AHORA</text>
+  <text x="450" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">ELEGIR FECHA</text>
+  <text x="860" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">DETALLE</text>
+
+  <!-- ==================== 1. AHORA ==================== -->
+  <g>
+    <rect x="40" y="80" width="370" height="800" rx="38" fill="#F7F7FA"/>
+    <rect x="180" y="92" width="90" height="26" rx="13" fill="#171634"/>
+    <text x="76" y="116" font-size="13" font-weight="600" fill="#171634">9:41</text>
+    <g fill="#171634">
+      <rect x="342" y="100" width="3" height="13" rx="1"/>
+      <rect x="352" y="102" width="20" height="11" rx="3" fill="none" stroke="#171634" stroke-width="1.2"/>
+      <rect x="354" y="104" width="14" height="7" rx="1.5"/>
+    </g>
+
+    <text x="60" y="172" font-size="26" font-weight="700" letter-spacing="-0.5" fill="#171634">Tu equipo</text>
+    <text x="60" y="196" font-size="13" fill="#5B5C74">2 de 6 disponibles ahora</text>
+
+    <g filter="url(#sh)">
+      <rect x="60" y="216" width="330" height="66" rx="12" fill="#FFFFFF"/>
+      <rect x="60" y="290" width="330" height="66" rx="12" fill="#FFFFFF"/>
+      <rect x="60" y="364" width="330" height="66" rx="12" fill="#FFFFFF"/>
+      <rect x="60" y="438" width="330" height="66" rx="12" fill="#FFFFFF"/>
+      <rect x="60" y="512" width="330" height="66" rx="12" fill="#FFFFFF"/>
+      <rect x="60" y="586" width="330" height="66" rx="12" fill="#FFFFFF"/>
+    </g>
+
+    <!-- Nadia -->
+    <circle cx="98" cy="249" r="18" fill="#E7E5F8"/>
+    <text x="98" y="254" font-size="13" font-weight="700" fill="#4436C7" text-anchor="middle">NP</text>
+    <circle cx="110" cy="261" r="6" fill="#FFFFFF"/><circle cx="110" cy="261" r="4" fill="#E0A03A"/>
+    <text x="128" y="244" font-size="15" font-weight="600" fill="#171634">Nadia</text>
+    <text x="128" y="263" font-size="12.5" fill="#5B5C74">Tel Aviv</text>
+    <text x="370" y="244" font-size="17" font-weight="600" fill="#171634" text-anchor="end">18:42</text>
+    <text x="370" y="263" font-size="12" font-weight="500" fill="#8A5A0B" text-anchor="end">Fin de semana</text>
+
+    <!-- Bilal -->
+    <circle cx="98" cy="323" r="18" fill="#E7E5F8"/>
+    <text x="98" y="328" font-size="13" font-weight="700" fill="#4436C7" text-anchor="middle">BA</text>
+    <circle cx="110" cy="335" r="6" fill="#FFFFFF"/><circle cx="110" cy="335" r="4" fill="#E0A03A"/>
+    <text x="128" y="318" font-size="15" font-weight="600" fill="#171634">Bilal</text>
+    <text x="128" y="337" font-size="12.5" fill="#5B5C74">Dubái</text>
+    <text x="370" y="318" font-size="17" font-weight="600" fill="#171634" text-anchor="end">19:42</text>
+    <text x="370" y="337" font-size="12" font-weight="500" fill="#8A5A0B" text-anchor="end">Fin de semana</text>
+
+    <!-- Meron -->
+    <circle cx="98" cy="397" r="18" fill="#E7E5F8"/>
+    <text x="98" y="402" font-size="13" font-weight="700" fill="#4436C7" text-anchor="middle">MT</text>
+    <circle cx="110" cy="409" r="6" fill="#FFFFFF"/><circle cx="110" cy="409" r="4" fill="#E0A03A"/>
+    <text x="128" y="392" font-size="15" font-weight="600" fill="#171634">Meron</text>
+    <text x="128" y="411" font-size="12.5" fill="#5B5C74">Adís Abeba</text>
+    <text x="370" y="392" font-size="17" font-weight="600" fill="#171634" text-anchor="end">18:42</text>
+    <text x="370" y="411" font-size="12" font-weight="500" fill="#8A5A0B" text-anchor="end">Feriado: Buhe</text>
+
+    <!-- Suresh -->
+    <circle cx="98" cy="471" r="18" fill="#E7E5F8"/>
+    <text x="98" y="476" font-size="13" font-weight="700" fill="#4436C7" text-anchor="middle">SK</text>
+    <circle cx="110" cy="483" r="6" fill="#FFFFFF"/><circle cx="110" cy="483" r="4" fill="#B9BACB"/>
+    <text x="128" y="466" font-size="15" font-weight="600" fill="#171634">Suresh</text>
+    <text x="128" y="485" font-size="12.5" fill="#5B5C74">Bengaluru</text>
+    <text x="370" y="466" font-size="17" font-weight="600" fill="#171634" text-anchor="end">21:12</text>
+    <text x="370" y="485" font-size="12" font-weight="500" fill="#9C9DB4" text-anchor="end">Fuera de horario</text>
+
+    <!-- Ana -->
+    <circle cx="98" cy="545" r="18" fill="#E3F3EB"/>
+    <text x="98" y="550" font-size="13" font-weight="700" fill="#1E8A5F" text-anchor="middle">AR</text>
+    <circle cx="110" cy="557" r="6" fill="#FFFFFF"/><circle cx="110" cy="557" r="4" fill="#1E8A5F"/>
+    <text x="128" y="540" font-size="15" font-weight="600" fill="#171634">Ana</text>
+    <text x="128" y="559" font-size="12.5" fill="#5B5C74">Madrid</text>
+    <text x="370" y="540" font-size="17" font-weight="600" fill="#171634" text-anchor="end">17:42</text>
+    <text x="370" y="559" font-size="12" font-weight="500" fill="#1E8A5F" text-anchor="end">Disponible</text>
+
+    <!-- Pedro -->
+    <circle cx="98" cy="619" r="18" fill="#E3F3EB"/>
+    <text x="98" y="624" font-size="13" font-weight="700" fill="#1E8A5F" text-anchor="middle">PG</text>
+    <circle cx="110" cy="631" r="6" fill="#FFFFFF"/><circle cx="110" cy="631" r="4" fill="#1E8A5F"/>
+    <text x="128" y="614" font-size="15" font-weight="600" fill="#171634">Pedro</text>
+    <text x="128" y="633" font-size="12.5" fill="#5B5C74">Buenos Aires</text>
+    <text x="370" y="614" font-size="17" font-weight="600" fill="#171634" text-anchor="end">12:42</text>
+    <text x="370" y="633" font-size="12" font-weight="500" fill="#1E8A5F" text-anchor="end">Disponible</text>
+
+    <rect x="60" y="676" width="330" height="50" rx="12" fill="#4436C7"/>
+    <text x="225" y="707" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">Buscar un horario</text>
+
+    <line x1="40" y1="776" x2="410" y2="776" stroke="#E4E4EC" stroke-width="1"/>
+    <g>
+      <circle cx="126" cy="800" r="5" fill="none" stroke="#4436C7" stroke-width="1.8"/>
+      <path d="M116 812 a10 10 0 0 1 20 0" fill="none" stroke="#4436C7" stroke-width="1.8"/>
+      <text x="126" y="830" font-size="10" font-weight="600" fill="#4436C7" text-anchor="middle">Equipo</text>
+    </g>
+    <g>
+      <rect x="217" y="794" width="16" height="16" rx="3" fill="none" stroke="#5B5C74" stroke-width="1.8"/>
+      <line x1="217" y1="799" x2="233" y2="799" stroke="#5B5C74" stroke-width="1.8"/>
+      <text x="225" y="830" font-size="10" font-weight="500" fill="#5B5C74" text-anchor="middle">Fechas</text>
+    </g>
+    <g>
+      <circle cx="325" cy="802" r="7" fill="none" stroke="#5B5C74" stroke-width="1.8"/>
+      <line x1="325" y1="791" x2="325" y2="795" stroke="#5B5C74" stroke-width="1.8"/>
+      <line x1="325" y1="809" x2="325" y2="813" stroke="#5B5C74" stroke-width="1.8"/>
+      <text x="325" y="830" font-size="10" font-weight="500" fill="#5B5C74" text-anchor="middle">Ajustes</text>
+    </g>
+    <rect x="185" y="856" width="80" height="5" rx="2.5" fill="#171634" opacity="0.3"/>
+  </g>
+
+  <!-- ==================== 2. ELEGIR FECHA ==================== -->
+  <g>
+    <rect x="450" y="80" width="370" height="800" rx="38" fill="#F7F7FA"/>
+    <rect x="590" y="92" width="90" height="26" rx="13" fill="#171634"/>
+    <text x="486" y="116" font-size="13" font-weight="600" fill="#171634">9:41</text>
+    <g fill="#171634">
+      <rect x="752" y="100" width="3" height="13" rx="1"/>
+      <rect x="762" y="102" width="20" height="11" rx="3" fill="none" stroke="#171634" stroke-width="1.2"/>
+      <rect x="764" y="104" width="14" height="7" rx="1.5"/>
+    </g>
+
+    <text x="470" y="172" font-size="26" font-weight="700" letter-spacing="-0.5" fill="#171634">Elegir fecha</text>
+
+    <text x="470" y="212" font-size="15" font-weight="600" fill="#171634">agosto 2026</text>
+    <path d="M760 206 l-6 6 l6 6" fill="none" stroke="#4436C7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M786 206 l6 6 l-6 6" fill="none" stroke="#4436C7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g font-size="11" font-weight="600" fill="#9C9DB4" text-anchor="middle">
+      <text x="494" y="238">L</text><text x="541" y="238">M</text><text x="588" y="238">M</text>
+      <text x="635" y="238">J</text><text x="682" y="238">V</text><text x="729" y="238">S</text><text x="776" y="238">D</text>
+    </g>
+
+    <!-- semana 3-9 -->
+    <g font-size="13.5" fill="#171634" text-anchor="middle">
+      <text x="494" y="268">3</text><text x="541" y="268">4</text><text x="588" y="268">5</text>
+      <text x="635" y="268">6</text><text x="682" y="268">7</text>
+      <text x="729" y="268" fill="#9C9DB4">8</text><text x="776" y="268" fill="#9C9DB4">9</text>
+    </g>
+    <circle cx="682" cy="278" r="2.5" fill="#E0A03A"/>
+
+    <!-- semana 10-16 -->
+    <g font-size="13.5" fill="#171634" text-anchor="middle">
+      <text x="494" y="306">10</text><text x="541" y="306">11</text><text x="588" y="306">12</text>
+      <text x="635" y="306">13</text><text x="682" y="306">14</text>
+      <text x="729" y="306" fill="#9C9DB4">15</text><text x="776" y="306" fill="#9C9DB4">16</text>
+    </g>
+    <circle cx="682" cy="316" r="2.5" fill="#E0A03A"/>
+
+    <!-- semana 17-23 (seleccionada) -->
+    <circle cx="682" cy="340" r="17" fill="#4436C7"/>
+    <g font-size="13.5" fill="#171634" text-anchor="middle">
+      <text x="494" y="344">17</text><text x="541" y="344">18</text><text x="588" y="344">19</text>
+      <text x="635" y="344">20</text>
+      <text x="682" y="344" fill="#FFFFFF" font-weight="700">21</text>
+      <text x="729" y="344" fill="#9C9DB4">22</text><text x="776" y="344" fill="#9C9DB4">23</text>
+    </g>
+
+    <!-- semana 24-30 -->
+    <g font-size="13.5" fill="#171634" text-anchor="middle">
+      <text x="494" y="382">24</text><text x="541" y="382">25</text><text x="588" y="382">26</text>
+      <text x="635" y="382">27</text><text x="682" y="382">28</text>
+      <text x="729" y="382" fill="#9C9DB4">29</text><text x="776" y="382" fill="#9C9DB4">30</text>
+    </g>
+    <circle cx="682" cy="392" r="2.5" fill="#E0A03A"/>
+
+    <!-- resumen -->
+    <rect x="470" y="424" width="330" height="188" rx="14" fill="#FBF0DC"/>
+    <text x="490" y="454" font-size="15" font-weight="700" fill="#171634">viernes 21 de agosto</text>
+    <text x="490" y="475" font-size="13" font-weight="600" fill="#8A5A0B">3 de 6 no disponibles</text>
+
+    <line x1="490" y1="492" x2="780" y2="492" stroke="#EBD9B6" stroke-width="1"/>
+
+    <circle cx="497" cy="513" r="4" fill="#E0A03A"/>
+    <text x="512" y="518" font-size="13" fill="#171634">Nadia · fin de semana en Israel</text>
+
+    <circle cx="497" cy="543" r="4" fill="#E0A03A"/>
+    <text x="512" y="548" font-size="13" fill="#171634">Bilal · fin de semana en Emiratos</text>
+
+    <circle cx="497" cy="573" r="4" fill="#E0A03A"/>
+    <text x="512" y="578" font-size="13" fill="#171634">Meron · feriado en Etiopía</text>
+
+    <rect x="470" y="632" width="330" height="50" rx="12" fill="#4436C7"/>
+    <text x="635" y="663" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">Ver días sin conflictos</text>
+
+    <text x="635" y="712" font-size="13" font-weight="600" fill="#4436C7" text-anchor="middle">Agendar igual</text>
+
+    <line x1="450" y1="776" x2="820" y2="776" stroke="#E4E4EC" stroke-width="1"/>
+    <g>
+      <circle cx="536" cy="800" r="5" fill="none" stroke="#5B5C74" stroke-width="1.8"/>
+      <path d="M526 812 a10 10 0 0 1 20 0" fill="none" stroke="#5B5C74" stroke-width="1.8"/>
+      <text x="536" y="830" font-size="10" font-weight="500" fill="#5B5C74" text-anchor="middle">Equipo</text>
+    </g>
+    <g>
+      <rect x="627" y="794" width="16" height="16" rx="3" fill="none" stroke="#4436C7" stroke-width="1.8"/>
+      <line x1="627" y1="799" x2="643" y2="799" stroke="#4436C7" stroke-width="1.8"/>
+      <text x="635" y="830" font-size="10" font-weight="600" fill="#4436C7" text-anchor="middle">Fechas</text>
+    </g>
+    <g>
+      <circle cx="735" cy="802" r="7" fill="none" stroke="#5B5C74" stroke-width="1.8"/>
+      <line x1="735" y1="791" x2="735" y2="795" stroke="#5B5C74" stroke-width="1.8"/>
+      <line x1="735" y1="809" x2="735" y2="813" stroke="#5B5C74" stroke-width="1.8"/>
+      <text x="735" y="830" font-size="10" font-weight="500" fill="#5B5C74" text-anchor="middle">Ajustes</text>
+    </g>
+    <rect x="595" y="856" width="80" height="5" rx="2.5" fill="#171634" opacity="0.3"/>
+  </g>
+
+  <!-- ==================== 3. DETALLE ==================== -->
+  <g>
+    <rect x="860" y="80" width="370" height="800" rx="38" fill="#F7F7FA"/>
+    <rect x="1000" y="92" width="90" height="26" rx="13" fill="#171634"/>
+    <text x="896" y="116" font-size="13" font-weight="600" fill="#171634">9:41</text>
+    <g fill="#171634">
+      <rect x="1162" y="100" width="3" height="13" rx="1"/>
+      <rect x="1172" y="102" width="20" height="11" rx="3" fill="none" stroke="#171634" stroke-width="1.2"/>
+      <rect x="1174" y="104" width="14" height="7" rx="1.5"/>
+    </g>
+
+    <path d="M889 158 l-8 -7 l8 -7" fill="none" stroke="#4436C7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="897" y="156" font-size="14.5" font-weight="500" fill="#4436C7">Equipo</text>
+
+    <circle cx="908" cy="204" r="24" fill="#E7E5F8"/>
+    <text x="908" y="211" font-size="17" font-weight="700" fill="#4436C7" text-anchor="middle">NP</text>
+    <text x="944" y="198" font-size="19" font-weight="700" fill="#171634">Nadia Peretz</text>
+    <text x="944" y="219" font-size="13" fill="#5B5C74">Tel Aviv, Israel · UTC+3</text>
+
+    <text x="880" y="278" font-size="46" font-weight="700" letter-spacing="-1" fill="#171634">18:42</text>
+    <text x="1210" y="278" font-size="14" font-weight="500" fill="#5B5C74" text-anchor="end">viernes 21 de agosto</text>
+
+    <rect x="880" y="300" width="330" height="52" rx="12" fill="#FBF0DC"/>
+    <circle cx="906" cy="326" r="5" fill="#E0A03A"/>
+    <text x="922" y="331" font-size="13.5" font-weight="600" fill="#8A5A0B">Fin de semana local</text>
+
+    <text x="880" y="392" font-size="11" font-weight="600" letter-spacing="1.6" fill="#5B5C74">SEMANA LABORAL</text>
+
+    <line x1="880" y1="406" x2="1210" y2="406" stroke="#E4E4EC" stroke-width="1"/>
+    <text x="880" y="434" font-size="14" fill="#5B5C74">Días hábiles</text>
+    <text x="1210" y="434" font-size="14" font-weight="600" fill="#171634" text-anchor="end">dom a jue</text>
+
+    <line x1="880" y1="454" x2="1210" y2="454" stroke="#E4E4EC" stroke-width="1"/>
+    <text x="880" y="482" font-size="14" fill="#5B5C74">Fin de semana</text>
+    <text x="1210" y="482" font-size="14" font-weight="600" fill="#171634" text-anchor="end">vie y sáb</text>
+
+    <line x1="880" y1="502" x2="1210" y2="502" stroke="#E4E4EC" stroke-width="1"/>
+    <text x="880" y="530" font-size="14" fill="#5B5C74">Calendario local</text>
+    <text x="1210" y="530" font-size="14" font-weight="600" fill="#171634" text-anchor="end">Hebreo · 5786</text>
+
+    <line x1="880" y1="550" x2="1210" y2="550" stroke="#E4E4EC" stroke-width="1"/>
+
+    <text x="880" y="592" font-size="11" font-weight="600" letter-spacing="1.6" fill="#5B5C74">PRÓXIMOS FERIADOS</text>
+
+    <g filter="url(#sh)">
+      <rect x="880" y="606" width="330" height="52" rx="12" fill="#FFFFFF"/>
+      <rect x="880" y="666" width="330" height="52" rx="12" fill="#FFFFFF"/>
+    </g>
+    <text x="900" y="628" font-size="14" font-weight="600" fill="#171634">Rosh Hashaná</text>
+    <text x="900" y="646" font-size="12.5" fill="#5B5C74">11 al 13 de septiembre</text>
+
+    <text x="900" y="688" font-size="14" font-weight="600" fill="#171634">Yom Kipur</text>
+    <text x="900" y="706" font-size="12.5" fill="#5B5C74">20 de septiembre</text>
+
+    <text x="880" y="748" font-size="12" fill="#9C9DB4">El día empieza al atardecer, no a medianoche.</text>
+
+    <rect x="1005" y="856" width="80" height="5" rx="2.5" fill="#171634" opacity="0.3"/>
+  </g>
+
+</svg>
