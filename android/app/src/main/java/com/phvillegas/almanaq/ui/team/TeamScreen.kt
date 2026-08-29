@@ -1,4 +1,4 @@
-package com.almanaq.app.ui.team
+package com.phvillegas.almanaq.ui.team
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,10 +22,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.almanaq.app.model.Member
-import com.almanaq.app.model.MemberAvailability
-import com.almanaq.app.ui.theme.AlmanaqTheme
-import com.almanaq.app.ui.theme.TabularFigures
+import com.phvillegas.almanaq.model.Member
+import com.phvillegas.almanaq.model.MemberAvailability
+import com.phvillegas.almanaq.ui.theme.AlmanaqTheme
+import com.phvillegas.almanaq.ui.theme.TabularFigures
 
 /**
  * The "Now" screen. See PLAN.md section 7.1.

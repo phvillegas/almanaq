@@ -30,8 +30,8 @@ almanaq/
 
 Identifiers:
 
-- Android package: `com.almanaq.app`
-- iOS bundle ID: `com.almanaq.app`
+- Android package: `com.phvillegas.almanaq`
+- iOS bundle ID: `com.phvillegas.almanaq`
 
 ```bash
 mkdir almanaq && cd almanaq
@@ -139,7 +139,7 @@ codebase, which is why `domain/calendars.ts` never formats without a time zone.
 **Create the project from Android Studio, not with Claude Code.**
 
 1. Android Studio → New Project → **Empty Activity** (with Compose).
-2. Name: `Almanaq`. Package: `com.almanaq.app`.
+2. Name: `Almanaq`. Package: `com.phvillegas.almanaq`.
 3. Minimum SDK: **API 26** (Android 8.0). It covers virtually the whole install base
    and avoids needless compatibility work.
 4. Build configuration language: **Kotlin DSL**.
@@ -182,7 +182,7 @@ are not to be touched.
 
 1. Xcode 26 → New Project → **App**.
 2. Interface: **SwiftUI**. Language: **Swift**.
-3. Name: `Almanaq`. Bundle ID: `com.almanaq.app`.
+3. Name: `Almanaq`. Bundle ID: `com.phvillegas.almanaq`.
 4. Minimum Deployment: **iOS 18** or higher depending on who you want to reach.
    Building against the iOS 26 SDK is mandatory; the deployment target is a separate
    decision.

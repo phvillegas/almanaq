@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.almanaq.app"
+    namespace = "com.phvillegas.almanaq"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.almanaq.app"
+        applicationId = "com.phvillegas.almanaq"
         // API 26 covers virtually the whole install base. See SETUP.md section 3.
         minSdk = 26
         targetSdk = 37

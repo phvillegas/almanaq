@@ -1,4 +1,4 @@
-package com.almanaq.app.ui.theme
+package com.phvillegas.almanaq.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

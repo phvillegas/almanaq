@@ -1,4 +1,4 @@
-package com.almanaq.app
+package com.phvillegas.almanaq
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,9 +11,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.almanaq.app.ui.team.TeamScreen
-import com.almanaq.app.ui.team.TeamViewModel
-import com.almanaq.app.ui.theme.AlmanaqTheme
+import com.phvillegas.almanaq.ui.team.TeamScreen
+import com.phvillegas.almanaq.ui.team.TeamViewModel
+import com.phvillegas.almanaq.ui.theme.AlmanaqTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.almanaq.app.data.api
+package com.phvillegas.almanaq.data.api
 
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor

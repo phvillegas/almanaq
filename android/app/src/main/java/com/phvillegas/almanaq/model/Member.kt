@@ -1,4 +1,4 @@
-package com.almanaq.app.model
+package com.phvillegas.almanaq.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,8 +1,8 @@
-package com.almanaq.app.data.local
+package com.phvillegas.almanaq.data.local
 
 import android.content.Context
-import com.almanaq.app.model.Member
-import com.almanaq.app.model.TeamDocument
+import com.phvillegas.almanaq.model.Member
+import com.phvillegas.almanaq.model.TeamDocument
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json

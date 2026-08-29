@@ -1,8 +1,8 @@
-package com.almanaq.app.data.api
+package com.phvillegas.almanaq.data.api
 
-import com.almanaq.app.model.AvailabilityRequest
-import com.almanaq.app.model.AvailabilityResponse
-import com.almanaq.app.model.LocationSearchResponse
+import com.phvillegas.almanaq.model.AvailabilityRequest
+import com.phvillegas.almanaq.model.AvailabilityResponse
+import com.phvillegas.almanaq.model.LocationSearchResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

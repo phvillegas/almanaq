@@ -1,14 +1,14 @@
-package com.almanaq.app.ui.team
+package com.phvillegas.almanaq.ui.team
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.almanaq.app.data.api.ApiClient
-import com.almanaq.app.data.local.TeamStore
-import com.almanaq.app.model.AvailabilityRequest
-import com.almanaq.app.model.Member
-import com.almanaq.app.model.MemberAvailability
-import com.almanaq.app.model.toRef
+import com.phvillegas.almanaq.data.api.ApiClient
+import com.phvillegas.almanaq.data.local.TeamStore
+import com.phvillegas.almanaq.model.AvailabilityRequest
+import com.phvillegas.almanaq.model.Member
+import com.phvillegas.almanaq.model.MemberAvailability
+import com.phvillegas.almanaq.model.toRef
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
