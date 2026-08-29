@@ -46,4 +46,15 @@
     <string name="settings_backend_url">Dirección del backend</string>
     <string name="settings_backend_hint">Desde el emulador, http://10.0.2.2:3000. Desde un teléfono, la IP de tu computadora en la red local.</string>
     <string name="settings_save">Guardar</string>
+    <string name="detail_edit_hours">Editar horario</string>
+    <string name="detail_from">Desde</string>
+    <string name="detail_to">Hasta</string>
+    <string name="detail_save">Guardar</string>
+    <string name="detail_use_country">Usar el del país</string>
+    <string name="settings_team_data">Datos del equipo</string>
+    <string name="settings_export">Exportar</string>
+    <string name="settings_import">Importar</string>
+    <string name="settings_import_failed">No pudimos leer ese archivo</string>
+    <string name="settings_import_ok">Equipo importado</string>
+    <string name="dates_schedule_anyway">Agendar igual</string>
 </resources>

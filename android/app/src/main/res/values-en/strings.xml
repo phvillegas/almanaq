@@ -35,4 +35,15 @@
     <string name="settings_backend_url">Backend address</string>
     <string name="settings_backend_hint">From the emulator, http://10.0.2.2:3000. From a phone, your computer\'s address on the local network.</string>
     <string name="settings_save">Save</string>
+    <string name="detail_edit_hours">Edit hours</string>
+    <string name="detail_from">From</string>
+    <string name="detail_to">To</string>
+    <string name="detail_save">Save</string>
+    <string name="detail_use_country">Use the country default</string>
+    <string name="settings_team_data">Team data</string>
+    <string name="settings_export">Export</string>
+    <string name="settings_import">Import</string>
+    <string name="settings_import_failed">Could not read that file</string>
+    <string name="settings_import_ok">Team imported</string>
+    <string name="dates_schedule_anyway">Schedule anyway</string>
 </resources>

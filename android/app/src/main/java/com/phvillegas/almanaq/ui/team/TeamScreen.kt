@@ -45,6 +45,7 @@ fun TeamScreen(
     state: TeamUiState,
     onAdd: () -> Unit,
     onOpen: (Member) -> Unit,
+    onFindTime: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize().padding(horizontal = 16.dp)) {
@@ -64,12 +65,19 @@ fun TeamScreen(
         }
 
         LazyColumn(
-            modifier = Modifier.fillMaxSize().padding(top = 16.dp),
+            modifier = Modifier.weight(1f).padding(top = 16.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             items(state.rows, key = { it.member.id }) { row ->
                 MemberRow(row, onClick = { onOpen(row.member) })
             }
+        }
+
+        Button(
+            onClick = onFindTime,
+            modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+        ) {
+            Text(stringResource(R.string.team_find_time))
         }
     }
 }
@@ -188,7 +196,7 @@ private fun EmptyState(onAdd: () -> Unit, modifier: Modifier = Modifier) {
 @Composable
 private fun TeamScreenPreview() {
     AlmanaqTheme {
-        TeamScreen(state = previewState(), onAdd = {}, onOpen = {})
+        TeamScreen(state = previewState(), onAdd = {}, onOpen = {}, onFindTime = {})
     }
 }
 
@@ -196,7 +204,7 @@ private fun TeamScreenPreview() {
 @Composable
 private fun TeamScreenDarkPreview() {
     AlmanaqTheme(darkTheme = true) {
-        TeamScreen(state = previewState(), onAdd = {}, onOpen = {})
+        TeamScreen(state = previewState(), onAdd = {}, onOpen = {}, onFindTime = {})
     }
 }
 

@@ -1,6 +1,7 @@
 package com.phvillegas.almanaq.ui.settings
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -8,6 +9,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,6 +32,8 @@ import com.phvillegas.almanaq.ui.theme.AlmanaqTheme
 fun SettingsScreen(
     baseUrl: String,
     onBaseUrl: (String) -> Unit,
+    onExport: () -> Unit,
+    onImport: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var value by remember(baseUrl) { mutableStateOf(baseUrl) }
@@ -59,6 +63,22 @@ fun SettingsScreen(
 
         Button(onClick = { onBaseUrl(value) }, modifier = Modifier.padding(top = 16.dp)) {
             Text(stringResource(R.string.settings_save))
+        }
+
+        // Export and import cover most of the multi-device need — changing phones,
+        // backups — without a backend, accounts or a privacy policy.
+        // See PLAN.md section 11.
+        Text(
+            text = stringResource(R.string.settings_team_data),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(top = 32.dp, bottom = 8.dp),
+        )
+        Row {
+            Button(onClick = onExport) { Text(stringResource(R.string.settings_export)) }
+            TextButton(onClick = onImport, modifier = Modifier.padding(start = 8.dp)) {
+                Text(stringResource(R.string.settings_import))
+            }
         }
     }
 }

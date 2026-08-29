@@ -44,6 +44,20 @@ class TeamStore(context: Context) {
         document
     }
 
+    /**
+     * Replaces the team with an imported document.
+     *
+     * Whole document in, whole document out. A malformed file is rejected rather than
+     * partially applied: half a team is worse than an untouched one.
+     */
+    suspend fun importJson(text: String): TeamDocument? = withContext(Dispatchers.IO) {
+        val document = runCatching { json.decodeFromString<TeamDocument>(text) }.getOrNull()
+            ?: return@withContext null
+        if (document.schemaVersion > SCHEMA_VERSION) return@withContext null
+        file.writeText(json.encodeToString(document))
+        document
+    }
+
     /** The same bytes the share sheet exports. See PLAN.md section 11. */
     suspend fun exportJson(): String = withContext(Dispatchers.IO) {
         if (file.exists()) file.readText() else json.encodeToString(TeamDocument())

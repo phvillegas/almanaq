@@ -1,6 +1,10 @@
 package com.phvillegas.almanaq
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
@@ -16,8 +20,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -28,6 +34,9 @@ import com.phvillegas.almanaq.ui.member.MemberDetailScreen
 import com.phvillegas.almanaq.ui.settings.SettingsScreen
 import com.phvillegas.almanaq.ui.team.TeamScreen
 import com.phvillegas.almanaq.ui.theme.AlmanaqTheme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Three tabs and two pushed screens.
@@ -65,7 +74,28 @@ private fun AlmanaqApp() {
     val detail by model.detail.collectAsStateWithLifecycle()
     val baseUrl by model.baseUrl.collectAsStateWithLifecycle()
 
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     var destination by remember { mutableStateOf<Destination>(Destination.Team) }
+
+    // Import replaces the whole document. A file that does not parse is refused rather
+    // than partially applied. See PLAN.md section 11.
+    val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri == null) return@rememberLauncherForActivityResult
+        scope.launch {
+            val text = withContext(Dispatchers.IO) {
+                runCatching {
+                    context.contentResolver.openInputStream(uri)?.bufferedReader()?.use { it.readText() }
+                }.getOrNull()
+            }
+            val ok = text != null && model.importJson(text)
+            Toast.makeText(
+                context,
+                context.getString(if (ok) R.string.settings_import_ok else R.string.settings_import_failed),
+                Toast.LENGTH_SHORT,
+            ).show()
+        }
+    }
     val isTab = destination is Destination.Team ||
         destination is Destination.Dates ||
         destination is Destination.Settings
@@ -115,6 +145,10 @@ private fun AlmanaqApp() {
                     model.openDetail(member)
                     destination = Destination.Detail
                 },
+                onFindTime = {
+                    destination = Destination.Dates
+                    model.loadCalendar()
+                },
                 modifier = content,
             )
 
@@ -128,6 +162,17 @@ private fun AlmanaqApp() {
             Destination.Settings -> SettingsScreen(
                 baseUrl = baseUrl,
                 onBaseUrl = model::updateBaseUrl,
+                onExport = {
+                    scope.launch {
+                        val json = model.exportJson()
+                        val send = Intent(Intent.ACTION_SEND).apply {
+                            type = "application/json"
+                            putExtra(Intent.EXTRA_TEXT, json)
+                        }
+                        context.startActivity(Intent.createChooser(send, null))
+                    }
+                },
+                onImport = { picker.launch(arrayOf("application/json", "text/plain")) },
                 modifier = content,
             )
 
@@ -154,6 +199,11 @@ private fun AlmanaqApp() {
                 },
                 onRemove = { id ->
                     model.removeMember(id)
+                    model.closeDetail()
+                    destination = Destination.Team
+                },
+                onOverrides = { id, overrides ->
+                    model.updateOverrides(id, overrides)
                     model.closeDetail()
                     destination = Destination.Team
                 },

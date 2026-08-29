@@ -229,6 +229,14 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     suspend fun exportJson(): String = teamStore.exportJson()
 
+    /** Returns false when the document is unreadable or from a newer schema. */
+    suspend fun importJson(text: String): Boolean {
+        val document = teamStore.importJson(text) ?: return false
+        members = document.members
+        refreshTeam()
+        return true
+    }
+
     // --- Calendar ---------------------------------------------------------------
 
     fun showMonth(month: LocalDate) {
