@@ -56,7 +56,11 @@ gets localized. An `InputError` message addresses a developer and stays in Engli
 4. **Member IDs are UUID v4.** Never auto-incrementing. This is what enables a future
    migration to a shared database (see section 12 of the plan).
 
-5. **Do not add dependencies without asking.** One person maintains this.
+5. **Ask before adding a dependency that ships.** Anything compiled into the backend
+   or into a client is a maintenance surface for one person, so it gets asked about.
+   Dependencies that never reach runtime — `devDependencies`, build scripts, anything
+   whose output is a committed artefact — go in without asking, with the reason stated
+   in the commit.
 
 6. **Respect the scope in section 2 of the plan.** If something looks like a good idea
    but is not listed, propose it, do not implement it.
