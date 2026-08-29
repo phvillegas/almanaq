@@ -1,21 +1,23 @@
 /**
- * `GET /v1/locations/search?q=tel+aviv` — autocompletado al agregar un miembro.
+ * `GET /v1/locations/search?q=tel+aviv` — autocomplete when adding a member.
  *
- * Ver PLAN.md sección 4.
+ * See PLAN.md section 4.
  */
 
 import { Hono } from 'hono';
 
-import { buscarCiudades } from '../domain/locations.js';
+import { resolveLocale } from '../domain/i18n.js';
+import { searchCities } from '../domain/locations.js';
 
 export const locations = new Hono();
 
 locations.get('/search', (c) => {
-  const consulta = c.req.query('q') ?? '';
-  const limiteCrudo = Number(c.req.query('limit'));
-  const limite = Number.isFinite(limiteCrudo) && limiteCrudo > 0 ? limiteCrudo : undefined;
+  const query = c.req.query('q') ?? '';
+  const rawLimit = Number(c.req.query('limit'));
+  const limit = Number.isFinite(rawLimit) && rawLimit > 0 ? rawLimit : undefined;
+  const locale = resolveLocale(c.req.header('accept-language'));
 
-  // Una consulta corta o vacía devuelve una lista vacía, no un error: el cliente
-  // llama a esto en cada tecla y el estado normal mientras se tipea es "todavía nada".
-  return c.json({ results: buscarCiudades(consulta, limite) });
+  // A short or empty query returns an empty list rather than an error: the client
+  // calls this on every keystroke, and "nothing yet" is the normal state while typing.
+  return c.json({ results: searchCities(query, locale, limit) });
 });

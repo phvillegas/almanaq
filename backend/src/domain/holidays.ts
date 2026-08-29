@@ -1,141 +1,143 @@
 /**
- * Lectura de los feriados precalculados de `src/data/holidays/*.json`.
+ * Reads the precomputed holidays in `src/data/holidays/*.json`.
  *
- * Cero llamadas de red en runtime: los JSON se generan una vez por año con
- * `npm run build:holidays` y se commitean al repositorio. Ver PLAN.md sección 5.
+ * No network calls at runtime: the JSON files are generated once a year with
+ * `npm run build:holidays` and committed to the repository. See PLAN.md section 5.
  *
- * La cobertura es por país Y por año. Un país cuyo archivo existe pero no incluye el
- * año consultado NO está cubierto para esa fecha: afirmar "no es feriado" mirando un
- * archivo que no llega hasta ahí sería inventar. Ver PLAN.md sección 10, regla 3.
+ * Coverage is per country AND per year. A country whose file exists but does not
+ * include the year being asked about is NOT covered for that date: claiming "not a
+ * holiday" from a file that does not reach that far would be making data up. See
+ * PLAN.md section 10, rule 3.
  */
 
 import { readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export interface Feriado {
-  /** Fecha gregoriana local, "YYYY-MM-DD". */
+export interface Holiday {
+  /** Local Gregorian date, "YYYY-MM-DD". */
   readonly date: string;
-  /** Nombre en el idioma del proveedor (inglés en Nager.Date). */
+  /** Name in the provider's language (English in Nager.Date). */
   readonly name: string;
-  /** Nombre en el idioma local del país. `null` si el proveedor no lo trae. */
+  /** Name in the country's own language. `null` when the provider omits it. */
   readonly localName: string | null;
 }
 
-export interface ArchivoFeriados {
+export interface HolidayFile {
   readonly countryCode: string;
   readonly provider: string;
   readonly generatedAt: string;
   readonly years: readonly number[];
-  readonly holidays: readonly Feriado[];
+  readonly holidays: readonly Holiday[];
 }
 
-let cache: Map<string, ArchivoFeriados> | null = null;
+let cache: Map<string, HolidayFile> | null = null;
 
 /**
- * Ubica `src/data/holidays` subiendo hasta la raíz del paquete.
+ * Locates `src/data/holidays` by walking up to the package root.
  *
- * Sube en vez de resolver relativo al módulo porque el mismo código corre desde
- * `src/` con tsx y desde `dist/` compilado, y los JSON viven siempre en `src/`:
- * son datos versionados, no artefactos de build.
+ * It walks up instead of resolving relative to the module because the same code runs
+ * from `src/` under tsx and from `dist/` once compiled, while the JSON always lives in
+ * `src/`: it is versioned data, not a build artifact.
  */
-function directorioDeDatos(): string {
-  let actual = dirname(fileURLToPath(import.meta.url));
+function dataDirectory(): string {
+  let current = dirname(fileURLToPath(import.meta.url));
   for (let i = 0; i < 6; i++) {
     try {
-      readFileSync(join(actual, 'package.json'), 'utf8');
-      return join(actual, 'src', 'data', 'holidays');
+      readFileSync(join(current, 'package.json'), 'utf8');
+      return join(current, 'src', 'data', 'holidays');
     } catch {
-      actual = dirname(actual);
+      current = dirname(current);
     }
   }
-  throw new Error('No se encontró la raíz del paquete para ubicar src/data/holidays');
+  throw new Error('Could not find the package root to locate src/data/holidays');
 }
 
-function cargar(): Map<string, ArchivoFeriados> {
+function load(): Map<string, HolidayFile> {
   if (cache) return cache;
 
-  const mapa = new Map<string, ArchivoFeriados>();
-  const directorio = directorioDeDatos();
+  const byCountry = new Map<string, HolidayFile>();
+  const directory = dataDirectory();
+  const files = listJsonFiles(directory);
 
-  let archivos: string[];
-  try {
-    archivos = readdirSync(directorio).filter((f) => f.endsWith('.json'));
-  } catch {
-    // Sin directorio de datos no hay cobertura de ningún país: todo cae en UNKNOWN.
-    archivos = [];
-  }
-
-  for (const archivo of archivos) {
-    const crudo = JSON.parse(readFileSync(join(directorio, archivo), 'utf8')) as ArchivoFeriados;
-    const codigo = crudo.countryCode?.toUpperCase();
-    if (!codigo) continue;
-    mapa.set(codigo, {
-      ...crudo,
-      countryCode: codigo,
-      holidays: [...crudo.holidays].sort((a, b) => a.date.localeCompare(b.date)),
+  for (const file of files) {
+    const raw = JSON.parse(readFileSync(join(directory, file), 'utf8')) as HolidayFile;
+    const code = raw.countryCode?.toUpperCase();
+    if (!code) continue;
+    byCountry.set(code, {
+      ...raw,
+      countryCode: code,
+      holidays: [...raw.holidays].sort((a, b) => a.date.localeCompare(b.date)),
     });
   }
 
-  cache = mapa;
-  return mapa;
+  cache = byCountry;
+  return cache;
 }
 
-/** Vacía la cache. Solo para los tests. */
-export function reiniciarCache(): void {
+function listJsonFiles(directory: string): string[] {
+  try {
+    return readdirSync(directory).filter((file) => file.endsWith('.json'));
+  } catch {
+    // With no data directory no country is covered: everything falls back to UNKNOWN.
+    return [];
+  }
+}
+
+/** Clears the cache. Tests only. */
+export function resetCache(): void {
   cache = null;
 }
 
-export function paisesCubiertos(): string[] {
-  return [...cargar().keys()].sort();
+export function coveredCountries(): string[] {
+  return [...load().keys()].sort();
 }
 
 /**
- * ¿Tenemos feriados de ese país para esa fecha?
+ * Do we have holidays for that country on that date?
  *
- * `fechaISO` es la fecha LOCAL del miembro ("YYYY-MM-DD"), no la del servidor.
+ * `isoDate` is the member's LOCAL date ("YYYY-MM-DD"), not the server's.
  */
-export function hayCobertura(countryCode: string | null | undefined, fechaISO: string): boolean {
-  const archivo = archivoDe(countryCode);
-  if (!archivo) return false;
-  const anio = Number(fechaISO.slice(0, 4));
-  return archivo.years.includes(anio);
+export function hasCoverage(countryCode: string | null | undefined, isoDate: string): boolean {
+  const file = fileFor(countryCode);
+  if (!file) return false;
+  return file.years.includes(Number(isoDate.slice(0, 4)));
 }
 
 /**
- * Feriado que cae en esa fecha local, o `null`.
+ * The holiday falling on that local date, or `null`.
  *
- * Devolver `null` solo significa "no hay feriado" si `hayCobertura` dio `true`.
- * Sin cobertura, `null` significa "no sabemos".
+ * `null` only means "not a holiday" when `hasCoverage` returned `true`. Without
+ * coverage it means "we do not know".
  *
- * TRAMPA CONOCIDA, no implementada en v1: en los calendarios hebreo e hiyrí el día
- * empieza al atardecer, así que un feriado arranca la tarde anterior a la fecha
- * gregoriana que figura acá. Ver PLAN.md sección 5, trampa 1.
+ * KNOWN PITFALL, not implemented in v1: in the Hebrew and Hijri calendars the day
+ * starts at sunset, so a holiday actually begins the afternoon before the Gregorian
+ * date recorded here. See PLAN.md section 5, pitfall 1.
  */
-export function feriadoEnFecha(
+export function holidayOn(
   countryCode: string | null | undefined,
-  fechaISO: string,
-): Feriado | null {
-  const archivo = archivoDe(countryCode);
-  if (!archivo) return null;
-  return archivo.holidays.find((f) => f.date === fechaISO) ?? null;
+  isoDate: string,
+): Holiday | null {
+  const file = fileFor(countryCode);
+  if (!file) return null;
+  return file.holidays.find((holiday) => holiday.date === isoDate) ?? null;
 }
 
 /**
- * Próximos feriados a partir de una fecha local, incluida.
- * La pantalla de detalle muestra como máximo 3. Ver PLAN.md sección 7.3.
+ * Upcoming holidays from a local date, inclusive.
+ * The detail screen shows at most 3. See PLAN.md section 7.3.
  */
-export function proximosFeriados(
+export function upcomingHolidays(
   countryCode: string | null | undefined,
-  desdeISO: string,
-  limite = 3,
-): Feriado[] {
-  const archivo = archivoDe(countryCode);
-  if (!archivo) return [];
-  return archivo.holidays.filter((f) => f.date >= desdeISO).slice(0, limite);
+  fromIsoDate: string,
+  limit = 3,
+): Holiday[] {
+  const file = fileFor(countryCode);
+  if (!file) return [];
+  return file.holidays.filter((holiday) => holiday.date >= fromIsoDate).slice(0, limit);
 }
 
-function archivoDe(countryCode: string | null | undefined): ArchivoFeriados | null {
+function fileFor(countryCode: string | null | undefined): HolidayFile | null {
   if (typeof countryCode !== 'string') return null;
-  return cargar().get(countryCode.trim().toUpperCase()) ?? null;
+  return load().get(countryCode.trim().toUpperCase()) ?? null;
 }

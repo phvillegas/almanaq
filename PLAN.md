@@ -1,96 +1,96 @@
-# Almanaq — Plan de producto y técnico
+# Almanaq — Product and technical plan
 
-App de disponibilidad para equipos distribuidos.
+Availability app for distributed teams.
 
-Documento de referencia para el asistente de código. Contiene alcance, arquitectura,
-contrato de API, sistema de diseño y especificación de pantallas.
+Reference document for the coding assistant. It holds the scope, the architecture, the
+API contract, the design system and the screen specifications.
 
-**Leé este documento entero antes de escribir código.** La sección "Reglas de trabajo"
-al final define límites que no hay que cruzar.
-
----
-
-## 1. Producto
-
-### Qué es
-
-Una app que responde una pregunta: **¿quién de mi equipo está realmente disponible
-ahora, y qué días conviene evitar?**
-
-La diferencia con cualquier conversor de husos horarios es que tiene en cuenta el
-**calendario local** de cada persona, no solo la hora: fines de semana que no son
-sábado y domingo, feriados nacionales, y festividades que se rigen por calendarios
-no gregorianos y por lo tanto se mueven cada año.
-
-### Para quién
-
-Personas que coordinan con colegas en otros países. El caso que define el producto:
-es viernes al mediodía en Buenos Aires, parece un día laboral normal, y la mitad del
-equipo está de fin de semana o de feriado.
-
-### Qué NO es
-
-- No es una app de calendarios curiosos ni un catálogo cultural.
-- No es multiplayer. **Nadie más que el usuario instala nada.**
-- No es un chat, ni una agenda, ni un CRM.
-
-### Modelo single-player (crítico)
-
-El usuario agrega personas con **nombre + ciudad**. La app infiere todo lo demás
-(huso horario, país, semana laboral, feriados) desde datos públicos.
-
-Las personas agregadas **no tienen cuenta, no reciben nada, no confirman nada.**
-Esta decisión es lo que hace viable el producto: no depende de la adopción de nadie.
+**Read this whole document before writing code.** The "Working rules" section at the
+end defines limits that are not to be crossed.
 
 ---
 
-## 2. Alcance v1
+## 1. Product
 
-### Dentro
+### What it is
 
-1. Agregar y quitar miembros del equipo (nombre + ciudad).
-2. Vista "Ahora": estado de disponibilidad de cada miembro en tiempo real.
-3. Vista "Elegir fecha": calendario mensual con días conflictivos marcados y
-   resumen de quién no está disponible en la fecha elegida.
-4. Vista "Detalle": semana laboral, calendario local y próximos feriados de una persona.
-5. Corrección manual: el usuario puede sobrescribir la semana laboral o el horario
-   de cualquier miembro.
+An app that answers one question: **who on my team is actually available right now,
+and which days are worth avoiding?**
 
-### Fuera (explícitamente)
+What separates it from any time zone converter is that it accounts for each person's
+**local calendar**, not just the clock: weekends that are not Saturday and Sunday,
+national holidays, and observances that follow non-Gregorian calendars and therefore
+move every year.
 
-- Cuentas, login, sincronización entre dispositivos (v1 usa almacenamiento local).
-- Widgets. Se dejan para la v1.1 — son código nativo separado en cada plataforma
-  (Glance / WidgetKit) y no aportan al núcleo.
-- Notificaciones push.
-- Integración con Google Calendar / Outlook.
-- Modo multiplayer o invitaciones.
-- Cualquier vista de "calendarios del mundo" desligada del equipo.
+### Who it is for
 
-### Regla de decisión ante dudas de alcance
+People coordinating with colleagues in other countries. The case that defines the
+product: it is Friday noon in Buenos Aires, it looks like an ordinary working day, and
+half the team is on a weekend or a public holiday.
 
-Si una funcionalidad no ayuda a responder "¿está disponible?" o "¿qué día elijo?",
-queda fuera de la v1.
+### What it is not
+
+- Not an app about curious calendars, and not a cultural catalogue.
+- Not multiplayer. **Nobody but the user installs anything.**
+- Not a chat, not a scheduler, not a CRM.
+
+### Single-player model (critical)
+
+The user adds people with **a name and a city**. The app infers everything else (time
+zone, country, work week, holidays) from public data.
+
+The people added **have no account, receive nothing and confirm nothing.** This
+decision is what makes the product viable: it does not depend on anyone else adopting
+it.
 
 ---
 
-## 3. Arquitectura
+## 2. v1 scope
 
-### Principio central
+### In
 
-> **El cliente nunca calcula disponibilidad.**
+1. Add and remove team members (name and city).
+2. "Now" view: each member's availability status in real time.
+3. "Pick a date" view: a monthly calendar with conflicting days marked and a summary
+   of who is unavailable on the chosen date.
+4. "Detail" view: work week, local calendar and upcoming holidays for one person.
+5. Manual correction: the user can override any member's work week or working hours.
 
-Toda la lógica de calendarios, husos, semanas laborales y feriados vive en el backend.
-Los clientes piden estados ya resueltos y los pintan.
+### Out (explicitly)
 
-Motivo: son dos apps nativas. Cualquier lógica que viva en el cliente hay que
-escribirla, testearla y corregirla dos veces. Y cualquier corrección de datos de
-feriados exigiría publicar una versión nueva en dos tiendas.
+- Accounts, login, cross-device sync (v1 uses local storage).
+- Widgets. Deferred to v1.1 — they are separate native code on each platform
+  (Glance / WidgetKit) and add nothing to the core.
+- Push notifications.
+- Google Calendar / Outlook integration.
+- Multiplayer mode or invitations.
+- Any "calendars of the world" view detached from the team.
 
-### Componentes
+### Decision rule when scope is unclear
+
+If a feature does not help answer "are they available?" or "which day should I pick?",
+it stays out of v1.
+
+---
+
+## 3. Architecture
+
+### Central principle
+
+> **The client never computes availability.**
+
+All the logic about calendars, time zones, work weeks and holidays lives in the
+backend. Clients ask for resolved statuses and paint them.
+
+The reason: there are two native apps. Any logic living in the client has to be
+written, tested and fixed twice. And any holiday data correction would require
+shipping a new version to two stores.
+
+### Components
 
 ```
 ┌─────────────────┐     ┌─────────────────┐
-│  Android nativo │     │   iOS nativo    │
+│ Native Android  │     │   Native iOS    │
 │ Kotlin + Compose│     │ Swift + SwiftUI │
 └────────┬────────┘     └────────┬────────┘
          │                       │
@@ -98,65 +98,71 @@ feriados exigiría publicar una versión nueva en dos tiendas.
                      │  HTTPS / JSON
             ┌────────▼────────┐
             │     Backend     │
-            │  Toda la lógica │
+            │  All the logic  │
             └────────┬────────┘
                      │
         ┌────────────┼────────────┐
         │            │            │
    ┌────▼───┐  ┌─────▼────┐  ┌────▼─────┐
-   │  ICU   │  │ JSON de  │  │ Tablas   │
-   │(nativo │  │ feriados │  │ husos y  │
-   │ de Node│  │ en repo  │  │ semanas  │
+   │  ICU   │  │ Holiday  │  │ Zone and │
+   │(native │  │ JSON in  │  │ work week│
+   │ to Node│  │ the repo │  │ tables   │
    └────────┘  └──────────┘  └──────────┘
 ```
 
 ### Backend — stack
 
-**Node + Hono.** Decidido, no a elección.
+**Node + Hono.** Decided, not up for choice.
 
-Motivo principal: **Node trae ICU completo de fábrica.** `Intl.DateTimeFormat` con
-extensiones (`-u-ca-hebrew`, `-u-ca-ethiopic`, `-u-ca-persian`) funciona sin instalar
-ni configurar nada. Toda la lógica de conversión de calendarios son pocas líneas.
+The main reason: **Node ships full ICU out of the box.** `Intl.DateTimeFormat` with
+extensions (`-u-ca-hebrew`, `-u-ca-ethiopic`, `-u-ca-persian`) works with nothing to
+install and nothing to configure. All the calendar conversion logic is a few lines.
 
-Hono en vez de Express: más liviano y corre igual en servidor tradicional o serverless.
+Hono rather than Express: lighter, and it runs the same on a traditional server or
+serverless.
 
-**Sin base de datos. Sin ORM. Sin autenticación. Sin estado.**
-El equipo se guarda en el dispositivo y viaja en cada request.
+**No database. No ORM. No authentication. No state.**
+The team is stored on the device and travels in every request.
 
-Deploy: Vercel o Railway. Costo prácticamente nulo.
+Deployment: Vercel or Railway. Cost is effectively nil.
 
-### Por qué no Supabase (en la v1)
+### Why not Supabase (in v1)
 
-Supabase resuelve Postgres, auth y storage. La v1 no necesita ninguna de las tres.
-Usarlo implicaría arrastrar la plataforma entera para terminar usando solo Edge
-Functions, que son funciones serverless comunes.
+Supabase solves Postgres, auth and storage. v1 needs none of the three. Using it would
+mean dragging in the whole platform only to end up using Edge Functions, which are
+ordinary serverless functions.
 
-**Reconsiderarlo en la v1.1 si se agregan cuentas y sincronización** (ver sección 12).
-Ahí sí es una buena elección y resuelve auth y datos de una.
+**Reconsider it in v1.1 if accounts and sync get added** (see section 12). At that
+point it is a good choice and solves auth and data in one move.
 
-### Advertencia sobre runtimes alternativos
+### Warning about alternative runtimes
 
-Si se evalúa Cloudflare Workers, Deno u otro runtime por precio o latencia:
-**verificar primero el soporte de `Intl` con calendarios no gregorianos.**
-Históricamente estuvo recortado, y es justo la capacidad que sostiene el producto.
-Escribir un test que convierta una fecha a los calendarios hebreo, etíope y persa
-antes de comprometerse con el runtime.
+If Cloudflare Workers, Deno or another runtime is evaluated for price or latency:
+**check `Intl` support for non-Gregorian calendars first.** It has historically been
+trimmed down, and it is precisely the capability the product rests on. Write a test
+that converts a date to the Hebrew, Ethiopic and Persian calendars before committing
+to a runtime.
 
-### Orden de construcción (importante)
+### Build order (important)
 
-1. **Backend completo y congelado**, con tests.
-2. Recién después, los dos clientes en paralelo.
+1. **Backend complete and frozen**, with tests.
+2. Only then, both clients in parallel.
 
-No empezar los clientes hasta que el contrato de API esté cerrado. Si el contrato se
-mueve mientras hay dos apps en vuelo, el retrabajo se duplica.
+Do not start the clients until the API contract is closed. If the contract moves while
+two apps are in flight, the rework doubles.
 
 ---
 
-## 4. Contrato de API
+## 4. API contract
 
-Base: `/v1`. Todas las fechas y horas en ISO 8601. Todas las respuestas en JSON.
+Base: `/v1`. All dates and times in ISO 8601. All responses in JSON.
 
-### Modelo de miembro (lo guarda el cliente)
+User-facing text is localized from the `Accept-Language` header. Spanish and English
+ship in v1 and Spanish is the fallback, so the same request in a different language
+returns the same `status` with different `statusLabel` and `statusDetail`. Examples
+below use English.
+
+### Member model (stored by the client)
 
 ```json
 {
@@ -174,26 +180,26 @@ Base: `/v1`. Todas las fechas y horas en ISO 8601. Todas las respuestas en JSON.
 }
 ```
 
-`overrides` en `null` significa "usar el valor inferido del país".
+`overrides` set to `null` means "use the value inferred from the country".
 
-**`id` debe ser UUID v4, nunca autoincremental.** Esto no es opcional: es lo que
-permite migrar a una base compartida más adelante con un `INSERT` directo, sin tener
-que reasignar claves. Ver sección 12.
+**`id` must be a UUID v4, never auto-incrementing.** This is not optional: it is what
+allows migrating to a shared database later with a direct `INSERT`, without having to
+reassign keys. See section 12.
 
-`updatedAt` no se usa en la v1, pero se guarda desde el día uno por el mismo motivo.
+`updatedAt` is unused in v1, but it is stored from day one for the same reason.
 
 ---
 
 ### `GET /v1/locations/search?q=tel+aviv`
 
-Autocompletado de ciudades al agregar un miembro.
+City autocomplete when adding a member.
 
 ```json
 {
   "results": [
     {
       "city": "Tel Aviv",
-      "region": "Tel Aviv District",
+      "region": "Tel Aviv",
       "country": "Israel",
       "countryCode": "IL",
       "timezone": "Asia/Jerusalem"
@@ -202,11 +208,13 @@ Autocompletado de ciudades al agregar un miembro.
 }
 ```
 
+`country` is localized; `city` and `region` keep their local spelling.
+
 ---
 
 ### `POST /v1/availability`
 
-El endpoint principal. El cliente manda su equipo y un instante; recibe estados.
+The main endpoint. The client sends its team and an instant; it receives statuses.
 
 Request:
 
@@ -223,7 +231,7 @@ Response:
 
 ```json
 {
-  "at": "2026-08-21T15:42:00Z",
+  "at": "2026-08-21T15:42:00.000Z",
   "availableCount": 2,
   "totalCount": 6,
   "members": [
@@ -234,31 +242,34 @@ Response:
       "localWeekday": "friday",
       "utcOffsetMinutes": 180,
       "status": "LOCAL_WEEKEND",
-      "statusLabel": "Fin de semana",
-      "statusDetail": "Fin de semana en Israel"
+      "statusLabel": "Weekend",
+      "statusDetail": "Weekend in Israel"
     }
   ]
 }
 ```
 
-**Enum `status`** — el cliente mapea esto a color, nada más:
+**The `status` enum** — the client maps this to a colour, nothing more:
 
-| Valor           | Significado                          | Color        |
+| Value           | Meaning                              | Colour       |
 |-----------------|--------------------------------------|--------------|
-| `AVAILABLE`     | En horario laboral                   | verde        |
-| `OFF_HOURS`     | Día laboral, fuera de horario        | gris         |
-| `LOCAL_WEEKEND` | Fin de semana local                  | Meridian     |
-| `LOCAL_HOLIDAY` | Feriado local                        | Meridian     |
-| `UNKNOWN`       | Sin datos para ese país              | gris         |
+| `AVAILABLE`     | Within working hours                 | green        |
+| `OFF_HOURS`     | Working day, outside hours           | grey         |
+| `LOCAL_WEEKEND` | Local weekend                        | Meridian     |
+| `LOCAL_HOLIDAY` | Local public holiday                 | Meridian     |
+| `UNKNOWN`       | No data for that country             | grey         |
 
-El backend manda `statusLabel` y `statusDetail` ya redactados y localizados.
-**El cliente no arma estos textos.**
+The backend sends `statusLabel` and `statusDetail` already written and localized.
+**The client does not compose this text.**
+
+Members come back sorted by status: available, off hours, weekend, holiday, unknown.
+The client sorts by name within each group, because the backend never receives names.
 
 ---
 
 ### `POST /v1/calendar`
 
-Alimenta la vista de mes: qué días tienen conflictos.
+Feeds the month view: which days have conflicts.
 
 Request:
 
@@ -266,7 +277,7 @@ Request:
 {
   "from": "2026-08-01",
   "to": "2026-08-31",
-  "members": [ /* igual que arriba */ ]
+  "members": [ /* same as above */ ]
 }
 ```
 
@@ -279,16 +290,16 @@ Response:
       "date": "2026-08-21",
       "conflictCount": 3,
       "conflicts": [
-        { "memberId": "a1", "reason": "LOCAL_WEEKEND", "detail": "Fin de semana en Israel" },
-        { "memberId": "b2", "reason": "LOCAL_WEEKEND", "detail": "Fin de semana en Emiratos" },
-        { "memberId": "c3", "reason": "LOCAL_HOLIDAY", "detail": "Feriado en Etiopía: Buhe" }
+        { "memberId": "a1", "reason": "LOCAL_WEEKEND", "detail": "Weekend in Israel" },
+        { "memberId": "b2", "reason": "LOCAL_WEEKEND", "detail": "Weekend in United Arab Emirates" },
+        { "memberId": "c3", "reason": "LOCAL_HOLIDAY", "detail": "Holiday in Ethiopia: Buhe" }
       ]
     }
   ]
 }
 ```
 
-Solo devolver días con `conflictCount > 0`. Los días ausentes están limpios.
+Only return days with `conflictCount > 0`. Absent days are clear.
 
 ---
 
@@ -298,7 +309,7 @@ Request:
 
 ```json
 {
-  "member": { /* modelo de miembro */ },
+  "member": { /* member model */ },
   "at": "2026-08-21T15:42:00Z"
 }
 ```
@@ -308,138 +319,180 @@ Response:
 ```json
 {
   "localTime": "18:42",
-  "localDateFormatted": "viernes 21 de agosto",
+  "localDateFormatted": "Friday, August 21",
   "utcOffsetMinutes": 180,
   "status": "LOCAL_WEEKEND",
-  "statusLabel": "Fin de semana local",
+  "statusLabel": "Local weekend",
   "workWeek": {
-    "daysLabel": "dom a jue",
-    "weekendLabel": "vie y sáb",
-    "hoursLabel": "9:00 a 18:00"
+    "daysLabel": "Sun to Thu",
+    "weekendLabel": "Fri and Sat",
+    "hoursLabel": "9:00 to 18:00"
   },
   "localCalendar": {
     "system": "hebrew",
-    "label": "Hebreo",
+    "label": "Hebrew",
     "currentYear": "5786",
-    "note": "El día empieza al atardecer, no a medianoche."
+    "note": "The day starts at sunset, not at midnight."
   },
   "upcomingHolidays": [
-    { "name": "Rosh Hashaná", "dateLabel": "11 al 13 de septiembre", "startDate": "2026-09-11" },
-    { "name": "Yom Kipur", "dateLabel": "20 de septiembre", "startDate": "2026-09-20" }
+    { "name": "Rosh Hashanah", "dateLabel": "September 11", "startDate": "2026-09-11" },
+    { "name": "Yom Kippur", "dateLabel": "September 20", "startDate": "2026-09-20" }
   ]
 }
 ```
 
-`localCalendar.note` puede venir en `null`. Solo se muestra si existe.
+`localCalendar` may come back as `null`, and so may `localCalendar.note`. Only show
+them when present.
 
 ---
 
-## 5. Datos de calendarios y feriados
+### Errors
 
-### Sistemas de calendario
+Not part of the original contract; added while building and still to be confirmed
+before freezing. Every failure returns the same shape:
 
-Usar `Intl.DateTimeFormat` de Node, que ya incluye ICU completo. Ejemplo:
-
-```js
-new Intl.DateTimeFormat('es-u-ca-ethiopic', { dateStyle: 'long' })
-  .format(new Date('2026-08-17'))
+```json
+{ "error": { "code": "INVALID_MEMBER", "message": "members[0].timezone is not a known IANA time zone: Mars/Olympus" } }
 ```
 
-Los sistemas disponibles vía CLDR:
+| Code             | HTTP | When                                            |
+|------------------|------|-------------------------------------------------|
+| `INVALID_BODY`   | 400  | Missing or malformed field                      |
+| `INVALID_MEMBER` | 400  | A member with an invalid time zone or override  |
+| `INVALID_RANGE`  | 400  | Inverted date range, or longer than 366 days    |
+| `NOT_FOUND`      | 404  | Unknown route                                   |
+| `INTERNAL`       | 500  | Unhandled error                                 |
+
+Error messages address whoever is building a client, so they are not localized.
+
+---
+
+## 5. Calendar and holiday data
+
+### Calendar systems
+
+Use Node's `Intl.DateTimeFormat`, which already bundles full ICU. Example:
+
+```js
+new Intl.DateTimeFormat('en-u-ca-ethiopic', { dateStyle: 'long', timeZone: 'Africa/Addis_Ababa' })
+  .format(new Date('2026-08-17T00:00:00Z'))
+```
+
+Always pass `timeZone`. Without it ICU formats in the process time zone and the date
+shifts a day in any negative offset.
+
+The systems available through CLDR:
 
 ```
 buddhist, chinese, coptic, dangi, ethiopic, ethioaa, gregory, hebrew,
 indian, islamic (+umalqura, civil, tbla, rgsa), japanese, persian, roc
 ```
 
-Faltantes conocidos, **no implementar en v1**: bikram sambat (Nepal), bengalí,
-juliano, baháʼí, amazigh, birmano, tibetano.
+Known gaps, **not to be implemented in v1**: Bikram Sambat (Nepal), Bengali, Julian,
+Baháʼí, Amazigh, Burmese, Tibetan.
 
-Si un país usa un calendario fuera de ICU, devolver `localCalendar: null` y mostrar
-solo el gregoriano. No inventar conversiones.
+If a country uses a calendar outside ICU, return `localCalendar: null` and show only
+the Gregorian one. Do not invent conversions.
 
-### Feriados — precalculados, no consultados en runtime
+### Holidays — precomputed, not queried at runtime
 
-**Comprar, no mantener.** Mantener feriados de 50 países a mano es un trabajo de
-tiempo completo.
+**Buy, do not maintain.** Keeping holidays for 50 countries by hand is a full-time
+job.
 
-Pero tampoco consultarlos en vivo. El enfoque es:
+But do not query them live either. The approach is:
 
-1. Un script `scripts/build-holidays.ts` que se corre **una vez por año**.
-2. Consulta Nager.Date (gratis) o Calendarific (pago, más cobertura).
-3. Genera un archivo por país: `data/holidays/IL.json`, `data/holidays/ET.json`, etc.
-4. Esos JSON **se commitean al repositorio**.
-5. El servidor los lee del disco. Cero llamadas de red en runtime.
+1. A `scripts/build-holidays.ts` script that runs **once a year**.
+2. It queries Nager.Date (free) or Calendarific (paid, wider coverage).
+3. It generates one file per country: `data/holidays/IL.json`, `data/holidays/ET.json`,
+   and so on.
+4. Those JSON files **are committed to the repository**.
+5. The server reads them from disk. Zero network calls at runtime.
 
-Ventajas: sin latencia, sin dependencia externa en producción, sin riesgo de que la
-API de terceros se caiga o cambie de precio, y los datos quedan versionados en git —
-si un feriado sale mal, se ve en el diff.
+Upsides: no latency, no external dependency in production, no risk of the third-party
+API going down or changing its pricing, and the data ends up versioned in git — if a
+holiday comes out wrong, it shows in the diff.
 
-El script debe fallar ruidosamente si un país devuelve vacío, para no generar un
-JSON silenciosamente incompleto.
+The script must fail loudly when a country returns empty, so it never generates a
+silently incomplete JSON.
 
-### Semanas laborales
+### Cities
 
-Tabla estática en el backend, no inferida:
+Same approach. `scripts/build-locations.ts` downloads the GeoNames `cities15000` dump
+(CC BY 4.0), keeps name, ASCII name, region, country and IANA time zone, and writes a
+single committed `data/locations/cities.json`. Search is by prefix, accent-insensitive,
+ranked by population.
 
-| Región                                    | Días laborales |
+The country name is not stored: it is resolved at runtime with `Intl.DisplayNames` in
+the caller's locale.
+
+Known limitation: search matches the local name and its transliteration, not exonyms.
+"Londres" does not find London.
+
+### Work weeks
+
+A static table in the backend, not inferred:
+
+| Region                                    | Working days   |
 |-------------------------------------------|----------------|
-| Mayoría                                   | lun a vie      |
-| Israel                                    | dom a jue      |
-| Emiratos Árabes Unidos                    | lun a vie*     |
-| Arabia Saudita, Kuwait, Qatar, Omán, etc. | dom a jue      |
-| Afganistán, Irán                          | sáb a jue      |
-| Nepal                                     | dom a vie      |
+| Majority                                  | Mon to Fri     |
+| Israel                                    | Sun to Thu     |
+| United Arab Emirates                      | Mon to Fri*    |
+| Saudi Arabia, Kuwait, Qatar, Oman, etc.   | Sun to Thu     |
+| Afghanistan, Iran                         | Sat to Thu     |
+| Nepal                                     | Sun to Fri     |
+| Brunei                                    | Mon to Thu, Sat|
 
-\* Emiratos cambió en 2022; verificar la vigencia al implementar y dejar la fuente
-documentada en el código.
+\* The UAE changed in 2022; check that it still holds when implementing and leave the
+source documented in the code.
 
-### Trampas conocidas (documentar en el código)
+Countries outside the table fall back to Mon to Fri, and that fallback is flagged as
+inferred so the status layer never treats it as verified data.
 
-1. **El día no siempre empieza a medianoche.** Los calendarios hebreo e hiyrí
-   arrancan al atardecer. Afecta cuándo empieza y termina un feriado.
-2. **El calendario islámico tiene cuatro variantes en ICU** y no coinciden entre sí.
-   Usar `umalqura` por defecto. El religioso depende de avistamiento lunar real:
-   ninguna tabla es definitiva. Documentarlo.
-3. **Chino, coreano (dangi) y vietnamita** son el mismo sistema con distinto
-   meridiano. Pueden caer en días distintos. No unificarlos.
-4. **Los husos horarios cambian.** Usar siempre la base de datos IANA actualizada,
-   nunca offsets fijos.
+### Known pitfalls (document them in the code)
+
+1. **The day does not always start at midnight.** The Hebrew and Hijri calendars start
+   at sunset. It affects when a holiday starts and ends.
+2. **The Islamic calendar has four variants in ICU** and they do not agree with each
+   other. Use `umalqura` by default. The religious one depends on actual moon
+   sighting: no table is definitive. Document it.
+3. **Chinese, Korean (dangi) and Vietnamese** are the same system with a different
+   meridian. They can land on different days. Do not merge them.
+4. **Time zones change.** Always use an up-to-date IANA database, never fixed offsets.
 
 ---
 
-## 6. Sistema de diseño — "Sol y Luna"
+## 6. Design system — "Sol y Luna"
 
-Paleta idéntica en ambas plataformas. **Los hexadecimales no cambian entre iOS y
-Android.** Lo que cambia es cómo se aplican (ver sección 8).
+The palette is identical on both platforms. **The hex values do not change between iOS
+and Android.** What changes is how they are applied (see section 8).
 
-### Tema claro
+### Light theme
 
-| Rol                  | Hex       | Nombre    |
+| Role                 | Hex       | Name      |
 |----------------------|-----------|-----------|
-| Acción / primario    | `#4436C7` | Vesper    |
-| Acento / alerta      | `#E0A03A` | Meridian  |
-| Texto principal      | `#171634` | Nocturne  |
-| Texto secundario     | `#5B5C74` | Slate     |
-| Bordes / divisores   | `#E4E4EC` | Mist      |
-| Fondo                | `#F7F7FA` | Paper     |
-| Superficie (cards)   | `#FFFFFF` | —         |
+| Action / primary     | `#4436C7` | Vesper    |
+| Accent / alert       | `#E0A03A` | Meridian  |
+| Primary text         | `#171634` | Nocturne  |
+| Secondary text       | `#5B5C74` | Slate     |
+| Borders / dividers   | `#E4E4EC` | Mist      |
+| Background           | `#F7F7FA` | Paper     |
+| Surface (cards)      | `#FFFFFF` | —         |
 
-### Tema oscuro
+### Dark theme
 
-| Rol                  | Hex       |
+| Role                 | Hex       |
 |----------------------|-----------|
-| Acción / primario    | `#8B7DFF` |
-| Acento / alerta      | `#F0B455` |
-| Texto principal      | `#F2F2F7` |
-| Texto secundario     | `#9C9DB4` |
-| Bordes / divisores   | `#2A2947` |
-| Fondo                | `#0F0E1C` |
-| Superficie (cards)   | `#1A1930` |
+| Action / primary     | `#8B7DFF` |
+| Accent / alert       | `#F0B455` |
+| Primary text         | `#F2F2F7` |
+| Secondary text       | `#9C9DB4` |
+| Borders / dividers   | `#2A2947` |
+| Background           | `#0F0E1C` |
+| Surface (cards)      | `#1A1930` |
 
-### Colores de estado
+### Status colours
 
-| Estado          | Claro (texto) | Claro (fondo) | Oscuro (texto) | Oscuro (fondo) |
+| Status          | Light (text)  | Light (bg)    | Dark (text)    | Dark (bg)      |
 |-----------------|---------------|---------------|----------------|----------------|
 | `AVAILABLE`     | `#17724E`     | `#E3F3EB`     | `#3DBE8B`      | `#12291F`      |
 | `OFF_HOURS`     | `#9C9DB4`     | —             | `#6E6F87`      | —              |
@@ -447,419 +500,420 @@ Android.** Lo que cambia es cómo se aplican (ver sección 8).
 | `LOCAL_HOLIDAY` | `#8A5A0B`     | `#FBF0DC`     | `#F0B455`      | `#2A2216`      |
 | `UNKNOWN`       | `#9C9DB4`     | —             | `#6E6F87`      | —              |
 
-### Reglas de color no negociables
+### Non-negotiable colour rules
 
-1. **Meridian (`#E0A03A`) nunca se usa como texto sobre fondo claro.** Da 2.1:1 y es
-   ilegible. Va en puntos, rellenos, bordes e indicadores. Para texto ámbar sobre
-   claro, usar `#8A5A0B`.
-2. **Botones con relleno `#8B7DFF` (oscuro) llevan texto oscuro `#0E1420`**, no
-   blanco. Blanco sobre ese violeta da 3.2:1 y no pasa AA.
-3. En tema oscuro la jerarquía se da con **superficies**, no con sombras.
-4. Todo par texto/fondo debe superar 4.5:1. Verificar cualquier combinación nueva.
+1. **Meridian (`#E0A03A`) is never used as text on a light background.** It gives
+   2.1:1 and is illegible. It goes in dots, fills, borders and indicators. For amber
+   text on light, use `#8A5A0B`.
+2. **Buttons filled with `#8B7DFF` (dark) carry dark text `#0E1420`**, not white.
+   White on that violet gives 3.2:1 and does not pass AA.
+3. In the dark theme, hierarchy comes from **surfaces**, not from shadows.
+4. Every text and background pair must clear 4.5:1. Check any new combination.
 
-### Los hexadecimales son idénticos en iOS y Android
+### The hex values are identical on iOS and Android
 
-No hay dos paletas. Lo que cambia por plataforma es cómo se aplican los colores
-(sombra vs relleno tonal, ripple vs opacidad, radios), no sus valores.
+There are not two palettes. What changes per platform is how the colours are applied
+(shadow versus tonal fill, ripple versus opacity, corner radii), not their values.
 
-Dos matices esperados, que **no** son excepciones a la regla:
+Two expected nuances, which are **not** exceptions to the rule:
 
-- **Android deriva tonos adicionales.** Material 3 genera su esquema desde la semilla
-  `#4436C7`, así que existirán tonos intermedios que en iOS no tienen equivalente
-  nombrado. Es la misma semilla expandida al sistema de roles de Android. Los colores
-  de marca y de estado siguen siendo los mismos valores.
-- **El vidrio de iOS altera la percepción.** Sobre la barra flotante, un color se
-  mezcla con lo que pasa por debajo y puede verse distinto que sobre una tarjeta
-  opaca. Esto es esperable y no se corrige con un hex distinto. Es precisamente por
-  qué el vidrio va solo en el chrome: en el contenido, donde el color tiene que ser
-  fiel y el contraste verificable, todo es opaco.
+- **Android derives extra tones.** Material 3 generates its scheme from the `#4436C7`
+  seed, so intermediate tones will exist that have no named equivalent on iOS. It is
+  the same seed expanded into Android's role system. The brand and status colours are
+  still the same values.
+- **iOS glass alters perception.** Over the floating bar, a colour blends with
+  whatever passes underneath and can look different than on an opaque card. That is
+  expected and is not fixed with a different hex. It is precisely why glass is confined
+  to the chrome: in content, where colour has to be faithful and contrast verifiable,
+  everything is opaque.
 
-### Escalas
+### Scales
 
 ```
-Espaciado: 4, 8, 12, 16, 24, 32, 48
-Radios:    iOS → 12-14    Android → 18-20    Píldoras → 999
+Spacing: 4, 8, 12, 16, 24, 32, 48
+Radii:   iOS → 12-14    Android → 18-20    Pills → 999
 ```
 
-### Tipografía
+### Typography
 
-| Rol       | Tamaño | Peso | Interlineado |
-|-----------|--------|------|--------------|
-| display   | 46     | 700  | 52           |
-| título    | 26     | 700  | 32           |
-| encabezado| 19     | 600  | 26           |
-| cuerpo    | 15     | 400  | 22           |
-| etiqueta  | 13     | 500  | 18           |
-| epígrafe  | 11     | 600  | 16 (tracking 1.6, mayúsculas) |
+| Role      | Size   | Weight | Line height |
+|-----------|--------|--------|-------------|
+| display   | 46     | 700    | 52          |
+| title     | 26     | 700    | 32          |
+| heading   | 19     | 600    | 26          |
+| body      | 15     | 400    | 22          |
+| label     | 13     | 500    | 18          |
+| caption   | 11     | 600    | 16 (tracking 1.6, uppercase) |
 
-Tipografía del sistema en ambas plataformas: SF Pro en iOS, Roboto en Android.
-No incorporar fuentes externas en la v1.
+System typography on both platforms: SF Pro on iOS, Roboto on Android. No external
+fonts in v1.
 
-**Números tabulares obligatorios** en horas locales y contadores. Sin eso, los
-tiempos bailan al actualizarse cada minuto.
+**Tabular figures are mandatory** for local times and counters. Without them the times
+jitter as they refresh every minute.
 
 ---
 
-## 7. Pantallas
+## 7. Screens
 
-Referencia visual: `mockup-equipos.svg` (tema claro, las tres pantallas).
-Para el tratamiento de tema oscuro, ver `mockup-dark.svg` — la paleta ahí es la
-anterior, pero **el criterio de superficies, contraste y jerarquía sí aplica.**
+Visual reference: `mockup-equipos.svg` (light theme, the three screens).
+For dark theme treatment see `mockup-plataformas-v2.svg`.
 
-### 7.1 Ahora (pantalla inicial)
+### 7.1 Now (initial screen)
 
-**Estructura vertical:**
+**Vertical structure:**
 
-1. Título "Tu equipo"
-2. Subtítulo con el contador: "2 de 6 disponibles ahora"
-3. Lista de miembros
-4. Botón primario "Buscar un horario"
-5. Barra de navegación: Equipo · Fechas · Ajustes
+1. Title "Your team"
+2. Subtitle with the counter: "2 of 6 available now"
+3. Member list
+4. Primary button "Find a time"
+5. Navigation bar: Team · Dates · Settings
 
-**Fila de miembro:**
+**Member row:**
 
 ```
-[avatar+badge]  Nombre                      18:42
-                Ciudad                Fin de semana
+[avatar+badge]  Name                        18:42
+                City                     Weekend
 ```
 
-- Avatar: círculo con iniciales. Fondo `#E7E5F8` con texto Vesper; si el estado es
-  `AVAILABLE`, fondo `#E3F3EB` con texto verde.
-- Badge de estado: círculo de 4px con anillo blanco de 2px, abajo a la derecha del avatar.
-- Hora local: 17px semibold, tabular, alineada a la derecha.
-- Etiqueta de estado: 12px, del color del estado, alineada a la derecha.
+- Avatar: a circle with initials. Background `#E7E5F8` with Vesper text; when the
+  status is `AVAILABLE`, background `#E3F3EB` with green text.
+- Status badge: a 4px circle with a 2px white ring, bottom right of the avatar.
+- Local time: 17px semibold, tabular, right aligned.
+- Status label: 12px, in the status colour, right aligned.
 
-**Comportamiento:**
+**Behaviour:**
 
-- La hora local se actualiza cada minuto. **Refrescar solo el texto**, no recargar
-  la lista entera ni re-consultar la API cada minuto.
-- Llamar a `/availability` al abrir la pantalla, al volver del segundo plano y con
+- The local time refreshes every minute. **Refresh only the text**, do not reload the
+  whole list or re-query the API every minute.
+- Call `/availability` on screen open, on returning from the background, and on
   pull-to-refresh.
-- Orden de la lista: disponibles primero, después fuera de horario, después fin de
-  semana y feriado. Dentro de cada grupo, por nombre.
-- Tocar una fila abre el detalle.
+- List order: available first, then off hours, then weekend and holiday. Within each
+  group, by name. The backend already returns them grouped by status.
+- Tapping a row opens the detail.
 
-**Estado vacío:** "Agregá a tu primer compañero" con un botón. Sin ilustración.
-
----
-
-### 7.2 Elegir fecha
-
-**Estructura vertical:**
-
-1. Título "Elegir fecha"
-2. Cabecera de mes con flechas de navegación
-3. Grilla mensual
-4. Tarjeta de resumen de la fecha seleccionada
-5. Botón "Ver días sin conflictos"
-6. Enlace de texto "Agendar igual"
-
-**Grilla:**
-
-- Semana empieza el lunes.
-- Días de fin de semana del **usuario** en gris `#9C9DB4`.
-- Día con conflictos: punto Meridian de 2.5px de radio, debajo del número.
-- Día seleccionado: círculo Vesper relleno, número en blanco y negrita.
-- Días pasados atenuados y no seleccionables.
-
-**Tarjeta de resumen** (fondo `#FBF0DC` si hay conflictos, `#E3F3EB` si no):
-
-- Fecha en formato largo, 15px bold.
-- Contador: "3 de 6 no disponibles", 13px semibold en `#8A5A0B`.
-- Divisor.
-- Una línea por conflicto: punto Meridian + `detail` que viene de la API.
-
-**"Agendar igual" tiene que existir.** Si la app solo bloquea, la gente la abandona.
-El producto informa, no veta.
-
-**Estado sin conflictos:** la tarjeta pasa a verde y dice "Todo el equipo disponible".
+**Empty state:** "Add your first teammate" with a button. No illustration.
 
 ---
 
-### 7.3 Detalle de miembro
+### 7.2 Pick a date
 
-**Estructura vertical:**
+**Vertical structure:**
 
-1. Botón atrás "Equipo"
-2. Avatar grande (48px) + nombre + "Ciudad, País · UTC±N"
-3. Hora local en display 46px + fecha larga a la derecha
-4. Banner de estado (fondo del color del estado)
-5. Sección "SEMANA LABORAL" — filas etiqueta/valor con divisores:
-   - Días hábiles
-   - Fin de semana
-   - Horario
-   - Calendario local (ej: "Hebreo · 5786") — ocultar si es `null`
-6. Sección "PRÓXIMOS FERIADOS" — cards con nombre y fecha
-7. Nota al pie en `#9C9DB4` si `localCalendar.note` existe
-8. Acción secundaria: "Editar horario" (abre los overrides)
+1. Title "Pick a date"
+2. Month header with navigation arrows
+3. Month grid
+4. Summary card for the selected date
+5. Button "Show days without conflicts"
+6. Text link "Schedule anyway"
 
-Máximo 3 feriados próximos. Si no hay, ocultar la sección entera.
+**Grid:**
+
+- The week starts on Monday.
+- The **user's** weekend days in grey `#9C9DB4`.
+- A day with conflicts: a Meridian dot of radius 2.5px, below the number.
+- The selected day: a filled Vesper circle, number in white and bold.
+- Past days dimmed and not selectable.
+
+**Summary card** (background `#FBF0DC` when there are conflicts, `#E3F3EB` when there
+are none):
+
+- Date in long form, 15px bold.
+- Counter: "3 of 6 unavailable", 13px semibold in `#8A5A0B`.
+- Divider.
+- One line per conflict: a Meridian dot plus the `detail` coming from the API.
+
+**"Schedule anyway" has to exist.** If the app only blocks, people abandon it. The
+product informs, it does not veto.
+
+**No-conflict state:** the card turns green and reads "The whole team is available".
 
 ---
 
-### 7.4 Estados transversales
+### 7.3 Member detail
 
-**Carga:** skeletons con la forma del contenido, no spinners centrados. La lista de
-"Ahora" es lo primero que ve el usuario al abrir.
+**Vertical structure:**
 
-**Error de red:** mostrar los últimos datos cacheados con una franja discreta arriba:
-"Datos de hace 12 min · Reintentar". No pantalla de error a pantalla completa si hay
-datos viejos utilizables.
+1. Back button "Team"
+2. Large avatar (48px) + name + "City, Country · UTC±N"
+3. Local time in 46px display + long date on the right
+4. Status banner (background in the status colour)
+5. "WORK WEEK" section — label/value rows with dividers:
+   - Working days
+   - Weekend
+   - Hours
+   - Local calendar (e.g. "Hebrew · 5786") — hide when `null`
+6. "UPCOMING HOLIDAYS" section — cards with name and date
+7. Footnote in `#9C9DB4` when `localCalendar.note` exists
+8. Secondary action: "Edit hours" (opens the overrides)
 
-**Sin datos de un país:** estado `UNKNOWN`, gris, con la leyenda "Sin datos de
-feriados". Nunca inventar ni asumir lunes a viernes silenciosamente.
+At most 3 upcoming holidays. When there are none, hide the whole section.
 
 ---
 
-## 8. Convenciones por plataforma
+### 7.4 Cross-cutting states
 
-Los colores son idénticos. Esto es lo que **sí** cambia:
+**Loading:** skeletons shaped like the content, not centred spinners. The "Now" list
+is the first thing the user sees on open.
+
+**Network error:** show the last cached data with a discreet strip on top: "Data from
+12 min ago · Retry". No full-screen error page when there is usable stale data.
+
+**No data for a country:** status `UNKNOWN`, grey, with the caption "No holiday data".
+Never invent, and never silently assume Monday to Friday.
+
+---
+
+## 8. Per-platform conventions
+
+The colours are identical. Here is what **does** change:
 
 ### Android
 
 - Jetpack Compose + Material 3.
-- Generar el esquema M3 desde semilla `#4436C7` con Material Theme Builder y mapear
-  a los roles (`primary`, `onPrimary`, `primaryContainer`, `surfaceContainer*`,
-  `outlineVariant`). No hardcodear hex en los Composables.
-- **Desactivar dynamic color explícitamente.** Si no, Material You repinta el violeta
-  según el fondo de pantalla del usuario.
-- Cards: relleno tonal, **sin sombra**.
-- Barra inferior: `NavigationBar` de M3, con la píldora indicadora detrás del ícono activo.
-- Radios 18-20.
-- Feedback táctil: ripple.
-- Barra de estado: configurar color y `barStyle` a mano.
-- State layers de M3: 8% hover, 12% pressed.
+- Generate the M3 scheme from the `#4436C7` seed with Material Theme Builder and map
+  it onto the roles (`primary`, `onPrimary`, `primaryContainer`, `surfaceContainer*`,
+  `outlineVariant`). Do not hardcode hex values in Composables.
+- **Turn dynamic colour off explicitly.** Otherwise Material You repaints the violet
+  according to the user's wallpaper.
+- Cards: tonal fill, **no shadow**.
+- Bottom bar: the M3 `NavigationBar`, with the pill indicator behind the active icon.
+- Radii 18-20.
+- Touch feedback: ripple.
+- Status bar: set the colour and `barStyle` by hand.
+- M3 state layers: 8% hover, 12% pressed.
 
 ### iOS
 
-- SwiftUI. Nada de UIKit salvo que haga falta.
-- Cards: blanco con sombra suave (`y:2, blur:8, opacidad 10%`).
-- `TabView` estándar, ítem activo solo teñido, sin píldora.
-- Radios 12-14.
-- Feedback táctil: opacidad.
-- Respetar `Dynamic Type` — nada de tamaños de fuente fijos en puntos absolutos
-  donde el sistema espera escalado.
-- Safe areas y Dynamic Island manejados por el framework.
+- SwiftUI. No UIKit unless it is unavoidable.
+- Cards: white with a soft shadow (`y:2, blur:8, 10% opacity`).
+- Standard `TabView`, active item tinted only, no pill.
+- Radii 12-14.
+- Touch feedback: opacity.
+- Honour `Dynamic Type` — no fixed point sizes where the system expects scaling.
+- Safe areas and the Dynamic Island are handled by the framework.
 
-#### Liquid Glass (obligatorio, no opcional)
+#### Liquid Glass (mandatory, not optional)
 
-Desde el 28 de abril de 2026 la App Store exige compilar con el SDK de iOS 26 vía
-Xcode 26. Al hacerlo, **los componentes estándar de SwiftUI adoptan Liquid Glass
-automáticamente**: barra de navegación, `TabView`, botones y sheets. Sin código.
+Since 28 April 2026 the App Store requires building against the iOS 26 SDK through
+Xcode 26. Doing so means **the standard SwiftUI components adopt Liquid Glass
+automatically**: navigation bar, `TabView`, buttons and sheets. No code.
 
-**No usar el flag `UIDesignRequiresCompatibility`.** Permite mantener la UI vieja,
-pero Apple lo ignora al compilar con el SDK de iOS 27. Para una app nueva, es deuda
-desde el día uno.
+**Do not use the `UIDesignRequiresCompatibility` flag.** It keeps the old UI, but
+Apple ignores it when building against the iOS 27 SDK. For a new app it is debt from
+day one.
 
-**Regla de diseño: vidrio en el chrome, opaco en el contenido.**
+**Design rule: glass in the chrome, opaque in the content.**
 
-| Capa                                    | Tratamiento               |
-|-----------------------------------------|---------------------------|
-| Tab bar, barra de navegación, sheets    | Liquid Glass (automático) |
-| Tarjetas de miembro, banners de estado  | Opaco, sin `.glassEffect()` |
-| Grilla del calendario, filas de datos   | Opaco                     |
-| Botón flotante de acción, si aparece    | `.glassEffect()`          |
+| Layer                                   | Treatment                   |
+|-----------------------------------------|-----------------------------|
+| Tab bar, navigation bar, sheets         | Liquid Glass (automatic)    |
+| Member cards, status banners            | Opaque, no `.glassEffect()` |
+| Calendar grid, data rows                | Opaque                      |
+| Floating action button, if any          | `.glassEffect()`            |
 
-Motivo doble. Estético: es lo que hace Apple — la capa flotante es translúcida, el
-contenido no. Y funcional: **el vidrio es translúcido, así que los contrastes fijos
-de la sección 6 dejan de estar garantizados** cuando algo se desplaza por detrás.
-Mantener el contenido opaco es lo que hace verificable la accesibilidad.
+The reason is twofold. Aesthetic: it is what Apple does — the floating layer is
+translucent, the content is not. And functional: **glass is translucent, so the fixed
+contrast ratios in section 6 stop being guaranteed** once something scrolls behind it.
+Keeping content opaque is what makes accessibility verifiable.
 
-Para elementos custom que sí deban integrarse con el chrome, la API es
-`.glassEffect()`, con variantes `.regular` y `.clear`, y modificadores encadenables
-`.tint()` e `.interactive()`.
+For custom elements that do need to blend into the chrome, the API is
+`.glassEffect()`, with `.regular` and `.clear` variants and chainable `.tint()` and
+`.interactive()` modifiers.
 
-**Pruebas obligatorias antes de publicar:**
+**Mandatory testing before shipping:**
 
-1. Con "Reducir transparencia" activado en Ajustes de Accesibilidad.
-2. Con "Aumentar contraste" activado.
-3. Tema claro y oscuro.
-4. Con contenido desplazándose por detrás de la tab bar — verificar que el texto
-   de las filas siga legible al pasar bajo el vidrio.
+1. With "Reduce Transparency" enabled in Accessibility settings.
+2. With "Increase Contrast" enabled.
+3. Light and dark themes.
+4. With content scrolling behind the tab bar — check the row text stays legible as it
+   passes under the glass.
 
-**Nota:** circula una fecha límite de abril de 2027 para adoptar Liquid Glass.
-No está en la página de requisitos de Apple. El único piso real es el SDK de iOS 26.
-No planificar en base a esa fecha.
+**Note:** an April 2027 deadline for adopting Liquid Glass circulates. It is not on
+Apple's requirements page. The only real floor is the iOS 26 SDK. Do not plan around
+that date.
 
-**Consecuencia para las capturas de tienda:** generarlas después de compilar con el
-SDK nuevo, no antes. Si muestran el chrome viejo, la ficha se ve desactualizada el
-primer día.
+**Consequence for store screenshots:** generate them after building against the new
+SDK, not before. If they show the old chrome, the listing looks out of date on day one.
 
-### Lo que NO se comparte nunca
+### What is never shared
 
-Widgets (Glance / WidgetKit), extensiones, atajos del sistema. Están fuera de la v1
-de todos modos.
+Widgets (Glance / WidgetKit), extensions, system shortcuts. They are out of v1
+regardless.
 
 ---
 
-## 9. Orden de trabajo
+## 9. Order of work
 
-**Fase 1 — Backend (terminar antes de tocar clientes)**
+**Phase 1 — Backend (finish before touching clients)**
 
-0. Verificar `Intl` con calendarios no gregorianos en el runtime elegido.
-1. Script `build-holidays.ts` y generación de los JSON por país.
-2. Búsqueda de ciudades y resolución de huso horario.
-3. Tabla de semanas laborales.
-4. Conversión de calendarios vía `Intl`.
-5. Los cuatro endpoints, con tests que cubran: Israel (fin de semana vie-sáb),
-   Nepal (offset 5:45), Etiopía (calendario propio + feriado), y un país sin datos.
-6. Congelar el contrato.
+0. Verify `Intl` with non-Gregorian calendars on the chosen runtime.
+1. The `build-holidays.ts` script and the per-country JSON generation.
+2. City search and time zone resolution.
+3. The work week table.
+4. Calendar conversion through `Intl`.
+5. The four endpoints, with tests covering: Israel (Fri-Sat weekend), Nepal (5:45
+   offset), Ethiopia (own calendar plus a holiday), and a country without data.
+6. Freeze the contract.
 
-**Fase 2 — Clientes en paralelo**
+**Phase 2 — Clients in parallel**
 
-Mismo orden en ambas plataformas para poder comparar:
+The same order on both platforms, so they can be compared:
 
-1. Capa de red y modelos.
-2. Persistencia local del equipo (ver sección 11).
-3. Pantalla "Ahora".
-4. Alta de miembro con búsqueda de ciudad.
-5. Pantalla "Detalle".
-6. Pantalla "Elegir fecha".
-7. Overrides manuales.
-8. Export / import del equipo en JSON.
-9. Tema oscuro y verificación de contraste.
+1. Networking layer and models.
+2. Local persistence of the team (see section 11).
+3. "Now" screen.
+4. Adding a member with city search.
+5. "Detail" screen.
+6. "Pick a date" screen.
+7. Manual overrides.
+8. Team export / import as JSON.
+9. Dark theme and contrast verification.
 
-**Fase 3 — Pulido**
+**Phase 3 — Polish**
 
-Estados vacíos, de error y de carga. Accesibilidad. Íconos y capturas de tienda.
-
----
-
-## 10. Reglas de trabajo para el asistente
-
-1. **No metas lógica de negocio en la UI.** Ni en Composables ni en Views. Si un
-   componente necesita decidir si alguien está disponible, el diseño está mal:
-   ese dato viene resuelto de la API.
-
-2. **No dupliques lógica entre clientes.** Si te encontrás escribiendo el mismo
-   cálculo en Kotlin y en Swift, ese cálculo pertenece al backend. Avisá antes de
-   escribirlo dos veces.
-
-3. **No inventes datos de calendarios ni de feriados.** Si un país no está cubierto,
-   devolvé `UNKNOWN`. Un dato equivocado es peor que ningún dato: la gente va a
-   agendar reuniones basándose en esto.
-
-4. **Verificá las APIs contra la documentación oficial**, especialmente Compose,
-   Material 3 y SwiftUI. Fijá versiones en los archivos de build y no las muevas
-   sin motivo.
-
-5. **No agregues dependencias sin preguntar.** Cada librería es superficie de
-   mantenimiento para una sola persona.
-
-6. **Respetá el alcance de la sección 2.** Si algo parece una buena idea pero no
-   está listado, proponelo, no lo implementes.
-
-7. **Cada color nuevo necesita verificación de contraste** contra su fondo, en los
-   dos temas, antes de usarse.
-
-8. **Definí vos los límites entre capas, pero pedí confirmación antes de cambiarlos.**
-   La arquitectura la decide el humano; la implementación dentro de cada capa es tuya.
+Empty, error and loading states. Accessibility. Icons and store screenshots.
 
 ---
 
-## 11. Persistencia local
+## 10. Working rules for the assistant
 
-Hay **dos almacenes separados**. No mezclarlos: tienen destinos distintos.
+1. **Do not put business logic in the UI.** Not in Composables, not in Views. If a
+   component needs to decide whether somebody is available, the design is wrong: that
+   value arrives resolved from the API.
 
-### A. Preferencias de la app
+2. **Do not duplicate logic between clients.** If you find yourself writing the same
+   computation in Kotlin and in Swift, that computation belongs in the backend. Say so
+   before writing it twice.
 
-Tema, idioma, horario laboral propio, primer día de la semana.
+3. **Do not invent calendar or holiday data.** If a country is not covered, return
+   `UNKNOWN`. Wrong data is worse than no data: people are going to schedule meetings
+   based on this.
+
+4. **Verify APIs against the official documentation**, especially Compose, Material 3
+   and SwiftUI. Pin versions in the build files and do not move them without reason.
+
+5. **Do not add dependencies without asking.** Every library is maintenance surface
+   for a single person.
+
+6. **Respect the scope in section 2.** If something looks like a good idea but is not
+   listed, propose it, do not implement it.
+
+7. **Every new colour needs a contrast check** against its background, in both themes,
+   before being used.
+
+8. **Define the boundaries between layers yourself, but ask before changing them.**
+   The human decides the architecture; the implementation inside each layer is yours.
+
+---
+
+## 11. Local persistence
+
+There are **two separate stores**. Do not mix them: they have different destinations.
+
+### A. App preferences
+
+Theme, language, the user's own working hours, first day of the week.
 
 - Android: `DataStore`
 - iOS: `UserDefaults` / `@AppStorage`
 
-**Nunca se sincronizan.** Son propias del dispositivo y no necesitan servidor jamás.
+**They never sync.** They belong to the device and will never need a server.
 
-### B. Datos del equipo
+### B. Team data
 
-La lista de miembros. Este es el único candidato a sincronizarse en el futuro, así
-que se guarda con forma de **documento sincronizable** desde el día uno:
+The member list. This is the only candidate for future sync, so it is stored as a
+**syncable document** from day one:
 
 ```json
 {
   "schemaVersion": 1,
   "updatedAt": "2026-08-18T14:20:00Z",
-  "members": [ /* array de miembros con UUID */ ]
+  "members": [ /* array of members with UUIDs */ ]
 }
 ```
 
-- Android: archivo JSON o `DataStore` con serialización, **no** SharedPreferences sueltas.
-- iOS: archivo JSON en Documents, **no** claves separadas en UserDefaults.
+- Android: a JSON file or `DataStore` with serialization, **not** loose
+  SharedPreferences.
+- iOS: a JSON file in Documents, **not** separate keys in UserDefaults.
 
-Guardar el documento entero, no campos individuales. Esto es lo que hace que una
-migración futura sea copiar un JSON en vez de un refactor.
+Store the whole document, not individual fields. That is what makes a future migration
+a matter of copying a JSON rather than a refactor.
 
 ### Export / import
 
-Compartir y abrir el documento JSON con el share sheet nativo. Resuelve el ~80% de
-la necesidad de multi-dispositivo (cambio de teléfono, respaldo) sin backend, auth
-ni política de privacidad.
+Share and open the JSON document through the native share sheet. It covers roughly 80%
+of the multi-device need (changing phones, backups) without a backend, auth or a
+privacy policy.
 
 ---
 
-## 12. Camino a una base compartida (no construir ahora)
+## 12. Path to a shared database (do not build now)
 
-**Decisión: no se construye en la v1.** Se dejan los cimientos, que cuestan casi nada.
+**Decision: not built in v1.** The foundations are laid, and they cost almost nothing.
 
-### Cuándo valdría la pena
+### When it would be worth it
 
-- **Multi-dispositivo** — razón débil. El export/import ya cubre casi todo.
-- **Multiplayer** (cada persona declara su propio horario y feriados) — razón fuerte,
-  porque mejora la calidad del dato: nadie sabe mejor que Nadia que se toma el jueves.
-  Pero rompe el modelo single-player y exige que todos instalen algo.
-- **Clientes empresa** — ahí deja de ser opcional, pero eso es otro producto:
-  cuentas, roles y facturación.
+- **Multi-device** — weak reason. Export/import already covers most of it.
+- **Multiplayer** (each person declares their own hours and holidays) — strong reason,
+  because it improves data quality: nobody knows better than Nadia that she takes
+  Thursdays off. But it breaks the single-player model and requires everyone to
+  install something.
+- **Enterprise customers** — at that point it stops being optional, but that is a
+  different product: accounts, roles and billing.
 
-### Qué hacer ahora para no cerrarse la puerta
+### What to do now so the door stays open
 
-1. UUID v4 en todos los IDs de miembro. **Ya está en el contrato, no cambiarlo.**
-2. Estado del equipo como documento versionado con `schemaVersion` y `updatedAt`.
-3. Mantener las preferencias de app separadas de los datos del equipo.
+1. UUID v4 for every member ID. **Already in the contract, do not change it.**
+2. Team state as a versioned document with `schemaVersion` and `updatedAt`.
+3. Keep app preferences separate from team data.
 
-Con esos tres puntos, agregar Supabase más adelante es trabajo de un fin de semana:
-el JSON local se convierte en filas y el backend sin estado gana un cliente de datos.
-Sin ellos, es un refactor.
+With those three, adding Supabase later is a weekend of work: the local JSON becomes
+rows and the stateless backend gains a data client. Without them, it is a refactor.
 
-### Señal para reevaluar
+### Signal to reassess
 
-Pedidos concretos de usuarios reales pidiendo sincronización. No construirlo antes
-de tener esa señal.
-
----
-
-## 13. Decisiones abiertas
-
-Estas quedaron sin resolver y hay que definirlas antes de la fase 2:
-
-- **Feriados: ¿inferidos por país o declarados por persona?** Propuesta: inferir por
-  país y permitir corrección manual por miembro. Inferir escala pero se equivoca;
-  declarar es preciso pero nadie mantiene su perfil.
-- **Horario laboral por defecto.** Propuesta: 9:00–18:00 local, editable.
-- **Idioma.** Propuesta: español e inglés en la v1. Los textos de estado los manda
-  el backend, así que agregar idiomas no requiere publicar apps nuevas.
-- **Proveedor de feriados.** Nager.Date es gratis pero con cobertura despareja fuera
-  de Europa y América. Evaluar Calendarific si falla en los países objetivo. Como los
-  datos se precalculan una vez por año, cambiar de proveedor después es barato: solo
-  se toca el script, no el servidor.
+Concrete requests from real users asking for sync. Do not build it before that signal.
 
 ---
 
-## Resumen de decisiones cerradas
+## 13. Open decisions
 
-Para no reabrir discusiones ya resueltas:
+These are unresolved and need to be settled before phase 2:
 
-| Tema                | Decisión                                        |
-|---------------------|-------------------------------------------------|
-| Plataformas         | Android e iOS nativos, en paralelo              |
-| Android             | Kotlin + Compose + Material 3                   |
-| iOS                 | Swift + SwiftUI, SDK de iOS 26                  |
-| Liquid Glass        | Sí. Vidrio en el chrome, contenido opaco        |
-| Framework compartido| Ninguno. Sin KMP, sin Flutter, sin React Native |
-| Backend             | Node + Hono, sin estado, sin base de datos      |
-| Supabase            | No en la v1. Reevaluar en la v1.1               |
-| Feriados            | JSON precalculado y commiteado al repo          |
-| Calendarios         | `Intl` de Node (ICU nativo)                     |
-| Persistencia        | Local, documento versionado con UUIDs           |
-| Modelo              | Single-player. Nadie más instala nada           |
-| Widgets             | Fuera de la v1                                  |
-| Cuentas / login     | Fuera de la v1                                  |
+- **Holidays: inferred per country or declared per person?** Proposal: infer per
+  country and allow manual correction per member. Inferring scales but gets things
+  wrong; declaring is precise but nobody maintains their profile.
+- **Default working hours.** Proposal: 9:00–18:00 local, editable. Implemented.
+- **Language.** Spanish and English in v1, resolved from `Accept-Language` with
+  Spanish as the fallback. Implemented. Since the status text comes from the backend,
+  adding languages does not require shipping new apps.
+- **Holiday provider.** Nager.Date is free but its coverage outside Europe and the
+  Americas is uneven: it covers none of the 18 countries listed in the README, which
+  are almost exactly the ones with non-standard work weeks. Evaluate Calendarific.
+  Because the data is precomputed once a year, changing providers later is cheap: only
+  the script changes, not the server.
+
+---
+
+## Summary of settled decisions
+
+So that resolved discussions do not get reopened:
+
+| Topic               | Decision                                          |
+|---------------------|---------------------------------------------------|
+| Platforms           | Native Android and iOS, in parallel               |
+| Android             | Kotlin + Compose + Material 3                     |
+| iOS                 | Swift + SwiftUI, iOS 26 SDK                       |
+| Liquid Glass        | Yes. Glass in the chrome, content opaque          |
+| Shared framework    | None. No KMP, no Flutter, no React Native         |
+| Backend             | Node + Hono, stateless, no database               |
+| Supabase            | Not in v1. Reassess in v1.1                       |
+| Holidays            | Precomputed JSON committed to the repo            |
+| Cities              | Precomputed GeoNames JSON committed to the repo   |
+| Calendars           | Node's `Intl` (native ICU)                        |
+| Persistence         | Local, versioned document with UUIDs              |
+| Model               | Single-player. Nobody else installs anything      |
+| Widgets             | Out of v1                                         |
+| Accounts / login    | Out of v1                                         |
+| Language of the code| English, including comments and commits           |
+| Language of the UI  | Localized by the backend, Spanish and English     |

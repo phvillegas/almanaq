@@ -1,20 +1,22 @@
 /**
- * `POST /v1/member/detail` — pantalla de detalle de una persona.
+ * `POST /v1/member/detail` — one person's detail screen.
  *
- * Ver PLAN.md sección 4 y 7.3.
+ * See PLAN.md sections 4 and 7.3.
  */
 
 import { Hono } from 'hono';
 
-import { resolverDetalle } from '../domain/status.js';
-import { comoObjeto, parsearInstante, parsearMiembro } from './entrada.js';
+import { resolveLocale } from '../domain/i18n.js';
+import { resolveDetail } from '../domain/status.js';
+import { asObject, parseInstant, parseMember } from './input.js';
 
 export const member = new Hono();
 
 member.post('/detail', async (c) => {
-  const cuerpo = comoObjeto(await c.req.json().catch(() => null), 'El cuerpo');
-  const miembro = parsearMiembro(cuerpo['member'], '`member`');
-  const instante = parsearInstante(cuerpo['at']);
+  const body = asObject(await c.req.json().catch(() => null), 'The body');
+  const parsed = parseMember(body['member'], '`member`');
+  const instant = parseInstant(body['at']);
+  const locale = resolveLocale(c.req.header('accept-language'));
 
-  return c.json(resolverDetalle(miembro, instante));
+  return c.json(resolveDetail(parsed, instant, locale));
 });

@@ -1,24 +1,25 @@
 /**
- * `POST /v1/availability` — el endpoint principal.
+ * `POST /v1/availability` — the main endpoint.
  *
- * El cliente manda su equipo y un instante; recibe estados ya resueltos. Ver PLAN.md
- * sección 4.
+ * The client sends its team and an instant; it gets back statuses already resolved.
+ * See PLAN.md section 4.
  */
 
 import { Hono } from 'hono';
 
-import { resolverEstado, type Estado } from '../domain/status.js';
-import { comoObjeto, parsearInstante, parsearMiembros } from './entrada.js';
+import { resolveLocale } from '../domain/i18n.js';
+import { resolveStatus, type Status } from '../domain/status.js';
+import { asObject, parseInstant, parseMembers } from './input.js';
 
 /**
- * Orden en que se devuelve la lista: disponibles primero, después fuera de horario,
- * después fin de semana y feriado, y al final los que no sabemos. PLAN.md sección 7.1.
+ * Order of the returned list: available first, then off hours, then weekend and
+ * holiday, and unknown last. See PLAN.md section 7.1.
  *
- * El backend ordena por estado y el cliente ordena por nombre dentro de cada grupo:
- * el backend no recibe los nombres y el cliente no tiene por qué saber qué estado
- * importa más. Cada uno ordena por lo que efectivamente conoce.
+ * The backend sorts by status and the client sorts by name within each group: the
+ * backend never receives names, and the client has no business knowing which status
+ * outranks which. Each side sorts by what it actually knows.
  */
-const PRIORIDAD: Readonly<Record<Estado, number>> = {
+const PRIORITY: Readonly<Record<Status, number>> = {
   AVAILABLE: 0,
   OFF_HOURS: 1,
   LOCAL_WEEKEND: 2,
@@ -29,30 +30,31 @@ const PRIORIDAD: Readonly<Record<Estado, number>> = {
 export const availability = new Hono();
 
 availability.post('/', async (c) => {
-  const cuerpo = comoObjeto(await c.req.json().catch(() => null), 'El cuerpo');
-  const instante = parsearInstante(cuerpo['at']);
-  const miembros = parsearMiembros(cuerpo['members']);
+  const body = asObject(await c.req.json().catch(() => null), 'The body');
+  const instant = parseInstant(body['at']);
+  const members = parseMembers(body['members']);
+  const locale = resolveLocale(c.req.header('accept-language'));
 
-  const resueltos = miembros.map((miembro) => {
-    const estado = resolverEstado(miembro, instante);
+  const resolved = members.map((member) => {
+    const status = resolveStatus(member, instant, locale);
     return {
-      id: miembro.id,
-      localTime: estado.localTime,
-      localDate: estado.localDate,
-      localWeekday: estado.localWeekday,
-      utcOffsetMinutes: estado.utcOffsetMinutes,
-      status: estado.status,
-      statusLabel: estado.statusLabel,
-      statusDetail: estado.statusDetail,
+      id: member.id,
+      localTime: status.localTime,
+      localDate: status.localDate,
+      localWeekday: status.localWeekday,
+      utcOffsetMinutes: status.utcOffsetMinutes,
+      status: status.status,
+      statusLabel: status.statusLabel,
+      statusDetail: status.statusDetail,
     };
   });
 
-  resueltos.sort((x, y) => PRIORIDAD[x.status] - PRIORIDAD[y.status]);
+  resolved.sort((left, right) => PRIORITY[left.status] - PRIORITY[right.status]);
 
   return c.json({
-    at: instante.toISOString(),
-    availableCount: resueltos.filter((m) => m.status === 'AVAILABLE').length,
-    totalCount: resueltos.length,
-    members: resueltos,
+    at: instant.toISOString(),
+    availableCount: resolved.filter((member) => member.status === 'AVAILABLE').length,
+    totalCount: resolved.length,
+    members: resolved,
   });
 });

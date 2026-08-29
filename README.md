@@ -1,132 +1,147 @@
 # Almanaq
 
-App de disponibilidad para equipos distribuidos. Responde quién del equipo está
-realmente disponible ahora, teniendo en cuenta el calendario local de cada persona:
-fines de semana que no son sábado y domingo, feriados nacionales y festividades que se
-rigen por calendarios no gregorianos.
+Availability app for distributed teams. It answers who on the team is actually
+available right now, taking into account each person's local calendar: weekends that
+are not Saturday and Sunday, national holidays, and observances that follow
+non-Gregorian calendars and therefore move every year.
 
-El caso que define el producto: es viernes al mediodía en Buenos Aires, parece un día
-laboral normal, y la mitad del equipo está de fin de semana o de feriado.
+The case that defines the product: it is Friday noon in Buenos Aires, it looks like an
+ordinary working day, and half the team is on a weekend or a public holiday.
 
-## Estado
+## Status
 
-| Pieza    | Estado                                                        |
-|----------|---------------------------------------------------------------|
-| Backend  | Los cuatro endpoints andando, con tests. Contrato sin congelar |
-| Android  | Sin empezar                                                    |
-| iOS      | Sin empezar                                                    |
+| Piece    | Status                                                    |
+|----------|-----------------------------------------------------------|
+| Backend  | All four endpoints working, with tests. Contract not frozen |
+| Android  | Not started                                                |
+| iOS      | Not started                                                |
 
-Los clientes no arrancan hasta que el contrato esté congelado: con dos apps en vuelo,
-un contrato que se mueve duplica el retrabajo.
+The clients do not start until the contract is frozen: with two apps in flight, a
+moving contract doubles the rework.
 
-## Estructura
+## Structure
 
 ```
 almanaq/
-├── CLAUDE.md     instrucciones permanentes para el asistente de código
-├── PLAN.md       alcance, arquitectura, contrato de API y sistema de diseño
-├── SETUP.md      puesta en marcha y orden de arranque
-├── design/       tokens de color y mockups
+├── CLAUDE.md     standing instructions for the coding assistant
+├── PLAN.md       scope, architecture, API contract and design system
+├── SETUP.md      bootstrap and starting order
+├── design/       colour tokens and mockups
 ├── backend/      Node + Hono + TypeScript
-├── android/      Kotlin + Compose (por crear desde Android Studio)
-└── ios/          Swift + SwiftUI (por crear desde Xcode)
+├── android/      Kotlin + Compose (to be created from Android Studio)
+└── ios/          Swift + SwiftUI (to be created from Xcode)
 ```
 
 ## Backend
 
-Requiere Node 22 o superior. Toda la lógica de negocio vive acá: los clientes piden
-estados ya resueltos y los pintan.
+Requires Node 22 or newer. All business logic lives here: the clients ask for resolved
+statuses and paint them.
 
 ```bash
 cd backend
 npm install
-npm run dev      # servidor en http://localhost:3000
-npm test         # 64 tests
-npm run build    # compila a dist/
+npm run dev      # server on http://localhost:3000
+npm test         # 78 tests
+npm run build    # compiles to dist/
 ```
 
 ### Endpoints
 
-Base `/v1`. Sin base de datos, sin autenticación y sin estado: el equipo vive en el
-dispositivo y viaja en cada request.
+Base `/v1`. No database, no authentication and no state: the team lives on the device
+and travels in every request.
 
-| Endpoint                       | Qué hace                                          |
-|--------------------------------|---------------------------------------------------|
-| `GET  /v1/locations/search?q=` | Autocompletado de ciudades al agregar un miembro   |
-| `POST /v1/availability`        | Estado de cada miembro en un instante              |
-| `POST /v1/calendar`            | Días con conflictos en un rango de fechas          |
-| `POST /v1/member/detail`       | Semana laboral, calendario local y feriados        |
+| Endpoint                       | What it does                                       |
+|--------------------------------|----------------------------------------------------|
+| `GET  /v1/locations/search?q=` | City autocomplete when adding a member             |
+| `POST /v1/availability`        | Each member's status at a given instant            |
+| `POST /v1/calendar`            | Days with conflicts over a date range              |
+| `POST /v1/member/detail`       | Work week, local calendar and upcoming holidays    |
 
-El detalle de cada request y response está en la sección 4 de `PLAN.md`.
+Request and response details are in section 4 of `PLAN.md`.
 
 ```bash
 curl -s "http://localhost:3000/v1/locations/search?q=tel+aviv"
 
 curl -s -X POST http://localhost:3000/v1/availability \
   -H 'content-type: application/json' \
+  -H 'accept-language: en' \
   -d '{"at":"2026-08-21T15:42:00Z","members":[
         {"id":"a1","countryCode":"IL","timezone":"Asia/Jerusalem"}]}'
 ```
 
-### Estados
+### Statuses
 
-El backend devuelve el enum ya resuelto y los textos ya redactados. El cliente mapea
-el estado a un color y nada más.
+The backend returns the enum already resolved and the text already written. The client
+maps the status to a colour and nothing else.
 
-| Estado          | Significado                    |
+| Status          | Meaning                        |
 |-----------------|--------------------------------|
-| `AVAILABLE`     | En horario laboral             |
-| `OFF_HOURS`     | Día laboral, fuera de horario  |
-| `LOCAL_WEEKEND` | Fin de semana local            |
-| `LOCAL_HOLIDAY` | Feriado local                  |
-| `UNKNOWN`       | Sin datos suficientes          |
+| `AVAILABLE`     | Within working hours           |
+| `OFF_HOURS`     | Working day, outside hours     |
+| `LOCAL_WEEKEND` | Local weekend                  |
+| `LOCAL_HOLIDAY` | Local public holiday           |
+| `UNKNOWN`       | Not enough data                |
 
-**La cobertura de feriados es el único portón hacia `AVAILABLE`.** Sin datos de
-feriados de un país, nunca se afirma que alguien está trabajando: se devuelve
-`UNKNOWN`. Un dato equivocado es peor que ningún dato, porque la gente agenda
-reuniones con esto.
+**Holiday coverage is the only gate to `AVAILABLE`.** Without holiday data for a
+country we never claim somebody is working: the answer is `UNKNOWN`. Wrong data is
+worse than no data, because people schedule meetings with this.
 
-## Datos
+### Language
 
-Todo se precalcula y se commitea. En runtime no hay ninguna llamada de red: sin
-latencia, sin depender de que un tercero siga en pie, y con los datos versionados en
-git, donde un feriado mal cargado se ve en el diff.
+User-facing text is localized by the backend from the `Accept-Language` header.
+Spanish and English ship in v1, Spanish is the fallback, and the catalog lives in
+`backend/src/domain/i18n.ts`. Adding a language is a server deploy, not two app store
+releases.
 
-```bash
-npm run build:holidays    # 1 vez por año
-npm run build:locations   # cuando cambie el volcado de GeoNames
+```
+accept-language: en   ->  "statusDetail": "Weekend in Israel"
+accept-language: es   ->  "statusDetail": "Fin de semana en Israel"
 ```
 
-| Dato       | Fuente                              | Cobertura actual        |
-|------------|-------------------------------------|-------------------------|
-| Feriados   | [Nager.Date](https://date.nager.at) | 57 países               |
-| Ciudades   | [GeoNames](https://geonames.org) `cities15000`, CC BY 4.0 | 34.079 ciudades, 210 países |
-| Calendarios| ICU nativo de Node (`Intl`)         | hebreo, etíope, persa, hiyrí, budista, saka, japonés |
-| Semanas laborales | Tabla estática con fuente por fila | 20 países + regla mayoritaria |
+Machine-readable fields (`status`, `localTime`, `utcOffsetMinutes`) are identical
+across locales. Holiday names are not translated: they are provider data.
 
-### Limitación conocida del proveedor de feriados
+## Data
 
-Nager.Date lista 204 países pero no cubre ninguno de estos:
+Everything is precomputed and committed. There are no network calls at runtime: no
+latency, no dependency on a third party staying up, and the data is versioned in git,
+where a wrong holiday shows up in the diff.
+
+```bash
+npm run build:holidays    # once a year
+npm run build:locations   # when the GeoNames dump changes
+```
+
+| Data        | Source                              | Current coverage           |
+|-------------|-------------------------------------|----------------------------|
+| Holidays    | [Nager.Date](https://date.nager.at) | 57 countries               |
+| Cities      | [GeoNames](https://geonames.org) `cities15000`, CC BY 4.0 | 34,079 cities, 210 countries |
+| Calendars   | Node's native ICU (`Intl`)          | Hebrew, Ethiopic, Persian, Hijri, Buddhist, Saka, Japanese |
+| Work weeks  | Static table, sourced per row       | 20 countries + majority rule |
+
+### Known limitation of the holiday provider
+
+Nager.Date lists 204 countries but covers none of these:
 
 ```
 IL SA QA KW OM JO PS MV AE AF IR NP BN TH IN MY PK LB
 ```
 
-Es casi exactamente el conjunto de países con semana laboral no estándar, que es el
-problema que Almanaq existe para resolver. Sus miembros quedan en `UNKNOWN` los días
-hábiles; los fines de semana sí se resuelven bien, porque salen de la tabla propia.
+That is almost exactly the set of countries with a non-standard work week, which is
+the problem Almanaq exists to solve. Their members come back `UNKNOWN` on working
+days; weekends still resolve correctly, because those come from our own table.
 
-Cambiar de proveedor es barato: se toca `backend/scripts/build-holidays.ts` y nada
-más. Ver la decisión abierta en la sección 13 de `PLAN.md`.
+Switching providers is cheap: `backend/scripts/build-holidays.ts` changes and nothing
+else. See the open decision in section 13 of `PLAN.md`.
 
-## Diseño
+## Design
 
-Los valores canónicos de color están en `design/tokens.json`, que es la única fuente
-de verdad. Los hexadecimales son idénticos en iOS y Android; lo que cambia es cómo se
-aplican. Toda combinación de texto y fondo tiene que superar 4.5:1 en los dos temas.
+The canonical colour values live in `design/tokens.json`, the single source of truth.
+The hex values are identical on iOS and Android; what changes is how they are applied.
+Every text and background pair must clear 4.5:1 in both themes.
 
-## Documentos
+## Documents
 
-- `PLAN.md` — alcance, arquitectura, contrato de API, sistema de diseño y pantallas.
-- `SETUP.md` — estructura de carpetas y bootstrap de cada pieza.
-- `CLAUDE.md` — reglas permanentes de trabajo.
+- `PLAN.md` — scope, architecture, API contract, design system and screens.
+- `SETUP.md` — folder structure and bootstrap for each piece.
+- `CLAUDE.md` — standing working rules, including language and code style.

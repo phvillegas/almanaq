@@ -2,168 +2,219 @@ import { describe, expect, it } from 'vitest';
 
 import { app } from '../src/index.js';
 
-const EQUIPO = [
+const TEAM = [
   { id: 'a1', countryCode: 'IL', timezone: 'Asia/Jerusalem', overrides: null },
   { id: 'b2', countryCode: 'ET', timezone: 'Africa/Addis_Ababa', overrides: null },
   { id: 'c3', countryCode: 'NP', timezone: 'Asia/Kathmandu', overrides: null },
   { id: 'd4', countryCode: 'AR', timezone: 'America/Argentina/Buenos_Aires', overrides: null },
 ];
 
-function post(ruta: string, cuerpo: unknown): Promise<Response> {
-  return app.request(ruta, {
+function post(route: string, body: unknown, language = 'en'): Promise<Response> {
+  return app.request(route, {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(cuerpo),
+    headers: { 'content-type': 'application/json', 'accept-language': language },
+    body: JSON.stringify(body),
   });
 }
 
+function get(route: string, language = 'en'): Promise<Response> {
+  return app.request(route, { headers: { 'accept-language': language } });
+}
+
 describe('POST /v1/availability', () => {
-  it('resuelve el equipo entero en un instante', async () => {
-    // Viernes 21/8/2026, 15:42 UTC: mediodía en Buenos Aires, fin de semana en Israel.
-    const respuesta = await post('/v1/availability', {
+  it('resolves the whole team at one instant', async () => {
+    // Friday 21 Aug 2026, 15:42 UTC: noon in Buenos Aires, weekend in Israel.
+    const response = await post('/v1/availability', {
       at: '2026-08-21T15:42:00Z',
-      members: EQUIPO,
+      members: TEAM,
     });
-    const cuerpo = (await respuesta.json()) as {
+    const body = (await response.json()) as {
       at: string;
       availableCount: number;
       totalCount: number;
       members: { id: string; status: string; statusDetail: string; localTime: string }[];
     };
 
-    expect(respuesta.status).toBe(200);
-    expect(cuerpo.totalCount).toBe(4);
-    expect(cuerpo.at).toBe('2026-08-21T15:42:00.000Z');
+    expect(response.status).toBe(200);
+    expect(body.totalCount).toBe(4);
+    expect(body.at).toBe('2026-08-21T15:42:00.000Z');
 
-    const porId = Object.fromEntries(cuerpo.members.map((m) => [m.id, m]));
-    expect(porId['a1']?.status).toBe('LOCAL_WEEKEND');
-    expect(porId['a1']?.statusDetail).toBe('Fin de semana en Israel');
-    expect(porId['a1']?.localTime).toBe('18:42');
-    expect(porId['d4']?.status).toBe('AVAILABLE');
-    expect(porId['d4']?.localTime).toBe('12:42');
-    expect(cuerpo.availableCount).toBe(1);
+    const byId = Object.fromEntries(body.members.map((member) => [member.id, member]));
+    expect(byId['a1']?.status).toBe('LOCAL_WEEKEND');
+    expect(byId['a1']?.statusDetail).toBe('Weekend in Israel');
+    expect(byId['a1']?.localTime).toBe('18:42');
+    expect(byId['d4']?.status).toBe('AVAILABLE');
+    expect(byId['d4']?.localTime).toBe('12:42');
+    expect(body.availableCount).toBe(1);
   });
 
-  it('ordena por estado: disponibles primero, sin datos al final', async () => {
-    const respuesta = await post('/v1/availability', {
+  it('sorts by status: available first, no data last', async () => {
+    const response = await post('/v1/availability', {
       at: '2026-08-21T15:42:00Z',
-      members: EQUIPO,
+      members: TEAM,
     });
-    const cuerpo = (await respuesta.json()) as { members: { status: string }[] };
+    const body = (await response.json()) as { members: { status: string }[] };
 
-    const orden = ['AVAILABLE', 'OFF_HOURS', 'LOCAL_WEEKEND', 'LOCAL_HOLIDAY', 'UNKNOWN'];
-    const posiciones = cuerpo.members.map((m) => orden.indexOf(m.status));
+    const order = ['AVAILABLE', 'OFF_HOURS', 'LOCAL_WEEKEND', 'LOCAL_HOLIDAY', 'UNKNOWN'];
+    const positions = body.members.map((member) => order.indexOf(member.status));
 
-    expect(posiciones).toEqual([...posiciones].sort((x, y) => x - y));
-    expect(cuerpo.members[0]?.status).toBe('AVAILABLE');
+    expect(positions).toEqual([...positions].sort((left, right) => left - right));
+    expect(body.members[0]?.status).toBe('AVAILABLE');
   });
 
-  it('rechaza un instante sin zona horaria', async () => {
-    const respuesta = await post('/v1/availability', {
+  it('rejects an instant without a time zone', async () => {
+    const response = await post('/v1/availability', {
       at: '2026-08-21T15:42:00',
-      members: EQUIPO,
+      members: TEAM,
     });
-    const cuerpo = (await respuesta.json()) as { error: { code: string; message: string } };
+    const body = (await response.json()) as { error: { code: string; message: string } };
 
-    expect(respuesta.status).toBe(400);
-    expect(cuerpo.error.code).toBe('INVALID_BODY');
-    expect(cuerpo.error.message).toContain('zona horaria');
+    expect(response.status).toBe(400);
+    expect(body.error.code).toBe('INVALID_BODY');
+    expect(body.error.message).toContain('time zone');
   });
 
-  it('rechaza un huso desconocido en vez de resolverlo con el del servidor', async () => {
-    const respuesta = await post('/v1/availability', {
+  it('rejects an unknown time zone instead of resolving it with the server one', async () => {
+    const response = await post('/v1/availability', {
       at: '2026-08-21T15:42:00Z',
       members: [{ id: 'x', countryCode: 'AR', timezone: 'America/Cordoba_Capital' }],
     });
-    const cuerpo = (await respuesta.json()) as { error: { code: string } };
+    const body = (await response.json()) as { error: { code: string } };
 
-    expect(respuesta.status).toBe(400);
-    expect(cuerpo.error.code).toBe('INVALID_MEMBER');
+    expect(response.status).toBe(400);
+    expect(body.error.code).toBe('INVALID_MEMBER');
   });
 
-  it('acepta un equipo vacío', async () => {
-    const respuesta = await post('/v1/availability', { at: '2026-08-21T15:42:00Z', members: [] });
-    const cuerpo = (await respuesta.json()) as { totalCount: number; availableCount: number };
+  it('accepts an empty team', async () => {
+    const response = await post('/v1/availability', { at: '2026-08-21T15:42:00Z', members: [] });
+    const body = (await response.json()) as { totalCount: number; availableCount: number };
 
-    expect(respuesta.status).toBe(200);
-    expect(cuerpo.totalCount).toBe(0);
-    expect(cuerpo.availableCount).toBe(0);
+    expect(response.status).toBe(200);
+    expect(body.totalCount).toBe(0);
+    expect(body.availableCount).toBe(0);
+  });
+});
+
+describe('content negotiation', () => {
+  it('writes the status text in the language the client asks for', async () => {
+    const payload = { at: '2026-08-21T15:42:00Z', members: [TEAM[0]] };
+
+    const english = (await (await post('/v1/availability', payload, 'en-US')).json()) as {
+      members: { statusLabel: string; statusDetail: string }[];
+    };
+    const spanish = (await (await post('/v1/availability', payload, 'es-AR')).json()) as {
+      members: { statusLabel: string; statusDetail: string }[];
+    };
+
+    expect(english.members[0]?.statusLabel).toBe('Weekend');
+    expect(english.members[0]?.statusDetail).toBe('Weekend in Israel');
+    expect(spanish.members[0]?.statusLabel).toBe('Fin de semana');
+    expect(spanish.members[0]?.statusDetail).toBe('Fin de semana en Israel');
+  });
+
+  it('falls back to Spanish when no language is requested', async () => {
+    const response = await app.request('/v1/availability', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ at: '2026-08-21T15:42:00Z', members: [TEAM[0]] }),
+    });
+    const body = (await response.json()) as { members: { statusLabel: string }[] };
+
+    expect(body.members[0]?.statusLabel).toBe('Fin de semana');
+  });
+
+  it('keeps the machine readable fields identical across locales', async () => {
+    const payload = { at: '2026-08-21T15:42:00Z', members: [TEAM[0]] };
+
+    const english = (await (await post('/v1/availability', payload, 'en')).json()) as {
+      members: { status: string; localTime: string; utcOffsetMinutes: number }[];
+    };
+    const spanish = (await (await post('/v1/availability', payload, 'es')).json()) as {
+      members: { status: string; localTime: string; utcOffsetMinutes: number }[];
+    };
+
+    expect(english.members[0]?.status).toBe(spanish.members[0]?.status);
+    expect(english.members[0]?.localTime).toBe(spanish.members[0]?.localTime);
+    expect(english.members[0]?.utcOffsetMinutes).toBe(spanish.members[0]?.utcOffsetMinutes);
   });
 });
 
 describe('POST /v1/calendar', () => {
-  it('devuelve solo los días con conflictos', async () => {
-    const respuesta = await post('/v1/calendar', {
+  it('returns only the days that have conflicts', async () => {
+    const response = await post('/v1/calendar', {
       from: '2026-08-17',
       to: '2026-08-23',
-      members: EQUIPO,
+      members: TEAM,
     });
-    const cuerpo = (await respuesta.json()) as {
-      days: { date: string; conflictCount: number; conflicts: { memberId: string; reason: string }[] }[];
+    const body = (await response.json()) as {
+      days: {
+        date: string;
+        conflictCount: number;
+        conflicts: { memberId: string; reason: string }[];
+      }[];
     };
 
-    expect(respuesta.status).toBe(200);
+    expect(response.status).toBe(200);
 
-    // Martes 18: día hábil para los cuatro. Igual aparece con dos conflictos, porque
-    // el proveedor no cubre los feriados de Israel ni los de Nepal. Es la consecuencia
-    // visible de no afirmar disponibilidad sin datos.
-    const martes = cuerpo.days.find((d) => d.date === '2026-08-18');
-    expect(martes?.conflictCount).toBe(2);
-    expect(martes?.conflicts.map((c) => c.memberId).sort()).toEqual(['a1', 'c3']);
-    expect(martes?.conflicts.every((c) => c.reason === 'UNKNOWN')).toBe(true);
+    // Tuesday the 18th is a working day for all four. It still shows two conflicts,
+    // because the provider covers neither Israeli nor Nepali holidays. That is the
+    // visible cost of never claiming availability without data.
+    const tuesday = body.days.find((day) => day.date === '2026-08-18');
+    expect(tuesday?.conflictCount).toBe(2);
+    expect(tuesday?.conflicts.map((conflict) => conflict.memberId).sort()).toEqual(['a1', 'c3']);
+    expect(tuesday?.conflicts.every((conflict) => conflict.reason === 'UNKNOWN')).toBe(true);
 
-    // Etiopía y Argentina, que sí tienen cobertura, no aparecen ese día.
-    expect(martes?.conflicts.some((c) => c.memberId === 'b2' || c.memberId === 'd4')).toBe(false);
+    const friday = body.days.find((day) => day.date === '2026-08-21');
+    expect(
+      friday?.conflicts.some(
+        (conflict) => conflict.memberId === 'a1' && conflict.reason === 'LOCAL_WEEKEND',
+      ),
+    ).toBe(true);
 
-    const viernes = cuerpo.days.find((d) => d.date === '2026-08-21');
-    expect(viernes?.conflicts.some((c) => c.memberId === 'a1' && c.reason === 'LOCAL_WEEKEND')).toBe(
-      true,
-    );
-
-    const sabado = cuerpo.days.find((d) => d.date === '2026-08-22');
-    expect(sabado?.conflictCount).toBe(4);
+    const saturday = body.days.find((day) => day.date === '2026-08-22');
+    expect(saturday?.conflictCount).toBe(4);
   });
 
-  it('rechaza un rango invertido', async () => {
-    const respuesta = await post('/v1/calendar', {
+  it('rejects an inverted range', async () => {
+    const response = await post('/v1/calendar', {
       from: '2026-08-31',
       to: '2026-08-01',
       members: [],
     });
-    const cuerpo = (await respuesta.json()) as { error: { code: string } };
+    const body = (await response.json()) as { error: { code: string } };
 
-    expect(respuesta.status).toBe(400);
-    expect(cuerpo.error.code).toBe('INVALID_RANGE');
+    expect(response.status).toBe(400);
+    expect(body.error.code).toBe('INVALID_RANGE');
   });
 
-  it('rechaza un rango de más de un año', async () => {
-    const respuesta = await post('/v1/calendar', {
+  it('rejects a range longer than a year', async () => {
+    const response = await post('/v1/calendar', {
       from: '2026-01-01',
       to: '2028-01-01',
       members: [],
     });
 
-    expect(respuesta.status).toBe(400);
+    expect(response.status).toBe(400);
   });
 
-  it('rechaza una fecha que no existe', async () => {
-    const respuesta = await post('/v1/calendar', {
+  it('rejects a date that does not exist', async () => {
+    const response = await post('/v1/calendar', {
       from: '2026-02-30',
       to: '2026-03-01',
       members: [],
     });
 
-    expect(respuesta.status).toBe(400);
+    expect(response.status).toBe(400);
   });
 });
 
 describe('POST /v1/member/detail', () => {
-  it('arma el detalle con calendario local y próximos feriados', async () => {
-    const respuesta = await post('/v1/member/detail', {
+  it('builds the detail with the local calendar and upcoming holidays', async () => {
+    const response = await post('/v1/member/detail', {
       member: { id: 'b2', countryCode: 'ET', timezone: 'Africa/Addis_Ababa' },
       at: '2026-03-02T09:00:00Z',
     });
-    const cuerpo = (await respuesta.json()) as {
+    const body = (await response.json()) as {
       localTime: string;
       localDateFormatted: string;
       status: string;
@@ -172,46 +223,50 @@ describe('POST /v1/member/detail', () => {
       upcomingHolidays: { name: string; startDate: string }[];
     };
 
-    expect(respuesta.status).toBe(200);
-    expect(cuerpo.localTime).toBe('12:00');
-    expect(cuerpo.localDateFormatted).toBe('lunes 2 de marzo');
-    expect(cuerpo.status).toBe('LOCAL_HOLIDAY');
-    expect(cuerpo.workWeek.weekendLabel).toBe('sáb y dom');
-    expect(cuerpo.localCalendar?.system).toBe('ethiopic');
-    expect(cuerpo.localCalendar?.currentYear).toBe('2018');
-    expect(cuerpo.upcomingHolidays.length).toBeLessThanOrEqual(3);
+    expect(response.status).toBe(200);
+    expect(body.localTime).toBe('12:00');
+    expect(body.localDateFormatted).toBe('Monday, March 2');
+    expect(body.status).toBe('LOCAL_HOLIDAY');
+    expect(body.workWeek.weekendLabel).toBe('Sat and Sun');
+    expect(body.localCalendar?.system).toBe('ethiopic');
+    expect(body.localCalendar?.currentYear).toBe('2018');
+    expect(body.upcomingHolidays.length).toBeLessThanOrEqual(3);
   });
 
-  it('omite el calendario local de un país sin calendario propio', async () => {
-    const respuesta = await post('/v1/member/detail', {
+  it('omits the local calendar for a country without one', async () => {
+    const response = await post('/v1/member/detail', {
       member: { id: 'd4', countryCode: 'AR', timezone: 'America/Argentina/Buenos_Aires' },
       at: '2026-08-21T15:42:00Z',
     });
-    const cuerpo = (await respuesta.json()) as { localCalendar: unknown };
+    const body = (await response.json()) as { localCalendar: unknown };
 
-    expect(cuerpo.localCalendar).toBeNull();
+    expect(body.localCalendar).toBeNull();
   });
 
-  it('aplica los overrides manuales del usuario', async () => {
-    const respuesta = await post('/v1/member/detail', {
+  it('applies the manual overrides set by the user', async () => {
+    const response = await post('/v1/member/detail', {
       member: {
         id: 'a1',
         countryCode: 'IL',
         timezone: 'Asia/Jerusalem',
-        overrides: { workDays: ['monday', 'tuesday'], workStartLocal: '08:00', workEndLocal: '13:00' },
+        overrides: {
+          workDays: ['monday', 'tuesday'],
+          workStartLocal: '08:00',
+          workEndLocal: '13:00',
+        },
       },
       at: '2026-08-21T15:42:00Z',
     });
-    const cuerpo = (await respuesta.json()) as {
+    const body = (await response.json()) as {
       workWeek: { daysLabel: string; hoursLabel: string };
     };
 
-    expect(cuerpo.workWeek.daysLabel).toBe('lun y mar');
-    expect(cuerpo.workWeek.hoursLabel).toBe('8:00 a 13:00');
+    expect(body.workWeek.daysLabel).toBe('Mon and Tue');
+    expect(body.workWeek.hoursLabel).toBe('8:00 to 13:00');
   });
 
-  it('rechaza un horario con formato inválido', async () => {
-    const respuesta = await post('/v1/member/detail', {
+  it('rejects a badly formatted time', async () => {
+    const response = await post('/v1/member/detail', {
       member: {
         id: 'a1',
         countryCode: 'IL',
@@ -221,19 +276,19 @@ describe('POST /v1/member/detail', () => {
       at: '2026-08-21T15:42:00Z',
     });
 
-    expect(respuesta.status).toBe(400);
+    expect(response.status).toBe(400);
   });
 });
 
 describe('GET /v1/locations/search', () => {
-  it('encuentra Tel Aviv con su huso y su país en español', async () => {
-    const respuesta = await app.request('/v1/locations/search?q=tel+aviv');
-    const cuerpo = (await respuesta.json()) as {
+  it('finds Tel Aviv with its time zone and its country name', async () => {
+    const response = await get('/v1/locations/search?q=tel+aviv');
+    const body = (await response.json()) as {
       results: { city: string; country: string; countryCode: string; timezone: string }[];
     };
 
-    expect(respuesta.status).toBe(200);
-    expect(cuerpo.results[0]).toMatchObject({
+    expect(response.status).toBe(200);
+    expect(body.results[0]).toMatchObject({
       city: 'Tel Aviv',
       country: 'Israel',
       countryCode: 'IL',
@@ -241,67 +296,81 @@ describe('GET /v1/locations/search', () => {
     });
   });
 
-  it('ordena por población: "san" trae ciudades grandes primero', async () => {
-    const respuesta = await app.request('/v1/locations/search?q=san');
-    const cuerpo = (await respuesta.json()) as { results: { city: string }[] };
+  it('localizes the country name but not the city name', async () => {
+    const english = (await (await get('/v1/locations/search?q=addis', 'en')).json()) as {
+      results: { city: string; country: string }[];
+    };
+    const spanish = (await (await get('/v1/locations/search?q=addis', 'es')).json()) as {
+      results: { city: string; country: string }[];
+    };
 
-    expect(cuerpo.results.length).toBeGreaterThan(0);
-    expect(cuerpo.results.length).toBeLessThanOrEqual(10);
+    expect(english.results[0]?.country).toBe('Ethiopia');
+    expect(spanish.results[0]?.country).toBe('Etiopía');
+    // The city keeps its local spelling in both.
+    expect(english.results[0]?.city).toBe(spanish.results[0]?.city);
   });
 
-  it('ignora los acentos', async () => {
-    const conAcento = await app.request('/v1/locations/search?q=bogot%C3%A1');
-    const sinAcento = await app.request('/v1/locations/search?q=bogota');
+  it('ranks by population', async () => {
+    const response = await get('/v1/locations/search?q=san');
+    const body = (await response.json()) as { results: { city: string }[] };
 
-    expect(await conAcento.json()).toEqual(await sinAcento.json());
+    expect(body.results.length).toBeGreaterThan(0);
+    expect(body.results.length).toBeLessThanOrEqual(10);
   });
 
-  it('devuelve vacío con menos de dos caracteres', async () => {
-    const respuesta = await app.request('/v1/locations/search?q=t');
-    const cuerpo = (await respuesta.json()) as { results: unknown[] };
+  it('ignores accents', async () => {
+    const accented = await get('/v1/locations/search?q=bogot%C3%A1');
+    const plain = await get('/v1/locations/search?q=bogota');
 
-    expect(cuerpo.results).toEqual([]);
+    expect(await accented.json()).toEqual(await plain.json());
   });
 
-  it('respeta el límite pedido', async () => {
-    const respuesta = await app.request('/v1/locations/search?q=san&limit=3');
-    const cuerpo = (await respuesta.json()) as { results: unknown[] };
+  it('returns nothing for fewer than two characters', async () => {
+    const response = await get('/v1/locations/search?q=t');
+    const body = (await response.json()) as { results: unknown[] };
 
-    expect(cuerpo.results).toHaveLength(3);
+    expect(body.results).toEqual([]);
   });
 
-  it('devuelve husos que el resto del backend acepta', async () => {
-    const respuesta = await app.request('/v1/locations/search?q=kathmandu');
-    const cuerpo = (await respuesta.json()) as { results: { timezone: string }[] };
-    const huso = cuerpo.results[0]?.timezone ?? '';
+  it('honours the requested limit', async () => {
+    const response = await get('/v1/locations/search?q=san&limit=3');
+    const body = (await response.json()) as { results: unknown[] };
 
-    const disponibilidad = await post('/v1/availability', {
+    expect(body.results).toHaveLength(3);
+  });
+
+  it('returns time zones the rest of the backend accepts', async () => {
+    const response = await get('/v1/locations/search?q=kathmandu');
+    const body = (await response.json()) as { results: { timezone: string }[] };
+    const timezone = body.results[0]?.timezone ?? '';
+
+    const availability = await post('/v1/availability', {
       at: '2026-08-21T00:00:00Z',
-      members: [{ id: 'x', countryCode: 'NP', timezone: huso }],
+      members: [{ id: 'x', countryCode: 'NP', timezone }],
     });
-    const resuelto = (await disponibilidad.json()) as { members: { utcOffsetMinutes: number }[] };
+    const resolved = (await availability.json()) as { members: { utcOffsetMinutes: number }[] };
 
-    expect(disponibilidad.status).toBe(200);
-    expect(resuelto.members[0]?.utcOffsetMinutes).toBe(345);
+    expect(availability.status).toBe(200);
+    expect(resolved.members[0]?.utcOffsetMinutes).toBe(345);
   });
 });
 
-describe('errores generales', () => {
-  it('devuelve 404 con forma de error para una ruta inexistente', async () => {
-    const respuesta = await app.request('/v1/nada');
-    const cuerpo = (await respuesta.json()) as { error: { code: string } };
+describe('general errors', () => {
+  it('returns a 404 shaped like an error for an unknown route', async () => {
+    const response = await get('/v1/nothing');
+    const body = (await response.json()) as { error: { code: string } };
 
-    expect(respuesta.status).toBe(404);
-    expect(cuerpo.error.code).toBe('NOT_FOUND');
+    expect(response.status).toBe(404);
+    expect(body.error.code).toBe('NOT_FOUND');
   });
 
-  it('rechaza un cuerpo que no es JSON', async () => {
-    const respuesta = await app.request('/v1/availability', {
+  it('rejects a body that is not JSON', async () => {
+    const response = await app.request('/v1/availability', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: 'esto no es json',
+      body: 'this is not json',
     });
 
-    expect(respuesta.status).toBe(400);
+    expect(response.status).toBe(400);
   });
 });

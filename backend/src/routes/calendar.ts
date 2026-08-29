@@ -1,44 +1,44 @@
 /**
- * `POST /v1/calendar` — alimenta la vista de mes.
+ * `POST /v1/calendar` — feeds the month view.
  *
- * Devuelve SOLO los días con conflictos. Los días ausentes están limpios: mandar el
- * mes entero con `conflictCount: 0` sería el 90% de la respuesta sin información.
- * Ver PLAN.md sección 4.
+ * Returns ONLY the days that have conflicts. Absent days are clear: sending the whole
+ * month with `conflictCount: 0` would be 90% of the payload carrying no information.
+ * See PLAN.md section 4.
  */
 
 import { Hono } from 'hono';
 
-import { resolverConflictoDelDia } from '../domain/status.js';
-import { comoObjeto, expandirRango, parsearFecha, parsearMiembros } from './entrada.js';
+import { resolveLocale } from '../domain/i18n.js';
+import { resolveDayConflict } from '../domain/status.js';
+import { asObject, expandRange, parseDate, parseMembers } from './input.js';
 
 export const calendar = new Hono();
 
 calendar.post('/', async (c) => {
-  const cuerpo = comoObjeto(await c.req.json().catch(() => null), 'El cuerpo');
-  const desde = parsearFecha(cuerpo['from'], '`from`');
-  const hasta = parsearFecha(cuerpo['to'], '`to`');
-  const miembros = parsearMiembros(cuerpo['members']);
+  const body = asObject(await c.req.json().catch(() => null), 'The body');
+  const from = parseDate(body['from'], '`from`');
+  const to = parseDate(body['to'], '`to`');
+  const members = parseMembers(body['members']);
+  const locale = resolveLocale(c.req.header('accept-language'));
 
-  const dias = [];
+  const days = [];
 
-  for (const fecha of expandirRango(desde, hasta)) {
-    const conflictos = [];
+  for (const date of expandRange(from, to)) {
+    const conflicts = [];
 
-    for (const miembro of miembros) {
-      const conflicto = resolverConflictoDelDia(miembro, fecha);
-      if (conflicto) {
-        conflictos.push({
-          memberId: miembro.id,
-          reason: conflicto.reason,
-          detail: conflicto.detail,
-        });
-      }
+    for (const member of members) {
+      const conflict = resolveDayConflict(member, date, locale);
+      if (!conflict) continue;
+      conflicts.push({
+        memberId: member.id,
+        reason: conflict.reason,
+        detail: conflict.detail,
+      });
     }
 
-    if (conflictos.length > 0) {
-      dias.push({ date: fecha, conflictCount: conflictos.length, conflicts: conflictos });
-    }
+    if (conflicts.length === 0) continue;
+    days.push({ date, conflictCount: conflicts.length, conflicts });
   }
 
-  return c.json({ days: dias });
+  return c.json({ days });
 });

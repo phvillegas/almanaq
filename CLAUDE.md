@@ -1,126 +1,151 @@
 # Almanaq
 
-App de disponibilidad para equipos distribuidos. Responde quién del equipo está
-realmente disponible ahora, teniendo en cuenta el calendario local de cada persona:
-fines de semana que no son sábado y domingo, feriados nacionales y festividades que
-se rigen por calendarios no gregorianos.
+Availability app for distributed teams. It answers who on the team is actually
+available right now, taking into account each person's local calendar: weekends that
+are not Saturday and Sunday, national holidays, and observances that follow
+non-Gregorian calendars.
 
-Monorepo con tres piezas: backend en Node, cliente Android nativo, cliente iOS nativo.
+A monorepo with three pieces: a Node backend, a native Android client, a native iOS
+client.
 
-## Antes de escribir código
+## Before writing code
 
-Leé `PLAN.md`. Contiene alcance, arquitectura, contrato de API, sistema de diseño y
-especificación de pantallas. **No empieces sin haberlo leído entero.**
+Read `PLAN.md`. It holds the scope, the architecture, the API contract, the design
+system and the screen specifications. **Do not start without having read it end to
+end.**
 
-`SETUP.md` tiene la estructura de carpetas, el bootstrap de cada pieza y el orden de
-la primera semana.
+`SETUP.md` has the folder structure, the bootstrap for each piece, and the order of
+the first week.
 
-Los valores de color canónicos están en `design/tokens.json`. No copies hexadecimales
-desde el markdown ni desde los SVG: leelos de ahí.
+The canonical colour values live in `design/tokens.json`. Do not copy hex values out
+of the markdown or the SVGs: read them from there.
 
-Referencias visuales en `design/`:
+Visual references in `design/`:
 
-| Archivo                       | Qué muestra                                    |
-|-------------------------------|------------------------------------------------|
-| `mockup-equipos.svg`          | Las tres pantallas, tema claro                 |
-| `mockup-plataformas-v2.svg`   | iOS y Android, claro y oscuro, con Liquid Glass|
-| `paleta-sol-luna.svg`         | Paleta completa y codificación de estados      |
+| File                          | What it shows                                   |
+|-------------------------------|-------------------------------------------------|
+| `mockup-equipos.svg`          | The three screens, light theme                  |
+| `mockup-plataformas-v2.svg`   | iOS and Android, light and dark, Liquid Glass   |
+| `paleta-sol-luna.svg`         | Full palette and status colour coding           |
 
-## Reglas que no se cruzan
+## Language
 
-1. **La lógica de negocio vive en el backend.** El cliente nunca calcula
-   disponibilidad, husos, feriados ni conversiones de calendario. Pide y pinta.
+**Everything that is engineering artefact is in English**: source code, identifiers,
+comments, commit messages, documentation, test names, error messages aimed at whoever
+builds a client.
 
-2. **Si te encontrás escribiendo el mismo cálculo en Kotlin y en Swift, pará.**
-   Ese cálculo pertenece al backend. Avisá antes de duplicarlo.
+**Everything the end user reads is localized.** Status text, country names, dates and
+calendar labels are resolved by the backend in the locale the client asks for through
+`Accept-Language`. They live in `backend/src/domain/i18n.ts`, never hardcoded at a
+call site. Spanish and English ship in v1; Spanish is the fallback.
 
-3. **No inventes datos de calendarios ni de feriados.** País sin cobertura devuelve
-   `UNKNOWN`. Un dato equivocado es peor que ningún dato: la gente agenda reuniones
-   con esto.
+The dividing line is the audience, not the file. `statusDetail` is product content and
+gets localized. An `InputError` message addresses a developer and stays in English.
 
-4. **Los IDs de miembro son UUID v4.** Nunca autoincrementales. Esto habilita una
-   migración futura a base compartida (ver sección 12 del plan).
+## Rules that do not bend
 
-5. **No agregues dependencias sin preguntar.** Una sola persona mantiene esto.
+1. **Business logic lives in the backend.** The client never computes availability,
+   time zones, holidays or calendar conversions. It asks and it paints.
 
-6. **Respetá el alcance de la sección 2 del plan.** Si algo parece buena idea pero
-   no está listado, proponelo, no lo implementes.
+2. **If you find yourself writing the same computation in Kotlin and in Swift, stop.**
+   That computation belongs in the backend. Say so before duplicating it.
 
-7. **Cada combinación de color nueva se verifica a 4.5:1** contra su fondo, en los
-   dos temas, antes de usarse.
+3. **Do not invent calendar or holiday data.** A country without coverage returns
+   `UNKNOWN`. Wrong data is worse than no data: people schedule meetings with this.
 
-8. **La arquitectura la decide el humano.** Podés proponer cambios de estructura;
-   no los apliques sin confirmación.
+4. **Member IDs are UUID v4.** Never auto-incrementing. This is what enables a future
+   migration to a shared database (see section 12 of the plan).
 
-## Stack (cerrado, no reabrir)
+5. **Do not add dependencies without asking.** One person maintains this.
 
-| Área          | Decisión                                          |
-|---------------|---------------------------------------------------|
-| Backend       | Node + Hono. Sin base de datos, sin auth, sin estado |
-| Android       | Kotlin + Jetpack Compose + Material 3             |
-| iOS           | Swift + SwiftUI, SDK de iOS 26, Liquid Glass      |
-| Compartido    | Nada. Sin KMP, sin Flutter, sin React Native      |
-| Feriados      | JSON precalculado y commiteado, no API en runtime |
-| Calendarios   | `Intl` de Node (ICU nativo)                       |
-| Persistencia  | Local. Documento versionado con UUIDs             |
+6. **Respect the scope in section 2 of the plan.** If something looks like a good idea
+   but is not listed, propose it, do not implement it.
 
-## Orden de trabajo
+7. **Every new colour combination is checked at 4.5:1** against its background, in
+   both themes, before being used.
 
-**El backend se termina y se congela antes de tocar cualquier cliente.** Con dos
-apps en vuelo, un contrato que se mueve duplica el retrabajo.
+8. **The human decides the architecture.** You may propose structural changes; do not
+   apply them without confirmation.
 
-Después, los dos clientes en paralelo siguiendo el mismo orden de pantallas, para
-poder compararlos.
+## Code style
 
-## Estado del proyecto
+- **No `else` and no nested `if`.** Use guard clauses and early returns; extract a
+  function when a branch needs its own branches. A `switch` or a lookup table beats a
+  chain of conditions. `if` inside a loop is fine; `if` inside `if` is not.
+- Ternaries are allowed for a single expression, not for control flow.
+- Comments explain why, not what. The what is already in the code.
+- Document every external data source (work weeks, holidays) with a link and the date
+  it was checked.
 
-**El proyecto se está creando de cero.** Si una carpeta o comando de este documento
-todavía no existe, es esperable. Ver `SETUP.md` para el orden de arranque.
+## Stack (settled, not up for discussion)
 
-Los proyectos de Android (Gradle) e iOS (`.xcodeproj`) **los crea el humano** con los
-asistentes de Android Studio y Xcode. No intentes generarlos: son estructuras con
-decenas de archivos interdependientes que se reconstruyen mal a mano. El backend sí
-se crea entero desde acá.
+| Area          | Decision                                             |
+|---------------|------------------------------------------------------|
+| Backend       | Node + Hono + TypeScript. No database, no auth, no state |
+| Android       | Kotlin + Jetpack Compose + Material 3                |
+| iOS           | Swift + SwiftUI, iOS 26 SDK, Liquid Glass            |
+| Shared        | Nothing. No KMP, no Flutter, no React Native         |
+| Holidays      | Precomputed committed JSON, not a runtime API        |
+| Cities        | Precomputed committed JSON from GeoNames             |
+| Calendars     | Node's `Intl` (native ICU)                           |
+| Persistence   | Local. A versioned document with UUIDs               |
 
-## Comandos
+## Order of work
 
-Disponibles una vez creado el backend (ver `SETUP.md` sección 2):
+**The backend is finished and frozen before touching any client.** With two apps in
+flight, a contract that keeps moving doubles the rework.
+
+After that, both clients in parallel following the same screen order, so they can be
+compared.
+
+## Project status
+
+The backend is built: domain layer, the four endpoints, precomputed data and tests.
+**The contract is not frozen yet.**
+
+The Android (Gradle) and iOS (`.xcodeproj`) projects **are created by the human** with
+the Android Studio and Xcode wizards. Do not try to generate them: they are structures
+of dozens of interdependent files that reconstruct badly by hand.
+
+## Commands
+
+From `backend/`:
 
 ```
-npm run dev             # servidor local
-npm test                # tests
-npm run build:holidays  # regenera data/holidays/*.json (1 vez por año)
+npm run dev              # local server
+npm test                 # tests
+npm run build            # compile to dist/
+npm run build:holidays   # regenerates data/holidays/*.json (once a year)
+npm run build:locations  # regenerates data/locations/cities.json
 ```
 
-## Convenciones
+## Conventions
 
-- **Commits semánticos, en español y en imperativo.** Formato `tipo(alcance): descripción`,
-  con la descripción en minúscula y sin punto final:
+- **Semantic commits, in English and in the imperative.** Format
+  `type(scope): description`, description in lower case and without a trailing period:
 
   ```
-  feat(backend): agrega endpoint de disponibilidad
-  fix(android): corrige el orden de la lista de miembros
-  docs: define la convención de mensajes de commit
+  feat(backend): add availability endpoint
+  fix(android): correct the member list ordering
+  docs: define the commit message convention
   ```
 
-  | Tipo       | Cuándo                                                  |
-  |------------|---------------------------------------------------------|
-  | `feat`     | funcionalidad nueva                                     |
-  | `fix`      | corrección de un error                                  |
-  | `docs`     | documentación, incluidos los `.md` de la raíz           |
-  | `test`     | tests, sin tocar código de producción                   |
-  | `refactor` | cambio interno que no altera el comportamiento          |
-  | `style`    | formato, sin cambios de comportamiento                  |
-  | `chore`    | dependencias, configuración, scripts de mantenimiento   |
+  | Type       | When                                                   |
+  |------------|--------------------------------------------------------|
+  | `feat`     | new functionality                                      |
+  | `fix`      | bug fix                                                |
+  | `docs`     | documentation, including the `.md` files at the root   |
+  | `test`     | tests, without touching production code                |
+  | `refactor` | internal change that does not alter behaviour          |
+  | `style`    | formatting, no behaviour change                        |
+  | `chore`    | dependencies, configuration, maintenance scripts       |
 
-  El alcance es opcional y sirve para separar las piezas del monorepo: `backend`,
-  `android`, `ios`, `design`. La regeneración anual de feriados o de ciudades va como
-  `chore(datos): regenera los feriados de 2027`.
+  The scope is optional and separates the monorepo pieces: `backend`, `android`,
+  `ios`, `design`. The yearly regeneration of holidays or cities goes as
+  `chore(data): regenerate 2027 holidays`.
 
-  El cuerpo del mensaje, cuando hace falta, también en español y explicando el porqué,
-  no el qué: el qué ya está en el diff.
-- Los textos visibles al usuario los devuelve el backend ya redactados
-  (`statusLabel`, `statusDetail`). El cliente no los arma.
-- Comentarios en el código en español.
-- Documentar en el código toda fuente de datos externa (semanas laborales, feriados)
-  con enlace y fecha de verificación.
+  The body, when one is needed, explains the why rather than the what: the what is
+  already in the diff.
+
+- User-visible text is returned by the backend already written and localized
+  (`statusLabel`, `statusDetail`). The client does not compose it.

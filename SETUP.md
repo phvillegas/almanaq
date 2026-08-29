@@ -1,49 +1,51 @@
-# Puesta en marcha desde cero
+# Bootstrapping from scratch
 
-Este documento se usa una sola vez, para crear la estructura. Después queda como
-referencia de convenciones de proyecto.
+This document is used once, to create the structure. After that it stays as a
+reference for project conventions.
 
 ---
 
-## 1. Estructura de repositorio
+## 1. Repository structure
 
-**Monorepo.** Una sola persona, un contrato de API compartido y tres piezas que
-cambian juntas: separarlas en tres repos multiplica la coordinación sin dar nada.
+**A monorepo.** One person, one shared API contract and three pieces that change
+together: splitting them into three repositories multiplies the coordination without
+giving anything back.
 
 ```
 almanaq/
-├── CLAUDE.md              # instrucciones permanentes (raíz)
-├── PLAN.md                # especificación completa
-├── SETUP.md               # este archivo
+├── CLAUDE.md              standing instructions (root)
+├── PLAN.md                full specification
+├── SETUP.md               this file
+├── README.md
 ├── .gitignore
 ├── design/
-│   ├── tokens.json        # fuente única de color
+│   ├── tokens.json        single source of colour
 │   ├── mockup-equipos.svg
 │   ├── mockup-plataformas-v2.svg
 │   └── paleta-sol-luna.svg
-├── backend/               # Node + Hono
-├── android/               # proyecto de Android Studio
-└── ios/                   # proyecto de Xcode
+├── backend/               Node + Hono
+├── android/               Android Studio project
+└── ios/                   Xcode project
 ```
 
-Identificadores:
+Identifiers:
 
-- Paquete Android: `com.almanaq.app`
-- Bundle ID iOS: `com.almanaq.app`
+- Android package: `com.almanaq.app`
+- iOS bundle ID: `com.almanaq.app`
 
 ```bash
 mkdir almanaq && cd almanaq
 git init
 mkdir design backend android ios
-# copiar CLAUDE.md, PLAN.md, SETUP.md a la raíz
-# copiar tokens.json y los .svg a design/
+# copy CLAUDE.md, PLAN.md, SETUP.md to the root
+# copy tokens.json and the .svg files to design/
 ```
 
 ---
 
 ## 2. Backend
 
-Claude Code puede crear esto entero. Base:
+Claude Code can create this whole piece. Base:
 
 ```bash
 cd backend
@@ -63,131 +65,157 @@ npx tsc --init
     "start": "node dist/index.js",
     "build": "tsc",
     "test": "vitest run",
-    "build:holidays": "tsx scripts/build-holidays.ts"
+    "build:holidays": "tsx scripts/build-holidays.ts",
+    "build:locations": "tsx scripts/build-locations.ts"
   }
 }
 ```
 
-Estructura objetivo:
+TypeScript 7 does not pick up `@types/node` from `moduleResolution: nodenext` alone.
+Declare it explicitly in `tsconfig.json`:
+
+```json
+{ "compilerOptions": { "types": ["node"] } }
+```
+
+Target structure:
 
 ```
 backend/
 ├── src/
-│   ├── index.ts              # servidor Hono, rutas
+│   ├── index.ts              Hono server, routes
 │   ├── routes/
 │   │   ├── availability.ts
 │   │   ├── calendar.ts
 │   │   ├── member.ts
-│   │   └── locations.ts
+│   │   ├── locations.ts
+│   │   └── input.ts          shared request validation
 │   ├── domain/
-│   │   ├── workweek.ts       # tabla de semanas laborales
-│   │   ├── holidays.ts       # lectura de data/holidays/*.json
-│   │   ├── calendars.ts      # conversión vía Intl
-│   │   └── status.ts         # resolución del enum de estado
+│   │   ├── workweek.ts       work week resolution and labels
+│   │   ├── holidays.ts       reads data/holidays/*.json
+│   │   ├── locations.ts      city search
+│   │   ├── calendars.ts      conversion through Intl
+│   │   ├── status.ts         status enum resolution
+│   │   └── i18n.ts           user-facing message catalog
 │   └── data/
 │       ├── workweeks.ts
-│       └── holidays/         # JSON generados, commiteados
+│       ├── holidays/         generated JSON, committed
+│       └── locations/        generated JSON, committed
 ├── scripts/
-│   └── build-holidays.ts     # correr 1 vez por año
+│   ├── build-holidays.ts     run once a year
+│   └── build-locations.ts
 └── tests/
 ```
 
-### Verificación previa (antes de escribir nada más)
+`routes/input.ts`, `domain/locations.ts` and `domain/i18n.ts` were added while
+building. They are not part of the original plan; move them if you prefer another
+layout.
 
-Correr esto en el runtime elegido. Si falla, el runtime no sirve para el proyecto:
+### Check this first, before writing anything else
+
+Run this on the chosen runtime. If it fails, the runtime is no good for this project:
 
 ```js
-const d = new Date('2026-08-17');
+const d = new Date('2026-08-17T00:00:00Z');
 for (const ca of ['hebrew', 'ethiopic', 'persian', 'islamic-umalqura']) {
-  console.log(ca, new Intl.DateTimeFormat(`es-u-ca-${ca}`, { dateStyle: 'long' }).format(d));
+  console.log(
+    ca,
+    new Intl.DateTimeFormat(`en-u-ca-${ca}`, { dateStyle: 'long', timeZone: 'UTC' }).format(d),
+  );
 }
 ```
 
-Debe imprimir cuatro fechas distintas y correctas. Node estándar las soporta.
+It must print four distinct, correct dates. Standard Node supports them.
+
+**Note the explicit `timeZone`.** Without it ICU formats in the process time zone, and
+in any negative offset `new Date('2026-08-17')` — which is midnight UTC — renders as
+the 16th. That off-by-one is the single most common source of wrong dates in this
+codebase, which is why `domain/calendars.ts` never formats without a time zone.
 
 ---
 
 ## 3. Android
 
-**Crear el proyecto desde Android Studio, no con Claude Code.**
+**Create the project from Android Studio, not with Claude Code.**
 
-1. Android Studio → New Project → **Empty Activity** (con Compose).
-2. Nombre: `Almanaq`. Paquete: `com.almanaq.app`.
-3. Minimum SDK: **API 26** (Android 8.0). Cubre prácticamente todo el parque y
-   evita compatibilidades innecesarias.
+1. Android Studio → New Project → **Empty Activity** (with Compose).
+2. Name: `Almanaq`. Package: `com.almanaq.app`.
+3. Minimum SDK: **API 26** (Android 8.0). It covers virtually the whole install base
+   and avoids needless compatibility work.
 4. Build configuration language: **Kotlin DSL**.
-5. Guardar en `almanaq/android`.
+5. Save under `almanaq/android`.
 
-Estructura objetivo dentro de `app/src/main/java/com/almanaq/app/`:
+Target structure inside `app/src/main/java/com/almanaq/app/`:
 
 ```
 ├── MainActivity.kt
 ├── ui/
-│   ├── theme/          # Color.kt, Theme.kt, Type.kt
-│   ├── team/           # pantalla "Ahora"
-│   ├── datepicker/     # pantalla "Elegir fecha"
-│   └── member/         # pantalla "Detalle"
+│   ├── theme/          Color.kt, Theme.kt, Type.kt
+│   ├── team/           "Now" screen
+│   ├── datepicker/     "Pick a date" screen
+│   └── member/         "Detail" screen
 ├── data/
 │   ├── api/
 │   └── local/
 └── model/
 ```
 
-Después, con el proyecto ya válido, Claude Code agrega:
+Then, with a valid project in place, Claude Code adds:
 
-- Retrofit u Ktor client + kotlinx.serialization
-- DataStore para persistencia
-- El esquema de Material 3 generado desde la semilla `#4436C7`
-- Los Composables de las tres pantallas
+- Retrofit or Ktor client + kotlinx.serialization
+- DataStore for persistence
+- The Material 3 scheme generated from the `#4436C7` seed
+- The Composables for the three screens
 
-**Generar el esquema de color** en Material Theme Builder con la semilla, exportar
-como `Color.kt` + `Theme.kt`, y verificar que los roles de marca y estado coincidan
-con `design/tokens.json`. La semilla genera tonos derivados; los colores de marca y
-de estado no se tocan.
+**Generate the colour scheme** in Material Theme Builder from the seed, export it as
+`Color.kt` + `Theme.kt`, and check that the brand and status roles match
+`design/tokens.json`. The seed generates derived tones; the brand and status colours
+are not to be touched.
 
-**Desactivar dynamic color explícitamente** en el `MaterialTheme`.
+**Turn dynamic colour off explicitly** in the `MaterialTheme`.
 
 ---
 
 ## 4. iOS
 
-**Crear el proyecto desde Xcode, no con Claude Code.**
+**Create the project from Xcode, not with Claude Code.**
 
 1. Xcode 26 → New Project → **App**.
 2. Interface: **SwiftUI**. Language: **Swift**.
-3. Nombre: `Almanaq`. Bundle ID: `com.almanaq.app`.
-4. Minimum Deployment: **iOS 18** o superior según a quién quieras alcanzar.
-   Compilar con el SDK de iOS 26 es obligatorio; el mínimo de despliegue es aparte.
-5. Guardar en `almanaq/ios`.
+3. Name: `Almanaq`. Bundle ID: `com.almanaq.app`.
+4. Minimum Deployment: **iOS 18** or higher depending on who you want to reach.
+   Building against the iOS 26 SDK is mandatory; the deployment target is a separate
+   decision.
+5. Save under `almanaq/ios`.
 
-Estructura objetivo dentro de `Almanaq/`:
+Target structure inside `Almanaq/`:
 
 ```
 ├── AlmanaqApp.swift
-├── Theme/          # Color+Tokens.swift, Typography.swift
+├── Theme/          Color+Tokens.swift, Typography.swift
 ├── Features/
-│   ├── Team/       # pantalla "Ahora"
-│   ├── DatePicker/ # pantalla "Elegir fecha"
-│   └── Member/     # pantalla "Detalle"
+│   ├── Team/       "Now" screen
+│   ├── DatePicker/ "Pick a date" screen
+│   └── Member/     "Detail" screen
 ├── Data/
 │   ├── API/
 │   └── Local/
 └── Models/
 ```
 
-Las carpetas de pantalla usan los mismos nombres conceptuales que en Android, para
-poder comparar el avance de las dos plataformas de un vistazo.
+The screen folders use the same conceptual names as on Android, so progress on both
+platforms can be compared at a glance.
 
-Después, Claude Code agrega:
+Then Claude Code adds:
 
-- Capa de red con `URLSession` y `Codable` (sin dependencias externas)
-- Persistencia en archivo JSON en Documents
-- `Color+Tokens.swift` derivado de `design/tokens.json`
-- Las vistas SwiftUI de las tres pantallas
+- A networking layer with `URLSession` and `Codable` (no external dependencies)
+- Persistence in a JSON file in Documents
+- `Color+Tokens.swift` derived from `design/tokens.json`
+- The SwiftUI views for the three screens
 
-**Confirmar que Liquid Glass está activo:** los componentes estándar deben verse
-translúcidos al compilar. Si se ven como antes, revisar que no exista
-`UIDesignRequiresCompatibility` en el Info.plist.
+**Confirm Liquid Glass is active:** the standard components must look translucent once
+compiled. If they look like before, check that `UIDesignRequiresCompatibility` is not
+in the Info.plist.
 
 ---
 
@@ -212,39 +240,39 @@ ios/DerivedData/
 *.xcuserstate
 ios/**/xcuserdata/
 
-# Sistema
+# System
 .DS_Store
 ```
 
-**No ignorar** `backend/src/data/holidays/`. Esos JSON se commitean a propósito.
+**Do not ignore** `backend/src/data/holidays/` or `backend/src/data/locations/`. Those
+JSON files are committed on purpose.
 
 ---
 
-## 6. Orden de la primera semana
+## 6. Order of the first week
 
-1. Crear estructura de carpetas y `git init`.
-2. Copiar los documentos y los assets de diseño.
-3. Correr la verificación de `Intl`.
-4. Backend: tabla de semanas laborales + script de feriados.
-5. Backend: los cuatro endpoints con tests.
-6. **Congelar el contrato de API.**
-7. Recién ahí: crear los proyectos de Android Studio y Xcode.
+1. Create the folder structure and `git init`.
+2. Copy the documents and the design assets.
+3. Run the `Intl` check.
+4. Backend: work week table and holiday script.
+5. Backend: the four endpoints with tests.
+6. **Freeze the API contract.**
+7. Only then: create the Android Studio and Xcode projects.
 
-No crear los proyectos móviles antes del punto 6. Tener dos apps esperando un
-contrato que todavía se mueve es la forma más rápida de duplicar retrabajo.
+Do not create the mobile projects before step 6. Having two apps waiting on a contract
+that is still moving is the fastest way to duplicate rework.
 
 ---
 
-## 7. Primer pedido sugerido a Claude Code
+## 7. Suggested first request to Claude Code
 
-> Leé CLAUDE.md y PLAN.md. Vamos a empezar por el backend.
+> Read CLAUDE.md and PLAN.md. We are starting with the backend.
 >
-> Primero, verificá el soporte de Intl con calendarios no gregorianos en este Node.
-> Después creá la estructura de `backend/` según SETUP.md sección 2, con la tabla de
-> semanas laborales de la sección 5 del plan y el script `build-holidays.ts`.
+> First, verify `Intl` support for non-Gregorian calendars on this Node.
+> Then create the `backend/` structure per SETUP.md section 2, with the work week
+> table from section 5 of the plan and the `build-holidays.ts` script.
 >
-> No implementes los endpoints todavía. Quiero revisar la capa de dominio primero.
+> Do not implement the endpoints yet. I want to review the domain layer first.
 
-Pedir la capa de dominio antes que los endpoints permite revisar las decisiones
-difíciles (calendarios, feriados, semanas laborales) mientras el código todavía es
-chico.
+Asking for the domain layer before the endpoints makes it possible to review the hard
+decisions (calendars, holidays, work weeks) while the code is still small.

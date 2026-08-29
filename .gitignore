@@ -16,5 +16,5 @@ ios/DerivedData/
 *.xcuserstate
 ios/**/xcuserdata/
 
-# Sistema
+# System
 .DS_Store

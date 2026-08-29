@@ -1,18 +1,18 @@
 /**
- * Tabla estática de semanas laborales por país.
+ * Static table of work weeks by country.
  *
- * Es una tabla, no una inferencia: no hay forma de deducir la semana laboral de un
- * país desde su huso horario ni desde su código. Ver PLAN.md sección 5.
+ * It is a table, not an inference: there is no way to derive a country's work week
+ * from its time zone or its code. See PLAN.md section 5.
  *
- * Los países que NO están acá usan la semana laboral por defecto (lun a vie). Esa
- * ausencia se marca como inferida en `obtenerSemanaLaboral`, para que la capa de
- * estado nunca afirme disponibilidad sobre un dato que en realidad no verificamos.
+ * Countries that are NOT listed here fall back to the default work week (Mon to Fri).
+ * That fallback is flagged as inferred in `getWorkWeek`, so the status layer never
+ * claims availability based on data we did not actually verify.
  *
- * Cada entrada documenta su fuente y la fecha en que se verificó. Al actualizar una
- * fila, actualizar también `verificado`.
+ * Every entry documents its source and the date it was checked. When updating a row,
+ * update `verified` as well.
  */
 
-export type DiaSemana =
+export type Weekday =
   | 'sunday'
   | 'monday'
   | 'tuesday'
@@ -21,7 +21,7 @@ export type DiaSemana =
   | 'friday'
   | 'saturday';
 
-export const DIAS_SEMANA: readonly DiaSemana[] = [
+export const WEEKDAYS: readonly Weekday[] = [
   'sunday',
   'monday',
   'tuesday',
@@ -31,32 +31,32 @@ export const DIAS_SEMANA: readonly DiaSemana[] = [
   'saturday',
 ] as const;
 
-export interface EntradaSemanaLaboral {
-  /** Días hábiles, en orden de la semana local. */
-  readonly workDays: readonly DiaSemana[];
-  /** Fuente consultada. Obligatoria: sin fuente la fila no entra. */
-  readonly fuente: string;
-  /** Fecha ISO en que se verificó la fuente. */
-  readonly verificado: string;
-  /** Matiz que la tabla no puede expresar. Se documenta, no se implementa. */
-  readonly nota?: string;
+export interface WorkWeekEntry {
+  /** Working days, in local week order. */
+  readonly workDays: readonly Weekday[];
+  /** Source consulted. Required: a row without a source does not get in. */
+  readonly source: string;
+  /** ISO date on which the source was checked. */
+  readonly verified: string;
+  /** Nuance the table cannot express. Documented, not implemented. */
+  readonly note?: string;
 }
 
-const LUN_A_VIE: readonly DiaSemana[] = [
+const MON_TO_FRI: readonly Weekday[] = [
   'monday',
   'tuesday',
   'wednesday',
   'thursday',
   'friday',
 ];
-const DOM_A_JUE: readonly DiaSemana[] = [
+const SUN_TO_THU: readonly Weekday[] = [
   'sunday',
   'monday',
   'tuesday',
   'wednesday',
   'thursday',
 ];
-const SAB_A_JUE: readonly DiaSemana[] = [
+const SAT_TO_THU: readonly Weekday[] = [
   'saturday',
   'sunday',
   'monday',
@@ -64,7 +64,7 @@ const SAB_A_JUE: readonly DiaSemana[] = [
   'wednesday',
   'thursday',
 ];
-const DOM_A_VIE: readonly DiaSemana[] = [
+const SUN_TO_FRI: readonly Weekday[] = [
   'sunday',
   'monday',
   'tuesday',
@@ -74,148 +74,148 @@ const DOM_A_VIE: readonly DiaSemana[] = [
 ];
 
 /**
- * Semana laboral usada cuando el país no está en la tabla.
+ * Work week used when the country is not in the table.
  *
- * Ojo: que sea el default no la vuelve un dato verificado. Ver PLAN.md sección 7.4:
- * nunca asumir lun a vie en silencio.
+ * Being the default does not make it verified data. See PLAN.md section 7.4: never
+ * silently assume Mon to Fri.
  */
-export const SEMANA_POR_DEFECTO: EntradaSemanaLaboral = {
-  workDays: LUN_A_VIE,
-  fuente: 'Convención mayoritaria. No verificada para países fuera de esta tabla.',
-  verificado: '2026-08-28',
+export const DEFAULT_WORK_WEEK: WorkWeekEntry = {
+  workDays: MON_TO_FRI,
+  source: 'Majority convention. Not verified for countries outside this table.',
+  verified: '2026-08-28',
 };
 
 /**
- * Horario laboral por defecto, en hora local del miembro.
- * PLAN.md sección 13 lo deja como propuesta: 9:00 a 18:00, editable por override.
+ * Default working hours, in the member's local time.
+ * PLAN.md section 13 leaves this as a proposal: 9:00 to 18:00, editable per member.
  */
-export const HORARIO_POR_DEFECTO = {
+export const DEFAULT_HOURS = {
   startLocal: '09:00',
   endLocal: '18:00',
 } as const;
 
-export const SEMANAS_LABORALES: Readonly<Record<string, EntradaSemanaLaboral>> = {
-  // --- Fin de semana viernes y sábado ---
+export const WORK_WEEKS: Readonly<Record<string, WorkWeekEntry>> = {
+  // --- Friday and Saturday weekend ---
 
   IL: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://www.gov.il/en/pages/working-hours-and-rest',
-    verificado: '2026-08-28',
-    nota: 'El viernes es día corto en buena parte del sector privado. La tabla no modela medio día.',
+    workDays: SUN_TO_THU,
+    source: 'https://www.gov.il/en/pages/working-hours-and-rest',
+    verified: '2026-08-28',
+    note: 'Friday is a short day across much of the private sector. The table does not model half days.',
   },
   SA: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://www.my.gov.sa/wps/portal/snp/aboutksa/holidaysInKSA',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://www.my.gov.sa/wps/portal/snp/aboutksa/holidaysInKSA',
+    verified: '2026-08-28',
   },
   QA: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://www.mol.gov.qa/en/labor-law/',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://www.mol.gov.qa/en/labor-law/',
+    verified: '2026-08-28',
   },
   KW: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://www.manpower.gov.kw/',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://www.manpower.gov.kw/',
+    verified: '2026-08-28',
   },
   OM: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://www.mol.gov.om/',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://www.mol.gov.om/',
+    verified: '2026-08-28',
   },
   BH: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://www.mlsd.gov.bh/',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://www.mlsd.gov.bh/',
+    verified: '2026-08-28',
   },
   EG: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://www.manpower.gov.eg/',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://www.manpower.gov.eg/',
+    verified: '2026-08-28',
   },
   JO: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://www.mol.gov.jo/',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://www.mol.gov.jo/',
+    verified: '2026-08-28',
   },
   IQ: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://molsa.gov.iq/',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://molsa.gov.iq/',
+    verified: '2026-08-28',
   },
   PS: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://www.mol.pna.ps/',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://www.mol.pna.ps/',
+    verified: '2026-08-28',
   },
   LY: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://www.mol.gov.ly/',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://www.mol.gov.ly/',
+    verified: '2026-08-28',
   },
   SY: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://www.syrianparliament.gov.sy/',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://www.syrianparliament.gov.sy/',
+    verified: '2026-08-28',
   },
   YE: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://www.yemen.gov.ye/',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://www.yemen.gov.ye/',
+    verified: '2026-08-28',
   },
   BD: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://mole.gov.bd/',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://mole.gov.bd/',
+    verified: '2026-08-28',
   },
   MV: {
-    workDays: DOM_A_JUE,
-    fuente: 'https://www.gov.mv/',
-    verificado: '2026-08-28',
+    workDays: SUN_TO_THU,
+    source: 'https://www.gov.mv/',
+    verified: '2026-08-28',
   },
 
-  // --- Emiratos: cambió en 2022 ---
+  // --- United Arab Emirates: changed in 2022 ---
 
   AE: {
-    workDays: LUN_A_VIE,
-    fuente:
+    workDays: MON_TO_FRI,
+    source:
       'https://u.ae/en/information-and-services/jobs/working-hours-in-the-private-sector',
-    verificado: '2026-08-28',
-    nota:
-      'Desde el 1 de enero de 2022 el sector público pasó de dom-jue a lun-vie, con el viernes ' +
-      'medio día y el fin de semana en sáb-dom. La tabla no modela el medio día del viernes: ' +
-      'el viernes figura como laboral completo.',
+    verified: '2026-08-28',
+    note:
+      'On 1 January 2022 the public sector moved from Sun-Thu to Mon-Fri, with Friday as a ' +
+      'half day and the weekend on Sat-Sun. The table does not model the Friday half day: ' +
+      'Friday counts as a full working day here.',
   },
 
-  // --- Fin de semana solo viernes ---
+  // --- Friday-only weekend ---
 
   AF: {
-    workDays: SAB_A_JUE,
-    fuente: 'https://molsa.gov.af/',
-    verificado: '2026-08-28',
+    workDays: SAT_TO_THU,
+    source: 'https://molsa.gov.af/',
+    verified: '2026-08-28',
   },
   IR: {
-    workDays: SAB_A_JUE,
-    fuente: 'https://www.mcls.gov.ir/',
-    verificado: '2026-08-28',
-    nota: 'El jueves es día corto o no laboral en buena parte del sector público.',
+    workDays: SAT_TO_THU,
+    source: 'https://www.mcls.gov.ir/',
+    verified: '2026-08-28',
+    note: 'Thursday is a short day or a day off across much of the public sector.',
   },
 
-  // --- Fin de semana solo sábado ---
+  // --- Saturday-only weekend ---
 
   NP: {
-    workDays: DOM_A_VIE,
-    fuente: 'https://moless.gov.np/',
-    verificado: '2026-08-28',
-    nota: 'El viernes suele terminar antes. La tabla no modela el día corto.',
+    workDays: SUN_TO_FRI,
+    source: 'https://moless.gov.np/',
+    verified: '2026-08-28',
+    note: 'Friday usually ends early. The table does not model the short day.',
   },
 
-  // --- Fin de semana viernes y domingo ---
+  // --- Friday and Sunday weekend ---
 
   BN: {
     workDays: ['monday', 'tuesday', 'wednesday', 'thursday', 'saturday'],
-    fuente: 'https://www.jpa.gov.bn/',
-    verificado: '2026-08-28',
-    nota: 'Caso único en la tabla: el fin de semana no es contiguo (viernes y domingo).',
+    source: 'https://www.jpa.gov.bn/',
+    verified: '2026-08-28',
+    note: 'The only entry with a non-contiguous weekend: Friday and Sunday.',
   },
 };

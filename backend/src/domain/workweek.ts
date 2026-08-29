@@ -1,66 +1,57 @@
 /**
- * Semana laboral de un miembro: resolución de la tabla estática, aplicación de
- * overrides manuales y redacción de las etiquetas que consume la pantalla de detalle.
+ * A member's work week: resolution from the static table, manual overrides, and the
+ * labels the detail screen renders.
  *
- * Este módulo no sabe nada de husos horarios ni de feriados. Recibe un día de la
- * semana y una hora ya expresados en la zona local del miembro. La conversión vive
- * en `calendars.ts`.
+ * This module knows nothing about time zones or holidays. It receives a weekday and a
+ * time already expressed in the member's local zone. The conversion lives in
+ * `calendars.ts`.
  */
 
 import {
-  DIAS_SEMANA,
-  HORARIO_POR_DEFECTO,
-  SEMANAS_LABORALES,
-  SEMANA_POR_DEFECTO,
-  type DiaSemana,
+  DEFAULT_HOURS,
+  DEFAULT_WORK_WEEK,
+  WEEKDAYS,
+  WORK_WEEKS,
+  type Weekday,
 } from '../data/workweeks.js';
+import { messagesFor, type Locale, type Messages } from './i18n.js';
 
-/** Overrides manuales del usuario. `null` significa "usar el valor del país". */
-export interface OverridesMiembro {
-  readonly workDays?: readonly DiaSemana[] | null;
+/** Manual overrides set by the user. `null` means "use the country value". */
+export interface MemberOverrides {
+  readonly workDays?: readonly Weekday[] | null;
   readonly workStartLocal?: string | null;
   readonly workEndLocal?: string | null;
 }
 
-export interface SemanaLaboral {
-  readonly workDays: readonly DiaSemana[];
-  /** Hora local de inicio, formato "HH:MM". */
+export interface WorkWeek {
+  readonly workDays: readonly Weekday[];
+  /** Local start time, "HH:MM". */
   readonly startLocal: string;
-  /** Hora local de fin, formato "HH:MM". */
+  /** Local end time, "HH:MM". */
   readonly endLocal: string;
   /**
-   * `true` cuando el país no está en la tabla y se cayó al default lun a vie.
+   * `true` when the country is not in the table and fell back to Mon to Fri.
    *
-   * La capa de estado usa esto para no afirmar disponibilidad sobre un dato que no
-   * verificamos. Ver PLAN.md sección 7.4.
+   * The status layer uses this to avoid claiming availability on data we never
+   * verified. See PLAN.md section 7.4.
    */
-  readonly inferida: boolean;
-  /** `true` si el usuario corrigió algo a mano. Un override siempre gana. */
-  readonly conOverrides: boolean;
-  readonly nota?: string;
+  readonly inferred: boolean;
+  /** `true` if the user corrected something by hand. An override always wins. */
+  readonly hasOverrides: boolean;
+  readonly note?: string;
 }
 
-const ABREVIATURAS: Readonly<Record<DiaSemana, string>> = {
-  sunday: 'dom',
-  monday: 'lun',
-  tuesday: 'mar',
-  wednesday: 'mié',
-  thursday: 'jue',
-  friday: 'vie',
-  saturday: 'sáb',
-};
-
-const HORA_VALIDA = /^([01]\d|2[0-3]):([0-5]\d)$/;
+const VALID_TIME = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
 /**
- * Orden usado solo para redactar etiquetas.
+ * Order used only to render labels.
  *
- * Empieza el lunes, igual que la grilla del calendario (PLAN.md sección 7.2). El
- * modelo de datos sigue usando `DIAS_SEMANA`, que arranca el domingo por convención
- * de ICU. Redactar desde el lunes hace que los tramos caigan donde el lector los
- * espera: el fin de semana de Brunéi sale "vie y dom" y no "dom y vie".
+ * It starts on Monday, like the calendar grid (PLAN.md section 7.2). The data model
+ * still uses `WEEKDAYS`, which starts on Sunday by ICU convention. Rendering from
+ * Monday puts the runs where a reader expects them: Brunei's weekend comes out as
+ * "Fri and Sun" rather than "Sun and Fri".
  */
-const ORDEN_ETIQUETA: readonly DiaSemana[] = [
+const LABEL_ORDER: readonly Weekday[] = [
   'monday',
   'tuesday',
   'wednesday',
@@ -71,138 +62,148 @@ const ORDEN_ETIQUETA: readonly DiaSemana[] = [
 ];
 
 /**
- * Resuelve la semana laboral efectiva de un miembro.
+ * Resolves a member's effective work week.
  *
- * Precedencia: override manual > tabla del país > default lun a vie.
- * Un override parcial (solo el horario, por ejemplo) deja el resto en el valor del país.
+ * Precedence: manual override > country table > Mon to Fri default. A partial
+ * override (hours only, for instance) leaves the rest on the country value.
  */
-export function obtenerSemanaLaboral(
+export function getWorkWeek(
   countryCode: string | null | undefined,
-  overrides?: OverridesMiembro | null,
-): SemanaLaboral {
-  const codigo = normalizarPais(countryCode);
-  const entrada = (codigo && SEMANAS_LABORALES[codigo]) || SEMANA_POR_DEFECTO;
-  const inferida = !codigo || SEMANAS_LABORALES[codigo] === undefined;
+  overrides?: MemberOverrides | null,
+): WorkWeek {
+  const code = normalizeCountry(countryCode);
+  const entry = (code && WORK_WEEKS[code]) || DEFAULT_WORK_WEEK;
+  const inferred = !code || WORK_WEEKS[code] === undefined;
 
-  const diasOverride = normalizarDias(overrides?.workDays);
-  const inicioOverride = normalizarHora(overrides?.workStartLocal);
-  const finOverride = normalizarHora(overrides?.workEndLocal);
-  const conOverrides =
-    diasOverride !== null || inicioOverride !== null || finOverride !== null;
+  const daysOverride = normalizeDays(overrides?.workDays);
+  const startOverride = normalizeTime(overrides?.workStartLocal);
+  const endOverride = normalizeTime(overrides?.workEndLocal);
+  const hasOverrides =
+    daysOverride !== null || startOverride !== null || endOverride !== null;
+  const keepsCountryDays = daysOverride === null;
 
   return {
-    workDays: diasOverride ?? entrada.workDays,
-    startLocal: inicioOverride ?? HORARIO_POR_DEFECTO.startLocal,
-    endLocal: finOverride ?? HORARIO_POR_DEFECTO.endLocal,
-    // Un override de días vuelve el dato explícito: ya no es una inferencia nuestra.
-    inferida: inferida && diasOverride === null,
-    conOverrides,
-    ...(entrada.nota !== undefined && diasOverride === null ? { nota: entrada.nota } : {}),
+    workDays: daysOverride ?? entry.workDays,
+    startLocal: startOverride ?? DEFAULT_HOURS.startLocal,
+    endLocal: endOverride ?? DEFAULT_HOURS.endLocal,
+    // An override of days makes the data explicit: it stops being our inference.
+    inferred: inferred && keepsCountryDays,
+    hasOverrides,
+    ...(entry.note !== undefined && keepsCountryDays ? { note: entry.note } : {}),
   };
 }
 
-export function esDiaLaboral(semana: SemanaLaboral, dia: DiaSemana): boolean {
-  return semana.workDays.includes(dia);
+export function isWorkDay(week: WorkWeek, day: Weekday): boolean {
+  return week.workDays.includes(day);
 }
 
 /**
- * ¿La hora local cae dentro del horario laboral?
+ * Does the local time fall within working hours?
  *
- * `horaLocal` viene en formato "HH:MM" de 24 horas. El intervalo es cerrado al
- * inicio y abierto al final: a las 18:00 en punto ya no se está disponible.
+ * `localTime` comes as 24-hour "HH:MM". The interval is closed at the start and open
+ * at the end: at 18:00 sharp the member is no longer available.
  *
- * Si el fin es menor o igual que el inicio se interpreta que el turno cruza la
- * medianoche. No es un caso del alcance v1, pero un override manual puede producirlo.
+ * When the end is less than or equal to the start, the shift is read as crossing
+ * midnight. Not a v1 case, but a manual override can produce it.
  */
-export function estaEnHorario(semana: SemanaLaboral, horaLocal: string): boolean {
-  const ahora = aMinutos(horaLocal);
-  const inicio = aMinutos(semana.startLocal);
-  const fin = aMinutos(semana.endLocal);
-  if (ahora === null || inicio === null || fin === null) return false;
-  return inicio < fin ? ahora >= inicio && ahora < fin : ahora >= inicio || ahora < fin;
+export function isWithinHours(week: WorkWeek, localTime: string): boolean {
+  const now = toMinutes(localTime);
+  const start = toMinutes(week.startLocal);
+  const end = toMinutes(week.endLocal);
+  if (now === null || start === null || end === null) return false;
+  if (start < end) return now >= start && now < end;
+  return now >= start || now < end;
 }
 
-/** Etiqueta de días hábiles: "dom a jue", "lun a jue y sáb". */
-export function etiquetaDias(semana: SemanaLaboral): string {
-  return etiquetaDeConjunto(semana.workDays);
+/** Working days label: "dom a jue" / "Sun to Thu". */
+export function formatWorkDays(week: WorkWeek, locale: Locale): string {
+  return formatDaySet(week.workDays, locale);
 }
 
-/** Etiqueta de fin de semana: "vie y sáb", "vie y dom". */
-export function etiquetaFinDeSemana(semana: SemanaLaboral): string {
-  const libres = DIAS_SEMANA.filter((d) => !semana.workDays.includes(d));
-  return etiquetaDeConjunto(libres);
+/** Weekend label: "vie y sáb" / "Fri and Sat". */
+export function formatWeekend(week: WorkWeek, locale: Locale): string {
+  const off = WEEKDAYS.filter((day) => !week.workDays.includes(day));
+  return formatDaySet(off, locale);
 }
 
-/** Etiqueta de horario: "9:00 a 18:00". Sin cero a la izquierda. */
-export function etiquetaHorario(semana: SemanaLaboral): string {
-  return `${sinCeroInicial(semana.startLocal)} a ${sinCeroInicial(semana.endLocal)}`;
+/** Hours label: "9:00 a 18:00" / "9:00 to 18:00". No leading zero. */
+export function formatHours(week: WorkWeek, locale: Locale): string {
+  return messagesFor(locale).hoursRange(
+    stripLeadingZero(week.startLocal),
+    stripLeadingZero(week.endLocal),
+  );
 }
 
 /**
- * Agrupa los días en tramos contiguos y los redacta.
+ * Groups the days into contiguous runs and renders them.
  *
- * La contigüidad es cíclica: sábado y domingo son un solo tramo aunque estén en las
- * puntas del array. Un tramo de dos días se une con "y"; de tres o más, con "a".
+ * Contiguity is cyclic: Saturday and Sunday form a single run even though they sit at
+ * opposite ends of the array. A run of two days joins with "and"; three or more with
+ * "to".
  */
-function etiquetaDeConjunto(dias: readonly DiaSemana[]): string {
-  const total = ORDEN_ETIQUETA.length;
-  const presentes = ORDEN_ETIQUETA.filter((d) => dias.includes(d));
-  if (presentes.length === 0) return '—';
-  if (presentes.length === total) return 'todos los días';
+function formatDaySet(days: readonly Weekday[], locale: Locale): string {
+  const messages = messagesFor(locale);
+  const total = LABEL_ORDER.length;
+  const present = LABEL_ORDER.filter((day) => days.includes(day));
+  if (present.length === 0) return messages.noDays;
+  if (present.length === total) return messages.everyDay;
 
-  const indices = presentes.map((d) => ORDEN_ETIQUETA.indexOf(d));
-  // Arrancar después de un hueco, para que un tramo cíclico no quede partido en dos.
-  const arranque =
-    indices.find((i) => !indices.includes((i + total - 1) % total)) ?? indices[0]!;
+  const indexes = present.map((day) => LABEL_ORDER.indexOf(day));
+  // Start right after a gap, so a cyclic run does not get split in two.
+  const start = indexes.find((i) => !indexes.includes((i + total - 1) % total)) ?? indexes[0]!;
 
-  const tramos: DiaSemana[][] = [];
-  let actual: DiaSemana[] = [];
-  for (let paso = 0; paso < total; paso++) {
-    const indice = (arranque + paso) % total;
-    const dia = ORDEN_ETIQUETA[indice]!;
-    if (indices.includes(indice)) {
-      actual.push(dia);
-    } else if (actual.length > 0) {
-      tramos.push(actual);
-      actual = [];
-    }
+  const runs: Weekday[][] = [];
+  let current: Weekday[] = [];
+
+  for (let step = 0; step < total; step++) {
+    const index = (start + step) % total;
+    const day = LABEL_ORDER[index]!;
+    const isPresent = indexes.includes(index);
+    if (isPresent) current.push(day);
+    if (isPresent) continue;
+    if (current.length === 0) continue;
+    runs.push(current);
+    current = [];
   }
-  if (actual.length > 0) tramos.push(actual);
+  if (current.length > 0) runs.push(current);
 
-  return tramos.map(redactarTramo).join(' y ');
+  return runs.map((run) => describeRun(run, messages)).join(` ${messages.pairJoin} `);
 }
 
-function redactarTramo(tramo: readonly DiaSemana[]): string {
-  const primero = ABREVIATURAS[tramo[0]!];
-  if (tramo.length === 1) return primero;
-  const ultimo = ABREVIATURAS[tramo[tramo.length - 1]!];
-  return tramo.length === 2 ? `${primero} y ${ultimo}` : `${primero} a ${ultimo}`;
+function describeRun(run: readonly Weekday[], messages: Messages): string {
+  const first = messages.weekdayAbbreviation[run[0]!];
+  if (run.length === 1) return first;
+  const last = messages.weekdayAbbreviation[run[run.length - 1]!];
+  if (run.length === 2) return `${first} ${messages.pairJoin} ${last}`;
+  return `${first} ${messages.rangeJoin} ${last}`;
 }
 
-function normalizarPais(countryCode: string | null | undefined): string | null {
+function normalizeCountry(countryCode: string | null | undefined): string | null {
   if (typeof countryCode !== 'string') return null;
-  const codigo = countryCode.trim().toUpperCase();
-  return /^[A-Z]{2}$/.test(codigo) ? codigo : null;
+  const code = countryCode.trim().toUpperCase();
+  if (!/^[A-Z]{2}$/.test(code)) return null;
+  return code;
 }
 
-function normalizarDias(
-  dias: readonly DiaSemana[] | null | undefined,
-): readonly DiaSemana[] | null {
-  if (!Array.isArray(dias) || dias.length === 0) return null;
-  const validos = DIAS_SEMANA.filter((d) => dias.includes(d));
-  return validos.length > 0 ? validos : null;
+function normalizeDays(days: readonly Weekday[] | null | undefined): readonly Weekday[] | null {
+  if (!Array.isArray(days) || days.length === 0) return null;
+  const valid = WEEKDAYS.filter((day) => days.includes(day));
+  if (valid.length === 0) return null;
+  return valid;
 }
 
-function normalizarHora(hora: string | null | undefined): string | null {
-  return typeof hora === 'string' && HORA_VALIDA.test(hora) ? hora : null;
+function normalizeTime(time: string | null | undefined): string | null {
+  if (typeof time !== 'string') return null;
+  if (!VALID_TIME.test(time)) return null;
+  return time;
 }
 
-function aMinutos(hora: string): number | null {
-  const partes = HORA_VALIDA.exec(hora);
-  if (!partes) return null;
-  return Number(partes[1]) * 60 + Number(partes[2]);
+function toMinutes(time: string): number | null {
+  const parts = VALID_TIME.exec(time);
+  if (!parts) return null;
+  return Number(parts[1]) * 60 + Number(parts[2]);
 }
 
-function sinCeroInicial(hora: string): string {
-  return hora.replace(/^0/, '');
+function stripLeadingZero(time: string): string {
+  return time.replace(/^0/, '');
 }

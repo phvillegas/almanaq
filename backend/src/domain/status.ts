@@ -1,70 +1,67 @@
 /**
- * Resolución del estado de disponibilidad y redacción de los textos que ve el usuario.
+ * Availability resolution and the user-facing text that goes with it.
  *
- * Este módulo es el único lugar donde se decide si alguien está disponible. El cliente
- * recibe el enum ya resuelto y los textos ya escritos; no arma ninguno de los dos.
- * Ver PLAN.md sección 4 y CLAUDE.md regla 1.
+ * This module is the only place where availability is decided. The client receives
+ * the enum already resolved and the text already written; it composes neither.
+ * See PLAN.md section 4 and CLAUDE.md rule 1.
  */
 
 import {
-  fechaLargaLocal,
-  obtenerCalendarioLocal,
-  partesLocales,
-  type CalendarioLocal,
-  type DiaSemanaLocal,
-  type PartesLocales,
+  formatLongDate,
+  formatShortDate,
+  getLocalCalendar,
+  localParts,
+  type LocalCalendar,
+  type LocalParts,
+  type LocalWeekday,
 } from './calendars.js';
-import { feriadoEnFecha, hayCobertura, proximosFeriados, type Feriado } from './holidays.js';
+import { hasCoverage, holidayOn, upcomingHolidays, type Holiday } from './holidays.js';
+import { intlTag, messagesFor, type Locale, type Messages, type Status } from './i18n.js';
 import {
-  esDiaLaboral,
-  estaEnHorario,
-  etiquetaDias,
-  etiquetaFinDeSemana,
-  etiquetaHorario,
-  obtenerSemanaLaboral,
-  type OverridesMiembro,
-  type SemanaLaboral,
+  formatHours,
+  formatWeekend,
+  formatWorkDays,
+  getWorkWeek,
+  isWithinHours,
+  isWorkDay,
+  type MemberOverrides,
+  type WorkWeek,
 } from './workweek.js';
 
-export type Estado =
-  | 'AVAILABLE'
-  | 'OFF_HOURS'
-  | 'LOCAL_WEEKEND'
-  | 'LOCAL_HOLIDAY'
-  | 'UNKNOWN';
+export type { Status } from './i18n.js';
 
-/** Lo mínimo que el backend necesita de un miembro para resolver su estado. */
-export interface MiembroEntrada {
+/** The minimum the backend needs about a member in order to resolve their status. */
+export interface MemberInput {
   readonly countryCode: string | null;
   readonly timezone: string;
-  readonly overrides?: OverridesMiembro | null;
+  readonly overrides?: MemberOverrides | null;
 }
 
-export interface EstadoResuelto extends PartesLocales {
-  readonly status: Estado;
+export interface ResolvedStatus extends LocalParts {
+  readonly status: Status;
   readonly statusLabel: string;
   readonly statusDetail: string;
-  readonly semana: SemanaLaboral;
-  readonly feriado: Feriado | null;
+  readonly week: WorkWeek;
+  readonly holiday: Holiday | null;
 }
 
-export interface ConflictoDia {
-  readonly reason: Extract<Estado, 'LOCAL_WEEKEND' | 'LOCAL_HOLIDAY' | 'UNKNOWN'>;
+export interface DayConflict {
+  readonly reason: Extract<Status, 'LOCAL_WEEKEND' | 'LOCAL_HOLIDAY' | 'UNKNOWN'>;
   readonly detail: string;
 }
 
-export interface DetalleMiembro {
+export interface MemberDetail {
   readonly localTime: string;
   readonly localDateFormatted: string;
   readonly utcOffsetMinutes: number;
-  readonly status: Estado;
+  readonly status: Status;
   readonly statusLabel: string;
   readonly workWeek: {
     readonly daysLabel: string;
     readonly weekendLabel: string;
     readonly hoursLabel: string;
   };
-  readonly localCalendar: CalendarioLocal | null;
+  readonly localCalendar: LocalCalendar | null;
   readonly upcomingHolidays: readonly {
     readonly name: string;
     readonly dateLabel: string;
@@ -72,207 +69,210 @@ export interface DetalleMiembro {
   }[];
 }
 
-const ETIQUETAS: Readonly<Record<Estado, string>> = {
-  AVAILABLE: 'Disponible',
-  OFF_HOURS: 'Fuera de horario',
-  LOCAL_WEEKEND: 'Fin de semana',
-  LOCAL_HOLIDAY: 'Feriado',
-  UNKNOWN: 'Sin datos',
-};
-
-/** Etiquetas de la pantalla de detalle, que tiene más lugar que una fila de lista. */
-const ETIQUETAS_DETALLE: Readonly<Record<Estado, string>> = {
-  AVAILABLE: 'Disponible ahora',
-  OFF_HOURS: 'Fuera de horario',
-  LOCAL_WEEKEND: 'Fin de semana local',
-  LOCAL_HOLIDAY: 'Feriado local',
-  UNKNOWN: 'Sin datos suficientes',
-};
-
-const NOMBRES_PAIS = new Intl.DisplayNames(['es'], { type: 'region' });
-
 /**
- * Resuelve el estado de un miembro en un instante dado.
+ * Resolves a member's status at a given instant.
  *
- * Orden de decisión, de más firme a menos:
+ * Decision order, from firmest to weakest:
  *
- * 1. Día no laboral según la tabla explícita (o según un override) → `LOCAL_WEEKEND`.
- *    Gana incluso sin cobertura de feriados y aunque además sea feriado: el dato de
- *    fin de semana es el más confiable que tenemos y al usuario el motivo le da igual.
- * 2. Feriado en el archivo del país → `LOCAL_HOLIDAY`.
- * 3. Sin cobertura de feriados para esa fecha → `UNKNOWN`. Nunca `AVAILABLE`:
- *    afirmar que alguien trabaja un día que podría ser feriado es exactamente el
- *    dato equivocado que PLAN.md sección 10 regla 3 prohíbe.
- * 4. Día no laboral según el default lun a vie → `LOCAL_WEEKEND`. Acá ya sabemos que
- *    hay cobertura de feriados del país, así que no es un país desconocido: es un país
- *    que cae en la regla mayoritaria documentada en PLAN.md sección 5.
- * 5. Día laboral y hora dentro del horario → `AVAILABLE`; si no, `OFF_HOURS`.
+ * 1. Non-working day per the explicit table (or per an override) -> `LOCAL_WEEKEND`.
+ *    It wins even without holiday coverage and even if the day is also a holiday: the
+ *    weekend fact is the most reliable one we have, and the user does not care which
+ *    of the two reasons applies.
+ * 2. A holiday in the country's file -> `LOCAL_HOLIDAY`.
+ * 3. No holiday coverage for that date -> `UNKNOWN`. Never `AVAILABLE`: claiming
+ *    somebody is working on a day that might be a holiday is exactly the wrong data
+ *    PLAN.md section 10 rule 3 forbids.
+ * 4. Non-working day per the Mon to Fri default -> `LOCAL_WEEKEND`. By this point the
+ *    country's holidays are covered, so it is not an unknown country: it is one that
+ *    falls under the majority rule documented in PLAN.md section 5.
+ * 5. Working day, and the time is within hours -> `AVAILABLE`; otherwise `OFF_HOURS`.
  *
- * Lo que sostiene todo el orden es que la cobertura de feriados es el único portón
- * hacia `AVAILABLE`. Sin ella nunca se afirma que alguien está trabajando.
+ * What holds the whole order together is that holiday coverage is the only gate to
+ * `AVAILABLE`. Without it we never claim that somebody is working.
  */
-export function resolverEstado(miembro: MiembroEntrada, instante: Date): EstadoResuelto {
-  const partes = partesLocales(instante, miembro.timezone);
-  const semana = obtenerSemanaLaboral(miembro.countryCode, miembro.overrides);
-  const pais = nombreDePais(miembro.countryCode);
+export function resolveStatus(
+  member: MemberInput,
+  instant: Date,
+  locale: Locale,
+): ResolvedStatus {
+  const parts = localParts(instant, member.timezone);
+  const week = getWorkWeek(member.countryCode, member.overrides);
+  const messages = messagesFor(locale);
+  const country = countryName(member.countryCode, locale);
 
-  const cobertura = hayCobertura(miembro.countryCode, partes.localDate);
-  const feriado = cobertura ? feriadoEnFecha(miembro.countryCode, partes.localDate) : null;
+  const covered = hasCoverage(member.countryCode, parts.localDate);
+  const holiday = covered ? holidayOn(member.countryCode, parts.localDate) : null;
 
-  const { status, statusDetail } = decidir({
-    dia: partes.localWeekday,
-    hora: partes.localTime,
-    semana,
-    cobertura,
-    feriado,
-    pais,
+  const { status, statusDetail } = decide({
+    day: parts.localWeekday,
+    time: parts.localTime,
+    week,
+    covered,
+    holiday,
+    country,
+    messages,
   });
 
   return {
-    ...partes,
+    ...parts,
     status,
-    statusLabel: ETIQUETAS[status],
+    statusLabel: messages.statusLabel[status],
     statusDetail,
-    semana,
-    feriado,
+    week,
+    holiday,
   };
 }
 
 /**
- * Conflicto de un miembro en una fecha del calendario, sin hora.
+ * A member's conflict on a calendar date, without a time of day.
  *
- * La fecha se evalúa como fecha local del miembro: es la fecha de la reunión que el
- * usuario está eligiendo, no un instante que haya que convertir de huso. Por eso acá
- * no existen `AVAILABLE` ni `OFF_HOURS`: sin hora no hay horario laboral que evaluar.
+ * The date is evaluated as the member's local date: it is the date of the meeting the
+ * user is picking, not an instant to convert between zones. That is why neither
+ * `AVAILABLE` nor `OFF_HOURS` appear here: with no time there are no working hours to
+ * evaluate.
  *
- * Devuelve `null` cuando el día está limpio. La vista de mes solo pinta los días con
- * conflicto. Ver PLAN.md sección 4, `POST /v1/calendar`.
+ * Returns `null` when the day is clear. The month view only paints days with
+ * conflicts. See PLAN.md section 4, `POST /v1/calendar`.
  */
-export function resolverConflictoDelDia(
-  miembro: MiembroEntrada,
-  fechaISO: string,
-): ConflictoDia | null {
-  const semana = obtenerSemanaLaboral(miembro.countryCode, miembro.overrides);
-  const pais = nombreDePais(miembro.countryCode);
-  const dia = diaSemanaDeFecha(fechaISO);
+export function resolveDayConflict(
+  member: MemberInput,
+  isoDate: string,
+  locale: Locale,
+): DayConflict | null {
+  const week = getWorkWeek(member.countryCode, member.overrides);
+  const messages = messagesFor(locale);
+  const country = countryName(member.countryCode, locale);
+  const day = weekdayOfDate(isoDate);
 
-  const cobertura = hayCobertura(miembro.countryCode, fechaISO);
-  const feriado = cobertura ? feriadoEnFecha(miembro.countryCode, fechaISO) : null;
+  const covered = hasCoverage(member.countryCode, isoDate);
+  const holiday = covered ? holidayOn(member.countryCode, isoDate) : null;
 
-  if (!semana.inferida && !esDiaLaboral(semana, dia)) {
-    return { reason: 'LOCAL_WEEKEND', detail: `Fin de semana en ${pais}` };
+  if (!week.inferred && !isWorkDay(week, day)) {
+    return { reason: 'LOCAL_WEEKEND', detail: messages.weekendIn(country) };
   }
-  if (feriado) {
-    return { reason: 'LOCAL_HOLIDAY', detail: `Feriado en ${pais}: ${nombreDeFeriado(feriado)}` };
+  if (holiday) {
+    return {
+      reason: 'LOCAL_HOLIDAY',
+      detail: messages.holidayIn(country, holidayName(holiday)),
+    };
   }
-  if (!cobertura) {
-    return { reason: 'UNKNOWN', detail: `Sin datos de feriados en ${pais}` };
+  if (!covered) {
+    return { reason: 'UNKNOWN', detail: messages.noHolidayData(country) };
   }
-  if (!esDiaLaboral(semana, dia)) {
-    return { reason: 'LOCAL_WEEKEND', detail: `Fin de semana en ${pais}` };
+  if (!isWorkDay(week, day)) {
+    return { reason: 'LOCAL_WEEKEND', detail: messages.weekendIn(country) };
   }
   return null;
 }
 
-/** Arma la respuesta de `POST /v1/member/detail`. */
-export function resolverDetalle(miembro: MiembroEntrada, instante: Date): DetalleMiembro {
-  const resuelto = resolverEstado(miembro, instante);
+/** Builds the `POST /v1/member/detail` response. */
+export function resolveDetail(
+  member: MemberInput,
+  instant: Date,
+  locale: Locale,
+): MemberDetail {
+  const resolved = resolveStatus(member, instant, locale);
+  const messages = messagesFor(locale);
 
   return {
-    localTime: resuelto.localTime,
-    localDateFormatted: fechaLargaLocal(instante, miembro.timezone),
-    utcOffsetMinutes: resuelto.utcOffsetMinutes,
-    status: resuelto.status,
-    statusLabel: ETIQUETAS_DETALLE[resuelto.status],
+    localTime: resolved.localTime,
+    localDateFormatted: formatLongDate(instant, member.timezone, locale),
+    utcOffsetMinutes: resolved.utcOffsetMinutes,
+    status: resolved.status,
+    statusLabel: messages.statusLabelDetail[resolved.status],
     workWeek: {
-      daysLabel: etiquetaDias(resuelto.semana),
-      weekendLabel: etiquetaFinDeSemana(resuelto.semana),
-      hoursLabel: etiquetaHorario(resuelto.semana),
+      daysLabel: formatWorkDays(resolved.week, locale),
+      weekendLabel: formatWeekend(resolved.week, locale),
+      hoursLabel: formatHours(resolved.week, locale),
     },
-    localCalendar: obtenerCalendarioLocal(miembro.countryCode, instante, miembro.timezone),
-    upcomingHolidays: proximosFeriados(miembro.countryCode, resuelto.localDate, 3).map((f) => ({
-      name: nombreDeFeriado(f),
-      dateLabel: fechaLargaLocal(new Date(`${f.date}T12:00:00Z`), 'UTC'),
-      startDate: f.date,
-    })),
+    localCalendar: getLocalCalendar(member.countryCode, instant, member.timezone, locale),
+    upcomingHolidays: upcomingHolidays(member.countryCode, resolved.localDate, 3).map(
+      (holiday) => ({
+        name: holidayName(holiday),
+        // Anchored at noon UTC and formatted in UTC: a holiday date is a civil date,
+        // not an instant, and midnight would shift it a day in negative offsets.
+        dateLabel: formatShortDate(new Date(`${holiday.date}T12:00:00Z`), 'UTC', locale),
+        startDate: holiday.date,
+      }),
+    ),
   };
 }
 
-function decidir(entrada: {
-  dia: DiaSemanaLocal;
-  hora: string;
-  semana: SemanaLaboral;
-  cobertura: boolean;
-  feriado: Feriado | null;
-  pais: string;
-}): { status: Estado; statusDetail: string } {
-  const { dia, hora, semana, cobertura, feriado, pais } = entrada;
+function decide(input: {
+  day: LocalWeekday;
+  time: string;
+  week: WorkWeek;
+  covered: boolean;
+  holiday: Holiday | null;
+  country: string;
+  messages: Messages;
+}): { status: Status; statusDetail: string } {
+  const { day, time, week, covered, holiday, country, messages } = input;
 
-  if (!semana.inferida && !esDiaLaboral(semana, dia)) {
-    return { status: 'LOCAL_WEEKEND', statusDetail: `Fin de semana en ${pais}` };
+  if (!week.inferred && !isWorkDay(week, day)) {
+    return { status: 'LOCAL_WEEKEND', statusDetail: messages.weekendIn(country) };
   }
-  if (feriado) {
+  if (holiday) {
     return {
       status: 'LOCAL_HOLIDAY',
-      statusDetail: `Feriado en ${pais}: ${nombreDeFeriado(feriado)}`,
+      statusDetail: messages.holidayIn(country, holidayName(holiday)),
     };
   }
-  if (!cobertura) {
-    return { status: 'UNKNOWN', statusDetail: `Sin datos de feriados en ${pais}` };
+  if (!covered) {
+    return { status: 'UNKNOWN', statusDetail: messages.noHolidayData(country) };
   }
-  if (!esDiaLaboral(semana, dia)) {
-    // País fuera de la tabla, pero con feriados cubiertos: aplica la regla mayoritaria.
-    return { status: 'LOCAL_WEEKEND', statusDetail: `Fin de semana en ${pais}` };
+  if (!isWorkDay(week, day)) {
+    // Country outside the table but with holidays covered: the majority rule applies.
+    return { status: 'LOCAL_WEEKEND', statusDetail: messages.weekendIn(country) };
   }
-  if (estaEnHorario(semana, hora)) {
+  if (isWithinHours(week, time)) {
     return {
       status: 'AVAILABLE',
-      statusDetail: `En horario hasta las ${sinCeroInicial(semana.endLocal)}`,
+      statusDetail: messages.workingUntil(stripLeadingZero(week.endLocal)),
     };
   }
-  return {
-    status: 'OFF_HOURS',
-    statusDetail:
-      hora < semana.startLocal
-        ? `Empieza a las ${sinCeroInicial(semana.startLocal)}`
-        : `Terminó a las ${sinCeroInicial(semana.endLocal)}`,
-  };
+  if (time < week.startLocal) {
+    return { status: 'OFF_HOURS', statusDetail: messages.startsAt(stripLeadingZero(week.startLocal)) };
+  }
+  return { status: 'OFF_HOURS', statusDetail: messages.finishedAt(stripLeadingZero(week.endLocal)) };
 }
 
 /**
- * Nombre del feriado tal como lo trae el proveedor.
+ * The holiday name as the provider supplies it.
  *
- * LIMITACIÓN CONOCIDA: no está traducido al español. Nager.Date devuelve el nombre en
- * inglés y el local en el idioma del país. Se prefiere el inglés porque el local viene
- * en alfabetos que el usuario hispanohablante no lee (amárico, hebreo, tailandés).
- * Traducirlos exigiría una tabla mantenida a mano y es la clase de dato que PLAN.md
- * sección 10 regla 3 prefiere no inventar.
+ * KNOWN LIMITATION: holiday names are not localized. Nager.Date returns an English
+ * name and a local one in the country's own script. The English one wins because the
+ * local one comes in alphabets most readers cannot read (Amharic, Hebrew, Thai).
+ * Translating them would need a hand-maintained table, which is the kind of data
+ * PLAN.md section 10 rule 3 prefers not to invent.
  */
-function nombreDeFeriado(feriado: Feriado): string {
-  return feriado.name || feriado.localName || 'Feriado';
+function holidayName(holiday: Holiday): string {
+  return holiday.name || holiday.localName || 'Holiday';
 }
 
-function nombreDePais(countryCode: string | null | undefined): string {
-  if (typeof countryCode !== 'string') return 'ese país';
-  const codigo = countryCode.trim().toUpperCase();
-  if (!/^[A-Z]{2}$/.test(codigo)) return 'ese país';
+/** Country name in the requested locale, straight from ICU. */
+function countryName(countryCode: string | null | undefined, locale: Locale): string {
+  const messages = messagesFor(locale);
+  if (typeof countryCode !== 'string') return messages.unknownCountry;
+  const code = countryCode.trim().toUpperCase();
+  if (!/^[A-Z]{2}$/.test(code)) return messages.unknownCountry;
   try {
-    return NOMBRES_PAIS.of(codigo) ?? codigo;
+    return new Intl.DisplayNames([intlTag(locale)], { type: 'region' }).of(code) ?? code;
   } catch {
-    return codigo;
+    return code;
   }
 }
 
 /**
- * Día de la semana de una fecha "YYYY-MM-DD", leída como fecha civil.
+ * Weekday of a "YYYY-MM-DD" date, read as a civil date.
  *
- * Se ancla a mediodía UTC a propósito: con medianoche, cualquier formateo en un huso
- * negativo devolvería el día anterior. Es el mismo error del snippet de SETUP.md.
+ * Anchored at noon UTC on purpose: at midnight, formatting in any negative offset
+ * would return the previous day. Same bug as the SETUP.md snippet.
  */
-function diaSemanaDeFecha(fechaISO: string): DiaSemanaLocal {
-  return partesLocales(new Date(`${fechaISO}T12:00:00Z`), 'UTC').localWeekday;
+function weekdayOfDate(isoDate: string): LocalWeekday {
+  return localParts(new Date(`${isoDate}T12:00:00Z`), 'UTC').localWeekday;
 }
 
-function sinCeroInicial(hora: string): string {
-  return hora.replace(/^0/, '');
+function stripLeadingZero(time: string): string {
+  return time.replace(/^0/, '');
 }
