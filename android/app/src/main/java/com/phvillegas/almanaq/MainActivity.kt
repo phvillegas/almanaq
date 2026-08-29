@@ -12,7 +12,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -24,6 +26,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -63,6 +66,21 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+
+/**
+ * A tab icon.
+ *
+ * `contentDescription` repeats the visible label on purpose: TalkBack announces the
+ * item once, and a null description would leave the icon silent if the label were ever
+ * hidden.
+ */
+@Composable
+private fun TabIcon(drawable: Int, label: Int) {
+    Icon(
+        painter = painterResource(drawable),
+        contentDescription = stringResource(label),
+    )
 }
 
 @Composable
@@ -114,7 +132,7 @@ private fun AlmanaqApp() {
                 NavigationBarItem(
                     selected = destination is Destination.Team,
                     onClick = { destination = Destination.Team },
-                    icon = {},
+                    icon = { TabIcon(R.drawable.ic_team, R.string.tab_team) },
                     label = { Text(stringResource(R.string.tab_team)) },
                 )
                 NavigationBarItem(
@@ -123,13 +141,13 @@ private fun AlmanaqApp() {
                         destination = Destination.Dates
                         model.loadCalendar()
                     },
-                    icon = {},
+                    icon = { TabIcon(R.drawable.ic_dates, R.string.tab_dates) },
                     label = { Text(stringResource(R.string.tab_dates)) },
                 )
                 NavigationBarItem(
                     selected = destination is Destination.Settings,
                     onClick = { destination = Destination.Settings },
-                    icon = {},
+                    icon = { TabIcon(R.drawable.ic_settings, R.string.tab_settings) },
                     label = { Text(stringResource(R.string.tab_settings)) },
                 )
             }
