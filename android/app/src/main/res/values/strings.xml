@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The app name is a proper noun and is not translated. Everything the user reads
+         inside the app comes localized from the backend. See CLAUDE.md. -->
+    <string name="app_name">Almanaq</string>
+</resources>

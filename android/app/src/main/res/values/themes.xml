@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Only the window theme lives here. The real design system is applied in Compose
+         from design/tokens.json, with dynamic colour explicitly off. See PLAN.md
+         section 8. -->
+    <style name="Theme.Almanaq" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>
