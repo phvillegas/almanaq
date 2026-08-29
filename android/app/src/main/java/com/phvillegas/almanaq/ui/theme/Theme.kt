@@ -36,6 +36,20 @@ private val LightColors = lightColorScheme(
     onSurfaceVariant = Slate,
     outline = SlateLight,
     outlineVariant = Mist,
+    // The surface ladder is declared in full on purpose. Roles left unset fall back to
+    // the Material 3 baseline, which is a purple-tinted neutral of its own: before this
+    // was mapped, NavigationBar painted itself #F3EDF7, a colour in no token file.
+    surfaceContainerLowest = Color.White,
+    surfaceContainerLow = Paper,
+    surfaceContainer = SurfaceTonalLight,
+    surfaceContainerHigh = Mist,
+    surfaceContainerHighest = Vesper100,
+    surfaceDim = Mist,
+    surfaceBright = Color.White,
+    inverseSurface = Nocturne,
+    inverseOnSurface = Starlight,
+    inversePrimary = Vesper300,
+    scrim = Nocturne,
 )
 
 private val DarkColors = darkColorScheme(
@@ -54,6 +68,17 @@ private val DarkColors = darkColorScheme(
     onSurfaceVariant = SlateLight,
     outline = TextDisabledDark,
     outlineVariant = BorderDark,
+    surfaceContainerLowest = Void,
+    surfaceContainerLow = SurfaceDark,
+    surfaceContainer = SurfaceDarkTonal,
+    surfaceContainerHigh = BorderDark,
+    surfaceContainerHighest = AccentSubtleDark,
+    surfaceDim = Void,
+    surfaceBright = SurfaceDarkTonal,
+    inverseSurface = Starlight,
+    inverseOnSurface = Nocturne,
+    inversePrimary = Vesper500,
+    scrim = Color.Black,
 )
 
 /**
