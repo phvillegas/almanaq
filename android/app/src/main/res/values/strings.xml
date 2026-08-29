@@ -11,12 +11,39 @@
     <!-- A proper noun; not translated. -->
     <string name="app_name">Almanaq</string>
 
+    <string name="tab_team">Equipo</string>
+    <string name="tab_dates">Fechas</string>
+    <string name="tab_settings">Ajustes</string>
+
     <string name="team_title">Tu equipo</string>
     <string name="team_available_count">%1$d de %2$d disponibles ahora</string>
     <string name="team_find_time">Buscar un horario</string>
-
     <string name="team_empty_title">Agregá a tu primer compañero</string>
     <string name="team_empty_action">Agregar compañero</string>
-
     <string name="team_stale_data">No pudimos actualizar · Reintentar</string>
+
+    <string name="add_title">Agregar compañero</string>
+    <string name="add_name_label">Nombre</string>
+    <string name="add_city_label">Ciudad</string>
+    <string name="add_cancel">Cancelar</string>
+
+    <string name="detail_back">Equipo</string>
+    <string name="detail_loading">Cargando…</string>
+    <string name="detail_failed">No pudimos cargar el detalle</string>
+    <string name="detail_work_week">Semana laboral</string>
+    <string name="detail_days">Días hábiles</string>
+    <string name="detail_weekend">Fin de semana</string>
+    <string name="detail_hours">Horario</string>
+    <string name="detail_local_calendar">Calendario local</string>
+    <string name="detail_upcoming_holidays">Próximos feriados</string>
+    <string name="detail_remove">Quitar del equipo</string>
+
+    <string name="dates_title">Elegir fecha</string>
+    <string name="dates_all_available">Todo el equipo disponible</string>
+    <string name="dates_unavailable_count">%1$d no disponibles</string>
+
+    <string name="settings_title">Ajustes</string>
+    <string name="settings_backend_url">Dirección del backend</string>
+    <string name="settings_backend_hint">Desde el emulador, http://10.0.2.2:3000. Desde un teléfono, la IP de tu computadora en la red local.</string>
+    <string name="settings_save">Guardar</string>
 </resources>

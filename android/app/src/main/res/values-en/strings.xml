@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="tab_team">Team</string>
+    <string name="tab_dates">Dates</string>
+    <string name="tab_settings">Settings</string>
+
     <string name="team_title">Your team</string>
     <string name="team_available_count">%1$d of %2$d available now</string>
     <string name="team_find_time">Find a time</string>
-
     <string name="team_empty_title">Add your first teammate</string>
     <string name="team_empty_action">Add teammate</string>
-
     <string name="team_stale_data">Could not refresh · Retry</string>
+
+    <string name="add_title">Add teammate</string>
+    <string name="add_name_label">Name</string>
+    <string name="add_city_label">City</string>
+    <string name="add_cancel">Cancel</string>
+
+    <string name="detail_back">Team</string>
+    <string name="detail_loading">Loading…</string>
+    <string name="detail_failed">Could not load the detail</string>
+    <string name="detail_work_week">Work week</string>
+    <string name="detail_days">Working days</string>
+    <string name="detail_weekend">Weekend</string>
+    <string name="detail_hours">Hours</string>
+    <string name="detail_local_calendar">Local calendar</string>
+    <string name="detail_upcoming_holidays">Upcoming holidays</string>
+    <string name="detail_remove">Remove from team</string>
+
+    <string name="dates_title">Pick a date</string>
+    <string name="dates_all_available">The whole team is available</string>
+    <string name="dates_unavailable_count">%1$d unavailable</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_backend_url">Backend address</string>
+    <string name="settings_backend_hint">From the emulator, http://10.0.2.2:3000. From a phone, your computer\'s address on the local network.</string>
+    <string name="settings_save">Save</string>
 </resources>

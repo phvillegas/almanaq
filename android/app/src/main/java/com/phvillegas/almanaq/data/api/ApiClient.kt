@@ -17,12 +17,6 @@ import java.util.concurrent.TimeUnit
  */
 object ApiClient {
 
-    /**
-     * Local development address. `10.0.2.2` is how the Android emulator reaches the
-     * host machine's localhost; a device on the same network needs the host's LAN IP.
-     */
-    private const val DEV_BASE_URL = "http://10.0.2.2:3000/"
-
     private val json = Json {
         // The backend may add fields ahead of the app. Ignoring them keeps an older
         // build working against a newer server.
@@ -30,20 +24,21 @@ object ApiClient {
         explicitNulls = false
     }
 
-    fun create(baseUrl: String = DEV_BASE_URL): AlmanaqApi {
-        val client = OkHttpClient.Builder()
+    private val client: OkHttpClient by lazy {
+        OkHttpClient.Builder()
             .addInterceptor(languageInterceptor())
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
             .build()
+    }
 
-        return Retrofit.Builder()
+    fun create(baseUrl: String): AlmanaqApi =
+        Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
             .create(AlmanaqApi::class.java)
-    }
 
     /**
      * Sends the device languages, in preference order, as `Accept-Language`.

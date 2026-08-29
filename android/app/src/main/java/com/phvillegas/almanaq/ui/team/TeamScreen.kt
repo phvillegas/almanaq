@@ -1,6 +1,7 @@
 package com.phvillegas.almanaq.ui.team
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import com.phvillegas.almanaq.R
 import com.phvillegas.almanaq.model.Member
 import com.phvillegas.almanaq.model.MemberAvailability
+import com.phvillegas.almanaq.ui.TeamRow
+import com.phvillegas.almanaq.ui.TeamUiState
 import com.phvillegas.almanaq.ui.theme.AlmanaqTheme
 import com.phvillegas.almanaq.ui.theme.TabularFigures
 
@@ -41,6 +44,7 @@ import com.phvillegas.almanaq.ui.theme.TabularFigures
 fun TeamScreen(
     state: TeamUiState,
     onAdd: () -> Unit,
+    onOpen: (Member) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize().padding(horizontal = 16.dp)) {
@@ -64,7 +68,7 @@ fun TeamScreen(
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             items(state.rows, key = { it.member.id }) { row ->
-                MemberRow(row)
+                MemberRow(row, onClick = { onOpen(row.member) })
             }
         }
     }
@@ -98,11 +102,11 @@ private fun StaleBanner() {
 }
 
 @Composable
-private fun MemberRow(row: TeamRow, modifier: Modifier = Modifier) {
+private fun MemberRow(row: TeamRow, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val palette = AlmanaqTheme.colors.forStatus(row.availability?.status ?: "UNKNOWN")
 
     Row(
-        modifier = modifier.fillMaxWidth().padding(vertical = 12.dp),
+        modifier = modifier.fillMaxWidth().clickable(onClick = onClick).padding(vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Avatar(name = row.member.name, background = palette.avatarBackground, text = palette.avatarText)
@@ -184,7 +188,7 @@ private fun EmptyState(onAdd: () -> Unit, modifier: Modifier = Modifier) {
 @Composable
 private fun TeamScreenPreview() {
     AlmanaqTheme {
-        TeamScreen(state = previewState(), onAdd = {})
+        TeamScreen(state = previewState(), onAdd = {}, onOpen = {})
     }
 }
 
@@ -192,7 +196,7 @@ private fun TeamScreenPreview() {
 @Composable
 private fun TeamScreenDarkPreview() {
     AlmanaqTheme(darkTheme = true) {
-        TeamScreen(state = previewState(), onAdd = {})
+        TeamScreen(state = previewState(), onAdd = {}, onOpen = {})
     }
 }
 
