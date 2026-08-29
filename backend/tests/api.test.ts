@@ -156,13 +156,10 @@ describe('POST /v1/calendar', () => {
 
     expect(response.status).toBe(200);
 
-    // Tuesday the 18th is a working day for all four. It still shows two conflicts,
-    // because the provider covers neither Israeli nor Nepali holidays. That is the
-    // visible cost of never claiming availability without data.
-    const tuesday = body.days.find((day) => day.date === '2026-08-18');
-    expect(tuesday?.conflictCount).toBe(2);
-    expect(tuesday?.conflicts.map((conflict) => conflict.memberId).sort()).toEqual(['a1', 'c3']);
-    expect(tuesday?.conflicts.every((conflict) => conflict.reason === 'UNKNOWN')).toBe(true);
+    // Tuesday the 18th is a working day for all four, and every one of those countries
+    // now has holiday coverage, so the day is clean and does not appear at all. Before
+    // the three-source build it showed two UNKNOWN conflicts, Israel and Nepal.
+    expect(body.days.some((day) => day.date === '2026-08-18')).toBe(false);
 
     const friday = body.days.find((day) => day.date === '2026-08-21');
     expect(

@@ -29,16 +29,15 @@ describe('Israel — Friday and Saturday weekend', () => {
     expect(status.status).not.toBe('LOCAL_WEEKEND');
   });
 
-  it('does not claim availability without holiday data for the country', () => {
-    // The free provider does not cover Israel. A working Sunday at 10am still comes
-    // back UNKNOWN, because it could be a holiday and we have no way to know.
-    // See PLAN.md section 10, rule 3.
-    expect(hasCoverage('IL', '2026-08-23')).toBe(false);
+  it('resolves a working Sunday, now that Israel has holiday coverage', () => {
+    // Nager.Date does not cover Israel; date-holidays does, and the build script falls
+    // back to it. Before that, this same Sunday came back UNKNOWN.
+    expect(hasCoverage('IL', '2026-08-23')).toBe(true);
 
     const status = resolveStatus(ISRAEL, new Date('2026-08-23T07:00:00Z'), 'en');
 
-    expect(status.status).toBe('UNKNOWN');
-    expect(status.statusDetail).toBe('No holiday data for Israel');
+    expect(status.status).toBe('AVAILABLE');
+    expect(status.statusDetail).toBe('Working until 18:00');
   });
 });
 
@@ -136,6 +135,20 @@ describe('country without data', () => {
   it('reports no holidays for a country without a file', () => {
     expect(upcomingHolidays('BT', '2026-01-01')).toEqual([]);
     expect(hasCoverage('BT', '2026-08-19')).toBe(false);
+  });
+
+  it('leaves Palestine UNKNOWN, the one target country no source covers', () => {
+    // In the work week table (Sun to Thu) but absent from all three holiday sources.
+    // The weekend still resolves; working days cannot.
+    const palestine = { countryCode: 'PS', timezone: 'Asia/Hebron' };
+
+    expect(hasCoverage('PS', '2026-08-19')).toBe(false);
+    expect(resolveStatus(palestine, new Date('2026-08-19T09:00:00Z'), 'en').status).toBe(
+      'UNKNOWN',
+    );
+    expect(resolveStatus(palestine, new Date('2026-08-21T09:00:00Z'), 'en').status).toBe(
+      'LOCAL_WEEKEND',
+    );
   });
 
   it('treats a year outside the generated range as uncovered', () => {

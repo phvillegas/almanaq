@@ -1,0 +1,166 @@
+{
+  "countryCode": "JO",
+  "provider": "google-ical",
+  "generatedAt": "2026-08-29T07:53:11.859Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": null
+    },
+    {
+      "date": "2026-03-20",
+      "name": "Eid al-Fitr",
+      "localName": null
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Eid al-Fitr Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-22",
+      "name": "Eid al-Fitr Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-23",
+      "name": "Eid al-Fitr Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-04-30",
+      "name": "Labor Day Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": null
+    },
+    {
+      "date": "2026-05-25",
+      "name": "Independence Day",
+      "localName": null
+    },
+    {
+      "date": "2026-05-26",
+      "name": "Arafah",
+      "localName": null
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Eid al-Adha",
+      "localName": null
+    },
+    {
+      "date": "2026-05-28",
+      "name": "Eid al-Adha Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-05-29",
+      "name": "Eid al-Adha Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-05-30",
+      "name": "Eid al-Adha Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-06-16",
+      "name": "Muharram",
+      "localName": null
+    },
+    {
+      "date": "2026-08-25",
+      "name": "Prophet's Birthday",
+      "localName": null
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": null
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": null
+    },
+    {
+      "date": "2027-03-09",
+      "name": "Eid al-Fitr (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-03-10",
+      "name": "Eid al-Fitr Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-03-11",
+      "name": "Eid al-Fitr Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-03-12",
+      "name": "Eid al-Fitr Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": null
+    },
+    {
+      "date": "2027-05-15",
+      "name": "Arafah (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-16",
+      "name": "Eid al-Adha (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-17",
+      "name": "Eid al-Adha Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-18",
+      "name": "Eid al-Adha Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-19",
+      "name": "Eid al-Adha Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-25",
+      "name": "Independence Day",
+      "localName": null
+    },
+    {
+      "date": "2027-06-06",
+      "name": "Muharram (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-08-14",
+      "name": "Prophet's Birthday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": null
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "countryCode": "QA",
+  "provider": "google-ical",
+  "generatedAt": "2026-08-29T07:53:11.124Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-02-10",
+      "name": "National Sports Day",
+      "localName": null
+    },
+    {
+      "date": "2026-03-20",
+      "name": "Eid al-Fitr",
+      "localName": null
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Eid al-Fitr Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-22",
+      "name": "Eid al-Fitr Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Eid al-Adha (Feast of Sacrifice)",
+      "localName": null
+    },
+    {
+      "date": "2026-05-28",
+      "name": "Eid al-Adha Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-05-29",
+      "name": "Eid al-Adha Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-12-18",
+      "name": "National Day",
+      "localName": null
+    },
+    {
+      "date": "2027-02-09",
+      "name": "National Sports Day",
+      "localName": null
+    },
+    {
+      "date": "2027-03-10",
+      "name": "Eid al-Fitr (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-03-11",
+      "name": "Eid al-Fitr Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-03-12",
+      "name": "Eid al-Fitr Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-17",
+      "name": "Eid al-Adha (Feast of Sacrifice) (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-18",
+      "name": "Eid al-Adha Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-19",
+      "name": "Eid al-Adha Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-12-18",
+      "name": "National Day",
+      "localName": null
+    }
+  ]
+}

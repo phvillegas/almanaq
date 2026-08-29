@@ -114,25 +114,32 @@ npm run build:locations   # when the GeoNames dump changes
 
 | Data        | Source                              | Current coverage           |
 |-------------|-------------------------------------|----------------------------|
-| Holidays    | [Nager.Date](https://date.nager.at) | 57 countries               |
+| Holidays    | Three sources, in precedence order   | 74 of 75 target countries  |
 | Cities      | [GeoNames](https://geonames.org) `cities15000`, CC BY 4.0 | 34,079 cities, 210 countries |
 | Calendars   | Node's native ICU (`Intl`)          | Hebrew, Ethiopic, Persian, Hijri, Buddhist, Saka, Japanese |
 | Work weeks  | Static table, sourced per row       | 20 countries + majority rule |
 
-### Known limitation of the holiday provider
+### Where the holidays come from
 
-Nager.Date lists 204 countries but covers none of these:
+No single source covers the countries this product is about, so the build script tries
+three in order and records which one produced each country's file:
 
-```
-IL SA QA KW OM JO PS MV AE AF IR NP BN TH IN MY PK LB
-```
+| Order | Source | Countries | Why here |
+|---|---|---|---|
+| 1 | [Nager.Date](https://date.nager.at) | 57 | Verified against ICU and correct |
+| 2 | [`date-holidays`](https://www.npmjs.com/package/date-holidays) | 9 | Offline dataset; covers Israel, the UAE, Saudi Arabia, Iran, India, Thailand, Malaysia, Pakistan, Brunei |
+| 3 | Google public ICS feeds | 8 | Covers Qatar, Kuwait, Oman, Jordan, Iraq, Syria, Yemen, Lebanon, Afghanistan, Nepal, Maldives |
 
-That is almost exactly the set of countries with a non-standard work week, which is
-the problem Almanaq exists to solve. Their members come back `UNKNOWN` on working
-days; weekends still resolve correctly, because those come from our own table.
+`date-holidays` is second and not first because it is not always right: it puts
+Ethiopian Christmas on 6 January, while ICU puts Tahsas 29 on the 7th, where
+Nager.Date also puts it. One wrong date is enough to keep a source from overriding a
+verified one.
 
-Switching providers is cheap: `backend/scripts/build-holidays.ts` changes and nothing
-else. See the open decision in section 13 of `PLAN.md`.
+**Only Palestine has no source.** Its members resolve their weekend from our own work
+week table and come back `UNKNOWN` on working days.
+
+Changing any of this is cheap: `backend/scripts/build-holidays.ts` changes and nothing
+else, because the data is precomputed.
 
 ## Design
 

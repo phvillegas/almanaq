@@ -1,0 +1,101 @@
+{
+  "countryCode": "IL",
+  "provider": "date-holidays",
+  "generatedAt": "2026-08-29T07:53:10.876Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-04-02",
+      "name": "Passover (Pesach)",
+      "localName": "פסח"
+    },
+    {
+      "date": "2026-04-08",
+      "name": "Mimouna, Seventh day of Passover",
+      "localName": "מימונה, שביעי של פסח"
+    },
+    {
+      "date": "2026-04-22",
+      "name": "Independence Day (Yom HaAtzmaut)",
+      "localName": "יום העצמאות"
+    },
+    {
+      "date": "2026-05-22",
+      "name": "Shavuot (Feast of Weeks)",
+      "localName": "שבועות"
+    },
+    {
+      "date": "2026-09-12",
+      "name": "Rosh Hashanah (Yom Teruah)",
+      "localName": "ראש השנה"
+    },
+    {
+      "date": "2026-09-13",
+      "name": "Rosh Hashanah (Day 2)",
+      "localName": "ראש השנה יום 2"
+    },
+    {
+      "date": "2026-09-21",
+      "name": "Day of Atonement (Yom Kippur)",
+      "localName": "יום כיפור"
+    },
+    {
+      "date": "2026-09-26",
+      "name": "Feast of Tabernacles (Sukkot)",
+      "localName": "סוכות"
+    },
+    {
+      "date": "2026-10-03",
+      "name": "Simchat Torah/ Shmini Atzeret",
+      "localName": "שמחת תורה/שמיני עצרת"
+    },
+    {
+      "date": "2027-04-22",
+      "name": "Passover (Pesach)",
+      "localName": "פסח"
+    },
+    {
+      "date": "2027-04-28",
+      "name": "Mimouna, Seventh day of Passover",
+      "localName": "מימונה, שביעי של פסח"
+    },
+    {
+      "date": "2027-05-12",
+      "name": "Independence Day (Yom HaAtzmaut)",
+      "localName": "יום העצמאות"
+    },
+    {
+      "date": "2027-06-11",
+      "name": "Shavuot (Feast of Weeks)",
+      "localName": "שבועות"
+    },
+    {
+      "date": "2027-10-02",
+      "name": "Rosh Hashanah (Yom Teruah)",
+      "localName": "ראש השנה"
+    },
+    {
+      "date": "2027-10-03",
+      "name": "Rosh Hashanah (Day 2)",
+      "localName": "ראש השנה יום 2"
+    },
+    {
+      "date": "2027-10-11",
+      "name": "Day of Atonement (Yom Kippur)",
+      "localName": "יום כיפור"
+    },
+    {
+      "date": "2027-10-16",
+      "name": "Feast of Tabernacles (Sukkot)",
+      "localName": "סוכות"
+    },
+    {
+      "date": "2027-10-23",
+      "name": "Simchat Torah/ Shmini Atzeret",
+      "localName": "שמחת תורה/שמיני עצרת"
+    }
+  ]
+}

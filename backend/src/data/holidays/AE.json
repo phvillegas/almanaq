@@ -1,0 +1,96 @@
+{
+  "countryCode": "AE",
+  "provider": "date-holidays",
+  "generatedAt": "2026-08-29T07:53:12.849Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "رأس السنة الميلادية"
+    },
+    {
+      "date": "2026-01-16",
+      "name": "Laylat al-Mi'raj",
+      "localName": "الإسراء والمعراج"
+    },
+    {
+      "date": "2026-02-18",
+      "name": "First day of Ramadan",
+      "localName": "اليوم الأول من رمضان"
+    },
+    {
+      "date": "2026-03-20",
+      "name": "End of Ramadan (Eid al-Fitr)",
+      "localName": "عيد الفطر"
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Feast of the Sacrifice (Eid al-Adha)",
+      "localName": "عيد الأضحى"
+    },
+    {
+      "date": "2026-06-16",
+      "name": "Islamic New Year",
+      "localName": "رأس السنة الهجرية"
+    },
+    {
+      "date": "2026-08-25",
+      "name": "Birthday of Muhammad (Mawlid)",
+      "localName": "المولد النبويّ"
+    },
+    {
+      "date": "2026-12-02",
+      "name": "National Day",
+      "localName": "اليوم الوطني"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "رأس السنة الميلادية"
+    },
+    {
+      "date": "2027-01-05",
+      "name": "Laylat al-Mi'raj",
+      "localName": "الإسراء والمعراج"
+    },
+    {
+      "date": "2027-02-08",
+      "name": "First day of Ramadan",
+      "localName": "اليوم الأول من رمضان"
+    },
+    {
+      "date": "2027-03-09",
+      "name": "End of Ramadan (Eid al-Fitr)",
+      "localName": "عيد الفطر"
+    },
+    {
+      "date": "2027-05-16",
+      "name": "Feast of the Sacrifice (Eid al-Adha)",
+      "localName": "عيد الأضحى"
+    },
+    {
+      "date": "2027-06-06",
+      "name": "Islamic New Year",
+      "localName": "رأس السنة الهجرية"
+    },
+    {
+      "date": "2027-08-14",
+      "name": "Birthday of Muhammad (Mawlid)",
+      "localName": "المولد النبويّ"
+    },
+    {
+      "date": "2027-12-02",
+      "name": "National Day",
+      "localName": "اليوم الوطني"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Laylat al-Mi'raj",
+      "localName": "الإسراء والمعراج"
+    }
+  ]
+}

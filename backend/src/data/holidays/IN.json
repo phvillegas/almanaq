@@ -1,0 +1,71 @@
+{
+  "countryCode": "IN",
+  "provider": "date-holidays",
+  "generatedAt": "2026-08-29T07:53:13.407Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-26",
+      "name": "Republic Day",
+      "localName": "Republic Day"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Good Friday"
+    },
+    {
+      "date": "2026-04-14",
+      "name": "Ambedkar Jayanti",
+      "localName": "Ambedkar Jayanti"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "Independence Day",
+      "localName": "Independence Day"
+    },
+    {
+      "date": "2026-10-02",
+      "name": "Gandhi Jayanti",
+      "localName": "Gandhi Jayanti"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Christmas Day"
+    },
+    {
+      "date": "2027-01-26",
+      "name": "Republic Day",
+      "localName": "Republic Day"
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Good Friday"
+    },
+    {
+      "date": "2027-04-14",
+      "name": "Ambedkar Jayanti",
+      "localName": "Ambedkar Jayanti"
+    },
+    {
+      "date": "2027-08-15",
+      "name": "Independence Day",
+      "localName": "Independence Day"
+    },
+    {
+      "date": "2027-10-02",
+      "name": "Gandhi Jayanti",
+      "localName": "Gandhi Jayanti"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Christmas Day",
+      "localName": "Christmas Day"
+    }
+  ]
+}

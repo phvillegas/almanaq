@@ -1,0 +1,171 @@
+{
+  "countryCode": "TH",
+  "provider": "date-holidays",
+  "generatedAt": "2026-08-29T07:53:13.381Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "New Year's Day"
+    },
+    {
+      "date": "2026-03-03",
+      "name": "Makha Bucha",
+      "localName": "Makha Bucha"
+    },
+    {
+      "date": "2026-04-06",
+      "name": "Chakri Memorial Day",
+      "localName": "Chakri Memorial Day"
+    },
+    {
+      "date": "2026-04-13",
+      "name": "Songkran Festival",
+      "localName": "Songkran Festival"
+    },
+    {
+      "date": "2026-04-14",
+      "name": "Songkran Festival",
+      "localName": "Songkran Festival"
+    },
+    {
+      "date": "2026-04-15",
+      "name": "Songkran Festival",
+      "localName": "Songkran Festival"
+    },
+    {
+      "date": "2026-05-04",
+      "name": "Coronation Day",
+      "localName": "Coronation Day"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Vesak Day",
+      "localName": "Vesak Day"
+    },
+    {
+      "date": "2026-06-03",
+      "name": "Queen Suthida's Birthday",
+      "localName": "Queen Suthida's Birthday"
+    },
+    {
+      "date": "2026-07-28",
+      "name": "King's Birthday",
+      "localName": "King's Birthday"
+    },
+    {
+      "date": "2026-07-29",
+      "name": "Asalha Puja",
+      "localName": "Asalha Puja"
+    },
+    {
+      "date": "2026-07-30",
+      "name": "Buddhist Lent",
+      "localName": "Buddhist Lent"
+    },
+    {
+      "date": "2026-08-12",
+      "name": "The Queen Mother's Birthday",
+      "localName": "The Queen Mother's Birthday"
+    },
+    {
+      "date": "2026-10-13",
+      "name": "King Bhumibol Adulyadej Memorial Day",
+      "localName": "King Bhumibol Adulyadej Memorial Day"
+    },
+    {
+      "date": "2026-10-23",
+      "name": "King Chulalongkorn Day",
+      "localName": "King Chulalongkorn Day"
+    },
+    {
+      "date": "2026-12-05",
+      "name": "King Bhumibol Adulyadej's Birthday",
+      "localName": "King Bhumibol Adulyadej's Birthday"
+    },
+    {
+      "date": "2026-12-10",
+      "name": "Constitution Day",
+      "localName": "Constitution Day"
+    },
+    {
+      "date": "2026-12-31",
+      "name": "New Year's Eve",
+      "localName": "New Year's Eve"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "New Year's Day"
+    },
+    {
+      "date": "2027-04-06",
+      "name": "Chakri Memorial Day",
+      "localName": "Chakri Memorial Day"
+    },
+    {
+      "date": "2027-04-13",
+      "name": "Songkran Festival",
+      "localName": "Songkran Festival"
+    },
+    {
+      "date": "2027-04-14",
+      "name": "Songkran Festival",
+      "localName": "Songkran Festival"
+    },
+    {
+      "date": "2027-04-15",
+      "name": "Songkran Festival",
+      "localName": "Songkran Festival"
+    },
+    {
+      "date": "2027-05-04",
+      "name": "Coronation Day",
+      "localName": "Coronation Day"
+    },
+    {
+      "date": "2027-06-03",
+      "name": "Queen Suthida's Birthday",
+      "localName": "Queen Suthida's Birthday"
+    },
+    {
+      "date": "2027-07-28",
+      "name": "King's Birthday",
+      "localName": "King's Birthday"
+    },
+    {
+      "date": "2027-08-12",
+      "name": "The Queen Mother's Birthday",
+      "localName": "The Queen Mother's Birthday"
+    },
+    {
+      "date": "2027-10-13",
+      "name": "King Bhumibol Adulyadej Memorial Day",
+      "localName": "King Bhumibol Adulyadej Memorial Day"
+    },
+    {
+      "date": "2027-10-23",
+      "name": "King Chulalongkorn Day",
+      "localName": "King Chulalongkorn Day"
+    },
+    {
+      "date": "2027-12-05",
+      "name": "King Bhumibol Adulyadej's Birthday",
+      "localName": "King Bhumibol Adulyadej's Birthday"
+    },
+    {
+      "date": "2027-12-10",
+      "name": "Constitution Day",
+      "localName": "Constitution Day"
+    },
+    {
+      "date": "2027-12-31",
+      "name": "New Year's Eve",
+      "localName": "New Year's Eve"
+    }
+  ]
+}

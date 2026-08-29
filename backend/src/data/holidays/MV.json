@@ -1,0 +1,266 @@
+{
+  "countryCode": "MV",
+  "provider": "google-ical",
+  "generatedAt": "2026-08-29T07:53:12.846Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": null
+    },
+    {
+      "date": "2026-02-05",
+      "name": "Majlis Presidential Address",
+      "localName": null
+    },
+    {
+      "date": "2026-02-18",
+      "name": "Ramadan Start",
+      "localName": null
+    },
+    {
+      "date": "2026-03-09",
+      "name": "Ramadan Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-10",
+      "name": "Ramadan Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-11",
+      "name": "Ramadan Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-12",
+      "name": "Ramadan Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-13",
+      "name": "Ramadan Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-14",
+      "name": "Ramadan Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-15",
+      "name": "Ramadan Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-16",
+      "name": "Ramadan Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-17",
+      "name": "Ramadan Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-18",
+      "name": "Ramadan Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-20",
+      "name": "Eid-ul-Fithr",
+      "localName": null
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Eid-ul-Fithr Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-22",
+      "name": "Eid-ul-Fithr Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labor Day",
+      "localName": null
+    },
+    {
+      "date": "2026-05-24",
+      "name": "Eid-ul Al'haa Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-05-25",
+      "name": "Eid-ul Al'haa Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-05-26",
+      "name": "Hajj Day",
+      "localName": null
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Eid-ul Al'haa",
+      "localName": null
+    },
+    {
+      "date": "2026-05-28",
+      "name": "Eid-ul Al'haa Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-05-29",
+      "name": "Eid-ul Al'haa Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-05-30",
+      "name": "Eid-ul Al'haa Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-06-16",
+      "name": "Muharram",
+      "localName": null
+    },
+    {
+      "date": "2026-07-26",
+      "name": "Independence Day",
+      "localName": null
+    },
+    {
+      "date": "2026-07-27",
+      "name": "Independence Day Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-08-14",
+      "name": "National Day",
+      "localName": null
+    },
+    {
+      "date": "2026-08-25",
+      "name": "Milad un Nabi",
+      "localName": null
+    },
+    {
+      "date": "2026-09-14",
+      "name": "The Day Maldives Embraced Islam (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2026-11-03",
+      "name": "Victory Day",
+      "localName": null
+    },
+    {
+      "date": "2026-11-11",
+      "name": "Republic Day",
+      "localName": null
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": null
+    },
+    {
+      "date": "2027-02-08",
+      "name": "Ramadan Start (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-03-10",
+      "name": "Eid-ul-Fithr (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-03-11",
+      "name": "Eid-ul-Fithr Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-03-12",
+      "name": "Eid-ul-Fithr Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labor Day",
+      "localName": null
+    },
+    {
+      "date": "2027-05-16",
+      "name": "Hajj Day",
+      "localName": null
+    },
+    {
+      "date": "2027-05-17",
+      "name": "Eid-ul Al'haa (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-18",
+      "name": "Eid-ul Al'haa Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-19",
+      "name": "Eid-ul Al'haa Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-20",
+      "name": "Eid-ul Al'haa Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-06-06",
+      "name": "Muharram (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-07-26",
+      "name": "Independence Day",
+      "localName": null
+    },
+    {
+      "date": "2027-07-27",
+      "name": "Independence Day Holiday",
+      "localName": null
+    },
+    {
+      "date": "2027-08-04",
+      "name": "National Day (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-08-15",
+      "name": "Milad un Nabi (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-09-03",
+      "name": "The Day Maldives Embraced Islam (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-11-03",
+      "name": "Victory Day",
+      "localName": null
+    },
+    {
+      "date": "2027-11-11",
+      "name": "Republic Day",
+      "localName": null
+    }
+  ]
+}

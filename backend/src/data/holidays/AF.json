@@ -1,0 +1,176 @@
+{
+  "countryCode": "AF",
+  "provider": "google-ical",
+  "generatedAt": "2026-08-29T07:53:13.058Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-02-15",
+      "name": "Liberation Day",
+      "localName": null
+    },
+    {
+      "date": "2026-02-18",
+      "name": "First Day of Ramadan",
+      "localName": null
+    },
+    {
+      "date": "2026-03-19",
+      "name": "Eid al-Fitr",
+      "localName": null
+    },
+    {
+      "date": "2026-03-20",
+      "name": "Eid al-Fitr Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Eid al-Fitr Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-04-28",
+      "name": "Afghan Victory Day",
+      "localName": null
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labor Day",
+      "localName": null
+    },
+    {
+      "date": "2026-05-26",
+      "name": "Day of Arafat",
+      "localName": null
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Eid al-Qurban",
+      "localName": null
+    },
+    {
+      "date": "2026-05-28",
+      "name": "Eid al-Qurban Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-05-29",
+      "name": "Eid al-Qurban Holiday",
+      "localName": null
+    },
+    {
+      "date": "2026-06-26",
+      "name": "Ashura",
+      "localName": null
+    },
+    {
+      "date": "2026-08-15",
+      "name": "Anniversary of Taliban Rule",
+      "localName": null
+    },
+    {
+      "date": "2026-08-19",
+      "name": "Independence Day (National Day)",
+      "localName": null
+    },
+    {
+      "date": "2026-08-26",
+      "name": "The Prophet's Birthday",
+      "localName": null
+    },
+    {
+      "date": "2026-08-31",
+      "name": "Anniversary of the Withdrawal of Foreign Troops",
+      "localName": null
+    },
+    {
+      "date": "2026-09-09",
+      "name": "Martyrs and Ahmad Shah Masoud Day",
+      "localName": null
+    },
+    {
+      "date": "2027-02-08",
+      "name": "First Day of Ramadan (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-02-15",
+      "name": "Liberation Day",
+      "localName": null
+    },
+    {
+      "date": "2027-03-10",
+      "name": "Eid al-Fitr (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-03-11",
+      "name": "Eid al-Fitr Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-03-12",
+      "name": "Eid al-Fitr Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-04-28",
+      "name": "Afghan Victory Day",
+      "localName": null
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labor Day",
+      "localName": null
+    },
+    {
+      "date": "2027-05-16",
+      "name": "Day of Arafat (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-17",
+      "name": "Eid al-Qurban (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-18",
+      "name": "Eid al-Qurban Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-05-19",
+      "name": "Eid al-Qurban Holiday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-06-15",
+      "name": "Ashura (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-08-15",
+      "name": "The Prophet's Birthday (tentative)",
+      "localName": null
+    },
+    {
+      "date": "2027-08-19",
+      "name": "Independence Day (National Day)",
+      "localName": null
+    },
+    {
+      "date": "2027-08-31",
+      "name": "Anniversary of the Withdrawal of Foreign Troops",
+      "localName": null
+    },
+    {
+      "date": "2027-09-09",
+      "name": "Martyrs and Ahmad Shah Masoud Day",
+      "localName": null
+    }
+  ]
+}

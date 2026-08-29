@@ -1,0 +1,51 @@
+{
+  "countryCode": "SA",
+  "provider": "date-holidays",
+  "generatedAt": "2026-08-29T07:53:10.877Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-02-22",
+      "name": "Founding Day",
+      "localName": "يوم التأسيس"
+    },
+    {
+      "date": "2026-03-19",
+      "name": "End of Ramadan (Eid al-Fitr)",
+      "localName": "عيد الفطر"
+    },
+    {
+      "date": "2026-05-26",
+      "name": "Feast of the Sacrifice (Eid al-Adha)",
+      "localName": "عيد الأضحى"
+    },
+    {
+      "date": "2026-09-23",
+      "name": "National Day",
+      "localName": "اليوم الوطني"
+    },
+    {
+      "date": "2027-02-22",
+      "name": "Founding Day",
+      "localName": "يوم التأسيس"
+    },
+    {
+      "date": "2027-03-09",
+      "name": "End of Ramadan (Eid al-Fitr)",
+      "localName": "عيد الفطر"
+    },
+    {
+      "date": "2027-05-15",
+      "name": "Feast of the Sacrifice (Eid al-Adha)",
+      "localName": "عيد الأضحى"
+    },
+    {
+      "date": "2027-09-23",
+      "name": "National Day",
+      "localName": "اليوم الوطني"
+    }
+  ]
+}

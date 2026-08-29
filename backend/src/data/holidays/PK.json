@@ -1,0 +1,121 @@
+{
+  "countryCode": "PK",
+  "provider": "date-holidays",
+  "generatedAt": "2026-08-29T07:53:15.670Z",
+  "years": [
+    2026,
+    2027
+  ],
+  "holidays": [
+    {
+      "date": "2026-02-05",
+      "name": "Kashmir Day",
+      "localName": "یومِ یکجہتیِ کشمیر"
+    },
+    {
+      "date": "2026-03-20",
+      "name": "End of Ramadan (Eid al-Fitr)",
+      "localName": "End of Ramadan (Eid al-Fitr)"
+    },
+    {
+      "date": "2026-03-23",
+      "name": "Pakistan Day",
+      "localName": "یومِ پاکستان"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Labour Day",
+      "localName": "Labour Day"
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Feast of the Sacrifice (Eid al-Adha)",
+      "localName": "Feast of the Sacrifice (Eid al-Adha)"
+    },
+    {
+      "date": "2026-05-28",
+      "name": "Youm-e-Takbeer",
+      "localName": "یومِ تکبیر"
+    },
+    {
+      "date": "2026-06-24",
+      "name": "Ashura",
+      "localName": "عاشورہ"
+    },
+    {
+      "date": "2026-08-14",
+      "name": "Independence Day",
+      "localName": "یومِ آزادی"
+    },
+    {
+      "date": "2026-08-25",
+      "name": "Birthday of Muhammad (Mawlid)",
+      "localName": "Birthday of Muhammad (Mawlid)"
+    },
+    {
+      "date": "2026-11-09",
+      "name": "Iqbal Day",
+      "localName": "یومِ اقبال"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Quaid-e-Azam Day",
+      "localName": "یومِ قائدِاعظم"
+    },
+    {
+      "date": "2027-02-05",
+      "name": "Kashmir Day",
+      "localName": "یومِ یکجہتیِ کشمیر"
+    },
+    {
+      "date": "2027-03-09",
+      "name": "End of Ramadan (Eid al-Fitr)",
+      "localName": "End of Ramadan (Eid al-Fitr)"
+    },
+    {
+      "date": "2027-03-23",
+      "name": "Pakistan Day",
+      "localName": "یومِ پاکستان"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "Labour Day",
+      "localName": "Labour Day"
+    },
+    {
+      "date": "2027-05-16",
+      "name": "Feast of the Sacrifice (Eid al-Adha)",
+      "localName": "Feast of the Sacrifice (Eid al-Adha)"
+    },
+    {
+      "date": "2027-05-28",
+      "name": "Youm-e-Takbeer",
+      "localName": "یومِ تکبیر"
+    },
+    {
+      "date": "2027-06-14",
+      "name": "Ashura",
+      "localName": "عاشورہ"
+    },
+    {
+      "date": "2027-08-14",
+      "name": "Birthday of Muhammad (Mawlid)",
+      "localName": "یومِ آزادی"
+    },
+    {
+      "date": "2027-08-14",
+      "name": "Independence Day",
+      "localName": "یومِ آزادی"
+    },
+    {
+      "date": "2027-11-09",
+      "name": "Iqbal Day",
+      "localName": "یومِ اقبال"
+    },
+    {
+      "date": "2027-12-25",
+      "name": "Quaid-e-Azam Day",
+      "localName": "یومِ قائدِاعظم"
+    }
+  ]
+}
