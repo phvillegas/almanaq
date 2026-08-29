@@ -109,7 +109,13 @@ compared.
 ## Project status
 
 The backend is built: domain layer, the four endpoints, precomputed data and tests.
-**The contract is not frozen yet.**
+
+**The contract is frozen** as of 2026-08-29: the four endpoints in section 4 of the
+plan, the error shape, and the `status` enum. Changing any of them from here on is a
+decision the human makes, not a refactor.
+
+What is still open is holiday coverage, which changes what the endpoints answer, not
+what they answer with. See section 13 of the plan.
 
 The Android (Gradle) and iOS (`.xcodeproj`) projects **are created by the human** with
 the Android Studio and Xcode wizards. Do not try to generate them: they are structures

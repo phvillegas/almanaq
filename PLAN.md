@@ -887,9 +887,24 @@ These are unresolved and need to be settled before phase 2:
 - **Language.** Spanish and English in v1, resolved from `Accept-Language` with
   Spanish as the fallback. Implemented. Since the status text comes from the backend,
   adding languages does not require shipping new apps.
-- **Holiday provider.** Nager.Date is free but its coverage outside Europe and the
-  Americas is uneven: it covers none of the 18 countries listed in the README, which
-  are almost exactly the ones with non-standard work weeks. Evaluate Calendarific.
+- **Holiday provider.** Still open, but measured on 2026-08-29 against the 75 target
+  countries:
+
+  | Source | Covers | Misses | Notes |
+  |---|---|---|---|
+  | Nager.Date (current) | 57 | the 18 with non-standard work weeks | Free HTTP API |
+  | `date-holidays` (npm, MIT) | 63 | QA KW OM JO IQ PS SY YE MV AF NP LB | Offline dataset, English names, no network at build time |
+  | Google public ICS feeds | QA KW OM JO LB AF NP MV | PS | Free, no key, marks "Public holiday" vs "Observance"; most run to 2031, Nepal only to 2026 |
+
+  `date-holidays` plus the ICS feeds leaves only Palestine uncovered. `date-holidays`
+  covers Israel, Saudi Arabia, the UAE, Iran, India, Thailand, Malaysia, Pakistan and
+  Brunei, which Nager.Date does not; it does not cover Iraq, Syria or Yemen, which
+  Nager.Date does. Neither source alone is a superset of the other.
+
+  The ICS feeds are an undocumented Google endpoint with no support commitment. Since
+  the data is fetched once a year and committed, an outage would delay a regeneration
+  rather than break production — but it is not a contract anybody owes us.
+
   Because the data is precomputed once a year, changing providers later is cheap: only
   the script changes, not the server.
 
