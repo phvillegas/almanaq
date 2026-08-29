@@ -25,7 +25,13 @@ class MainActivity : ComponentActivity() {
                 val state by model.state.collectAsStateWithLifecycle()
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    TeamScreen(state = state, modifier = Modifier.padding(innerPadding))
+                    TeamScreen(
+                        state = state,
+                        // Inert until the add-member screen exists. See PLAN.md 7.1
+                        // step 4 of the phase 2 order.
+                        onAdd = {},
+                        modifier = Modifier.padding(innerPadding),
+                    )
                 }
             }
         }

@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Default resources are Spanish, matching the backend fallback: a device in an
+  unsupported language gets Spanish here and Spanish from the API, rather than a screen
+  in one language and status text in another. English lives in values-en.
+
+  Only chrome copy belongs here. Anything describing a person's availability arrives
+  written and localized from the backend. See CLAUDE.md.
+-->
 <resources>
-    <!-- The app name is a proper noun and is not translated. Everything the user reads
-         inside the app comes localized from the backend. See CLAUDE.md. -->
+    <!-- A proper noun; not translated. -->
     <string name="app_name">Almanaq</string>
+
+    <string name="team_title">Tu equipo</string>
+    <string name="team_available_count">%1$d de %2$d disponibles ahora</string>
+    <string name="team_find_time">Buscar un horario</string>
+
+    <string name="team_empty_title">Agregá a tu primer compañero</string>
+    <string name="team_empty_action">Agregar compañero</string>
+
+    <string name="team_stale_data">No pudimos actualizar · Reintentar</string>
 </resources>

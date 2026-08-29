@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,9 +20,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.phvillegas.almanaq.R
 import com.phvillegas.almanaq.model.Member
 import com.phvillegas.almanaq.model.MemberAvailability
 import com.phvillegas.almanaq.ui.theme.AlmanaqTheme
@@ -35,10 +38,14 @@ import com.phvillegas.almanaq.ui.theme.TabularFigures
  * colour and lays the row out.
  */
 @Composable
-fun TeamScreen(state: TeamUiState, modifier: Modifier = Modifier) {
+fun TeamScreen(
+    state: TeamUiState,
+    onAdd: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Column(modifier = modifier.fillMaxSize().padding(horizontal = 16.dp)) {
         Text(
-            text = "Almanaq",
+            text = stringResource(R.string.team_title),
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.padding(top = 24.dp),
@@ -48,7 +55,7 @@ fun TeamScreen(state: TeamUiState, modifier: Modifier = Modifier) {
         if (state.staleError) StaleBanner()
 
         if (state.rows.isEmpty() && !state.isLoading) {
-            EmptyState(modifier = Modifier.fillMaxSize())
+            EmptyState(onAdd = onAdd, modifier = Modifier.fillMaxSize())
             return@Column
         }
 
@@ -65,11 +72,14 @@ fun TeamScreen(state: TeamUiState, modifier: Modifier = Modifier) {
 
 @Composable
 private fun Counter(state: TeamUiState) {
-    // The wording comes from the client because it is a count, not product copy about
-    // a member's situation. Anything describing a person's availability comes from the
-    // backend already written.
+    // Chrome copy, so it lives in strings.xml. Anything describing a person's
+    // availability arrives already written from the backend.
     Text(
-        text = "${state.availableCount} / ${state.totalCount}",
+        text = stringResource(
+            R.string.team_available_count,
+            state.availableCount,
+            state.totalCount,
+        ),
         style = MaterialTheme.typography.bodyMedium.merge(TabularFigures),
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         modifier = Modifier.padding(top = 4.dp),
@@ -78,9 +88,10 @@ private fun Counter(state: TeamUiState) {
 
 @Composable
 private fun StaleBanner() {
+    // A discreet strip over stale data, never a full screen error. See PLAN.md 7.4.
     Text(
-        text = "···",
-        style = MaterialTheme.typography.labelSmall,
+        text = stringResource(R.string.team_stale_data),
+        style = MaterialTheme.typography.labelLarge,
         color = AlmanaqTheme.colors.localWeekend.text,
         modifier = Modifier.padding(top = 8.dp),
     )
@@ -146,14 +157,26 @@ private fun Avatar(name: String, background: androidx.compose.ui.graphics.Color,
 private fun initialsOf(name: String): String =
     name.trim().split(Regex("\\s+")).take(2).mapNotNull { it.firstOrNull()?.uppercase() }.joinToString("")
 
+/** Text and a button, no illustration. See PLAN.md section 7.1. */
 @Composable
-private fun EmptyState(modifier: Modifier = Modifier) {
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+private fun EmptyState(onAdd: () -> Unit, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
         Text(
-            text = "—",
-            style = MaterialTheme.typography.headlineMedium,
-            color = AlmanaqTheme.colors.textDisabled,
+            text = stringResource(R.string.team_empty_title),
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
         )
+        Button(
+            onClick = onAdd,
+            modifier = Modifier.padding(top = 16.dp),
+        ) {
+            Text(text = stringResource(R.string.team_empty_action))
+        }
     }
 }
 
@@ -161,7 +184,7 @@ private fun EmptyState(modifier: Modifier = Modifier) {
 @Composable
 private fun TeamScreenPreview() {
     AlmanaqTheme {
-        TeamScreen(state = previewState())
+        TeamScreen(state = previewState(), onAdd = {})
     }
 }
 
@@ -169,7 +192,7 @@ private fun TeamScreenPreview() {
 @Composable
 private fun TeamScreenDarkPreview() {
     AlmanaqTheme(darkTheme = true) {
-        TeamScreen(state = previewState())
+        TeamScreen(state = previewState(), onAdd = {})
     }
 }
 

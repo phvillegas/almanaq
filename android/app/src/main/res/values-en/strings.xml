@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="team_title">Your team</string>
+    <string name="team_available_count">%1$d of %2$d available now</string>
+    <string name="team_find_time">Find a time</string>
+
+    <string name="team_empty_title">Add your first teammate</string>
+    <string name="team_empty_action">Add teammate</string>
+
+    <string name="team_stale_data">Could not refresh · Retry</string>
+</resources>
