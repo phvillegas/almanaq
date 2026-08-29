@@ -495,10 +495,15 @@ and Android.** What changes is how they are applied (see section 8).
 | Status          | Light (text)  | Light (bg)    | Dark (text)    | Dark (bg)      |
 |-----------------|---------------|---------------|----------------|----------------|
 | `AVAILABLE`     | `#17724E`     | `#E3F3EB`     | `#3DBE8B`      | `#12291F`      |
-| `OFF_HOURS`     | `#9C9DB4`     | —             | `#6E6F87`      | —              |
+| `OFF_HOURS`     | `#5B5C74`     | —             | `#9C9DB4`      | —              |
 | `LOCAL_WEEKEND` | `#8A5A0B`     | `#FBF0DC`     | `#F0B455`      | `#2A2216`      |
 | `LOCAL_HOLIDAY` | `#8A5A0B`     | `#FBF0DC`     | `#F0B455`      | `#2A2216`      |
-| `UNKNOWN`       | `#9C9DB4`     | —             | `#6E6F87`      | —              |
+| `UNKNOWN`       | `#5B5C74`     | —             | `#9C9DB4`      | —              |
+
+The light text for `OFF_HOURS` and `UNKNOWN` was `#9C9DB4` until it was measured on
+2026-08-29: on a white surface it gives **2.66:1**, against the 4.5:1 rule 4 below
+requires. It is now `#5B5C74` (6.51:1), which is the secondary text colour. The dark
+value is `#9C9DB4` (6.44:1 on surface), which passes.
 
 ### Non-negotiable colour rules
 

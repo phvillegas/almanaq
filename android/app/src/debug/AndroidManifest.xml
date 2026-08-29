@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Debug-only overlay.
+
+  The local backend runs on http://10.0.2.2:3000, and cleartext HTTP has been blocked
+  by default since API 28. This allows it for debug builds only, so the release build
+  keeps refusing plain HTTP.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:usesCleartextTraffic="true"
+        tools:replace="android:usesCleartextTraffic" />
+
+</manifest>

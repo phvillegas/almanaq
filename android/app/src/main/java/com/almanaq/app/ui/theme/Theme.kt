@@ -92,24 +92,17 @@ data class AlmanaqColors(
 }
 
 /**
- * CONTRAST WARNING, unresolved as of 2026-08-29.
- *
- * `OFF_HOURS` and `UNKNOWN` use `#9C9DB4` as their text colour in the light theme,
- * which is what `design/tokens.json` says. Measured against white surface it gives
- * **2.66:1**, below the 4.5:1 that PLAN.md section 6 rule 4 requires of every text and
- * background pair. The token file contradicts its own rule.
- *
- * The values are transcribed faithfully rather than silently corrected, because the
- * palette is the human's call. Nothing renders status text yet, so nothing violates
- * the rule today. Before the "Now" screen paints a status label, either the token
- * changes or these two statuses use `Slate` (`#5B5C74`, 6.51:1) in the light theme.
+ * `OFF_HOURS` and `UNKNOWN` take `Slate` and not `SlateLight` for their text.
+ * `SlateLight` on a white surface measures 2.66:1, below the 4.5:1 rule. The token
+ * file was corrected on 2026-08-29; see the note under the status table in PLAN.md
+ * section 6.
  */
 private val LightStatuses = AlmanaqColors(
     available = StatusPalette(Green600, Green600, Green100, Green100, Green600),
-    offHours = StatusPalette(SlateLight, DotNeutralLight, null, Vesper050, Vesper500),
+    offHours = StatusPalette(Slate, DotNeutralLight, null, Vesper050, Vesper500),
     localWeekend = StatusPalette(Meridian600, Meridian500, Meridian100, Vesper050, Vesper500),
     localHoliday = StatusPalette(Meridian600, Meridian500, Meridian100, Vesper050, Vesper500),
-    unknown = StatusPalette(SlateLight, DotNeutralLight, null, Vesper050, Vesper500),
+    unknown = StatusPalette(Slate, DotNeutralLight, null, Vesper050, Vesper500),
     accentPressed = Vesper600,
     textDisabled = SlateLight,
 )
