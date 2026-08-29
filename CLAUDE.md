@@ -76,6 +76,14 @@ gets localized. An `InputError` message addresses a developer and stays in Engli
 - Comments explain why, not what. The what is already in the code.
 - Document every external data source (work weeks, holidays) with a link and the date
   it was checked.
+- **Relative imports, no path aliases.** The tree is flat enough that nothing goes
+  deeper than one `../`. Node subpath imports (`#domain/*` in `package.json`) do work
+  here, and `paths` in `tsconfig.json` does not — TypeScript will not rewrite the
+  emitted specifiers, so `node dist/index.js` breaks without an extra dependency. The
+  reason to stay with relative imports is the failure mode: subpath imports need
+  `--conditions development` on every dev entry point, and without it Node resolves to
+  `./dist/`, silently running yesterday's compiled build instead of the source.
+  Revisit if a third folder level appears and `../../` starts showing up.
 
 ## Stack (settled, not up for discussion)
 
