@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Auto Backup rules for devices below API 31. See data_extraction_rules.xml for 31+.
+
+  The team document is included: restoring it on a new phone is exactly the
+  "changing phones" case that PLAN.md section 11 expects export and import to cover,
+  and Auto Backup does it without the user doing anything.
+
+  The settings store is excluded. It holds the backend address, which is specific to
+  the machine the user was developing against and is wrong on any other device.
+-->
+<full-backup-content>
+    <include domain="file" path="team.json" />
+    <exclude domain="file" path="datastore" />
+</full-backup-content>

@@ -1,0 +1,18 @@
+# R8 keep rules. AGP combines every file in src/main/keepRules and passes them to R8.
+#
+# Optimization is off today (see app/build.gradle.kts), but these are the rules the app
+# will need the moment it is turned on: R8 strips the generated serializers and
+# kotlinx.serialization then fails at runtime, not at build time, which is the worst
+# way to find out.
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.**
+
+-keepclassmembers class com.phvillegas.almanaq.model.** {
+    *** Companion;
+}
+-keepclasseswithmembers class com.phvillegas.almanaq.model.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+# Retrofit interfaces are reached by reflection.
+-keep,allowobfuscation interface com.phvillegas.almanaq.data.api.AlmanaqApi
