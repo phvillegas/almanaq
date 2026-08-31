@@ -1,14 +1,35 @@
 <!--
-  Adaptive icon background: solid Vesper500, the brand colour from design/tokens.json.
-  The hex is written out because a launcher icon is read by the system before any theme
-  exists, so it cannot come from a Compose token.
+  Adaptive icon background: Vesper500 falling to Vesper700 across the diagonal.
+
+  A flat fill went first and read as a sticker. The gradient runs the same direction as
+  the crescent, so the sun sits on the lighter corner and the thick side of the moon on
+  the darker one.
+
+  Both hex values are from design/tokens.json. They are written out because the system
+  draws a launcher icon long before any Compose theme exists, so they cannot come from a
+  token at runtime.
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <path
-        android:fillColor="#4436C7"
-        android:pathData="M0,0h108v108h-108z" />
+    <path android:pathData="M0,0h108v108h-108z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="0"
+                android:startY="0"
+                android:endX="108"
+                android:endY="108">
+                <item
+                    android:color="#4436C7"
+                    android:offset="0" />
+                <item
+                    android:color="#302683"
+                    android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
 </vector>

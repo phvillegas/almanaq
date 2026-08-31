@@ -1,24 +1,50 @@
 <!--
-  Sun and moon, the name of the design system.
+  Sol y Luna: a crescent with the sun in its opening.
 
-  PLACEHOLDER. It is on-brand and legible, but it is not a designed mark: PLAN.md
-  section 9 puts store icons in phase 3. Replace before publishing.
+  The mark is the product in one shape. Two people, one in daylight and one in the middle
+  of the night, on the same face — which is the whole reason the app exists.
 
-  The art stays inside the central 66dp safe zone of the 108dp canvas, so no launcher
-  mask crops it.
+  The crescent is **one closed path of two arcs**, not a disc with a disc removed. That
+  matters. The obvious way to draw it is two circle subpaths with `fillType="evenOdd"`,
+  and that is what the placeholder did — correctly, because its inner disc sat entirely
+  inside the outer one, where the symmetric difference and the difference are the same
+  shape. A real crescent needs the inner disc to poke out past the outer one to form the
+  horns, and there even-odd fills the poking-out part as well: you get a ring with a bite
+  in it and a second white shape floating beside it. Reversing the winding and switching
+  to non-zero does not reliably fix it either. Two arcs meeting at the two intersection
+  points is unambiguous in every renderer.
+
+  The geometry, so the numbers are checkable rather than magic:
+
+  - Outer circle (54,54) r22, inner circle (67,41) r22, centres 13√2 = 18.385 apart.
+  - Equal radii, so they meet on the perpendicular bisector at (60.5, 47.5) ± 19.988
+    along (0.707, 0.707): (74.633, 61.633) and (46.367, 33.367). Those are the horns.
+  - The path runs the *major* outer arc between them (large-arc 1, sweep 1) and the
+    *minor* inner arc back (large-arc 0, sweep 0).
+  - Widest point of the crescent is 18.4 of 108, which survives the 24dp of a
+    notification.
+
+  Everything stays within 27.4 of centre. The safe circle allows 33 and the mask shows
+  36, but filling either is a mistake this drawing already made once: at radius 30 the
+  art left a violet rim two pixels wide and read as a white blob in the launcher. An
+  adaptive icon needs its background to be visible as background.
+
+  Colours are Starlight and Meridian400 from design/tokens.json, written as literals
+  because the system draws a launcher icon long before any theme exists.
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- Crescent: an outer disc with an offset disc removed, via even-odd fill. -->
+
+    <!-- Crescent. -->
     <path
-        android:fillColor="#FFFFFF"
-        android:fillType="evenOdd"
-        android:pathData="M32,52 a22,22 0 1,1 44,0 a22,22 0 1,1 -44,0 z M45,46 a19,19 0 1,1 38,0 a19,19 0 1,1 -38,0 z" />
-    <!-- Sun. -->
+        android:fillColor="#F2F2F7"
+        android:pathData="M74.633,61.633 A22,22 0 1,1 46.367,33.367 A22,22 0 0,0 74.633,61.633 Z" />
+
+    <!-- Sun, in the opening. -->
     <path
         android:fillColor="#F0B455"
-        android:pathData="M64,72 a7,7 0 1,1 14,0 a7,7 0 1,1 -14,0 z" />
+        android:pathData="M58,41 a9,9 0 1,1 18,0 a9,9 0 1,1 -18,0 z" />
 </vector>
