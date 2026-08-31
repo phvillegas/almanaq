@@ -1,0 +1,46 @@
+name: Backend
+
+# Runs on every pull request, with no path filter on purpose. A filtered workflow that
+# does not run never reports, and a required check that never reports blocks the pull
+# request forever. Cheap enough that always running is the simpler correct answer.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  backend:
+    name: backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Test
+        run: npm test
+
+      # The committed holiday and city data is what the server reads at runtime. If it
+      # ever stops parsing, every endpoint degrades to UNKNOWN in silence.
+      - name: Committed data parses
+        run: |
+          node -e "
+          const fs = require('fs');
+          const files = fs.readdirSync('src/data/holidays').filter(f => f.endsWith('.json'));
+          for (const f of files) JSON.parse(fs.readFileSync('src/data/holidays/' + f, 'utf8'));
+          JSON.parse(fs.readFileSync('src/data/locations/cities.json', 'utf8'));
+          console.log(files.length + ' country files and the city dump parse');
+          "
