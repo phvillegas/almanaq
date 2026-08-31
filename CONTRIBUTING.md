@@ -27,7 +27,8 @@ and lower case.
 | Change            | Before opening                                           |
 |-------------------|----------------------------------------------------------|
 | Backend           | `npm test` and `npx tsc --noEmit` pass                   |
-| Android           | `./gradlew assembleDebug` passes                          |
+| Android           | `./gradlew testDebugUnitTest` and `assembleDebug` pass    |
+| Android semantics | `./gradlew connectedDebugAndroidTest` — needs a device    |
 | Anything visible  | Seen running on a device or emulator, not only compiled  |
 | A new colour pair | Checked at 4.5:1 against its background, in both themes  |
 

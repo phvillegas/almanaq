@@ -13,13 +13,13 @@ ordinary working day, and half the team is on a weekend or a public holiday.
 | Piece    | Status                                                             |
 |----------|--------------------------------------------------------------------|
 | Backend  | Complete. Four endpoints, 79 tests, **contract frozen**            |
-| Android  | v1 scope complete, verified running against the backend            |
+| Android  | v1 complete. 28 unit tests, 4 instrumented, run on a device        |
 | iOS      | Not started                                                        |
 
 The contract was frozen before either client started: with two apps in flight, a moving
 contract doubles the rework.
 
-What Android is still missing is listed at the end of this file.
+What is still missing is listed at the end of this file.
 
 ## Structure
 
@@ -151,8 +151,10 @@ below it without core library desugaring.
 
 ```bash
 cd android
-./gradlew assembleDebug     # builds the APK
-./gradlew installDebug      # installs on the connected device or emulator
+./gradlew assembleDebug            # builds the APK
+./gradlew installDebug             # installs on the connected device or emulator
+./gradlew testDebugUnitTest        # 28 tests, run in CI
+./gradlew connectedDebugAndroidTest  # 4 more, need a device, not run in CI
 ```
 
 The backend address is editable in the app's Settings screen. `10.0.2.2` reaches the
@@ -162,6 +164,12 @@ network, and the backend has to be reachable there.
 The screens live under `app/src/main/java/com/phvillegas/almanaq/ui/`, one package per
 screen, and hold no availability logic: they map a status to a colour and lay out values
 the backend already resolved and localized.
+
+The client computes exactly four things for itself, and the unit tests cover all four:
+the ticking clock (from the offset the backend resolved, so no time zone database is
+opened on the device), the `UTC±N` label, the phone owner's own weekend from ICU, and
+the search for the first day with no conflicts. Anything beyond that list belongs in the
+backend.
 
 ## Working on it
 
@@ -177,6 +185,12 @@ The full rules are in `CLAUDE.md`.
 The canonical colour values live in `design/tokens.json`, the single source of truth.
 The hex values are identical on iOS and Android; what changes is how they are applied.
 Every text and background pair must clear 4.5:1 in both themes.
+
+**The contrast rule outranks the mockups.** One value in the plan does not survive it:
+section 7.2 greys the weekend columns of the month grid at `#9C9DB4`, which measures
+2.66:1 on the light background. A weekend day is selectable, so it is not an inactive
+control and the WCAG exemption does not apply. The app uses `onSurfaceVariant` there
+instead — the column still recedes, at 6.08:1 light and 7.20:1 dark.
 
 ## Documents
 
@@ -206,12 +220,19 @@ each provider writes them and are not translated.
 Stated plainly so nobody rediscovers it the hard way:
 
 - **iOS.** Not a line. It is half the product.
-- **"Find a time" does not find anything.** The button opens the month view; it does not
-  filter to the days without conflicts, which section 7.2 of the plan asks for.
-- **No loading states.** Section 7.4 asks for skeletons; screens currently appear empty
-  and then fill in at once.
-- **The clock does not tick.** Local times refresh when the screen is reopened, not every
-  minute, and there is no refresh on returning from the background.
-- **No client tests.** The backend has 79; Android has none.
-- **Accessibility is unverified.** TalkBack and large font sizes were never tried.
-- **The launcher icon is a placeholder**, on-brand but not a designed mark.
+- **The detail header has no country name.** Section 7.3 of the plan asks for
+  "City, Country · UTC±N" and the app shows "City · UTC±N". The member document stores a
+  country *code*, and turning a code into a localized country name is exactly the kind of
+  table that must not be written once in Kotlin and again in Swift. The backend already
+  resolves it for search results, so the fix is a field on `/v1/member/detail` — a change
+  to a frozen contract, and therefore a decision rather than a refactor.
+- **The instrumented tests do not run in CI.** They need a device. `AccessibilityTest`
+  runs locally with `./gradlew connectedDebugAndroidTest`.
+- **TalkBack was never actually heard.** What a screen reader is handed is asserted
+  against the semantics tree; the audio itself was not listened to, because there is no
+  way to capture speech from an emulator.
+- **"Schedule anyway" does not schedule anything.** It acknowledges the conflict and
+  nothing else. Handing the chosen date to the device calendar through
+  `Intent.ACTION_INSERT` is not in the section 2 scope, so it stays proposed.
+- **The mockups in `design/` are Spanish only.** The app is localized; the reference
+  images are not.
