@@ -42,7 +42,7 @@ body:
     attributes:
       label: Instant
       description: The UTC instant, or the date, at which it happened.
-      placeholder: 2026-08-21T15:42:00Z
+      placeholder: "2026-08-21T15:42:00Z"
     validations:
       required: true
 
