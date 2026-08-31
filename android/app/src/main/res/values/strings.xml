@@ -20,7 +20,11 @@
     <string name="team_find_time">Buscar un horario</string>
     <string name="team_empty_title">Agregá a tu primer compañero</string>
     <string name="team_empty_action">Agregar compañero</string>
-    <string name="team_stale_data">No pudimos actualizar · Reintentar</string>
+    <string name="team_stale_unknown">No pudimos actualizar · Reintentar</string>
+    <plurals name="team_stale_minutes">
+        <item quantity="one">Datos de hace %d minuto · Reintentar</item>
+        <item quantity="other">Datos de hace %d minutos · Reintentar</item>
+    </plurals>
 
     <string name="add_title">Agregar compañero</string>
     <string name="add_name_label">Nombre</string>
@@ -28,7 +32,6 @@
     <string name="add_cancel">Cancelar</string>
 
     <string name="detail_back">Equipo</string>
-    <string name="detail_loading">Cargando…</string>
     <string name="detail_failed">No pudimos cargar el detalle</string>
     <string name="detail_work_week">Semana laboral</string>
     <string name="detail_days">Días hábiles</string>

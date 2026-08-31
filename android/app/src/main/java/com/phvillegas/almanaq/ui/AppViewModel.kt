@@ -39,6 +39,12 @@ data class TeamUiState(
     val isLoading: Boolean = true,
     /** Set when the last refresh failed and the rows on screen are stale. */
     val staleError: Boolean = false,
+    /**
+     * When the rows on screen were last resolved by the backend. `null` means nothing
+     * has ever loaded, which is why the strip can say how old the data is only
+     * sometimes. See PLAN.md section 7.4.
+     */
+    val loadedAt: Instant? = null,
 )
 
 data class SearchUiState(
@@ -60,6 +66,20 @@ data class DetailUiState(
     val isLoading: Boolean = false,
     val failed: Boolean = false,
 )
+
+/**
+ * Sorts by name inside each status group, leaving the groups where the backend put them.
+ *
+ * `groupBy` keeps the order the keys were first seen, which is the order the response
+ * arrived in. That matters: the backend decides that available outranks off hours
+ * outranks weekend, and the client must not re-decide it. All this does is settle ties.
+ *
+ * Top level and `internal` so it can be tested without an Android runtime.
+ */
+internal fun sortByNameWithinStatus(rows: List<TeamRow>): List<TeamRow> =
+    rows.groupBy { it.availability?.status }
+        .values
+        .flatMap { group -> group.sortedBy { it.member.name.lowercase() } }
 
 /**
  * Holds everything the three screens read.
@@ -151,6 +171,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                         totalCount = response.totalCount,
                         isLoading = false,
                         staleError = false,
+                        loadedAt = Instant.now(),
                     )
                 }
                 .onFailure { error ->
@@ -170,11 +191,6 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                 }
         }
     }
-
-    private fun sortByNameWithinStatus(rows: List<TeamRow>): List<TeamRow> =
-        rows.groupBy { it.availability?.status }
-            .values
-            .flatMap { group -> group.sortedBy { it.member.name.lowercase() } }
 
     // --- Adding and removing members --------------------------------------------
 
