@@ -180,5 +180,36 @@ npm run build:locations  # regenerates data/locations/cities.json
   The body, when one is needed, explains the why rather than the what: the what is
   already in the diff.
 
+- **Branches and pull requests.** `main` is never committed to directly. Every change
+  goes on a branch named `type/short-description`, using the same types as the commit
+  convention, in English and lower case with hyphens:
+
+  ```
+  feat/android-member-detail
+  fix/backend-nepal-offset
+  chore/data-2027-holidays
+  ```
+
+  The scope goes inside the description, not as a second slash: `feat/android-...`,
+  never `feat/android/...`.
+
+- **One pull request per logical change.** The pull request title is the commit message
+  that will land: merges are squashes, and GitHub takes the title.
+
+- **Squash merge only.** Merge commits are disabled on the repository and the branch is
+  deleted on merge, so neither needs to be done by hand.
+
+- **A pull request states what was verified, and what was not.** The floor:
+
+  | Change            | Before opening the pull request                          |
+  |-------------------|----------------------------------------------------------|
+  | Backend           | `npm test` and `npx tsc --noEmit` pass                   |
+  | Android           | `./gradlew assembleDebug` passes                          |
+  | Anything visible  | Seen running on a device or emulator, not only compiled  |
+
+  The last row is not ceremony. A screen that compiles can still be unusable: the first
+  version of the "Now" screen rendered its empty state as a bare dash, which on a phone
+  read as a broken dark screen. It compiled, and it had previews.
+
 - User-visible text is returned by the backend already written and localized
   (`statusLabel`, `statusDetail`). The client does not compose it.
