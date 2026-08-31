@@ -33,6 +33,7 @@ import com.phvillegas.almanaq.model.Overrides
 import com.phvillegas.almanaq.ui.DetailUiState
 import com.phvillegas.almanaq.ui.clockAt
 import com.phvillegas.almanaq.ui.components.Avatar
+import com.phvillegas.almanaq.ui.components.BackButton
 import com.phvillegas.almanaq.ui.components.DetailSkeleton
 import com.phvillegas.almanaq.ui.rememberMinuteTicker
 import com.phvillegas.almanaq.ui.theme.AlmanaqTheme
@@ -66,9 +67,9 @@ fun MemberDetailScreen(
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 16.dp),
     ) {
-        TextButton(onClick = onBack, modifier = Modifier.padding(top = 8.dp)) {
-            Text(stringResource(R.string.detail_back))
-        }
+        // The same control as the add screen, on purpose: both sit on top of the tabs
+        // and hide the navigation bar, so both need the same visible way out.
+        BackButton(onBack = onBack, modifier = Modifier.padding(top = 8.dp))
 
         Header(name = member.name, city = member.city, detail = detail)
 

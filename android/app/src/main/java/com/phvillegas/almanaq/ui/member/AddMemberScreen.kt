@@ -11,7 +11,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.phvillegas.almanaq.R
 import com.phvillegas.almanaq.model.Location
 import com.phvillegas.almanaq.ui.SearchUiState
+import com.phvillegas.almanaq.ui.components.BackButton
 
 /**
  * Adding a member: a name and a city, nothing else.
@@ -36,17 +36,22 @@ fun AddMemberScreen(
     state: SearchUiState,
     onQuery: (String) -> Unit,
     onPick: (String, Location) -> Unit,
-    onCancel: () -> Unit,
+    onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var name by remember { mutableStateOf("") }
 
     Column(modifier = modifier.fillMaxSize().padding(horizontal = 16.dp)) {
+        // The navigation bar is hidden on this screen, so this is the only visible way
+        // out of it. It used to be a small "Cancel" link below the city field, which
+        // read as "discard what you typed" rather than "go back", and was easy to miss.
+        BackButton(onBack = onBack, modifier = Modifier.padding(top = 8.dp))
+
         Text(
             text = stringResource(R.string.add_title),
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.padding(top = 24.dp, bottom = 16.dp),
+            modifier = Modifier.padding(bottom = 16.dp),
         )
 
         OutlinedTextField(
@@ -65,11 +70,7 @@ fun AddMemberScreen(
             modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
         )
 
-        TextButton(onClick = onCancel, modifier = Modifier.padding(top = 4.dp)) {
-            Text(stringResource(R.string.add_cancel))
-        }
-
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(modifier = Modifier.fillMaxSize().padding(top = 8.dp)) {
             items(state.results, key = { "${it.city}-${it.countryCode}-${it.timezone}" }) { location ->
                 LocationRow(
                     location = location,

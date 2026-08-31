@@ -1,10 +1,12 @@
 package com.phvillegas.almanaq.ui
 
 import androidx.compose.ui.test.assertHasClickAction
+import androidx.compose.ui.test.assertHeightIsAtLeast
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.unit.dp
 import com.phvillegas.almanaq.model.Member
 import com.phvillegas.almanaq.model.MemberAvailability
 import com.phvillegas.almanaq.ui.team.TeamScreen
@@ -47,6 +49,7 @@ class TeamScreenTest {
 
         compose
             .onNodeWithContentDescription("Add teammate")
+            .assertHeightIsAtLeast(48.dp)
             .assertHasClickAction()
             .performClick()
 

@@ -29,9 +29,9 @@
     <string name="add_title">Agregar compañero</string>
     <string name="add_name_label">Nombre</string>
     <string name="add_city_label">Ciudad</string>
-    <string name="add_cancel">Cancelar</string>
 
-    <string name="detail_back">Equipo</string>
+    <!-- Read out for the back arrow on both pushed screens. -->
+    <string name="action_back">Volver al equipo</string>
     <string name="detail_failed">No pudimos cargar el detalle</string>
     <string name="detail_work_week">Semana laboral</string>
     <string name="detail_days">Días hábiles</string>
