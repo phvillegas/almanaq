@@ -21,15 +21,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.phvillegas.almanaq.R
+import com.phvillegas.almanaq.model.MemberDetailResponse
 import com.phvillegas.almanaq.model.Overrides
 import com.phvillegas.almanaq.ui.DetailUiState
+import com.phvillegas.almanaq.ui.clockAt
+import com.phvillegas.almanaq.ui.components.Avatar
+import com.phvillegas.almanaq.ui.components.DetailSkeleton
+import com.phvillegas.almanaq.ui.rememberMinuteTicker
 import com.phvillegas.almanaq.ui.theme.AlmanaqTheme
 import com.phvillegas.almanaq.ui.theme.TabularFigures
+import com.phvillegas.almanaq.ui.utcOffsetLabel
 import java.time.DayOfWeek
 import java.time.format.TextStyle
 import java.util.Locale
@@ -50,6 +57,7 @@ fun MemberDetailScreen(
 ) {
     val member = state.member ?: return
     val detail = state.detail
+    val now by rememberMinuteTicker()
 
     Column(
         modifier = modifier
@@ -61,20 +69,16 @@ fun MemberDetailScreen(
             Text(stringResource(R.string.detail_back))
         }
 
-        Text(
-            text = member.name,
-            style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.onBackground,
-        )
-        Text(
-            text = member.city,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
+        Header(name = member.name, city = member.city, detail = detail)
+
+        if (detail == null && state.isLoading) {
+            DetailSkeleton(modifier = Modifier.padding(top = 24.dp))
+            return@Column
+        }
 
         if (detail == null) {
             Text(
-                text = stringResource(if (state.isLoading) R.string.detail_loading else R.string.detail_failed),
+                text = stringResource(R.string.detail_failed),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = 24.dp),
@@ -84,12 +88,14 @@ fun MemberDetailScreen(
         }
 
         Text(
-            text = detail.localTime,
+            // Ticks on the minute from the offset the backend resolved. See Clock.kt.
+            text = clockAt(now, detail.utcOffsetMinutes),
             style = MaterialTheme.typography.displayLarge.merge(TabularFigures),
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.padding(top = 16.dp),
         )
         Text(
+            // Written and localized by the backend, in that person's calendar.
             text = detail.localDateFormatted,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -133,6 +139,41 @@ fun MemberDetailScreen(
         )
 
         RemoveAction(member.id, onRemove)
+    }
+}
+
+/**
+ * Avatar, name, and where the person is. See PLAN.md section 7.3.
+ *
+ * The plan asks for "City, Country · UTC±N" and this shows "City · UTC±N". The country
+ * name is missing on purpose: the member document stores a country *code*, and turning a
+ * code into a localized country name is exactly the kind of table that must not be
+ * written once in Kotlin and again in Swift. The backend already resolves it for search
+ * results; putting it on `/v1/member/detail` would change a frozen contract, so it is
+ * proposed rather than done. See CLAUDE.md rules 2, 6 and 8.
+ */
+@Composable
+private fun Header(name: String, city: String, detail: MemberDetailResponse?) {
+    val palette = AlmanaqTheme.colors.forStatus(detail?.status ?: "UNKNOWN")
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Avatar(name = name, palette = palette, size = 48.dp, showBadge = false)
+
+        Column(modifier = Modifier.padding(start = 12.dp)) {
+            Text(
+                text = name,
+                style = MaterialTheme.typography.headlineMedium,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+            Text(
+                text = detail?.let { "$city · ${utcOffsetLabel(it.utcOffsetMinutes)}" } ?: city,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
     }
 }
 

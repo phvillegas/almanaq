@@ -9,7 +9,11 @@
     <string name="team_find_time">Find a time</string>
     <string name="team_empty_title">Add your first teammate</string>
     <string name="team_empty_action">Add teammate</string>
-    <string name="team_stale_data">Could not refresh · Retry</string>
+    <string name="team_stale_unknown">Could not refresh · Retry</string>
+    <plurals name="team_stale_minutes">
+        <item quantity="one">Data from %d minute ago · Retry</item>
+        <item quantity="other">Data from %d minutes ago · Retry</item>
+    </plurals>
 
     <string name="add_title">Add teammate</string>
     <string name="add_name_label">Name</string>
@@ -17,7 +21,6 @@
     <string name="add_cancel">Cancel</string>
 
     <string name="detail_back">Team</string>
-    <string name="detail_loading">Loading…</string>
     <string name="detail_failed">Could not load the detail</string>
     <string name="detail_work_week">Work week</string>
     <string name="detail_days">Working days</string>

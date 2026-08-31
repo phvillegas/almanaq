@@ -11,10 +11,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -28,6 +26,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.phvillegas.almanaq.ui.AppViewModel
@@ -95,6 +95,19 @@ private fun AlmanaqApp() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     var destination by remember { mutableStateOf<Destination>(Destination.Team) }
+
+    // Section 7.1 lists three moments to re-query availability: on open, on returning
+    // from the background, and on pull to refresh. This is the second one. The first
+    // resume is the open, which the view model already covered from its own init, so it
+    // is skipped rather than fetched twice.
+    var resumedOnce by remember { mutableStateOf(false) }
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
+        if (!resumedOnce) {
+            resumedOnce = true
+            return@LifecycleEventEffect
+        }
+        model.refreshTeam()
+    }
 
     // Import replaces the whole document. A file that does not parse is refused rather
     // than partially applied. See PLAN.md section 11.
@@ -167,6 +180,7 @@ private fun AlmanaqApp() {
                     destination = Destination.Dates
                     model.loadCalendar()
                 },
+                onRefresh = model::refreshTeam,
                 modifier = content,
             )
 
