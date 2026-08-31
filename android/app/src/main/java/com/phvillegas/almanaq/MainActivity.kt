@@ -178,7 +178,9 @@ private fun AlmanaqApp() {
                 },
                 onFindTime = {
                     destination = Destination.Dates
-                    model.loadCalendar()
+                    // "Find a time" arrives with the filter already on, so the month
+                    // opens on the first day nobody is away. PLAN.md section 7.2.
+                    model.findTime()
                 },
                 onRefresh = model::refreshTeam,
                 modifier = content,
@@ -188,6 +190,9 @@ private fun AlmanaqApp() {
                 state = calendar,
                 onMonth = model::showMonth,
                 onSelect = model::selectDay,
+                onConflictFreeOnly = model::showConflictFreeOnly,
+                onRetry = model::loadCalendar,
+                onAdd = { destination = Destination.AddMember },
                 modifier = content,
             )
 
