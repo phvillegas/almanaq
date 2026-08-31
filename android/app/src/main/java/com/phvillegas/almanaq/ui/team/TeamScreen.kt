@@ -13,6 +13,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
@@ -20,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -65,12 +68,7 @@ fun TeamScreen(
     val isEmpty = state.rows.isEmpty() && !state.isLoading
 
     Column(modifier = modifier.fillMaxSize().padding(horizontal = 16.dp)) {
-        Text(
-            text = stringResource(R.string.team_title),
-            style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.padding(top = 24.dp),
-        )
+        Title(onAdd = onAdd, showAdd = !isEmpty)
         Counter(state)
 
         if (state.staleError) StaleBanner(loadedAt = state.loadedAt, now = now, onRetry = onRefresh)
@@ -131,6 +129,44 @@ private fun Content(
             items(state.rows, key = { it.member.id }) { row ->
                 MemberRow(row = row, now = now, onClick = { onOpen(row.member) })
             }
+        }
+    }
+}
+
+/**
+ * The screen title, with the way to add somebody next to it.
+ *
+ * The plus is not decoration. Before it existed, the only route into "add a teammate"
+ * was the empty state's button, which means the app held exactly one person: add the
+ * first, and the button that let you do it disappears forever. Section 7.1 lists the
+ * vertical structure of this screen and does not mention an add control, but section 2
+ * puts "add and remove team members" in scope, so the omission is in the plan.
+ *
+ * It is hidden on the empty state, where the big button already says the same thing and
+ * two ways to do one thing is worse than one.
+ */
+@Composable
+private fun Title(onAdd: () -> Unit, showAdd: Boolean) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(
+            text = stringResource(R.string.team_title),
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.weight(1f),
+        )
+
+        if (!showAdd) return@Row
+
+        IconButton(onClick = onAdd) {
+            Icon(
+                painter = painterResource(R.drawable.ic_add),
+                // The glyph is a plus; what a screen reader needs is the verb.
+                contentDescription = stringResource(R.string.team_empty_action),
+                tint = MaterialTheme.colorScheme.primary,
+            )
         }
     }
 }
