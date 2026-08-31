@@ -129,6 +129,16 @@ baseline on 2026-08-31: the build files are the ones Android Studio generates, w
 plugins, dependencies and comments added on top. Keeping the wizard's shape means a
 future regeneration diffs cleanly instead of being reconciled by hand.
 
+**Android v1 is complete** as of 2026-08-31: every screen in section 7 of the plan, the
+per-minute clock, the conflict-free day view, loading and stale states, the launcher
+icon, and tests. What is left is listed under "Not done yet" in the README, and the only
+large item there is iOS.
+
+The client computes exactly four things for itself — the ticking clock from the offset
+the backend resolved, the `UTC±N` label, the phone owner's own weekend from ICU, and the
+search for the first day with no conflicts. That list is the whole surface rule 1 allows.
+Before adding a fifth, say why the backend cannot answer it.
+
 Two constraints are worth knowing before touching versions:
 
 - AGP 9.3.2 requires Gradle 9.5.0 or newer.
@@ -150,6 +160,15 @@ npm test                 # tests
 npm run build            # compile to dist/
 npm run build:holidays   # regenerates data/holidays/*.json (once a year)
 npm run build:locations  # regenerates data/locations/cities.json
+```
+
+From `android/`:
+
+```
+./gradlew assembleDebug              # builds the APK
+./gradlew installDebug               # installs on the connected device or emulator
+./gradlew testDebugUnitTest          # unit tests, run in CI
+./gradlew connectedDebugAndroidTest  # semantics tests, need a device, not in CI
 ```
 
 ## Conventions
@@ -204,7 +223,8 @@ npm run build:locations  # regenerates data/locations/cities.json
   | Change            | Before opening the pull request                          |
   |-------------------|----------------------------------------------------------|
   | Backend           | `npm test` and `npx tsc --noEmit` pass                   |
-  | Android           | `./gradlew assembleDebug` passes                          |
+  | Android           | `./gradlew testDebugUnitTest` and `assembleDebug` pass    |
+  | Android semantics | `./gradlew connectedDebugAndroidTest` — needs a device    |
   | Anything visible  | Seen running on a device or emulator, not only compiled  |
 
   The last row is not ceremony. A screen that compiles can still be unusable: the first
