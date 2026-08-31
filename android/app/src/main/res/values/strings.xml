@@ -60,4 +60,13 @@
     <string name="settings_import_failed">No pudimos leer ese archivo</string>
     <string name="settings_import_ok">Equipo importado</string>
     <string name="dates_schedule_anyway">Agendar igual</string>
+    <string name="dates_show_conflict_free">Ver días sin conflictos</string>
+    <string name="dates_show_all">Ver todos los días</string>
+    <string name="dates_no_clear_day">Ningún día de este mes está libre para todo el equipo</string>
+    <string name="dates_empty_title">Agregá compañeros para ver los conflictos</string>
+    <string name="dates_failed">No pudimos cargar el mes · Reintentar</string>
+    <string name="dates_previous_month">Mes anterior</string>
+    <string name="dates_next_month">Mes siguiente</string>
+    <!-- Read out loud on a day that has conflicts: "31 de agosto de 2026, 3 no disponibles". -->
+    <string name="dates_day_conflicts_a11y">%1$s, %2$d no disponibles</string>
 </resources>

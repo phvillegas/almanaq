@@ -83,6 +83,26 @@ fun TeamListSkeleton(modifier: Modifier = Modifier, rows: Int = 4) {
     }
 }
 
+/** The shape of the month grid: six rows of seven day circles. */
+@Composable
+fun CalendarSkeleton(modifier: Modifier = Modifier, weeks: Int = 6) {
+    Column(
+        modifier = modifier.fillMaxWidth().clearAndSetSemantics { },
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        repeat(weeks) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                repeat(7) {
+                    SkeletonBox(modifier = Modifier.size(32.dp), shape = CircleShape)
+                }
+            }
+        }
+    }
+}
+
 /** The shape of the member detail: the big clock, then the label rows. */
 @Composable
 fun DetailSkeleton(modifier: Modifier = Modifier) {
