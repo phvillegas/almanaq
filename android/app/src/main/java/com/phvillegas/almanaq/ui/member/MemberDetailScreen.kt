@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.phvillegas.almanaq.R
 import com.phvillegas.almanaq.model.MemberDetailResponse
@@ -310,6 +311,17 @@ private fun SectionTitle(text: String) {
     )
 }
 
+/**
+ * A label on the left, its value on the right.
+ *
+ * The value is measured first and the label takes what is left. That ordering is the
+ * whole point of the function: with both sides unconstrained, a long label eats the row
+ * and leaves the value a column one character wide, which renders "October 12" as eleven
+ * stacked letters. It is invisible at the default font size and unmissable at 200%,
+ * where holiday names wrap.
+ *
+ * A short label simply does not use its share, so nothing changes for "Weekend".
+ */
 @Composable
 private fun LabelRow(label: String, value: String) {
     Row(
@@ -320,11 +332,13 @@ private fun LabelRow(label: String, value: String) {
             text = label,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.weight(1f).padding(end = 16.dp),
         )
         Text(
             text = value,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurface,
+            textAlign = TextAlign.End,
         )
     }
     HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
