@@ -18,9 +18,9 @@
     <string name="add_title">Add teammate</string>
     <string name="add_name_label">Name</string>
     <string name="add_city_label">City</string>
-    <string name="add_cancel">Cancel</string>
 
-    <string name="detail_back">Team</string>
+    <!-- Read out for the back arrow on both pushed screens. -->
+    <string name="action_back">Back to the team</string>
     <string name="detail_failed">Could not load the detail</string>
     <string name="detail_work_week">Work week</string>
     <string name="detail_days">Working days</string>

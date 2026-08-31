@@ -221,7 +221,7 @@ private fun AlmanaqApp() {
                     model.clearSearch()
                     destination = Destination.Team
                 },
-                onCancel = {
+                onBack = {
                     model.clearSearch()
                     destination = Destination.Team
                 },

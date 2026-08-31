@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -160,7 +161,9 @@ private fun Title(onAdd: () -> Unit, showAdd: Boolean) {
 
         if (!showAdd) return@Row
 
-        IconButton(onClick = onAdd) {
+        // Explicit 48dp for the same reason as BackButton: Material 3 lays an IconButton
+        // out at 40 and widens only the touch area, leaving the accessibility node short.
+        IconButton(onClick = onAdd, modifier = Modifier.size(48.dp)) {
             Icon(
                 painter = painterResource(R.drawable.ic_add),
                 // The glyph is a plus; what a screen reader needs is the verb.
