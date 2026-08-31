@@ -183,6 +183,23 @@ Every text and background pair must clear 4.5:1 in both themes.
 - `PLAN.md` — scope, architecture, API contract, design system and screens.
 - `SETUP.md` — folder structure and bootstrap for each piece.
 - `CLAUDE.md` — standing working rules: language, code style, branches and pull requests.
+- `CONTRIBUTING.md` — the short version of those rules.
+- `SECURITY.md` — what this project holds, and how to report a vulnerability.
+
+## Licence and data
+
+The code is under the [MIT licence](LICENSE).
+
+**The committed data is not, and carries its own obligations.** It is redistributed
+here, so the terms travel with it:
+
+| Data | Source | Terms |
+|---|---|---|
+| `backend/src/data/locations/cities.json` | [GeoNames](https://www.geonames.org/) `cities15000` | **CC BY 4.0** — attribution required by anyone redistributing it |
+| `backend/src/data/holidays/*.json` | [Nager.Date](https://date.nager.at), [`date-holidays`](https://www.npmjs.com/package/date-holidays) (MIT), and Google's public holiday calendars | Each file records which provider produced it, in its `provider` field |
+
+If you fork this, the GeoNames attribution has to come with you. Holiday names appear as
+each provider writes them and are not translated.
 
 ## Not done yet
 
