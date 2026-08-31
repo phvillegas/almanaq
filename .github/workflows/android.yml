@@ -1,0 +1,27 @@
+name: Android
+
+# No path filter, for the same reason as the backend workflow: a required check that
+# never runs never reports, and blocks the pull request forever.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  android:
+    name: android
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # JDK 17: what AGP 9 requires. Not 21, not 25. See CLAUDE.md.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
