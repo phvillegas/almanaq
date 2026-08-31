@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Backup and device-transfer rules for API 31 and above.
+
+  Same reasoning as backup_rules.xml: the team document travels, the backend address
+  does not. Device transfer carries both, because moving to a new phone on the same
+  desk is the one case where the address is still right.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <include domain="file" path="team.json" />
+        <exclude domain="file" path="datastore" />
+    </cloud-backup>
+    <device-transfer>
+        <include domain="file" path="team.json" />
+        <include domain="file" path="datastore" />
+    </device-transfer>
+</data-extraction-rules>

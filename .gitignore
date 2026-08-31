@@ -9,6 +9,11 @@ android/build/
 android/app/build/
 android/local.properties
 android/.idea/
+android/captures/
+android/.kotlin/
+*.iml
+.cxx
+.externalNativeBuild
 
 # iOS
 ios/build/
