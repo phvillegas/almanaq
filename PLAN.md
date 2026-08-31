@@ -550,8 +550,13 @@ Radii:   iOS → 12-14    Android → 18-20    Pills → 999
 | label     | 13     | 500    | 18          |
 | caption   | 11     | 600    | 16 (tracking 1.6, uppercase) |
 
-System typography on both platforms: SF Pro on iOS, Roboto on Android. No external
-fonts in v1.
+**Inter, bundled.** Reversed on 2026-08-31: this said system typography on both
+platforms — SF Pro on iOS, Roboto on Android — and no external fonts in v1. The system
+font read wrong for the product, so Inter ships with the app instead. One variable file
+carrying every weight, not subset, under the SIL Open Font License.
+
+iOS should use the same file when it starts, or the two apps stop matching. That is the
+part of the original decision worth keeping: one typeface, both platforms.
 
 **Tabular figures are mandatory** for local times and counters. Without them the times
 jitter as they refresh every minute.
