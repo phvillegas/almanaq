@@ -10,14 +10,16 @@ ordinary working day, and half the team is on a weekend or a public holiday.
 
 ## Status
 
-| Piece    | Status                                                    |
-|----------|-----------------------------------------------------------|
-| Backend  | All four endpoints working, with tests. Contract not frozen |
-| Android  | Not started                                                |
-| iOS      | Not started                                                |
+| Piece    | Status                                                             |
+|----------|--------------------------------------------------------------------|
+| Backend  | Complete. Four endpoints, 79 tests, **contract frozen**            |
+| Android  | v1 scope complete, verified running against the backend            |
+| iOS      | Not started                                                        |
 
-The clients do not start until the contract is frozen: with two apps in flight, a
-moving contract doubles the rework.
+The contract was frozen before either client started: with two apps in flight, a moving
+contract doubles the rework.
+
+What Android is still missing is listed at the end of this file.
 
 ## Structure
 
@@ -41,7 +43,7 @@ statuses and paint them.
 cd backend
 npm install
 npm run dev      # server on http://localhost:3000
-npm test         # 78 tests
+npm test         # 79 tests
 npm run build    # compiles to dist/
 ```
 
@@ -141,6 +143,35 @@ week table and come back `UNKNOWN` on working days.
 Changing any of this is cheap: `backend/scripts/build-holidays.ts` changes and nothing
 else, because the data is precomputed.
 
+## Android
+
+Requires Android Studio, JDK 17 and the SDK command-line tools. `minSdk` is 26, which
+is a hard floor rather than a preference: the app uses `java.time`, which does not exist
+below it without core library desugaring.
+
+```bash
+cd android
+./gradlew assembleDebug     # builds the APK
+./gradlew installDebug      # installs on the connected device or emulator
+```
+
+The backend address is editable in the app's Settings screen. `10.0.2.2` reaches the
+host machine from the emulator; a real phone needs the host's address on the local
+network, and the backend has to be reachable there.
+
+The screens live under `app/src/main/java/com/phvillegas/almanaq/ui/`, one package per
+screen, and hold no availability logic: they map a status to a colour and lay out values
+the backend already resolved and localized.
+
+## Working on it
+
+`main` is never committed to directly. Branches are named `type/short-description` with
+the same types as the commit convention, one pull request per logical change, squash
+merge only. A pull request says what was verified and what was not — including whether
+a visible change was actually seen running, not just compiled.
+
+The full rules are in `CLAUDE.md`.
+
 ## Design
 
 The canonical colour values live in `design/tokens.json`, the single source of truth.
@@ -151,4 +182,19 @@ Every text and background pair must clear 4.5:1 in both themes.
 
 - `PLAN.md` — scope, architecture, API contract, design system and screens.
 - `SETUP.md` — folder structure and bootstrap for each piece.
-- `CLAUDE.md` — standing working rules, including language and code style.
+- `CLAUDE.md` — standing working rules: language, code style, branches and pull requests.
+
+## Not done yet
+
+Stated plainly so nobody rediscovers it the hard way:
+
+- **iOS.** Not a line. It is half the product.
+- **"Find a time" does not find anything.** The button opens the month view; it does not
+  filter to the days without conflicts, which section 7.2 of the plan asks for.
+- **No loading states.** Section 7.4 asks for skeletons; screens currently appear empty
+  and then fill in at once.
+- **The clock does not tick.** Local times refresh when the screen is reopened, not every
+  minute, and there is no refresh on returning from the background.
+- **No client tests.** The backend has 79; Android has none.
+- **Accessibility is unverified.** TalkBack and large font sizes were never tried.
+- **The launcher icon is a placeholder**, on-brand but not a designed mark.
