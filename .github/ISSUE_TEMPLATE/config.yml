@@ -1,0 +1,9 @@
+# Blank issues stay enabled: not everything worth writing down fits a form.
+blank_issues_enabled: true
+contact_links:
+  - name: Scope, architecture and the API contract
+    url: https://github.com/phvillegas/almanaq/blob/main/PLAN.md
+    about: Read this before proposing anything. It settles most questions already.
+  - name: Working rules
+    url: https://github.com/phvillegas/almanaq/blob/main/CLAUDE.md
+    about: Language, code style, branches and pull requests.

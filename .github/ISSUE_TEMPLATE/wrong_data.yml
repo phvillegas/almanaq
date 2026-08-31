@@ -1,0 +1,55 @@
+name: Wrong calendar data
+description: A holiday, a work week or a local calendar is wrong or missing
+labels: ["bug", "data"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Wrong data is worse than no data: people schedule meetings with this. A country
+        with no coverage is supposed to answer `UNKNOWN`, so "it says UNKNOWN" is a
+        coverage gap, not necessarily a bug.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is wrong
+      options:
+        - A holiday on the wrong date
+        - A holiday that does not exist
+        - A missing holiday
+        - The work week of a country
+        - The local calendar or its year
+        - A country answering UNKNOWN that should be covered
+    validations:
+      required: true
+
+  - type: input
+    id: country
+    attributes:
+      label: Country code
+      placeholder: ET
+    validations:
+      required: true
+
+  - type: input
+    id: date
+    attributes:
+      label: Date involved
+      placeholder: "2026-01-07"
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What it should say, and the source
+      description: >
+        A link to something authoritative — a government page, an embassy, an official
+        calendar. The generated files record which provider produced each country, in
+        `backend/src/data/holidays/<COUNTRY>.json`.
+      placeholder: |
+        Ethiopian Christmas (Genna) falls on 7 January 2026, not the 6th.
+        Tahsas 29 maps to 2026-01-07 in ICU.
+        Source: ...
+    validations:
+      required: true

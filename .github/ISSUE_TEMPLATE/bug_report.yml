@@ -1,0 +1,67 @@
+name: Bug report
+description: Something behaves differently from what the plan or the contract says
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: piece
+    attributes:
+      label: Piece
+      options:
+        - Backend
+        - Android
+        - iOS
+        - Design tokens
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you got instead.
+      placeholder: |
+        Opened the Now screen with a member in Kathmandu.
+        Expected: the local time to read 05:45.
+        Got: 05:00.
+    validations:
+      required: true
+
+  - type: input
+    id: member
+    attributes:
+      label: Country and time zone of the member involved
+      description: >
+        Almost every bug in this product is a bug about one specific country. Without
+        the country code and the IANA zone it usually cannot be reproduced.
+      placeholder: NP, Asia/Kathmandu
+    validations:
+      required: true
+
+  - type: input
+    id: instant
+    attributes:
+      label: Instant
+      description: The UTC instant, or the date, at which it happened.
+      placeholder: "2026-08-21T15:42:00Z"
+    validations:
+      required: true
+
+  - type: textarea
+    id: response
+    attributes:
+      label: Backend response
+      description: >
+        For anything about availability, paste the JSON the backend returned. It settles
+        immediately whether the bug is in the backend or in the client.
+      render: json
+    validations:
+      required: false
+
+  - type: input
+    id: language
+    attributes:
+      label: Requested language
+      description: The `Accept-Language` sent, or the device language.
+      placeholder: es-AR
+    validations:
+      required: false

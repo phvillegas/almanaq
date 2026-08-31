@@ -1,0 +1,62 @@
+name: Scope proposal
+description: An idea that is not in section 2 of the plan
+labels: ["scope"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Section 2 of the plan settles what v1 is. Anything not listed there gets
+        proposed, not built — that is rule 6. This template exists so proposals are
+        recorded and judged, rather than quietly implemented or quietly lost.
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: The proposal
+      description: What it would do, in a couple of sentences.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: question
+    attributes:
+      label: Which question does it help answer?
+      description: >
+        The decision rule in section 2: if a feature helps neither, it stays out of v1.
+      options:
+        - "Is this person available right now?"
+        - "Which day should I pick?"
+        - Neither, and I think the rule should bend here
+    validations:
+      required: true
+
+  - type: textarea
+    id: why-now
+    attributes:
+      label: Why now rather than later
+      description: >
+        What is worse today because it is missing. "It would be nice" is a fine answer,
+        but say so plainly.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: reach
+    attributes:
+      label: What would it touch?
+      multiple: true
+      options:
+        - Backend only
+        - Android
+        - iOS
+        - The API contract
+        - Local persistence
+        - A new dependency
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: >
+        If it touches the API contract, note that the contract is frozen: changing it is
+        a decision the human makes, and both clients pay for it.
