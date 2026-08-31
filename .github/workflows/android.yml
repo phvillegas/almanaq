@@ -22,6 +22,10 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
+      - name: Test
+        working-directory: android
+        run: ./gradlew testDebugUnitTest --no-daemon
+
       - name: Build
         working-directory: android
         run: ./gradlew assembleDebug --no-daemon
