@@ -124,16 +124,20 @@ what they answer with. See section 13 of the plan.
 The iOS (`.xcodeproj`) project **is created by the human** with the Xcode wizard. Do
 not try to generate it.
 
-The Android project was written by hand on 2026-08-29, at the human's request,
-overriding this rule. It builds: `./gradlew assembleDebug` produces a signed debug APK.
-Two things cost a rebuild each and are worth knowing before touching the versions:
+The Android project was written by hand on 2026-08-29 and rebased onto a wizard
+baseline on 2026-08-31: the build files are the ones Android Studio generates, with our
+plugins, dependencies and comments added on top. Keeping the wizard's shape means a
+future regeneration diffs cleanly instead of being reconciled by hand.
+
+Two constraints are worth knowing before touching versions:
 
 - AGP 9.3.2 requires Gradle 9.5.0 or newer.
 - AGP 9 ships Kotlin support built in and **fails** if the
-  `org.jetbrains.kotlin.android` plugin is applied. Only
-  `org.jetbrains.kotlin.plugin.compose` is declared.
+  `org.jetbrains.kotlin.android` plugin is applied. The wizard does not declare it
+  either; only `org.jetbrains.kotlin.plugin.compose` and `.plugin.serialization` are.
 
-Versions live in `android/gradle/libs.versions.toml`. Do not bump them without
+Library versions in `android/gradle/libs.versions.toml` are ours and newer than the
+wizard defaults, verified by a build and a run on a device. Do not bump them without
 running a build.
 
 ## Commands
