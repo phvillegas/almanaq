@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  GENERATED FILE - do not edit.
+
+  Written by backend/scripts/build-theme.ts, from design/tokens.json, in the same run
+  that writes the Material roles and the Compose scheme. Run npm run build:theme.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1690" viewBox="0 0 1200 1690"
+     font-family="Inter, -apple-system, system-ui, sans-serif">
+  <rect width="1200" height="1690" fill="#fcf8ff" />
+  <text x="40" y="52" font-size="26" font-weight="700" fill="#1b1b23">Sol y Luna — palette</text>
+  <text x="40" y="110" font-size="13" font-weight="600" letter-spacing="1.6" fill="#474554">BRAND</text>
+  <rect x="40" y="130" width="170" height="110" rx="14" fill="#4436C7" stroke="#c8c4d7" />
+  <text x="40" y="266" font-size="15" font-weight="700" fill="#1b1b23">Vesper 500</text>
+  <text x="40" y="288" font-size="13" fill="#474554">#4436C7 · seed</text>
+  <rect x="230" y="130" width="170" height="110" rx="14" fill="#8B7DFF" stroke="#c8c4d7" />
+  <text x="230" y="266" font-size="15" font-weight="700" fill="#1b1b23">Vesper 300</text>
+  <text x="230" y="288" font-size="13" fill="#474554">#8B7DFF · brand, dark</text>
+  <rect x="420" y="130" width="170" height="110" rx="14" fill="#E0A03A" stroke="#c8c4d7" />
+  <text x="420" y="266" font-size="15" font-weight="700" fill="#1b1b23">Meridian 500</text>
+  <text x="420" y="288" font-size="13" fill="#474554">#E0A03A · accent</text>
+  <rect x="610" y="130" width="170" height="110" rx="14" fill="#F0B455" stroke="#c8c4d7" />
+  <text x="610" y="266" font-size="15" font-weight="700" fill="#1b1b23">Meridian 400</text>
+  <text x="610" y="288" font-size="13" fill="#474554">#F0B455 · accent, dark</text>
+  <text x="40" y="392" font-size="13" font-weight="600" letter-spacing="1.6" fill="#474554">MATERIAL 3 · LIGHT · GENERATED FROM #4436C7</text>
+  <rect x="40" y="412" width="170" height="110" rx="14" fill="#2b11b1" stroke="#c8c4d7" />
+  <text x="40" y="548" font-size="15" font-weight="700" fill="#1b1b23">primary</text>
+  <text x="40" y="570" font-size="13" fill="#474554">#2b11b1</text>
+  <rect x="230" y="412" width="170" height="110" rx="14" fill="#ffffff" stroke="#c8c4d7" />
+  <text x="230" y="548" font-size="15" font-weight="700" fill="#1b1b23">onPrimary</text>
+  <text x="230" y="570" font-size="13" fill="#474554">#ffffff</text>
+  <rect x="420" y="412" width="170" height="110" rx="14" fill="#4436c7" stroke="#c8c4d7" />
+  <text x="420" y="548" font-size="15" font-weight="700" fill="#1b1b23">primaryContainer</text>
+  <text x="420" y="570" font-size="13" fill="#474554">#4436c7</text>
+  <rect x="610" y="412" width="170" height="110" rx="14" fill="#c1bdff" stroke="#c8c4d7" />
+  <text x="610" y="548" font-size="15" font-weight="700" fill="#1b1b23">secondaryContainer</text>
+  <text x="610" y="570" font-size="13" fill="#474554">#c1bdff</text>
+  <rect x="800" y="412" width="170" height="110" rx="14" fill="#fcf8ff" stroke="#c8c4d7" />
+  <text x="800" y="548" font-size="15" font-weight="700" fill="#1b1b23">background</text>
+  <text x="800" y="570" font-size="13" fill="#474554">#fcf8ff</text>
+  <rect x="990" y="412" width="170" height="110" rx="14" fill="#fcf8ff" stroke="#c8c4d7" />
+  <text x="990" y="548" font-size="15" font-weight="700" fill="#1b1b23">surface</text>
+  <text x="990" y="570" font-size="13" fill="#474554">#fcf8ff</text>
+  <rect x="40" y="618" width="170" height="110" rx="14" fill="#f0ecf8" stroke="#c8c4d7" />
+  <text x="40" y="754" font-size="15" font-weight="700" fill="#1b1b23">surfaceContainer</text>
+  <text x="40" y="776" font-size="13" fill="#474554">#f0ecf8</text>
+  <rect x="230" y="618" width="170" height="110" rx="14" fill="#eae6f3" stroke="#c8c4d7" />
+  <text x="230" y="754" font-size="15" font-weight="700" fill="#1b1b23">surfaceContainerHigh</text>
+  <text x="230" y="776" font-size="13" fill="#474554">#eae6f3</text>
+  <rect x="420" y="618" width="170" height="110" rx="14" fill="#1b1b23" stroke="#c8c4d7" />
+  <text x="420" y="754" font-size="15" font-weight="700" fill="#1b1b23">onSurface</text>
+  <text x="420" y="776" font-size="13" fill="#474554">#1b1b23</text>
+  <rect x="610" y="618" width="170" height="110" rx="14" fill="#474554" stroke="#c8c4d7" />
+  <text x="610" y="754" font-size="15" font-weight="700" fill="#1b1b23">onSurfaceVariant</text>
+  <text x="610" y="776" font-size="13" fill="#474554">#474554</text>
+  <rect x="800" y="618" width="170" height="110" rx="14" fill="#c8c4d7" stroke="#c8c4d7" />
+  <text x="800" y="754" font-size="15" font-weight="700" fill="#1b1b23">outlineVariant</text>
+  <text x="800" y="776" font-size="13" fill="#474554">#c8c4d7</text>
+  <rect x="990" y="618" width="170" height="110" rx="14" fill="#ba1a1a" stroke="#c8c4d7" />
+  <text x="990" y="754" font-size="15" font-weight="700" fill="#1b1b23">error</text>
+  <text x="990" y="776" font-size="13" fill="#474554">#ba1a1a</text>
+  <text x="40" y="880" font-size="13" font-weight="600" letter-spacing="1.6" fill="#474554">MATERIAL 3 · DARK · GENERATED FROM #4436C7</text>
+  <rect x="40" y="900" width="170" height="110" rx="14" fill="#c4c0ff" stroke="#c8c4d7" />
+  <text x="40" y="1036" font-size="15" font-weight="700" fill="#1b1b23">primary</text>
+  <text x="40" y="1058" font-size="13" fill="#474554">#c4c0ff</text>
+  <rect x="230" y="900" width="170" height="110" rx="14" fill="#2200a3" stroke="#c8c4d7" />
+  <text x="230" y="1036" font-size="15" font-weight="700" fill="#1b1b23">onPrimary</text>
+  <text x="230" y="1058" font-size="13" fill="#474554">#2200a3</text>
+  <rect x="420" y="900" width="170" height="110" rx="14" fill="#4436c7" stroke="#c8c4d7" />
+  <text x="420" y="1036" font-size="15" font-weight="700" fill="#1b1b23">primaryContainer</text>
+  <text x="420" y="1058" font-size="13" fill="#474554">#4436c7</text>
+  <rect x="610" y="900" width="170" height="110" rx="14" fill="#434079" stroke="#c8c4d7" />
+  <text x="610" y="1036" font-size="15" font-weight="700" fill="#1b1b23">secondaryContainer</text>
+  <text x="610" y="1058" font-size="13" fill="#474554">#434079</text>
+  <rect x="800" y="900" width="170" height="110" rx="14" fill="#13121b" stroke="#c8c4d7" />
+  <text x="800" y="1036" font-size="15" font-weight="700" fill="#1b1b23">background</text>
+  <text x="800" y="1058" font-size="13" fill="#474554">#13121b</text>
+  <rect x="990" y="900" width="170" height="110" rx="14" fill="#13121b" stroke="#c8c4d7" />
+  <text x="990" y="1036" font-size="15" font-weight="700" fill="#1b1b23">surface</text>
+  <text x="990" y="1058" font-size="13" fill="#474554">#13121b</text>
+  <rect x="40" y="1106" width="170" height="110" rx="14" fill="#1f1f27" stroke="#c8c4d7" />
+  <text x="40" y="1242" font-size="15" font-weight="700" fill="#1b1b23">surfaceContainer</text>
+  <text x="40" y="1264" font-size="13" fill="#474554">#1f1f27</text>
+  <rect x="230" y="1106" width="170" height="110" rx="14" fill="#2a2932" stroke="#c8c4d7" />
+  <text x="230" y="1242" font-size="15" font-weight="700" fill="#1b1b23">surfaceContainerHigh</text>
+  <text x="230" y="1264" font-size="13" fill="#474554">#2a2932</text>
+  <rect x="420" y="1106" width="170" height="110" rx="14" fill="#e5e1ed" stroke="#c8c4d7" />
+  <text x="420" y="1242" font-size="15" font-weight="700" fill="#1b1b23">onSurface</text>
+  <text x="420" y="1264" font-size="13" fill="#474554">#e5e1ed</text>
+  <rect x="610" y="1106" width="170" height="110" rx="14" fill="#c8c4d7" stroke="#c8c4d7" />
+  <text x="610" y="1242" font-size="15" font-weight="700" fill="#1b1b23">onSurfaceVariant</text>
+  <text x="610" y="1264" font-size="13" fill="#474554">#c8c4d7</text>
+  <rect x="800" y="1106" width="170" height="110" rx="14" fill="#474554" stroke="#c8c4d7" />
+  <text x="800" y="1242" font-size="15" font-weight="700" fill="#1b1b23">outlineVariant</text>
+  <text x="800" y="1264" font-size="13" fill="#474554">#474554</text>
+  <rect x="990" y="1106" width="170" height="110" rx="14" fill="#ffb4ab" stroke="#c8c4d7" />
+  <text x="990" y="1242" font-size="15" font-weight="700" fill="#1b1b23">error</text>
+  <text x="990" y="1264" font-size="13" fill="#474554">#ffb4ab</text>
+  <text x="40" y="1368" font-size="13" font-weight="600" letter-spacing="1.6" fill="#474554">STATUS · HAND-PICKED, NEVER GENERATED</text>
+  <rect x="40" y="1388" width="170" height="110" rx="14" fill="#E3F3EB" stroke="#c8c4d7" />
+  <text x="40" y="1524" font-size="15" font-weight="700" fill="#1b1b23">AVAILABLE</text>
+  <text x="40" y="1546" font-size="13" fill="#474554">#E3F3EB · container</text>
+  <rect x="230" y="1388" width="170" height="110" rx="14" fill="#5B5C74" stroke="#c8c4d7" />
+  <text x="230" y="1524" font-size="15" font-weight="700" fill="#1b1b23">OFF_HOURS</text>
+  <text x="230" y="1546" font-size="13" fill="#474554">#5B5C74 · text, no container</text>
+  <rect x="420" y="1388" width="170" height="110" rx="14" fill="#FBF0DC" stroke="#c8c4d7" />
+  <text x="420" y="1524" font-size="15" font-weight="700" fill="#1b1b23">LOCAL_WEEKEND</text>
+  <text x="420" y="1546" font-size="13" fill="#474554">#FBF0DC · container</text>
+  <rect x="610" y="1388" width="170" height="110" rx="14" fill="#FBF0DC" stroke="#c8c4d7" />
+  <text x="610" y="1524" font-size="15" font-weight="700" fill="#1b1b23">LOCAL_HOLIDAY</text>
+  <text x="610" y="1546" font-size="13" fill="#474554">#FBF0DC · container</text>
+  <rect x="800" y="1388" width="170" height="110" rx="14" fill="#5B5C74" stroke="#c8c4d7" />
+  <text x="800" y="1524" font-size="15" font-weight="700" fill="#1b1b23">UNKNOWN</text>
+  <text x="800" y="1546" font-size="13" fill="#474554">#5B5C74 · text, no container</text>
+  <text x="40" y="1650" font-size="13" fill="#474554">Generated by backend/scripts/build-theme.ts. The Material roles come from the seed; the status colours do not, and every status pair is checked at 4.5:1 before this file is written.</text>
+</svg>

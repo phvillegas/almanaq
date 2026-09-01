@@ -31,7 +31,7 @@ Visual references in `design/`:
 |-------------------------------|-------------------------------------------------|
 | `mockup-equipos.svg`          | The three screens, light theme                  |
 | `mockup-plataformas-v2.svg`   | iOS and Android, light and dark, Liquid Glass   |
-| `paleta-sol-luna.svg`         | Full palette and status colour coding           |
+| `palette.svg`                 | Generated: brand, the 36 Material roles, status |
 
 ## Language
 
