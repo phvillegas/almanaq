@@ -9,6 +9,7 @@
     "build": "tsc",
     "test": "vitest run",
     "build:holidays": "tsx scripts/build-holidays.ts",
+    "build:theme": "tsx scripts/build-theme.ts",
     "build:locations": "tsx scripts/build-locations.ts"
   },
   "dependencies": {
@@ -16,6 +17,7 @@
     "hono": "^4.13.5"
   },
   "devDependencies": {
+    "@material/material-color-utilities": "^0.4.0",
     "@types/node": "^26.4.0",
     "date-holidays": "^3.36.0",
     "tsx": "^4.23.12",

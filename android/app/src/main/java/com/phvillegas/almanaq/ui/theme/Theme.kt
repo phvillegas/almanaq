@@ -2,8 +2,6 @@ package com.phvillegas.almanaq.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -13,73 +11,19 @@ import androidx.compose.ui.graphics.Color
 /**
  * The Sol y Luna theme.
  *
- * Dynamic colour is deliberately absent: Material You would repaint the brand violet
- * from the user's wallpaper. PLAN.md section 8 requires it to be off, so this file
- * never reads `dynamicLightColorScheme`.
+ * The Material role scheme is **generated**, not written here. It lives in
+ * `Material3Colors.kt`, produced by `backend/scripts/build-theme.ts` from the `#4436C7`
+ * seed, and this file only chooses between light and dark. Section 8 of the plan asked
+ * for that generation from the start; it used to be a hand-mapped scheme instead, which
+ * left eleven roles unset for Material to fill from its own baseline.
  *
- * Values come from `design/tokens.json`. Do not copy hex values in here from anywhere
- * else — `Color.kt` transcribes the token file and nothing else does.
+ * Dynamic colour is deliberately absent: Material You would repaint the brand violet
+ * from the user's wallpaper. Section 8 requires it off, so nothing here or in the
+ * generated file ever reads `dynamicLightColorScheme`.
+ *
+ * What stays hand-written is below: the availability statuses, which are product meaning
+ * rather than theme roles and which Material has no slot for.
  */
-
-private val LightColors = lightColorScheme(
-    primary = Vesper500,
-    onPrimary = Color.White,
-    primaryContainer = Vesper050,
-    onPrimaryContainer = Vesper700,
-    secondary = Slate,
-    onSecondary = Color.White,
-    background = Paper,
-    onBackground = Nocturne,
-    surface = Color.White,
-    onSurface = Nocturne,
-    surfaceVariant = SurfaceTonalLight,
-    onSurfaceVariant = Slate,
-    outline = SlateLight,
-    outlineVariant = Mist,
-    // The surface ladder is declared in full on purpose. Roles left unset fall back to
-    // the Material 3 baseline, which is a purple-tinted neutral of its own: before this
-    // was mapped, NavigationBar painted itself #F3EDF7, a colour in no token file.
-    surfaceContainerLowest = Color.White,
-    surfaceContainerLow = Paper,
-    surfaceContainer = SurfaceTonalLight,
-    surfaceContainerHigh = Mist,
-    surfaceContainerHighest = Vesper100,
-    surfaceDim = Mist,
-    surfaceBright = Color.White,
-    inverseSurface = Nocturne,
-    inverseOnSurface = Starlight,
-    inversePrimary = Vesper300,
-    scrim = Nocturne,
-)
-
-private val DarkColors = darkColorScheme(
-    primary = Vesper300,
-    // Not white. See the note on OnAccentDark.
-    onPrimary = OnAccentDark,
-    primaryContainer = AccentSubtleDark,
-    onPrimaryContainer = Vesper200,
-    secondary = SlateLight,
-    onSecondary = OnAccentDark,
-    background = Void,
-    onBackground = Starlight,
-    surface = SurfaceDark,
-    onSurface = Starlight,
-    surfaceVariant = SurfaceDarkTonal,
-    onSurfaceVariant = SlateLight,
-    outline = TextDisabledDark,
-    outlineVariant = BorderDark,
-    surfaceContainerLowest = Void,
-    surfaceContainerLow = SurfaceDark,
-    surfaceContainer = SurfaceDarkTonal,
-    surfaceContainerHigh = BorderDark,
-    surfaceContainerHighest = AccentSubtleDark,
-    surfaceDim = Void,
-    surfaceBright = SurfaceDarkTonal,
-    inverseSurface = Starlight,
-    inverseOnSurface = Nocturne,
-    inversePrimary = Vesper500,
-    scrim = Color.Black,
-)
 
 /**
  * Colours the Material 3 role system has no slot for: the availability statuses and
@@ -156,7 +100,7 @@ fun AlmanaqTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
-    val colorScheme = if (darkTheme) DarkColors else LightColors
+    val colorScheme = materialScheme(darkTheme)
     val statuses = if (darkTheme) DarkStatuses else LightStatuses
 
     CompositionLocalProvider(LocalAlmanaqColors provides statuses) {
