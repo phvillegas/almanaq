@@ -29,3 +29,46 @@ jobs:
       - name: Build
         working-directory: android
         run: ./gradlew assembleDebug --no-daemon
+
+  # Deliberately a separate job, and deliberately not a required check.
+  #
+  # These need a booted emulator, which takes minutes and occasionally fails for reasons
+  # that have nothing to do with the change under review. Making that a merge gate would
+  # teach everyone to ignore a red tick, which is worse than not having the tick.
+  #
+  # What they cover is the part no unit test can reach: the semantics tree a screen
+  # reader is handed. Rows merging into one stop, initials excluded from it, day cells
+  # announcing their date and conflict count, back controls that are really 48dp.
+  instrumented:
+    name: instrumented
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      # The emulator needs hardware acceleration, and the runner needs telling.
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' \
+            | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      # API 34 rather than the 37 the app compiles against: the tests exercise our own
+      # code, not a platform version, and 34 is the image the runner has always had.
+      # minSdk is 26, so anything from there up is a fair place to run them.
+      - name: Instrumented tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: default
+          arch: x86_64
+          disable-animations: true
+          working-directory: android
+          script: ./gradlew connectedDebugAndroidTest --no-daemon
