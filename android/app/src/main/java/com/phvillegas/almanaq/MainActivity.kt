@@ -1,6 +1,7 @@
 package com.phvillegas.almanaq
 
 import android.content.Intent
+import android.util.Log
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -32,6 +33,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.phvillegas.almanaq.ui.AppViewModel
 import com.phvillegas.almanaq.ui.datepicker.DatePickerScreen
+import com.phvillegas.almanaq.ui.datepicker.calendarIntent
 import com.phvillegas.almanaq.ui.member.AddMemberScreen
 import com.phvillegas.almanaq.ui.member.MemberDetailScreen
 import com.phvillegas.almanaq.ui.settings.SettingsScreen
@@ -193,6 +195,20 @@ private fun AlmanaqApp() {
                 onConflictFreeOnly = model::showConflictFreeOnly,
                 onRetry = model::loadCalendar,
                 onAdd = { destination = Destination.AddMember },
+                onSchedule = { date ->
+                    // A phone with no calendar app at all is rare but not impossible,
+                    // and an unhandled ActivityNotFoundException would crash the app on
+                    // the one tap the whole screen leads up to.
+                    runCatching { context.startActivity(calendarIntent(date)) }
+                        .onFailure {
+                            Log.w("Almanaq", "no calendar app to hand the date to", it)
+                            Toast.makeText(
+                                context,
+                                context.getString(R.string.dates_no_calendar_app),
+                                Toast.LENGTH_SHORT,
+                            ).show()
+                        }
+                },
                 modifier = content,
             )
 

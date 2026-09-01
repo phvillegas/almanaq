@@ -49,6 +49,8 @@
     <string name="settings_import_failed">Could not read that file</string>
     <string name="settings_import_ok">Team imported</string>
     <string name="dates_schedule_anyway">Schedule anyway</string>
+    <string name="dates_schedule">Schedule</string>
+    <string name="dates_no_calendar_app">No calendar app found</string>
     <string name="dates_show_conflict_free">Show days without conflicts</string>
     <string name="dates_show_all">Show every day</string>
     <string name="dates_no_clear_day">No day this month is clear for the whole team</string>

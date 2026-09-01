@@ -60,6 +60,8 @@
     <string name="settings_import_failed">No pudimos leer ese archivo</string>
     <string name="settings_import_ok">Equipo importado</string>
     <string name="dates_schedule_anyway">Agendar igual</string>
+    <string name="dates_schedule">Agendar</string>
+    <string name="dates_no_calendar_app">No encontramos una app de calendario</string>
     <string name="dates_show_conflict_free">Ver días sin conflictos</string>
     <string name="dates_show_all">Ver todos los días</string>
     <string name="dates_no_clear_day">Ningún día de este mes está libre para todo el equipo</string>

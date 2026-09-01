@@ -62,7 +62,10 @@ it.
 - Widgets. Deferred to v1.1 — they are separate native code on each platform
   (Glance / WidgetKit) and add nothing to the core.
 - Push notifications.
-- Google Calendar / Outlook integration.
+- Google Calendar / Outlook integration — reading calendars, accounts, or syncing.
+  Handing a chosen date *out* through `Intent.ACTION_INSERT` is not that and was added
+  on 2026-09-01: nothing is read back, no account is touched and no permission is asked
+  for. The line is whether the app knows anything about your calendar. It does not.
 - Multiplayer mode or invitations.
 - Any "calendars of the world" view detached from the team.
 
