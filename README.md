@@ -186,6 +186,15 @@ The canonical colour values live in `design/tokens.json`, the single source of t
 The hex values are identical on iOS and Android; what changes is how they are applied.
 Every text and background pair must clear 4.5:1 in both themes.
 
+**The type is Inter, bundled**, one variable file carrying every weight. The plan
+originally called for the platform system font and no bundled fonts in v1; that was
+reversed on 2026-08-31 because the system font read wrong for the product. iOS should
+use the same file when it starts, or the two apps stop matching.
+
+The font is deliberately **not subset**, which would have saved a few hundred kilobytes.
+This app exists to show city and holiday names from countries nobody on the team thought
+about, and a missing glyph is a tofu box in exactly those places.
+
 **The contrast rule outranks the mockups.** One value in the plan does not survive it:
 section 7.2 greys the weekend columns of the month grid at `#9C9DB4`, which measures
 2.66:1 on the light background. A weekend day is selectable, so it is not an inactive
@@ -211,6 +220,7 @@ here, so the terms travel with it:
 |---|---|---|
 | `backend/src/data/locations/cities.json` | [GeoNames](https://www.geonames.org/) `cities15000` | **CC BY 4.0** — attribution required by anyone redistributing it |
 | `backend/src/data/holidays/*.json` | [Nager.Date](https://date.nager.at), [`date-holidays`](https://www.npmjs.com/package/date-holidays) (MIT), and Google's public holiday calendars | Each file records which provider produced it, in its `provider` field |
+| `android/app/src/main/res/font/inter_variable.ttf` | [Inter](https://rsms.me/inter/) v4.1 | **SIL Open Font License 1.1** — the full text travels with it, at `android/app/licenses/Inter-OFL.txt` |
 
 If you fork this, the GeoNames attribution has to come with you. Holiday names appear as
 each provider writes them and are not translated.
