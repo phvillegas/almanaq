@@ -406,8 +406,8 @@ private fun EmptyState(onAdd: () -> Unit) {
  * Section 7.2 asks for `#9C9DB4`, which measures 2.66:1 on the light background and
  * fails the 4.5:1 rule the same plan sets in section 6. A weekend day is selectable, so
  * it is not an inactive control and the exemption does not apply. `onSurfaceVariant`
- * keeps the intent — the column is quieter than a working day — at 6.08:1 light and
- * 7.20:1 dark. See CLAUDE.md rule 7.
+ * keeps the intent — the column is quieter than a working day — at 8.90:1 light and
+ * 10.91:1 dark, measured against the generated scheme. See CLAUDE.md rule 7.
  */
 @Composable
 private fun weekdayColor(isWeekend: Boolean) = when (isWeekend) {

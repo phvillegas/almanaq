@@ -13,7 +13,7 @@ ordinary working day, and half the team is on a weekend or a public holiday.
 | Piece    | Status                                                             |
 |----------|--------------------------------------------------------------------|
 | Backend  | Complete. Four endpoints, 79 tests, **contract frozen**            |
-| Android  | v1 complete. 28 unit tests, 4 instrumented, run on a device        |
+| Android  | v1 complete. 28 unit tests, 9 instrumented, run on a device        |
 | iOS      | Not started                                                        |
 
 The contract was frozen before either client started: with two apps in flight, a moving
@@ -154,7 +154,7 @@ cd android
 ./gradlew assembleDebug            # builds the APK
 ./gradlew installDebug             # installs on the connected device or emulator
 ./gradlew testDebugUnitTest        # 28 tests, run in CI
-./gradlew connectedDebugAndroidTest  # 4 more, need a device, not run in CI
+./gradlew connectedDebugAndroidTest  # 9 more, need a device, not run in CI
 ```
 
 The backend address is editable in the app's Settings screen. `10.0.2.2` reaches the
@@ -199,7 +199,33 @@ about, and a missing glyph is a tofu box in exactly those places.
 section 7.2 greys the weekend columns of the month grid at `#9C9DB4`, which measures
 2.66:1 on the light background. A weekend day is selectable, so it is not an inactive
 control and the WCAG exemption does not apply. The app uses `onSurfaceVariant` there
-instead — the column still recedes, at 6.08:1 light and 7.20:1 dark.
+instead — the column still recedes, at 8.90:1 light and 10.91:1 dark.
+
+## Colour
+
+The Material 3 scheme is **generated from the `#4436C7` seed**, not written by hand, by
+`backend/scripts/build-theme.ts`. It runs at design time and commits its output, exactly
+like the holiday and city data: no colour maths on a device, and a palette change shows
+up in a diff.
+
+```bash
+cd backend && npm run build:theme
+```
+
+One run writes two shapes. `material3` in `design/tokens.json` holds all 36 roles and is
+emitted straight into Kotlin as `Material3Colors.kt`; `theme` holds twelve
+platform-neutral names for iOS, which has no notion of Material roles. Both come from
+the same generation, so the two platforms cannot drift.
+
+The variant is **Fidelity**, chosen because the variants are not interchangeable. From
+this seed, TonalSpot desaturates the brand to a grey lavender, Vibrant pushes it past the
+icon, and Expressive rotates the hue to green. Fidelity preserves the source colour and
+puts `#4436C7` itself into `primaryContainer`.
+
+The availability status colours are **not** generated — green for available and amber for
+a holiday are product meaning, and Material has no slot for them. The script re-checks
+each one against the regenerated backgrounds at 4.5:1 and **refuses to write** if any pair
+fails, so rule 7 is enforced rather than remembered.
 
 ## Documents
 
@@ -236,8 +262,9 @@ Stated plainly so nobody rediscovers it the hard way:
   table that must not be written once in Kotlin and again in Swift. The backend already
   resolves it for search results, so the fix is a field on `/v1/member/detail` — a change
   to a frozen contract, and therefore a decision rather than a refactor.
-- **The instrumented tests do not run in CI.** They need a device. `AccessibilityTest`
-  runs locally with `./gradlew connectedDebugAndroidTest`.
+- **The instrumented tests do not run in CI.** They need a device, and GitHub's runners
+  have none. The nine in `AccessibilityTest`, `TeamScreenTest` and `PushedScreensTest`
+  run locally with `./gradlew connectedDebugAndroidTest`.
 - **TalkBack was never actually heard.** What a screen reader is handed is asserted
   against the semantics tree; the audio itself was not listened to, because there is no
   way to capture speech from an emulator.

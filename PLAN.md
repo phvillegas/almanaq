@@ -680,9 +680,22 @@ The colours are identical. Here is what **does** change:
 ### Android
 
 - Jetpack Compose + Material 3.
-- Generate the M3 scheme from the `#4436C7` seed with Material Theme Builder and map
-  it onto the roles (`primary`, `onPrimary`, `primaryContainer`, `surfaceContainer*`,
-  `outlineVariant`). Do not hardcode hex values in Composables.
+- **The M3 scheme is generated from the `#4436C7` seed**, all 36 roles, by
+  `backend/scripts/build-theme.ts` — not by hand and not in a browser. It runs at design
+  time and commits its output, like every other piece of data here, so a palette change
+  arrives as a diff. Variant **Fidelity**, because the variants are not interchangeable:
+  from this seed TonalSpot desaturates the brand to grey lavender, Vibrant overshoots the
+  icon, and Expressive turns it green. Do not hardcode hex values in Composables.
+  - Settled on 2026-08-31. Before that the roles were mapped by hand from the token
+    file, which left eleven of them unset — `secondaryContainer`, `tertiary*`, `error*`,
+    `surfaceTint` — for Material to fill from its own baseline. That is not theoretical:
+    it reached the screen once as a `NavigationBar` painted `#F3EDF7`, a colour in no
+    token file.
+  - The generated colours are **not** the original mockup values, and that was accepted
+    deliberately. What is preserved is the seed, which Fidelity keeps as
+    `primaryContainer`, and the section 6 promise that both platforms use identical hex
+    values — one generation writes the Compose roles and the twelve platform-neutral
+    names iOS reads.
 - **Turn dynamic colour off explicitly.** Otherwise Material You repaints the violet
   according to the user's wallpaper.
 - Cards: tonal fill, **no shadow**.

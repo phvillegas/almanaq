@@ -20,6 +20,11 @@ the first week.
 The canonical colour values live in `design/tokens.json`. Do not copy hex values out
 of the markdown or the SVGs: read them from there.
 
+**The Material 3 roles in that file are generated**, from the `#4436C7` seed, by
+`backend/scripts/build-theme.ts`. Do not hand-edit the `material3` block or the Android
+`Material3Colors.kt` it emits — change the seed and run `npm run build:theme`, which
+rewrites both and refuses to write if any status colour drops below 4.5:1.
+
 Visual references in `design/`:
 
 | File                          | What it shows                                   |
@@ -160,6 +165,7 @@ npm test                 # tests
 npm run build            # compile to dist/
 npm run build:holidays   # regenerates data/holidays/*.json (once a year)
 npm run build:locations  # regenerates data/locations/cities.json
+npm run build:theme      # regenerates the colour scheme from the #4436C7 seed
 ```
 
 From `android/`:

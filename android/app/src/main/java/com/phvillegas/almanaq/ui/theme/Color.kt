@@ -7,7 +7,9 @@ import androidx.compose.ui.graphics.Color
  * truth. The hex values are identical on iOS and Android; only how they are applied
  * changes. See PLAN.md section 6.
  *
- * Nothing outside this file should hold a literal colour.
+ * What is left here is the palette and the availability statuses. The Material role
+ * scheme is no longer among them: it is generated from the `#4436C7` seed into
+ * `Material3Colors.kt`, so several values below now feed only the status palettes.
  */
 
 // Vesper — indigo. Action and brand.
