@@ -79,6 +79,7 @@ class AccessibilityTest {
                     onConflictFreeOnly = {},
                     onRetry = {},
                     onAdd = {},
+                    onSchedule = {},
                 )
             }
         }
@@ -102,6 +103,7 @@ class AccessibilityTest {
                     onConflictFreeOnly = {},
                     onRetry = {},
                     onAdd = {},
+                    onSchedule = {},
                 )
             }
         }

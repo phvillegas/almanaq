@@ -256,11 +256,11 @@ each provider writes them and are not translated.
 Stated plainly so nobody rediscovers it the hard way:
 
 - **iOS.** Not a line. It is half the product.
-- **The instrumented tests do not run in CI.** They need a device, and GitHub's runners
-  have none. The nine in `AccessibilityTest`, `TeamScreenTest` and `PushedScreensTest`
-  run locally with `./gradlew connectedDebugAndroidTest`.
-- **TalkBack was never actually heard.** What a screen reader is handed is asserted
-  against the semantics tree; the audio itself was not listened to, because there is no
-  way to capture speech from an emulator.
+- **TalkBack was never actually heard.** It has been *run* — it navigates the app and its
+  focus box wraps whole controls rather than glyphs — and what it is handed is asserted
+  against the semantics tree by the instrumented tests. What was never checked is the
+  audio. TalkBack turns out to log its own utterances to logcat, but only on an error
+  path, when text-to-speech has failed to initialise; once it is working it goes quiet.
+  So the words a person actually hears remain inferred from the tree rather than heard.
 - **The mockups in `design/` are Spanish only.** The app is localized; the reference
   images are not.
