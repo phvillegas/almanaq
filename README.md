@@ -12,8 +12,8 @@ ordinary working day, and half the team is on a weekend or a public holiday.
 
 | Piece    | Status                                                             |
 |----------|--------------------------------------------------------------------|
-| Backend  | Complete. Four endpoints, 79 tests, **contract frozen**            |
-| Android  | v1 complete. 28 unit tests, 9 instrumented, run on a device        |
+| Backend  | Complete. Four endpoints, 81 tests, contract frozen bar one field  |
+| Android  | v1 complete. 32 unit tests, 9 instrumented, run on a device        |
 | iOS      | Not started                                                        |
 
 The contract was frozen before either client started: with two apps in flight, a moving
@@ -43,7 +43,7 @@ statuses and paint them.
 cd backend
 npm install
 npm run dev      # server on http://localhost:3000
-npm test         # 79 tests
+npm test         # 81 tests
 npm run build    # compiles to dist/
 ```
 
@@ -153,7 +153,7 @@ below it without core library desugaring.
 cd android
 ./gradlew assembleDebug            # builds the APK
 ./gradlew installDebug             # installs on the connected device or emulator
-./gradlew testDebugUnitTest        # 28 tests, run in CI
+./gradlew testDebugUnitTest        # 32 tests, run in CI
 ./gradlew connectedDebugAndroidTest  # 9 more, need a device, not run in CI
 ```
 
@@ -256,12 +256,6 @@ each provider writes them and are not translated.
 Stated plainly so nobody rediscovers it the hard way:
 
 - **iOS.** Not a line. It is half the product.
-- **The detail header has no country name.** Section 7.3 of the plan asks for
-  "City, Country · UTC±N" and the app shows "City · UTC±N". The member document stores a
-  country *code*, and turning a code into a localized country name is exactly the kind of
-  table that must not be written once in Kotlin and again in Swift. The backend already
-  resolves it for search results, so the fix is a field on `/v1/member/detail` — a change
-  to a frozen contract, and therefore a decision rather than a refactor.
 - **The instrumented tests do not run in CI.** They need a device, and GitHub's runners
   have none. The nine in `AccessibilityTest`, `TeamScreenTest` and `PushedScreensTest`
   run locally with `./gradlew connectedDebugAndroidTest`.

@@ -44,6 +44,14 @@ data class MemberDetailResponse(
     val utcOffsetMinutes: Int,
     val status: String,
     val statusLabel: String,
+    /**
+     * Localized country name, or `null` when the backend has no usable country code.
+     *
+     * Defaulted so an older backend that predates the field still parses. The client
+     * must never turn a country code into a name itself: that table would have to be
+     * written again in Swift.
+     */
+    val country: String? = null,
     val workWeek: WorkWeekLabels,
     val localCalendar: LocalCalendar? = null,
     val upcomingHolidays: List<UpcomingHoliday> = emptyList(),
