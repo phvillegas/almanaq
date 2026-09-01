@@ -323,6 +323,7 @@ Response:
   "utcOffsetMinutes": 180,
   "status": "LOCAL_WEEKEND",
   "statusLabel": "Local weekend",
+  "country": "Israel",
   "workWeek": {
     "daysLabel": "Sun to Thu",
     "weekendLabel": "Fri and Sat",
@@ -343,6 +344,14 @@ Response:
 
 `localCalendar` may come back as `null`, and so may `localCalendar.note`. Only show
 them when present.
+
+`country` is the localized country name, and it is `null` when the member has no usable
+country code — show the address line without it rather than substituting a placeholder.
+
+**Added on 2026-09-01, after the contract froze**, and deliberately. The alternative was
+a country-code-to-name table written once in Kotlin and again in Swift, which rule 2
+forbids. ICU already knows the answer and only the backend has it. Adding a field is
+additive: a client that predates it keeps working.
 
 ---
 

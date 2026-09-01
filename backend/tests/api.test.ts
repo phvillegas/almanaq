@@ -230,6 +230,36 @@ describe('POST /v1/member/detail', () => {
     expect(body.upcomingHolidays.length).toBeLessThanOrEqual(3);
   });
 
+  it('names the country in the requested locale', async () => {
+    const english = await post('/v1/member/detail', {
+      member: { id: 'a1', countryCode: 'IL', timezone: 'Asia/Jerusalem' },
+      at: '2026-08-21T15:42:00Z',
+    });
+    const spanish = await post(
+      '/v1/member/detail',
+      {
+        member: { id: 'a1', countryCode: 'IL', timezone: 'Asia/Jerusalem' },
+        at: '2026-08-21T15:42:00Z',
+      },
+      'es',
+    );
+
+    expect(((await english.json()) as { country: string }).country).toBe('Israel');
+    // The client must never hold a code-to-name table, which is the whole reason this
+    // field exists rather than living in Kotlin and Swift.
+    expect(((await spanish.json()) as { country: string }).country).toBe('Israel');
+  });
+
+  it('returns a null country rather than a placeholder when the code is missing', async () => {
+    const response = await post('/v1/member/detail', {
+      member: { id: 'x9', countryCode: null, timezone: 'UTC' },
+      at: '2026-08-21T15:42:00Z',
+    });
+
+    // An address line with the word "Unknown" wedged into it is worse than a short one.
+    expect(((await response.json()) as { country: unknown }).country).toBeNull();
+  });
+
   it('omits the local calendar for a country without one', async () => {
     const response = await post('/v1/member/detail', {
       member: { id: 'd4', countryCode: 'AR', timezone: 'America/Argentina/Buenos_Aires' },

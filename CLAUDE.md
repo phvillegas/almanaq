@@ -123,6 +123,11 @@ The backend is built: domain layer, the four endpoints, precomputed data and tes
 plan, the error shape, and the `status` enum. Changing any of them from here on is a
 decision the human makes, not a refactor.
 
+One field has been added since: `country` on `/v1/member/detail`, on 2026-09-01, because
+the alternative was a code-to-name table written once in Kotlin and again in Swift. It is
+additive, so older clients are unaffected. That it took a decision rather than a refactor
+is the point — the freeze held.
+
 What is still open is holiday coverage, which changes what the endpoints answer, not
 what they answer with. See section 13 of the plan.
 

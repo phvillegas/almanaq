@@ -145,14 +145,15 @@ fun MemberDetailScreen(
 }
 
 /**
- * Avatar, name, and where the person is. See PLAN.md section 7.3.
+ * Avatar, name, and where the person is: "City, Country · UTC±N". See PLAN.md 7.3.
  *
- * The plan asks for "City, Country · UTC±N" and this shows "City · UTC±N". The country
- * name is missing on purpose: the member document stores a country *code*, and turning a
- * code into a localized country name is exactly the kind of table that must not be
- * written once in Kotlin and again in Swift. The backend already resolves it for search
- * results; putting it on `/v1/member/detail` would change a frozen contract, so it is
- * proposed rather than done. See CLAUDE.md rules 2, 6 and 8.
+ * Every part of that line is resolved by the backend, including the country name, which
+ * arrives already localized. The client holds no code-to-name table — that table would
+ * have to be written again in Swift, which is rule 2.
+ *
+ * The country is `null` for a member with no usable country code, and the line simply
+ * gets shorter. Nothing is substituted: an address with the word "Unknown" in it is
+ * worse than an address without a country.
  */
 @Composable
 private fun Header(name: String, city: String, detail: MemberDetailResponse?) {
@@ -171,12 +172,22 @@ private fun Header(name: String, city: String, detail: MemberDetailResponse?) {
                 color = MaterialTheme.colorScheme.onBackground,
             )
             Text(
-                text = detail?.let { "$city · ${utcOffsetLabel(it.utcOffsetMinutes)}" } ?: city,
+                text = detail?.let { whereabouts(city, it.country, it.utcOffsetMinutes) } ?: city,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
     }
+}
+
+/**
+ * "Tel Aviv, Israel · UTC+3", or "Tel Aviv · UTC+3" when the country is unknown.
+ *
+ * Top level and `internal` so it can be tested without an Android runtime.
+ */
+internal fun whereabouts(city: String, country: String?, utcOffsetMinutes: Int): String {
+    val place = listOfNotNull(city, country).joinToString(", ")
+    return "$place · ${utcOffsetLabel(utcOffsetMinutes)}"
 }
 
 /**

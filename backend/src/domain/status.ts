@@ -56,6 +56,16 @@ export interface MemberDetail {
   readonly utcOffsetMinutes: number;
   readonly status: Status;
   readonly statusLabel: string;
+  /**
+   * Localized country name, or `null` when the member has no usable country code.
+   *
+   * Added on 2026-09-01, after the contract froze, because the alternative was a
+   * code-to-name table written once in Kotlin and again in Swift. ICU already knows the
+   * answer and only the backend has it. Nullable rather than a placeholder string: a
+   * client that has nothing to show should show nothing, not the word "Unknown" wedged
+   * into an address.
+   */
+  readonly country: string | null;
   readonly workWeek: {
     readonly daysLabel: string;
     readonly weekendLabel: string;
@@ -180,6 +190,7 @@ export function resolveDetail(
     utcOffsetMinutes: resolved.utcOffsetMinutes,
     status: resolved.status,
     statusLabel: messages.statusLabelDetail[resolved.status],
+    country: knownCountryName(member.countryCode, locale),
     workWeek: {
       daysLabel: formatWorkDays(resolved.week, locale),
       weekendLabel: formatWeekend(resolved.week, locale),
@@ -248,6 +259,19 @@ function decide(input: {
  */
 function holidayName(holiday: Holiday): string {
   return holiday.name || holiday.localName || 'Holiday';
+}
+
+/**
+ * Country name in the requested locale, or `null` when there is no usable code.
+ *
+ * Separate from `countryName` on purpose. That one is for prose — "Weekend in Israel" —
+ * and needs a word even when the country is unknown. This one is for an address line,
+ * where the honest answer to "which country" is to say nothing at all.
+ */
+function knownCountryName(countryCode: string | null | undefined, locale: Locale): string | null {
+  if (typeof countryCode !== 'string') return null;
+  if (!/^[A-Za-z]{2}$/.test(countryCode.trim())) return null;
+  return countryName(countryCode, locale);
 }
 
 /** Country name in the requested locale, straight from ICU. */
