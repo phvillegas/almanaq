@@ -218,7 +218,11 @@ up in a diff.
 cd backend && npm run build:theme
 ```
 
-One run writes two shapes. `material3` in `design/tokens.json` holds all 36 roles and is
+One run writes three: the palette sheet at `design/palette.svg` comes out of the same
+generation, so the reference can no longer disagree with the scheme it references. The
+hand-drawn `paleta-sol-luna.svg` it replaces is in the history.
+
+That run writes two data shapes. `material3` in `design/tokens.json` holds all 36 roles and is
 emitted straight into Kotlin as `Material3Colors.kt`; `theme` holds twelve
 platform-neutral names for iOS, which has no notion of Material roles. Both come from
 the same generation, so the two platforms cannot drift.
@@ -268,6 +272,3 @@ Stated plainly so nobody rediscovers it the hard way:
   audio. TalkBack turns out to log its own utterances to logcat, but only on an error
   path, when text-to-speech has failed to initialise; once it is working it goes quiet.
   So the words a person actually hears remain inferred from the tree rather than heard.
-- **The palette mockup predates the generated scheme.** `paleta-sol-luna.svg` still
-  shows the hand-picked theme colours. The brand and status colours it documents are
-  current; the theme roles beside them are not, since those now come from the seed.
