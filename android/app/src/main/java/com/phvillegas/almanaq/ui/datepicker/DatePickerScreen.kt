@@ -66,6 +66,7 @@ fun DatePickerScreen(
     onConflictFreeOnly: (Boolean) -> Unit,
     onRetry: () -> Unit,
     onAdd: () -> Unit,
+    onSchedule: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     // The device locale does not change while the screen is composed, and the lookup
@@ -96,7 +97,7 @@ fun DatePickerScreen(
 
         WeekdayHeader(weekend)
         Grid(state = state, weekend = weekend, onSelect = onSelect)
-        Summary(state)
+        Summary(state, onSchedule)
         FilterButton(state, onConflictFreeOnly)
     }
 }
@@ -271,7 +272,7 @@ private fun ConflictDot(visible: Boolean) {
 }
 
 @Composable
-private fun Summary(state: CalendarUiState) {
+private fun Summary(state: CalendarUiState, onSchedule: (String) -> Unit) {
     val selected = state.selected
 
     if (selected == null) {
@@ -306,6 +307,7 @@ private fun Summary(state: CalendarUiState) {
                 color = palette.text,
                 modifier = Modifier.padding(top = 4.dp),
             )
+            ScheduleAction(selected, hasConflicts = false, color = palette.text, onSchedule = onSchedule)
             return@Column
         }
 
@@ -329,25 +331,37 @@ private fun Summary(state: CalendarUiState) {
             )
         }
 
-        ScheduleAnyway(selected, palette.text)
+        ScheduleAction(selected, hasConflicts = true, color = palette.text, onSchedule = onSchedule)
     }
 }
 
 /**
- * "Schedule anyway" has to exist. See PLAN.md section 7.2.
+ * Hands the chosen day to whatever calendar the phone has. See PLAN.md section 7.2.
  *
- * An app that only blocks gets abandoned, so the conflicting day stays selectable and
- * the acknowledgement is one tap. It does not open anything: handing the date to the
- * device calendar is not in the section 2 scope, and rule 6 says propose, do not build.
+ * "Schedule anyway" has to exist, because an app that only blocks gets abandoned. It
+ * used to only acknowledge the conflict and fall silent, which made it a dead end: the
+ * product told you which day to pick and then left you to retype it somewhere else.
+ *
+ * The wording changes with the day and the meaning does not. On a day with conflicts it
+ * still reads "schedule anyway", which is a decision the user is making with the reasons
+ * in front of them. On a clear day it is simply "schedule".
+ *
+ * This is not calendar *integration*, which section 2 rules out. Nothing is read, no
+ * account is touched, no permission is asked for: a date leaves the app through a
+ * platform intent and the user's own calendar takes it from there.
  */
 @Composable
-private fun ScheduleAnyway(selected: String, color: Color) {
-    var acknowledged by remember(selected) { mutableStateOf(false) }
+private fun ScheduleAction(
+    selected: String,
+    hasConflicts: Boolean,
+    color: Color,
+    onSchedule: (String) -> Unit,
+) {
+    val label =
+        if (hasConflicts) R.string.dates_schedule_anyway else R.string.dates_schedule
 
-    if (acknowledged) return
-
-    TextButton(onClick = { acknowledged = true }, modifier = Modifier.padding(top = 8.dp)) {
-        Text(text = stringResource(R.string.dates_schedule_anyway), color = color)
+    TextButton(onClick = { onSchedule(selected) }, modifier = Modifier.padding(top = 8.dp)) {
+        Text(text = stringResource(label), color = color)
     }
 }
 

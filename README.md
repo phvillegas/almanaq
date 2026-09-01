@@ -13,7 +13,7 @@ ordinary working day, and half the team is on a weekend or a public holiday.
 | Piece    | Status                                                             |
 |----------|--------------------------------------------------------------------|
 | Backend  | Complete. Four endpoints, 81 tests, contract frozen bar one field  |
-| Android  | v1 complete. 32 unit tests, 9 instrumented, run on a device        |
+| Android  | v1 complete. 36 unit tests, 9 instrumented, run on a device        |
 | iOS      | Not started                                                        |
 
 The contract was frozen before either client started: with two apps in flight, a moving
@@ -153,7 +153,7 @@ below it without core library desugaring.
 cd android
 ./gradlew assembleDebug            # builds the APK
 ./gradlew installDebug             # installs on the connected device or emulator
-./gradlew testDebugUnitTest        # 32 tests, run in CI
+./gradlew testDebugUnitTest        # 36 tests, run in CI
 ./gradlew connectedDebugAndroidTest  # 9 more, need a device, not run in CI
 ```
 
@@ -262,8 +262,5 @@ Stated plainly so nobody rediscovers it the hard way:
 - **TalkBack was never actually heard.** What a screen reader is handed is asserted
   against the semantics tree; the audio itself was not listened to, because there is no
   way to capture speech from an emulator.
-- **"Schedule anyway" does not schedule anything.** It acknowledges the conflict and
-  nothing else. Handing the chosen date to the device calendar through
-  `Intent.ACTION_INSERT` is not in the section 2 scope, so it stays proposed.
 - **The mockups in `design/` are Spanish only.** The app is localized; the reference
   images are not.

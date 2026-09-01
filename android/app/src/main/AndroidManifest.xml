@@ -4,6 +4,26 @@
     <!-- The backend resolves availability, so the app needs the network and nothing else. -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!--
+      Package visibility for the one app this one ever talks to.
+
+      From API 30 an app cannot see other packages unless it says which ones it cares
+      about, and without this the platform logs the handoff as
+      `AppsFilter: ... -> com.google.android.calendar BLOCKED`. `startActivity` still
+      gets through, but any attempt to check for a calendar first comes back empty,
+      which would make "no calendar app found" fire on phones that have one.
+
+      Note what is *not* here: no calendar permission. The app hands a date over and
+      reads nothing back. See PLAN.md section 2 — integration is out of scope, this is a
+      platform intent.
+    -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.INSERT" />
+            <data android:mimeType="vnd.android.cursor.dir/event" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
