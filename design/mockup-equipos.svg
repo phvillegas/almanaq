@@ -8,9 +8,9 @@
 
   <rect width="1270" height="920" fill="#DEDEE6"/>
 
-  <text x="40" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">AHORA</text>
-  <text x="450" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">ELEGIR FECHA</text>
-  <text x="860" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">DETALLE</text>
+  <text x="40" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">NOW</text>
+  <text x="450" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">PICK A DATE</text>
+  <text x="860" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">DETAIL</text>
 
   <!-- ==================== 1. AHORA ==================== -->
   <g>

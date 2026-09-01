@@ -182,6 +182,12 @@ The full rules are in `CLAUDE.md`.
 
 ## Design
 
+The mockups in `design/` follow the same audience rule as everything else. Their
+**annotations** — "NOW", "LIGHT THEME", the swatch labels — are English, because their
+reader is whoever is building a client. The text **inside the phone frames** is Spanish,
+because that is the app's default locale and a mockup of the Spanish build should read
+like the Spanish build.
+
 The canonical colour values live in `design/tokens.json`, the single source of truth.
 The hex values are identical on iOS and Android; what changes is how they are applied.
 Every text and background pair must clear 4.5:1 in both themes.
@@ -262,5 +268,6 @@ Stated plainly so nobody rediscovers it the hard way:
   audio. TalkBack turns out to log its own utterances to logcat, but only on an error
   path, when text-to-speech has failed to initialise; once it is working it goes quiet.
   So the words a person actually hears remain inferred from the tree rather than heard.
-- **The mockups in `design/` are Spanish only.** The app is localized; the reference
-  images are not.
+- **The palette mockup predates the generated scheme.** `paleta-sol-luna.svg` still
+  shows the hand-picked theme colours. The brand and status colours it documents are
+  current; the theme roles beside them are not, since those now come from the seed.

@@ -16,10 +16,10 @@
 
   <rect width="1680" height="920" fill="#DEDEE6"/>
 
-  <text x="40" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">iOS 26 · CLARO · LIQUID GLASS</text>
-  <text x="450" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">iOS 26 · OSCURO · LIQUID GLASS</text>
-  <text x="860" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">ANDROID · CLARO · MATERIAL 3</text>
-  <text x="1270" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">ANDROID · OSCURO · MATERIAL 3</text>
+  <text x="40" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">iOS 26 · LIGHT · LIQUID GLASS</text>
+  <text x="450" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">iOS 26 · DARK · LIQUID GLASS</text>
+  <text x="860" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">ANDROID · LIGHT · MATERIAL 3</text>
+  <text x="1270" y="58" font-size="13" font-weight="700" letter-spacing="0.6" fill="#4A4B60">ANDROID · DARK · MATERIAL 3</text>
 
   <!-- ============================================================ -->
   <!-- 1. iOS CLARO                                                  -->

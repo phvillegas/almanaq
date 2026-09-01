@@ -2,56 +2,56 @@
 
   <rect width="920" height="660" fill="#F7F7FA"/>
 
-  <text x="40" y="52" font-size="21" font-weight="700" letter-spacing="-0.3" fill="#171634">Sol y Luna — paleta propuesta</text>
+  <text x="40" y="52" font-size="21" font-weight="700" letter-spacing="-0.3" fill="#171634">Sol y Luna — proposed palette</text>
 
   <!-- ===== TEMA CLARO ===== -->
-  <text x="40" y="94" font-size="11" font-weight="600" letter-spacing="1.6" fill="#5B5C74">TEMA CLARO</text>
+  <text x="40" y="94" font-size="11" font-weight="600" letter-spacing="1.6" fill="#5B5C74">LIGHT THEME</text>
 
   <g>
     <rect x="40" y="108" width="128" height="96" rx="10" fill="#4436C7"/>
     <text x="40" y="224" font-size="12.5" font-weight="600" fill="#171634">Vesper</text>
-    <text x="40" y="242" font-size="11.5" fill="#5B5C74">#4436C7 · acción</text>
+    <text x="40" y="242" font-size="11.5" fill="#5B5C74">#4436C7 · action</text>
 
     <rect x="182" y="108" width="128" height="96" rx="10" fill="#E0A03A"/>
     <text x="182" y="224" font-size="12.5" font-weight="600" fill="#171634">Meridian</text>
-    <text x="182" y="242" font-size="11.5" fill="#5B5C74">#E0A03A · acento</text>
+    <text x="182" y="242" font-size="11.5" fill="#5B5C74">#E0A03A · accent</text>
 
     <rect x="324" y="108" width="128" height="96" rx="10" fill="#171634"/>
     <text x="324" y="224" font-size="12.5" font-weight="600" fill="#171634">Nocturne</text>
-    <text x="324" y="242" font-size="11.5" fill="#5B5C74">#171634 · texto</text>
+    <text x="324" y="242" font-size="11.5" fill="#5B5C74">#171634 · text</text>
 
     <rect x="466" y="108" width="128" height="96" rx="10" fill="#5B5C74"/>
     <text x="466" y="224" font-size="12.5" font-weight="600" fill="#171634">Slate</text>
-    <text x="466" y="242" font-size="11.5" fill="#5B5C74">#5B5C74 · secundario</text>
+    <text x="466" y="242" font-size="11.5" fill="#5B5C74">#5B5C74 · secondary</text>
 
     <rect x="608" y="108" width="128" height="96" rx="10" fill="#E4E4EC"/>
     <text x="608" y="224" font-size="12.5" font-weight="600" fill="#171634">Mist</text>
-    <text x="608" y="242" font-size="11.5" fill="#5B5C74">#E4E4EC · bordes</text>
+    <text x="608" y="242" font-size="11.5" fill="#5B5C74">#E4E4EC · borders</text>
 
     <rect x="750" y="108" width="128" height="96" rx="10" fill="#F7F7FA" stroke="#E4E4EC" stroke-width="1.5"/>
     <text x="750" y="224" font-size="12.5" font-weight="600" fill="#171634">Paper</text>
-    <text x="750" y="242" font-size="11.5" fill="#5B5C74">#F7F7FA · fondo</text>
+    <text x="750" y="242" font-size="11.5" fill="#5B5C74">#F7F7FA · background</text>
   </g>
 
   <!-- ===== TEMA OSCURO ===== -->
-  <text x="40" y="296" font-size="11" font-weight="600" letter-spacing="1.6" fill="#5B5C74">TEMA OSCURO</text>
+  <text x="40" y="296" font-size="11" font-weight="600" letter-spacing="1.6" fill="#5B5C74">DARK THEME</text>
 
   <g>
     <rect x="40" y="310" width="128" height="96" rx="10" fill="#8B7DFF"/>
-    <text x="40" y="426" font-size="12.5" font-weight="600" fill="#171634">Vesper claro</text>
-    <text x="40" y="444" font-size="11.5" fill="#5B5C74">#8B7DFF · acción</text>
+    <text x="40" y="426" font-size="12.5" font-weight="600" fill="#171634">Vesper light</text>
+    <text x="40" y="444" font-size="11.5" fill="#5B5C74">#8B7DFF · action</text>
 
     <rect x="182" y="310" width="128" height="96" rx="10" fill="#F0B455"/>
-    <text x="182" y="426" font-size="12.5" font-weight="600" fill="#171634">Meridian claro</text>
-    <text x="182" y="444" font-size="11.5" fill="#5B5C74">#F0B455 · acento</text>
+    <text x="182" y="426" font-size="12.5" font-weight="600" fill="#171634">Meridian light</text>
+    <text x="182" y="444" font-size="11.5" fill="#5B5C74">#F0B455 · accent</text>
 
     <rect x="324" y="310" width="128" height="96" rx="10" fill="#F2F2F7"/>
     <text x="324" y="426" font-size="12.5" font-weight="600" fill="#171634">Starlight</text>
-    <text x="324" y="444" font-size="11.5" fill="#5B5C74">#F2F2F7 · texto</text>
+    <text x="324" y="444" font-size="11.5" fill="#5B5C74">#F2F2F7 · text</text>
 
     <rect x="466" y="310" width="128" height="96" rx="10" fill="#9C9DB4"/>
-    <text x="466" y="426" font-size="12.5" font-weight="600" fill="#171634">Slate claro</text>
-    <text x="466" y="444" font-size="11.5" fill="#5B5C74">#9C9DB4 · secundario</text>
+    <text x="466" y="426" font-size="12.5" font-weight="600" fill="#171634">Slate light</text>
+    <text x="466" y="444" font-size="11.5" fill="#5B5C74">#9C9DB4 · secondary</text>
 
     <rect x="608" y="310" width="128" height="96" rx="10" fill="#1A1930"/>
     <text x="608" y="426" font-size="12.5" font-weight="600" fill="#171634">Surface</text>
@@ -59,30 +59,30 @@
 
     <rect x="750" y="310" width="128" height="96" rx="10" fill="#0F0E1C"/>
     <text x="750" y="426" font-size="12.5" font-weight="600" fill="#171634">Void</text>
-    <text x="750" y="444" font-size="11.5" fill="#5B5C74">#0F0E1C · fondo</text>
+    <text x="750" y="444" font-size="11.5" fill="#5B5C74">#0F0E1C · background</text>
   </g>
 
   <!-- ===== CODIFICACION ===== -->
-  <text x="40" y="498" font-size="11" font-weight="600" letter-spacing="1.6" fill="#5B5C74">CODIFICACIÓN POR TIPO DE CALENDARIO</text>
+  <text x="40" y="498" font-size="11" font-weight="600" letter-spacing="1.6" fill="#5B5C74">CODING BY CALENDAR TYPE</text>
 
   <g>
     <rect x="40" y="512" width="270" height="72" rx="10" fill="#FBF0DC"/>
     <circle cx="72" cy="548" r="11" fill="#E0A03A"/>
     <text x="98" y="544" font-size="13.5" font-weight="600" fill="#171634">Solar</text>
-    <text x="98" y="562" font-size="11.5" fill="#5B5C74">Etíope, persa, budista, minguo</text>
+    <text x="98" y="562" font-size="11.5" fill="#5B5C74">Ethiopic, Persian, Buddhist, Minguo</text>
 
     <rect x="324" y="512" width="270" height="72" rx="10" fill="#E7E5F8"/>
     <circle cx="356" cy="548" r="11" fill="#4436C7"/>
     <text x="382" y="544" font-size="13.5" font-weight="600" fill="#171634">Lunar</text>
-    <text x="382" y="562" font-size="11.5" fill="#5B5C74">Hiyrí</text>
+    <text x="382" y="562" font-size="11.5" fill="#5B5C74">Hijri</text>
 
     <rect x="608" y="512" width="270" height="72" rx="10" fill="#F1EDEF"/>
     <path d="M654 537 a11 11 0 0 0 0 22 z" fill="#4436C7"/>
     <path d="M654 537 a11 11 0 0 1 0 22 z" fill="#E0A03A"/>
     <text x="680" y="544" font-size="13.5" font-weight="600" fill="#171634">Lunisolar</text>
-    <text x="680" y="562" font-size="11.5" fill="#5B5C74">Hebreo, chino, hindú</text>
+    <text x="680" y="562" font-size="11.5" fill="#5B5C74">Hebrew, Chinese, Hindu</text>
   </g>
 
-  <text x="40" y="628" font-size="11.5" fill="#9C9DB4">Todos los pares de texto/fondo superan 4.5:1. Meridian no se usa como texto: solo relleno, puntos e indicadores.</text>
+  <text x="40" y="628" font-size="11.5" fill="#9C9DB4">Every text/background pair clears 4.5:1. Meridian is never text: fill, dots and indicators only.</text>
 
 </svg>
